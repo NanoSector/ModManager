@@ -1,0 +1,11 @@
+c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\OrganizingProjectC.exe.config
+c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.csprojResolveAssemblyReference.cache
+c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.Form1.resources
+c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.Properties.Resources.resources
+c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.csproj.GenerateResource.Cache
+c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\OrganizingProjectC.exe
+c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\OrganizingProjectC.pdb
+c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.exe
+c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.pdb
+c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.modEditor.resources
+C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.loadProject.resources

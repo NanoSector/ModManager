@@ -93,15 +93,13 @@ namespace OrganizingProjectC
                 System.Windows.Forms.MessageBox.Show("An error occured while loading the project.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             // Tyvm!
-            else
-                lp.Close();
+            lp.Close();
         }
 
         private void createProjectButton_Click(object sender, EventArgs e)
         {
             modEditor me = new modEditor();
             me.Show();
-
         }
     }
 }

@@ -130,6 +130,11 @@ namespace OrganizingProjectC
 
             }
 
+            // Also load the readme.txt.
+            me.modReadme.Text = File.ReadAllText(dir + "/Package/readme.txt");
+
+            me.workingDirectory = dir;
+
             me.Show();
 
             return true;
