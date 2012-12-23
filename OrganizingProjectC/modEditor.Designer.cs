@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("package-info.xml");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("readme.txt");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Files", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("package-info.xml");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("readme.txt");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Files", new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode8});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.modDetails = new System.Windows.Forms.TabPage();
             this.authorName = new System.Windows.Forms.TextBox();
@@ -42,11 +42,15 @@
             this.modID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.modVersion = new System.Windows.Forms.Label();
+            this.versionLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.modVersion = new System.Windows.Forms.TextBox();
             this.modName = new System.Windows.Forms.TextBox();
             this.genPkgID = new System.Windows.Forms.CheckBox();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,14 +69,11 @@
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.modDetails.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -95,9 +96,9 @@
             this.modDetails.Controls.Add(this.modID);
             this.modDetails.Controls.Add(this.label4);
             this.modDetails.Controls.Add(this.label3);
-            this.modDetails.Controls.Add(this.modVersion);
+            this.modDetails.Controls.Add(this.versionLabel);
             this.modDetails.Controls.Add(this.label1);
-            this.modDetails.Controls.Add(this.textBox1);
+            this.modDetails.Controls.Add(this.modVersion);
             this.modDetails.Controls.Add(this.modName);
             this.modDetails.Controls.Add(this.genPkgID);
             this.modDetails.Location = new System.Drawing.Point(4, 22);
@@ -112,7 +113,7 @@
             // 
             this.authorName.Location = new System.Drawing.Point(209, 169);
             this.authorName.Name = "authorName";
-            this.authorName.Size = new System.Drawing.Size(100, 20);
+            this.authorName.Size = new System.Drawing.Size(162, 20);
             this.authorName.TabIndex = 14;
             this.authorName.TextChanged += new System.EventHandler(this.authorName_TextChanged);
             // 
@@ -143,7 +144,7 @@
             "Avatar pack"});
             this.modType.Location = new System.Drawing.Point(209, 58);
             this.modType.Name = "modType";
-            this.modType.Size = new System.Drawing.Size(100, 21);
+            this.modType.Size = new System.Drawing.Size(162, 21);
             this.modType.TabIndex = 11;
             // 
             // modID
@@ -151,7 +152,7 @@
             this.modID.Enabled = false;
             this.modID.Location = new System.Drawing.Point(209, 85);
             this.modID.Name = "modID";
-            this.modID.Size = new System.Drawing.Size(100, 20);
+            this.modID.Size = new System.Drawing.Size(162, 20);
             this.modID.TabIndex = 10;
             this.modID.TextChanged += new System.EventHandler(this.modID_TextChanged);
             // 
@@ -173,14 +174,14 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Mod type";
             // 
-            // modVersion
+            // versionLabel
             // 
-            this.modVersion.AutoSize = true;
-            this.modVersion.Location = new System.Drawing.Point(14, 39);
-            this.modVersion.Name = "modVersion";
-            this.modVersion.Size = new System.Drawing.Size(65, 13);
-            this.modVersion.TabIndex = 6;
-            this.modVersion.Text = "Mod version";
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(14, 39);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(65, 13);
+            this.versionLabel.TabIndex = 6;
+            this.versionLabel.Text = "Mod version";
             // 
             // label1
             // 
@@ -191,18 +192,18 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Mod name";
             // 
-            // textBox1
+            // modVersion
             // 
-            this.textBox1.Location = new System.Drawing.Point(209, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.modVersion.Location = new System.Drawing.Point(209, 32);
+            this.modVersion.Name = "modVersion";
+            this.modVersion.Size = new System.Drawing.Size(162, 20);
+            this.modVersion.TabIndex = 3;
             // 
             // modName
             // 
             this.modName.Location = new System.Drawing.Point(209, 6);
             this.modName.Name = "modName";
-            this.modName.Size = new System.Drawing.Size(100, 20);
+            this.modName.Size = new System.Drawing.Size(162, 20);
             this.modName.TabIndex = 4;
             this.modName.TextChanged += new System.EventHandler(this.modName_TextChanged);
             // 
@@ -218,6 +219,54 @@
             this.genPkgID.Text = "Automatically generate mod ID";
             this.genPkgID.UseVisualStyleBackColor = true;
             this.genPkgID.CheckedChanged += new System.EventHandler(this.genPkgID_CheckedChanged);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.treeView1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(922, 417);
+            this.tabPage1.TabIndex = 1;
+            this.tabPage1.Text = "Files";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(255, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Add file";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(252, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(103, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "File Management";
+            // 
+            // treeView1
+            // 
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treeView1.Location = new System.Drawing.Point(3, 3);
+            this.treeView1.Name = "treeView1";
+            treeNode7.Name = "packageInfoXML";
+            treeNode7.Text = "package-info.xml";
+            treeNode8.Name = "readmeTXT";
+            treeNode8.Text = "readme.txt";
+            treeNode9.Name = "filesRoot";
+            treeNode9.Text = "Files";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode9});
+            this.treeView1.Size = new System.Drawing.Size(243, 411);
+            this.treeView1.TabIndex = 0;
             // 
             // menuStrip1
             // 
@@ -235,7 +284,8 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newProjectToolStripMenuItem,
-            this.openProjectToolStripMenuItem});
+            this.openProjectToolStripMenuItem,
+            this.saveProjectToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -349,53 +399,12 @@
             this.buildToolStripMenuItem.Text = "Build";
             this.buildToolStripMenuItem.Click += new System.EventHandler(this.buildToolStripMenuItem_Click);
             // 
-            // tabPage1
+            // saveProjectToolStripMenuItem
             // 
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.treeView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(922, 417);
-            this.tabPage1.TabIndex = 1;
-            this.tabPage1.Text = "Files";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // treeView1
-            // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
-            this.treeView1.Name = "treeView1";
-            treeNode1.Name = "packageInfoXML";
-            treeNode1.Text = "package-info.xml";
-            treeNode2.Name = "readmeTXT";
-            treeNode2.Text = "readme.txt";
-            treeNode3.Name = "filesRoot";
-            treeNode3.Text = "Files";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
-            this.treeView1.Size = new System.Drawing.Size(243, 411);
-            this.treeView1.TabIndex = 0;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(252, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "File Management";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(255, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Add file";
-            this.button1.UseVisualStyleBackColor = true;
+            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveProjectToolStripMenuItem.Text = "Save project";
+            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
             // 
             // modEditor
             // 
@@ -411,10 +420,10 @@
             this.tabControl1.ResumeLayout(false);
             this.modDetails.ResumeLayout(false);
             this.modDetails.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,23 +449,24 @@
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem;
-        private System.Windows.Forms.ComboBox modType;
-        private System.Windows.Forms.TextBox modID;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label modVersion;
+        private System.Windows.Forms.Label versionLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox modName;
         private System.Windows.Forms.CheckBox genPkgID;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openProjectToolStripMenuItem;
-        private System.Windows.Forms.TextBox authorName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TreeView treeView1;
+        public System.Windows.Forms.ComboBox modType;
+        public System.Windows.Forms.TextBox modID;
+        public System.Windows.Forms.TextBox modVersion;
+        public System.Windows.Forms.TextBox modName;
+        public System.Windows.Forms.TextBox authorName;
+        private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
     }
 }

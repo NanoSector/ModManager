@@ -56,7 +56,6 @@
             // 
             // createProjectButton
             // 
-            this.createProjectButton.Enabled = false;
             this.createProjectButton.Location = new System.Drawing.Point(15, 54);
             this.createProjectButton.Name = "createProjectButton";
             this.createProjectButton.Size = new System.Drawing.Size(243, 23);
@@ -67,7 +66,6 @@
             // 
             // editProjectButton
             // 
-            this.editProjectButton.Enabled = false;
             this.editProjectButton.Location = new System.Drawing.Point(15, 83);
             this.editProjectButton.Name = "editProjectButton";
             this.editProjectButton.Size = new System.Drawing.Size(243, 23);

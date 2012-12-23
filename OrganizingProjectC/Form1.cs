@@ -26,6 +26,7 @@ namespace OrganizingProjectC
 
             // Assign some properties.
             selectDirectory.Description = "Select the folder that contains your project.";
+            selectDirectory.ShowNewFolderButton = false;
             selectDirectory.ShowDialog();
 
             // Grab the directory selected.
@@ -34,21 +35,21 @@ namespace OrganizingProjectC
             // Verify that it exists.
             if (!Directory.Exists(dir))
             {
-                System.Windows.Forms.MessageBox.Show("The directory you entered is invalid.");
+                System.Windows.Forms.MessageBox.Show("The directory you entered is invalid.", "Compiling Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // Also check that the /Source directory exists.
             if (!Directory.Exists(dir + "/Source"))
             {
-                System.Windows.Forms.MessageBox.Show("There is no Source directory in the project.");
+                System.Windows.Forms.MessageBox.Show("There is no Source directory in the project.", "Compiling Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // Same check for /Package
             if (!Directory.Exists(dir + "/Package"))
             {
-                System.Windows.Forms.MessageBox.Show("There is no Package directory in the project.");
+                System.Windows.Forms.MessageBox.Show("There is no Package directory in the project.", "Compiling Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -71,6 +72,29 @@ namespace OrganizingProjectC
         private void editProjectButton_Click(object sender, EventArgs e)
         {
 
+            // Show them the loading box.
+            loadProject lp = new loadProject();
+            lp.Show();
+
+            // Get us a new FolderBrowserDialog
+            FolderBrowserDialog fb = new FolderBrowserDialog();
+            fb.Description = "Please select the directory that your project resides in.";
+            fb.ShowNewFolderButton = false;
+            fb.ShowDialog();
+
+            // Get the path.
+            string dir = fb.SelectedPath;
+
+            // Load the project.
+            bool stat = lp.openProjDir(dir);
+
+            // Check the status.
+            if (stat == false)
+                System.Windows.Forms.MessageBox.Show("An error occured while loading the project.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            // Tyvm!
+            else
+                lp.Close();
         }
 
         private void createProjectButton_Click(object sender, EventArgs e)
