@@ -25,7 +25,7 @@ namespace OrganizingProjectC
 
         }
 
-        public Boolean openProjDir(string dir)
+        public bool openProjDir(string dir)
         {
             // Check if the directory exists. Also should contain a package_info.xml.
             if (!Directory.Exists(dir) || !File.Exists(dir + "/Package/package-info.xml"))
@@ -40,96 +40,39 @@ namespace OrganizingProjectC
             XmlReader reader = XmlReader.Create(dir + "/Package/package-info.xml", settings);
 
             // Read it!
-            while (reader.Read())
+            #region Boring XML parsing
+            using (reader)
             {
-                if (reader.NodeType == XmlNodeType.Element && reader.Name == "package-info")
-                {
-                    while (reader.NodeType != XmlNodeType.EndElement)
-                    {
-                        reader.Read();
+                // Read until we get to the ID element.
+                reader.ReadToFollowing("id");
+                string mid = reader.ReadElementContentAsString();
+                me.modID.Text = mid;
 
-                        // Grab the ID.
-                        if (reader.Name == "id")
-                        {
-                            while (reader.NodeType != XmlNodeType.EndElement)
-                            {
+                // Determine the mod author.
+                string[] pieces = mid.Split(':');
+                me.authorName.Text = pieces[0];
 
-                                reader.Read();
+                // And the name element.
+                reader.ReadToFollowing("name");
+                me.modName.Text = reader.ReadElementContentAsString();
 
-                                if (reader.NodeType == XmlNodeType.Text)
-                                {
-                                    me.modID.Text = reader.Value;
+                // The version element.
+                reader.ReadToFollowing("version");
+                me.modVersion.Text = reader.ReadElementContentAsString();
 
-                                    string[] pieces = reader.Value.Split(':');
+                // Type.
+                reader.ReadToFollowing("type");
+                if (reader.ReadElementContentAsString() == "modification")
+                    me.modType.SelectedItem = "Modification";
+                else
+                    me.modType.SelectedItem = "Avatar pack";
 
-                                    me.authorName.Text = pieces[0];
-                                }
-
-                            }
-
-                            reader.Read();
-                        }
-
-                        // Grab the name.
-                        if (reader.Name == "name")
-                        {
-                            while (reader.NodeType != XmlNodeType.EndElement)
-                            {
-
-                                reader.Read();
-
-                                if (reader.NodeType == XmlNodeType.Text)
-                                {
-                                    me.modName.Text = reader.Value;
-                                }
-
-                            }
-
-                            reader.Read();
-                        }
-
-                        // Version.
-                        if (reader.Name == "version")
-                        {
-                            while (reader.NodeType != XmlNodeType.EndElement)
-                            {
-
-                                reader.Read();
-
-                                if (reader.NodeType == XmlNodeType.Text)
-                                {
-                                    me.modVersion.Text = reader.Value;
-                                }
-
-                            }
-
-                            reader.Read();
-                        }
-
-                        // Type.
-                        if (reader.Name == "type")
-                        {
-                            while (reader.NodeType != XmlNodeType.EndElement)
-                            {
-
-                                reader.Read();
-
-                                if (reader.NodeType == XmlNodeType.Text)
-                                {
-                                    if (reader.Value == "modification")
-                                        me.modType.SelectedItem = "Modification";
-                                    else
-                                        me.modType.SelectedItem = "Avatar pack";
-                                }
-
-                            }
-
-                            reader.Read();
-                        }
-                    }
-                }
-
+                // Move on to the install element to determine the compatibility range.
+                reader.ReadToFollowing("install");
+                reader.MoveToAttribute("for");
+                me.modCompatibility.Text = reader.Value;
             }
+            #endregion
 
             // Also load the readme.txt.
             if (File.Exists(dir + "/Package/readme.txt"))

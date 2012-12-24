@@ -37,6 +37,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.method = new System.Windows.Forms.ComboBox();
+            this.fileEdited = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,7 +86,7 @@
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.method);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 269);
+            this.panel1.Location = new System.Drawing.Point(0, 298);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(536, 33);
             this.panel1.TabIndex = 4;
@@ -116,6 +118,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // method
             // 
@@ -130,11 +133,29 @@
             this.method.TabIndex = 0;
             this.method.Text = "Replace";
             // 
+            // fileEdited
+            // 
+            this.fileEdited.Location = new System.Drawing.Point(133, 272);
+            this.fileEdited.Name = "fileEdited";
+            this.fileEdited.Size = new System.Drawing.Size(391, 20);
+            this.fileEdited.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 275);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(124, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "File to be edited: ROOT/";
+            // 
             // addInstruction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 302);
+            this.ClientSize = new System.Drawing.Size(536, 331);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.fileEdited);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.after);
             this.Controls.Add(this.label2);
@@ -160,5 +181,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox method;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox fileEdited;
+        private System.Windows.Forms.Label label4;
     }
 }

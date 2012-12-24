@@ -15,11 +15,12 @@ namespace OrganizingProjectC
     {
         private string wD;
         private SQLiteConnection co;
+        private modEditor me;
 
         // <summary>
         // Loads and sets up the environment.
         // </summary>
-        public addInstruction(string workingDirectory, SQLiteConnection conn, int editing)
+        public addInstruction(string workingDirectory, SQLiteConnection conn, int editing, modEditor mode)
         {
             // Start the form.
             InitializeComponent();
@@ -29,6 +30,9 @@ namespace OrganizingProjectC
 
             // And set the SQLite connection.
             co = conn;
+
+            // Also set the host form.
+            me = mode;
 
             // Are we editing anything?
             if (editing != 0)
@@ -71,7 +75,13 @@ namespace OrganizingProjectC
         private void button2_Click(object sender, EventArgs e)
         {
             string type;
-            
+
+            if (string.IsNullOrEmpty(before.Text) || string.IsNullOrEmpty(after.Text) || string.IsNullOrEmpty(fileEdited.Text) || string.IsNullOrEmpty(method.SelectedItem.ToString()))
+            {
+                MessageBox.Show("Please check that you entered something in all the fields; they are all required.", "Check your content", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             // Try to get the method type.
             switch (method.SelectedItem.ToString())
             {
@@ -89,11 +99,18 @@ namespace OrganizingProjectC
             }
 
             // Insert the row.
-            string sql = "INSERT INTO instructions(before, after, type) VALUES(\"" + before.Text + "\", \"" + after.Text + "\", \"" + type + "\")";
+            string sql = "INSERT INTO instructions(before, after, type, file) VALUES(\"" + before.Text + "\", \"" + after.Text + "\", \"" + type + "\")";
 
             // Create the query.
             SQLiteCommand command = new SQLiteCommand(sql, co);
 
+            me.refreshInstructionTree();
+
+            Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
             Close();
         }
     }
