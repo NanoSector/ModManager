@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml;
+using System.Data.SQLite;
 
 namespace OrganizingProjectC
 {
@@ -131,9 +132,20 @@ namespace OrganizingProjectC
             }
 
             // Also load the readme.txt.
-            me.modReadme.Text = File.ReadAllText(dir + "/Package/readme.txt");
+            if (File.Exists(dir + "/Package/readme.txt"))
+                me.modReadme.Text = File.ReadAllText(dir + "/Package/readme.txt");
+
+            if (!File.Exists(dir + "/data.sqlite"))
+            {
+                MessageBox.Show("A required database was not found in your project. It will now be created.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                me.generateSQL(dir);
+
+                MessageBox.Show("A database file has been successfully created.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             me.workingDirectory = dir;
+            me.conn = new SQLiteConnection("Data Source=\"" + dir + "/data.sqlite\";Version=3;");
 
             me.Show();
 

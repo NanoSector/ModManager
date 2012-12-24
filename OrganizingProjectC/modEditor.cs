@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using System.IO;
+using System.Data.SQLite;
 
 namespace OrganizingProjectC
 {
@@ -17,7 +17,9 @@ namespace OrganizingProjectC
     {
         // Strings
         public string workingDirectory;
+        public SQLiteConnection conn;
 
+        #region Load
         // Shows the actual editor
         public modEditor()
         {
@@ -36,17 +38,12 @@ namespace OrganizingProjectC
         {
             modType.SelectedItem = "Modification";
         }
+        #endregion
 
+        #region Mod ID Generator
         private void modName_TextChanged(object sender, EventArgs e)
         {
-            if (genPkgID.Checked == true && !string.IsNullOrEmpty(authorName.Text) && !string.IsNullOrEmpty(modName.Text))
-            {
-                string an = authorName.Text;
-                an.Replace(" ", "");
-                string mn = modName.Text;
-                mn.Replace(" ", "");
-                modID.Text = an + ":" + mn;
-            }
+            generateModID();
 
             modName.BackColor = Color.White;
         }
@@ -56,20 +53,25 @@ namespace OrganizingProjectC
             if (genPkgID.Checked == true)
             {
                 modID.Enabled = false;
-                if (genPkgID.Checked == true && !string.IsNullOrEmpty(authorName.Text) && !string.IsNullOrEmpty(modName.Text))
-                {
-                    string an = authorName.Text;
-                    an.Replace(" ", "");
-                    string mn = modName.Text;
-                    mn.Replace(" ", "");
-                    modID.Text = an + ":" + mn;
-                }
+                generateModID();
             }
             else
                 modID.Enabled = true;
         }
 
         private void authorName_TextChanged(object sender, EventArgs e)
+        {
+            generateModID();
+        }
+
+        private void modID_TextChanged(object sender, EventArgs e)
+        {
+            modID.Text = modID.Text.Replace(" ", "");
+
+            modID.BackColor = Color.White;
+        }
+
+        private void generateModID()
         {
             if (genPkgID.Checked == true && !string.IsNullOrEmpty(authorName.Text) && !string.IsNullOrEmpty(modName.Text))
             {
@@ -80,40 +82,10 @@ namespace OrganizingProjectC
                 modID.Text = an + ":" + mn;
             }
         }
+        #endregion
 
-        private void modID_TextChanged(object sender, EventArgs e)
-        {
-            modID.Text = modID.Text.Replace(" ", "");
-
-            modID.BackColor = Color.White;
-        }
-
-        private void buildToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string xml;
-
-            // TODO: Make the app avatar pack-compatible.
-            Dictionary<string, string> types = new Dictionary<string, string>();
-
-            types.Add("Modification", "modification");
-            types.Add("Avatar pack", "avatar");
-            string type = types[modType.Text];
-
-            XmlWriterSettings xsettings = new XmlWriterSettings();
-
-
-
-            xml = "<?xml version=\"1.0\"?>" +
-"<!DOCTYPE package-info SYSTEM \"http://www.simplemachines.org/xml/package-info\">" + System.Environment.NewLine +
-"<package-info xmlns=\"http://www.simplemachines.org/xml/package-info\" xmlns:smf=\"http://www.simplemachines.org/\">" + System.Environment.NewLine +
-"   <id>" + modID.Text + "</id>" + System.Environment.NewLine +
-"   <name>" + modName.Text + "</name>" + System.Environment.NewLine +
-"   <type>" + type + "</type>";
-
-            System.Windows.Forms.MessageBox.Show(xml);
-        }
-
-        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        #region Mod builder
+        private bool buildMod(string dir)
         {
             // If we don't have a working directory, ask/beg for one.
             if (string.IsNullOrEmpty(workingDirectory))
@@ -126,7 +98,7 @@ namespace OrganizingProjectC
                 if (string.IsNullOrEmpty(af.SelectedPath))
                 {
                     System.Windows.Forms.MessageBox.Show("An error occured while saving the project, because you did not select a (valid) directory. Nothing has been saved.", "Saving Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    return false;
                 }
 
                 // Set the working directory.
@@ -159,7 +131,7 @@ namespace OrganizingProjectC
 
                 if (String.IsNullOrEmpty(modCompatibility.Text))
                     modCompatibility.BackColor = Color.Red;
-                return;
+                return false;
             }
 
             // Lets build the package_info.xml.
@@ -228,7 +200,82 @@ namespace OrganizingProjectC
 
             // Then write the readme.
             File.WriteAllText(workingDirectory + "/Package/readme.txt", modReadme.Text);
+
+            // Do we have an empty database?
+            if (!File.Exists(workingDirectory + "/data.sqlite"))
+                generateSQL(workingDirectory);
+
+
+            return true;
         }
+
+        public bool generateSQL(string dir)
+        {
+            // Create the file.
+            SQLiteConnection.CreateFile(workingDirectory + "/data.sqlite");
+
+            // Immediately connect.
+            conn = new SQLiteConnection("Data Source=\"" + workingDirectory + "/data.sqlite\";Version=3;");
+            conn.Open();
+
+            // Create our tables.
+            string sql = "CREATE TABLE instructions(id INT, before VARCHAR(255), after VARCHAR(255), type VARCHAR(20), file VARCHAR(255))";
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
+            sql = "CREATE TABLE hooks(ID int, hook_name VARCHAR(255), value VARCHAR(255))";
+            command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
+            sql = "CREATE TABLE files(ID int, file_name VARCHAR(255), destination VARCHAR(255))";
+            command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
+            return true;
+        }
+
+        private void buildToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Build the mod.
+            bool result = buildMod(workingDirectory);
+
+            if (result == false)
+                MessageBox.Show("An error occured while building your mod. Please try again.", "Building mod", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Project has been build.", "Building project", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        #endregion
+
+        #region Mod Saver
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(workingDirectory))
+            {
+                FolderBrowserDialog fb = new FolderBrowserDialog();
+
+                fb.ShowNewFolderButton = true;
+                fb.Description = "Please choose a folder to save your project to.";
+
+                fb.ShowDialog();
+
+                if (!Directory.Exists(fb.SelectedPath))
+                {
+                    MessageBox.Show("An error occured while saving your project, the destination directory does not exist.", "Saving project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                workingDirectory = fb.SelectedPath;
+            }
+
+            // Build the mod.
+            bool result = buildMod(workingDirectory);
+
+            if (result == false)
+                MessageBox.Show("An error occured while saving your project. Please try again.", "Saving project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        #endregion
+
+        #region Help texts
 
         private void showHelp(string text)
         {
@@ -264,7 +311,9 @@ namespace OrganizingProjectC
         {
             showHelp("This field is not required when you want to enter your own mod ID. It helps the generator in creating a unique mod ID and is not used in your mod.");
         }
+#endregion
 
+        #region Colour changing
         private void modType_SelectedIndexChanged(object sender, EventArgs e)
         {
             modType.BackColor = Color.White;
@@ -279,5 +328,95 @@ namespace OrganizingProjectC
         {
             modCompatibility.BackColor = Color.White;
         }
+        #endregion
+
+        #region Adding instructions
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (!File.Exists(workingDirectory + "/data.sqlite"))
+            {
+                System.Windows.Forms.MessageBox.Show("Please save your project before continuing.", "Adding new instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            addInstruction ai = new addInstruction(workingDirectory, conn, 0);
+            ai.Show();
+        }
+        #endregion
+
+        #region Generate database
+        private void regenerateSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(workingDirectory) || !File.Exists(workingDirectory + "/data.sqlite"))
+            {
+                MessageBox.Show("Either your project is not saved or you have a corrupted project. Please try saving your project.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show("Are you sure you want to regenerate the database file? You will lose almost all your data!", "Regenerate SQL", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                conn.Close();
+
+                try
+                {
+                    File.Delete(workingDirectory + "/data.sqlite");
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("The database file is in use by another process. Please try again in a few seconds.", "Database file is locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                generateSQL(workingDirectory);
+
+                MessageBox.Show("A new database has been generated. Your project will now be reloaded.", "Generating SQL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                loadProject lp = new loadProject();
+
+                lp.Show();
+                lp.openProjDir(workingDirectory);
+
+                lp.Close();
+
+                Close();
+            }
+        }
+        #endregion
+
+        #region New project and Open project
+        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Just start an all new instance. Simple as that.
+            modEditor me = new modEditor();
+            me.Show();
+        }
+
+        private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loadProject lp = new loadProject();
+            lp.Show();
+
+            // Get us a new FolderBrowserDialog
+            FolderBrowserDialog fb = new FolderBrowserDialog();
+            fb.Description = "Please select the directory that your project resides in.";
+            fb.ShowNewFolderButton = false;
+            fb.ShowDialog();
+
+            // Get the path.
+            string dir = fb.SelectedPath;
+
+            // Load the project.
+            bool stat = lp.openProjDir(dir);
+
+            // Check the status.
+            if (stat == false)
+                System.Windows.Forms.MessageBox.Show("An error occured while loading the project.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            // Tyvm!
+            lp.Close();
+        }
+        #endregion
     }
 }
