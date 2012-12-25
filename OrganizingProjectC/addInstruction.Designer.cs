@@ -39,6 +39,7 @@
             this.method = new System.Windows.Forms.ComboBox();
             this.fileEdited = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.optionalCheck = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +82,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.optionalCheck);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
@@ -149,6 +151,16 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "File to be edited: ROOT/";
             // 
+            // optionalCheck
+            // 
+            this.optionalCheck.AutoSize = true;
+            this.optionalCheck.Location = new System.Drawing.Point(217, 8);
+            this.optionalCheck.Name = "optionalCheck";
+            this.optionalCheck.Size = new System.Drawing.Size(65, 17);
+            this.optionalCheck.TabIndex = 4;
+            this.optionalCheck.Text = "Optional";
+            this.optionalCheck.UseVisualStyleBackColor = true;
+            // 
             // addInstruction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,5 +195,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox fileEdited;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox optionalCheck;
     }
 }

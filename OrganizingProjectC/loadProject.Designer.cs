@@ -61,7 +61,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Loading project...";
-            this.Load += new System.EventHandler(this.loadProject_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

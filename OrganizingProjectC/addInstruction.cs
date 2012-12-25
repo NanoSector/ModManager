@@ -39,7 +39,7 @@ namespace OrganizingProjectC
             if (editing != 0)
             {
                 // Yes we are... Set up the query.
-                string sql = "SELECT before, after, type, file FROM instructions WHERE id = " + editing + " LIMIT 1";
+                string sql = "SELECT before, after, type, file, optional FROM instructions WHERE id = " + editing + " LIMIT 1";
 
                 // Execute it.
                 SQLiteCommand command = new SQLiteCommand(sql, co);
@@ -67,6 +67,10 @@ namespace OrganizingProjectC
                             method.SelectedItem = "Replace";
                             break;
                     }
+
+                    // Check for an optional operation.
+                    if (Convert.ToInt32(reader["optional"]) == 1)
+                        optionalCheck.Checked = true;
                 }
                 this.editing = editing;
             }
@@ -101,19 +105,38 @@ namespace OrganizingProjectC
                     break;
             }
 
+            int optional;
+            switch (optionalCheck.Checked)
+            {
+                case true:
+                    optional = 1;
+                    break;
+
+                default:
+                    optional = 0;
+                    break;
+            }   
+
             // Insert the row, if we weren't editing. Else update the row.
             string sql;
             if (editing == 0)
             {
-                sql = "INSERT INTO instructions(id, before, after, type, file) VALUES(null, \"" + before.Text + "\", \"" + after.Text + "\", \"" + type + "\", \"" + fileEdited.Text + "\")";
+                sql = "INSERT INTO instructions(id, before, after, type, file, optional) VALUES(null, @beforeText, @afterText, @type, @fileEdited, @optional)";
             }
             else
             {
-                sql = "UPDATE instructions SET before = \"" + before.Text + "\", after = \"" + after.Text + "\", type = \"" + type + "\", file = \"" + fileEdited.Text + "\" WHERE id = " + editing;
+                sql = "UPDATE instructions SET before = @beforeText, after = @afterText, type = @type, file = @fileEdited, optional = @optional WHERE id = @editing";
             }
 
             // Create the query.
             SQLiteCommand command = new SQLiteCommand(sql, co);
+            command.Parameters.AddWithValue("@beforeText", before.Text);
+            command.Parameters.AddWithValue("@afterText", after.Text);
+            command.Parameters.AddWithValue("@type", type);
+            command.Parameters.AddWithValue("@fileEdited", fileEdited.Text);
+            command.Parameters.AddWithValue("@optional", optional);
+            command.Parameters.AddWithValue("@editing", editing);
+
             command.ExecuteNonQuery();
 
             me.refreshInstructionTree();

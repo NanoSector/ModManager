@@ -20,11 +20,6 @@ namespace OrganizingProjectC
             InitializeComponent();
         }
 
-        private void loadProject_Load(object sender, EventArgs e)
-        {
-
-        }
-
         public bool openProjDir(string dir)
         {
             // Check if the directory exists. Also should contain a package_info.xml.
@@ -92,6 +87,7 @@ namespace OrganizingProjectC
             me.conn.Open();
 
             me.refreshInstructionTree();
+            me.PopulateFileTree(dir, me.files.Nodes[0]);
 
             me.Show();
 

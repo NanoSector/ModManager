@@ -29,11 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("package-info.xml");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("readme.txt");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Files", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Files");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(modEditor));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.modDetails = new System.Windows.Forms.TabPage();
@@ -69,6 +65,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.delInstruction = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.instructionsRefresh = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
@@ -99,8 +97,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNewDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label2 = new System.Windows.Forms.Label();
-            this.delInstruction = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.modDetails.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -403,6 +399,7 @@
             this.refreshFileListButton.TabIndex = 3;
             this.refreshFileListButton.Text = "Refresh";
             this.refreshFileListButton.UseVisualStyleBackColor = true;
+            this.refreshFileListButton.Click += new System.EventHandler(this.refreshFileListButton_Click);
             // 
             // addFileButton
             // 
@@ -428,14 +425,10 @@
             this.files.Dock = System.Windows.Forms.DockStyle.Left;
             this.files.Location = new System.Drawing.Point(3, 3);
             this.files.Name = "files";
-            treeNode1.Name = "packageInfoXML";
-            treeNode1.Text = "package-info.xml";
-            treeNode2.Name = "readmeTXT";
-            treeNode2.Text = "readme.txt";
-            treeNode3.Name = "filesRoot";
-            treeNode3.Text = "Files";
+            treeNode1.Name = "filesRoot";
+            treeNode1.Text = "Files";
             this.files.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode1});
             this.files.Size = new System.Drawing.Size(243, 282);
             this.files.TabIndex = 0;
             // 
@@ -496,6 +489,26 @@
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Instructions";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // delInstruction
+            // 
+            this.delInstruction.Location = new System.Drawing.Point(258, 147);
+            this.delInstruction.Name = "delInstruction";
+            this.delInstruction.Size = new System.Drawing.Size(120, 25);
+            this.delInstruction.TabIndex = 6;
+            this.delInstruction.Text = "Delete instruction";
+            this.delInstruction.UseVisualStyleBackColor = true;
+            this.delInstruction.Click += new System.EventHandler(this.delInstruction_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(258, 131);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(226, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "To delete an entry, select it on the left";
             // 
             // instructionsRefresh
             // 
@@ -738,26 +751,6 @@
             this.addAFileToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.addAFileToolStripMenuItem.Text = "Add a file";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(258, 131);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(226, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "To delete an entry, select it on the left";
-            // 
-            // delInstruction
-            // 
-            this.delInstruction.Location = new System.Drawing.Point(258, 147);
-            this.delInstruction.Name = "delInstruction";
-            this.delInstruction.Size = new System.Drawing.Size(120, 25);
-            this.delInstruction.TabIndex = 6;
-            this.delInstruction.Text = "Delete instruction";
-            this.delInstruction.UseVisualStyleBackColor = true;
-            this.delInstruction.Click += new System.EventHandler(this.delInstruction_Click);
-            // 
             // modEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -832,7 +825,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button addFileButton;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TreeView files;
         public System.Windows.Forms.ComboBox modType;
         public System.Windows.Forms.TextBox modID;
         public System.Windows.Forms.TextBox modVersion;
@@ -870,5 +862,6 @@
         private System.Windows.Forms.Button instructionsRefresh;
         private System.Windows.Forms.Button delInstruction;
         private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.TreeView files;
     }
 }

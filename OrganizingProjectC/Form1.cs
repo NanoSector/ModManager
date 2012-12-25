@@ -101,5 +101,45 @@ namespace OrganizingProjectC
             modEditor me = new modEditor();
             me.Show();
         }
+
+        private void repairProject_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fb = new FolderBrowserDialog();
+            fb.Description = "Please select the directory that your project resides in.";
+            fb.ShowNewFolderButton = false;
+            fb.ShowDialog();
+
+            // Get the path.
+            string dir = fb.SelectedPath;
+
+            if (string.IsNullOrEmpty(dir))
+                return;
+
+            DialogResult result = MessageBox.Show("Should I generate a new database for this project?", "Repairing project", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            // New instance of the mod editor.
+            modEditor me = new modEditor();
+            if (result == DialogResult.Yes)
+                me.generateSQL(dir);
+
+            result = MessageBox.Show("Your project has been repaired, should I load it now?", "Repaired project", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                loadProject lp = new loadProject();
+                lp.Show();
+
+                // Load the project.
+                bool stat = lp.openProjDir(dir);
+
+                // Check the status.
+                if (stat == false)
+                    System.Windows.Forms.MessageBox.Show("An error occured while loading the project.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                // Tyvm!
+                lp.Close();
+            }
+
+        }
     }
 }
