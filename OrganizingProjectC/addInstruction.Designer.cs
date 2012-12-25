@@ -162,7 +162,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.before);
             this.Name = "addInstruction";
-            this.Text = "Add an instruction";
+            this.Text = "Add/edit an instruction";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

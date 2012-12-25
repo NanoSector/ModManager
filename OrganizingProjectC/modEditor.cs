@@ -335,13 +335,30 @@ namespace OrganizingProjectC
 
         private void instructions_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            MessageBox.Show(instructions.SelectedImageIndex.ToString());
+            int index = instructions.SelectedNode.Index;
+
+            addInstruction ai = new addInstruction(workingDirectory, conn, instructions.SelectedNode.Index, this);
+            ai.Show();
         }
 
         public void refreshInstructionTree()
         {
             // Grab the data.
-            MessageBox.Show(workingDirectory);
+            string sql = "SELECT id, file FROM instructions";
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            instructions.BeginUpdate();
+            instructions.Nodes.Clear();
+            instructions.Nodes.Add("Instructions");
+            int i = 1;
+            while (reader.Read())
+            {
+                int id = Convert.ToInt32(reader["id"]);
+                instructions.Nodes.Add("id" + id, "Operation #" + i + " on file ROOT/" + reader["file"], id);
+                i++;
+            }
+            instructions.EndUpdate();
         }
         #endregion
 
@@ -395,15 +412,15 @@ namespace OrganizingProjectC
             conn.Open();
 
             // Create our tables.
-            string sql = "CREATE TABLE instructions(id INT AUTO_INCREMENT, before VARCHAR(255), after VARCHAR(255), type VARCHAR(20), file VARCHAR(255))";
+            string sql = "CREATE TABLE instructions(id INTEGER PRIMARY KEY, before VARCHAR(255), after VARCHAR(255), type VARCHAR(20), file VARCHAR(255))";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
 
-            sql = "CREATE TABLE hooks(id int, hook_name VARCHAR(255), value VARCHAR(255))";
+            sql = "CREATE TABLE hooks(id INTEGER PRIMARY KEY, hook_name VARCHAR(255), value VARCHAR(255))";
             command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
 
-            sql = "CREATE TABLE files(id int, file_name VARCHAR(255), destination VARCHAR(255))";
+            sql = "CREATE TABLE files(id INTEGER PRIMARY KEY, file_name VARCHAR(255), destination VARCHAR(255))";
             command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
 
@@ -444,5 +461,23 @@ namespace OrganizingProjectC
             lp.Close();
         }
         #endregion
+
+        private void instructionsRefresh_Click(object sender, EventArgs e)
+        {
+            refreshInstructionTree();
+        }
+
+        private void delInstruction_Click(object sender, EventArgs e)
+        {
+            if (instructions.SelectedNode == null || instructions.SelectedNode.Index == 0)
+                return;
+
+            // Get rid of it.
+            string sql = "DELETE FROM instructions WHERE id = " + instructions.SelectedNode.Index;
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
+            refreshInstructionTree();
+        }
     }
 }

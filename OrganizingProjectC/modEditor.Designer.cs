@@ -34,31 +34,33 @@
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Files", new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Instructions");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(modEditor));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.modDetails = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.modType = new System.Windows.Forms.ComboBox();
+            this.genPkgID = new System.Windows.Forms.CheckBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.modName = new System.Windows.Forms.TextBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.modVersion = new System.Windows.Forms.TextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.versionLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.modCompatibility = new System.Windows.Forms.TextBox();
+            this.modID = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.authorName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.modType = new System.Windows.Forms.ComboBox();
-            this.modID = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.versionLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.modVersion = new System.Windows.Forms.TextBox();
-            this.modName = new System.Windows.Forms.TextBox();
-            this.genPkgID = new System.Windows.Forms.CheckBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.refreshFileListButton = new System.Windows.Forms.Button();
             this.addFileButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.files = new System.Windows.Forms.TreeView();
@@ -67,6 +69,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.instructionsRefresh = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.instructions = new System.Windows.Forms.TreeView();
@@ -90,24 +93,24 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regenerateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNewDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.refreshFileListButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.delInstruction = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.modDetails.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -116,8 +119,6 @@
             this.tabPage4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -146,6 +147,57 @@
             this.modDetails.Text = "Mod Details";
             this.modDetails.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.modType);
+            this.groupBox2.Controls.Add(this.genPkgID);
+            this.groupBox2.Controls.Add(this.pictureBox6);
+            this.groupBox2.Controls.Add(this.modName);
+            this.groupBox2.Controls.Add(this.pictureBox5);
+            this.groupBox2.Controls.Add(this.modVersion);
+            this.groupBox2.Controls.Add(this.pictureBox4);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.pictureBox3);
+            this.groupBox2.Controls.Add(this.versionLabel);
+            this.groupBox2.Controls.Add(this.pictureBox1);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.modCompatibility);
+            this.groupBox2.Controls.Add(this.modID);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Location = new System.Drawing.Point(8, 7);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(564, 203);
+            this.groupBox2.TabIndex = 25;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "General information";
+            // 
+            // modType
+            // 
+            this.modType.FormattingEnabled = true;
+            this.modType.Items.AddRange(new object[] {
+            "Modification",
+            "Avatar pack"});
+            this.modType.Location = new System.Drawing.Point(223, 77);
+            this.modType.Name = "modType";
+            this.modType.Size = new System.Drawing.Size(334, 21);
+            this.modType.TabIndex = 11;
+            this.modType.SelectedIndexChanged += new System.EventHandler(this.modType_SelectedIndexChanged);
+            // 
+            // genPkgID
+            // 
+            this.genPkgID.AutoSize = true;
+            this.genPkgID.Checked = true;
+            this.genPkgID.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.genPkgID.Location = new System.Drawing.Point(31, 127);
+            this.genPkgID.Name = "genPkgID";
+            this.genPkgID.Size = new System.Drawing.Size(170, 17);
+            this.genPkgID.TabIndex = 0;
+            this.genPkgID.Text = "Automatically generate mod ID";
+            this.genPkgID.UseVisualStyleBackColor = true;
+            this.genPkgID.CheckedChanged += new System.EventHandler(this.genPkgID_CheckedChanged);
+            // 
             // pictureBox6
             // 
             this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Help;
@@ -156,6 +208,14 @@
             this.pictureBox6.TabIndex = 23;
             this.pictureBox6.TabStop = false;
             this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
+            // 
+            // modName
+            // 
+            this.modName.Location = new System.Drawing.Point(223, 25);
+            this.modName.Name = "modName";
+            this.modName.Size = new System.Drawing.Size(334, 20);
+            this.modName.TabIndex = 4;
+            this.modName.TextChanged += new System.EventHandler(this.modName_TextChanged);
             // 
             // pictureBox5
             // 
@@ -168,6 +228,14 @@
             this.pictureBox5.TabStop = false;
             this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
             // 
+            // modVersion
+            // 
+            this.modVersion.Location = new System.Drawing.Point(223, 51);
+            this.modVersion.Name = "modVersion";
+            this.modVersion.Size = new System.Drawing.Size(334, 20);
+            this.modVersion.TabIndex = 3;
+            this.modVersion.TextChanged += new System.EventHandler(this.modVersion_TextChanged);
+            // 
             // pictureBox4
             // 
             this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Help;
@@ -178,6 +246,15 @@
             this.pictureBox4.TabIndex = 21;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(28, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Mod name";
             // 
             // pictureBox3
             // 
@@ -190,16 +267,14 @@
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
-            // pictureBox2
+            // versionLabel
             // 
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Help;
-            this.pictureBox2.Image = global::OrganizingProjectC.Properties.Resources.question;
-            this.pictureBox2.Location = new System.Drawing.Point(7, 27);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox2.TabIndex = 19;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(28, 58);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(65, 13);
+            this.versionLabel.TabIndex = 6;
+            this.versionLabel.Text = "Mod version";
             // 
             // pictureBox1
             // 
@@ -212,6 +287,15 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(28, 85);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Mod type";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -222,6 +306,15 @@
             this.label8.Text = "(you can use a range, like 2.0 - 2.0.99, but just a single version will also work" +
     ". Separate versions with a comma)";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(28, 111);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(42, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Mod ID";
+            // 
             // modCompatibility
             // 
             this.modCompatibility.Location = new System.Drawing.Point(222, 149);
@@ -229,6 +322,15 @@
             this.modCompatibility.Size = new System.Drawing.Size(334, 20);
             this.modCompatibility.TabIndex = 16;
             this.modCompatibility.TextChanged += new System.EventHandler(this.modCompatibility_TextChanged);
+            // 
+            // modID
+            // 
+            this.modID.Enabled = false;
+            this.modID.Location = new System.Drawing.Point(223, 104);
+            this.modID.Name = "modID";
+            this.modID.Size = new System.Drawing.Size(334, 20);
+            this.modID.TabIndex = 10;
+            this.modID.TextChanged += new System.EventHandler(this.modID_TextChanged);
             // 
             // label7
             // 
@@ -238,6 +340,18 @@
             this.label7.Size = new System.Drawing.Size(65, 13);
             this.label7.TabIndex = 15;
             this.label7.Text = "Compatibility";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.authorName);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.pictureBox2);
+            this.groupBox1.Location = new System.Drawing.Point(6, 216);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(566, 64);
+            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Author information";
             // 
             // authorName
             // 
@@ -256,91 +370,16 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "Username\r\n(please refrain from using spaces)";
             // 
-            // modType
+            // pictureBox2
             // 
-            this.modType.FormattingEnabled = true;
-            this.modType.Items.AddRange(new object[] {
-            "Modification",
-            "Avatar pack"});
-            this.modType.Location = new System.Drawing.Point(223, 77);
-            this.modType.Name = "modType";
-            this.modType.Size = new System.Drawing.Size(334, 21);
-            this.modType.TabIndex = 11;
-            this.modType.SelectedIndexChanged += new System.EventHandler(this.modType_SelectedIndexChanged);
-            // 
-            // modID
-            // 
-            this.modID.Enabled = false;
-            this.modID.Location = new System.Drawing.Point(223, 104);
-            this.modID.Name = "modID";
-            this.modID.Size = new System.Drawing.Size(334, 20);
-            this.modID.TabIndex = 10;
-            this.modID.TextChanged += new System.EventHandler(this.modID_TextChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 111);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Mod ID";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(28, 85);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Mod type";
-            // 
-            // versionLabel
-            // 
-            this.versionLabel.AutoSize = true;
-            this.versionLabel.Location = new System.Drawing.Point(28, 58);
-            this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(65, 13);
-            this.versionLabel.TabIndex = 6;
-            this.versionLabel.Text = "Mod version";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Mod name";
-            // 
-            // modVersion
-            // 
-            this.modVersion.Location = new System.Drawing.Point(223, 51);
-            this.modVersion.Name = "modVersion";
-            this.modVersion.Size = new System.Drawing.Size(334, 20);
-            this.modVersion.TabIndex = 3;
-            this.modVersion.TextChanged += new System.EventHandler(this.modVersion_TextChanged);
-            // 
-            // modName
-            // 
-            this.modName.Location = new System.Drawing.Point(223, 25);
-            this.modName.Name = "modName";
-            this.modName.Size = new System.Drawing.Size(334, 20);
-            this.modName.TabIndex = 4;
-            this.modName.TextChanged += new System.EventHandler(this.modName_TextChanged);
-            // 
-            // genPkgID
-            // 
-            this.genPkgID.AutoSize = true;
-            this.genPkgID.Checked = true;
-            this.genPkgID.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.genPkgID.Location = new System.Drawing.Point(31, 127);
-            this.genPkgID.Name = "genPkgID";
-            this.genPkgID.Size = new System.Drawing.Size(170, 17);
-            this.genPkgID.TabIndex = 0;
-            this.genPkgID.Text = "Automatically generate mod ID";
-            this.genPkgID.UseVisualStyleBackColor = true;
-            this.genPkgID.CheckedChanged += new System.EventHandler(this.genPkgID_CheckedChanged);
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Help;
+            this.pictureBox2.Image = global::OrganizingProjectC.Properties.Resources.question;
+            this.pictureBox2.Location = new System.Drawing.Point(7, 27);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox2.TabIndex = 19;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // tabPage1
             // 
@@ -355,6 +394,15 @@
             this.tabPage1.TabIndex = 1;
             this.tabPage1.Text = "Files";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // refreshFileListButton
+            // 
+            this.refreshFileListButton.Location = new System.Drawing.Point(255, 48);
+            this.refreshFileListButton.Name = "refreshFileListButton";
+            this.refreshFileListButton.Size = new System.Drawing.Size(100, 22);
+            this.refreshFileListButton.TabIndex = 3;
+            this.refreshFileListButton.Text = "Refresh";
+            this.refreshFileListButton.UseVisualStyleBackColor = true;
             // 
             // addFileButton
             // 
@@ -434,6 +482,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.delInstruction);
+            this.tabPage3.Controls.Add(this.label2);
+            this.tabPage3.Controls.Add(this.instructionsRefresh);
             this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.instructions);
@@ -446,9 +497,19 @@
             this.tabPage3.Text = "Instructions";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // instructionsRefresh
+            // 
+            this.instructionsRefresh.Location = new System.Drawing.Point(258, 88);
+            this.instructionsRefresh.Name = "instructionsRefresh";
+            this.instructionsRefresh.Size = new System.Drawing.Size(120, 23);
+            this.instructionsRefresh.TabIndex = 4;
+            this.instructionsRefresh.Text = "Refresh";
+            this.instructionsRefresh.UseVisualStyleBackColor = true;
+            this.instructionsRefresh.Click += new System.EventHandler(this.instructionsRefresh_Click);
+            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(130, 56);
+            this.button2.Location = new System.Drawing.Point(258, 59);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 23);
             this.button2.TabIndex = 3;
@@ -460,7 +521,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(130, 40);
+            this.label12.Location = new System.Drawing.Point(258, 43);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(120, 13);
             this.label12.TabIndex = 2;
@@ -471,11 +532,7 @@
             this.instructions.Dock = System.Windows.Forms.DockStyle.Left;
             this.instructions.Location = new System.Drawing.Point(3, 37);
             this.instructions.Name = "instructions";
-            treeNode4.Name = "rootInstruction";
-            treeNode4.Text = "Instructions";
-            this.instructions.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
-            this.instructions.Size = new System.Drawing.Size(121, 248);
+            this.instructions.Size = new System.Drawing.Size(249, 248);
             this.instructions.TabIndex = 1;
             this.instructions.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.instructions_NodeMouseDoubleClick);
             // 
@@ -493,10 +550,10 @@
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(3, 10);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(440, 13);
+            this.label11.Size = new System.Drawing.Size(537, 13);
             this.label11.TabIndex = 0;
             this.label11.Text = "You can specify any custom instructions like replacing code that need to be perfo" +
-    "rmed here.";
+    "rmed here. Double click to edit.";
             // 
             // tabPage4
             // 
@@ -504,7 +561,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(591, 275);
+            this.tabPage4.Size = new System.Drawing.Size(583, 288);
             this.tabPage4.TabIndex = 4;
             this.tabPage4.Text = "Hooks";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -634,19 +691,12 @@
             // projectToolStripMenuItem
             // 
             this.projectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
             this.compileToolStripMenuItem,
             this.buildToolStripMenuItem,
             this.regenerateSQLToolStripMenuItem});
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
             this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.projectToolStripMenuItem.Text = "Project";
-            // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
-            this.newToolStripMenuItem.Text = "New";
             // 
             // compileToolStripMenuItem
             // 
@@ -688,52 +738,25 @@
             this.addAFileToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.addAFileToolStripMenuItem.Text = "Add a file";
             // 
-            // groupBox1
+            // label2
             // 
-            this.groupBox1.Controls.Add(this.authorName);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.pictureBox2);
-            this.groupBox1.Location = new System.Drawing.Point(6, 216);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(566, 64);
-            this.groupBox1.TabIndex = 24;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Author information";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(258, 131);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(226, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "To delete an entry, select it on the left";
             // 
-            // groupBox2
+            // delInstruction
             // 
-            this.groupBox2.Controls.Add(this.modType);
-            this.groupBox2.Controls.Add(this.genPkgID);
-            this.groupBox2.Controls.Add(this.pictureBox6);
-            this.groupBox2.Controls.Add(this.modName);
-            this.groupBox2.Controls.Add(this.pictureBox5);
-            this.groupBox2.Controls.Add(this.modVersion);
-            this.groupBox2.Controls.Add(this.pictureBox4);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.pictureBox3);
-            this.groupBox2.Controls.Add(this.versionLabel);
-            this.groupBox2.Controls.Add(this.pictureBox1);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.modCompatibility);
-            this.groupBox2.Controls.Add(this.modID);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(8, 7);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(564, 203);
-            this.groupBox2.TabIndex = 25;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "General information";
-            // 
-            // refreshFileListButton
-            // 
-            this.refreshFileListButton.Location = new System.Drawing.Point(255, 48);
-            this.refreshFileListButton.Name = "refreshFileListButton";
-            this.refreshFileListButton.Size = new System.Drawing.Size(100, 22);
-            this.refreshFileListButton.TabIndex = 3;
-            this.refreshFileListButton.Text = "Refresh";
-            this.refreshFileListButton.UseVisualStyleBackColor = true;
+            this.delInstruction.Location = new System.Drawing.Point(258, 147);
+            this.delInstruction.Name = "delInstruction";
+            this.delInstruction.Size = new System.Drawing.Size(120, 25);
+            this.delInstruction.TabIndex = 6;
+            this.delInstruction.Text = "Delete instruction";
+            this.delInstruction.UseVisualStyleBackColor = true;
+            this.delInstruction.Click += new System.EventHandler(this.delInstruction_Click);
             // 
             // modEditor
             // 
@@ -749,12 +772,16 @@
             this.Load += new System.EventHandler(this.modEditor_Load);
             this.tabControl1.ResumeLayout(false);
             this.modDetails.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -770,10 +797,6 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -796,7 +819,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem projectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem;
         private System.Windows.Forms.Label label4;
@@ -845,5 +867,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button refreshFileListButton;
+        private System.Windows.Forms.Button instructionsRefresh;
+        private System.Windows.Forms.Button delInstruction;
+        private System.Windows.Forms.Label label2;
     }
 }

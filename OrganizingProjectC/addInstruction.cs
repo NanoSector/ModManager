@@ -16,6 +16,7 @@ namespace OrganizingProjectC
         private string wD;
         private SQLiteConnection co;
         private modEditor me;
+        int editing = 0;
 
         // <summary>
         // Loads and sets up the environment.
@@ -31,14 +32,14 @@ namespace OrganizingProjectC
             // And set the SQLite connection.
             co = conn;
 
-            // Also set the host form.
+            // ModEditor form
             me = mode;
 
             // Are we editing anything?
             if (editing != 0)
             {
                 // Yes we are... Set up the query.
-                string sql = "SELECT before, after, type FROM instructions WHERE id = " + editing;
+                string sql = "SELECT before, after, type, file FROM instructions WHERE id = " + editing + " LIMIT 1";
 
                 // Execute it.
                 SQLiteCommand command = new SQLiteCommand(sql, co);
@@ -49,6 +50,7 @@ namespace OrganizingProjectC
                 {
                     before.Text = (string) reader["before"];
                     after.Text = (string) reader["after"];
+                    fileEdited.Text = (string) reader["file"];
                     
                     // Gather and set the method.
                     switch ((string) reader["type"])
@@ -66,6 +68,7 @@ namespace OrganizingProjectC
                             break;
                     }
                 }
+                this.editing = editing;
             }
         }
 
@@ -98,11 +101,20 @@ namespace OrganizingProjectC
                     break;
             }
 
-            // Insert the row.
-            string sql = "INSERT INTO instructions(before, after, type, file) VALUES(\"" + before.Text + "\", \"" + after.Text + "\", \"" + type + "\")";
+            // Insert the row, if we weren't editing. Else update the row.
+            string sql;
+            if (editing == 0)
+            {
+                sql = "INSERT INTO instructions(id, before, after, type, file) VALUES(null, \"" + before.Text + "\", \"" + after.Text + "\", \"" + type + "\", \"" + fileEdited.Text + "\")";
+            }
+            else
+            {
+                sql = "UPDATE instructions SET before = \"" + before.Text + "\", after = \"" + after.Text + "\", type = \"" + type + "\", file = \"" + fileEdited.Text + "\" WHERE id = " + editing;
+            }
 
             // Create the query.
             SQLiteCommand command = new SQLiteCommand(sql, co);
+            command.ExecuteNonQuery();
 
             me.refreshInstructionTree();
 

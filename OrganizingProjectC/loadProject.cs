@@ -89,6 +89,9 @@ namespace OrganizingProjectC
 
             me.workingDirectory = dir;
             me.conn = new SQLiteConnection("Data Source=\"" + dir + "/data.sqlite\";Version=3;");
+            me.conn.Open();
+
+            me.refreshInstructionTree();
 
             me.Show();
 
