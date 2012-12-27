@@ -97,6 +97,11 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNewDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.extractFiles = new System.Windows.Forms.TreeView();
+            this.label13 = new System.Windows.Forms.Label();
+            this.createExtractionInstruction = new System.Windows.Forms.Button();
+            this.extractionRefresh = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.modDetails.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -115,6 +120,7 @@
             this.tabPage4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -124,6 +130,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
@@ -409,6 +416,7 @@
             this.addFileButton.TabIndex = 2;
             this.addFileButton.Text = "Add a new file";
             this.addFileButton.UseVisualStyleBackColor = true;
+            this.addFileButton.Click += new System.EventHandler(this.addFileButton_Click);
             // 
             // label6
             // 
@@ -716,6 +724,7 @@
             this.compileToolStripMenuItem.Name = "compileToolStripMenuItem";
             this.compileToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.compileToolStripMenuItem.Text = "Compile";
+            this.compileToolStripMenuItem.Click += new System.EventHandler(this.compileToolStripMenuItem_Click);
             // 
             // buildToolStripMenuItem
             // 
@@ -750,6 +759,58 @@
             this.addAFileToolStripMenuItem.Name = "addAFileToolStripMenuItem";
             this.addAFileToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.addAFileToolStripMenuItem.Text = "Add a file";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.extractionRefresh);
+            this.tabPage5.Controls.Add(this.createExtractionInstruction);
+            this.tabPage5.Controls.Add(this.label13);
+            this.tabPage5.Controls.Add(this.extractFiles);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(583, 288);
+            this.tabPage5.TabIndex = 5;
+            this.tabPage5.Text = "Extract files";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // extractFiles
+            // 
+            this.extractFiles.Dock = System.Windows.Forms.DockStyle.Left;
+            this.extractFiles.Location = new System.Drawing.Point(3, 3);
+            this.extractFiles.Name = "extractFiles";
+            this.extractFiles.Size = new System.Drawing.Size(187, 282);
+            this.extractFiles.TabIndex = 0;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(196, 12);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(117, 13);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Extraction Manager";
+            // 
+            // createExtractionInstruction
+            // 
+            this.createExtractionInstruction.Location = new System.Drawing.Point(199, 28);
+            this.createExtractionInstruction.Name = "createExtractionInstruction";
+            this.createExtractionInstruction.Size = new System.Drawing.Size(114, 23);
+            this.createExtractionInstruction.TabIndex = 2;
+            this.createExtractionInstruction.Text = "Create instruction";
+            this.createExtractionInstruction.UseVisualStyleBackColor = true;
+            this.createExtractionInstruction.Click += new System.EventHandler(this.createExtractionInstruction_Click);
+            // 
+            // extractionRefresh
+            // 
+            this.extractionRefresh.Location = new System.Drawing.Point(199, 57);
+            this.extractionRefresh.Name = "extractionRefresh";
+            this.extractionRefresh.Size = new System.Drawing.Size(114, 23);
+            this.extractionRefresh.TabIndex = 3;
+            this.extractionRefresh.Text = "Refresh";
+            this.extractionRefresh.UseVisualStyleBackColor = true;
+            this.extractionRefresh.Click += new System.EventHandler(this.extractionRefresh_Click);
             // 
             // modEditor
             // 
@@ -790,6 +851,8 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -863,5 +926,10 @@
         private System.Windows.Forms.Button delInstruction;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.TreeView files;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button extractionRefresh;
+        private System.Windows.Forms.Button createExtractionInstruction;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TreeView extractFiles;
     }
 }

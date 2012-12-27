@@ -33,13 +33,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.after = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.optionalCheck = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.method = new System.Windows.Forms.ComboBox();
             this.fileEdited = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.optionalCheck = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -93,6 +93,16 @@
             this.panel1.Size = new System.Drawing.Size(536, 33);
             this.panel1.TabIndex = 4;
             // 
+            // optionalCheck
+            // 
+            this.optionalCheck.AutoSize = true;
+            this.optionalCheck.Location = new System.Drawing.Point(217, 8);
+            this.optionalCheck.Name = "optionalCheck";
+            this.optionalCheck.Size = new System.Drawing.Size(65, 17);
+            this.optionalCheck.TabIndex = 4;
+            this.optionalCheck.Text = "Optional";
+            this.optionalCheck.UseVisualStyleBackColor = true;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -128,12 +138,14 @@
             this.method.Items.AddRange(new object[] {
             "Replace",
             "Add before",
-            "Add after"});
+            "Add after",
+            "At the end of file"});
             this.method.Location = new System.Drawing.Point(64, 7);
             this.method.Name = "method";
             this.method.Size = new System.Drawing.Size(147, 21);
             this.method.TabIndex = 0;
             this.method.Text = "Replace";
+            this.method.SelectedIndexChanged += new System.EventHandler(this.method_SelectedIndexChanged);
             // 
             // fileEdited
             // 
@@ -150,16 +162,6 @@
             this.label4.Size = new System.Drawing.Size(124, 13);
             this.label4.TabIndex = 6;
             this.label4.Text = "File to be edited: ROOT/";
-            // 
-            // optionalCheck
-            // 
-            this.optionalCheck.AutoSize = true;
-            this.optionalCheck.Location = new System.Drawing.Point(217, 8);
-            this.optionalCheck.Name = "optionalCheck";
-            this.optionalCheck.Size = new System.Drawing.Size(65, 17);
-            this.optionalCheck.TabIndex = 4;
-            this.optionalCheck.Text = "Optional";
-            this.optionalCheck.UseVisualStyleBackColor = true;
             // 
             // addInstruction
             // 

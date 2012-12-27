@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>OrganizingProjectC</RootNamespace>
     <AssemblyName>OrganizingProjectC</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -48,14 +49,18 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationIcon>card-address %281%29.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\..\..\..\Downloads\DotNetZipLib-DevKit-v1.9\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\..\..\..\..\Downloads\System.Data.SQLite_DLL\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite, Version=1.0.82.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Resources\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -67,42 +72,51 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addInstruction.cs">
+    <Compile Include="Forms\addExtractionInstructionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addInstruction.Designer.cs">
+    <Compile Include="Forms\addExtractionInstructionDialog.Designer.cs">
+      <DependentUpon>addExtractionInstructionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\addInstruction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\addInstruction.Designer.cs">
       <DependentUpon>addInstruction.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="loadProject.cs">
+    <Compile Include="Forms\loadProject.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="loadProject.Designer.cs">
+    <Compile Include="Forms\loadProject.Designer.cs">
       <DependentUpon>loadProject.cs</DependentUpon>
     </Compile>
-    <Compile Include="modEditor.cs">
+    <Compile Include="Forms\modEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modEditor.Designer.cs">
+    <Compile Include="Forms\modEditor.Designer.cs">
       <DependentUpon>modEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="addInstruction.resx">
+    <EmbeddedResource Include="Forms\addExtractionInstructionDialog.resx">
+      <DependentUpon>addExtractionInstructionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\addInstruction.resx">
       <DependentUpon>addInstruction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="loadProject.resx">
+    <EmbeddedResource Include="Forms\loadProject.resx">
       <DependentUpon>loadProject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="modEditor.resx">
+    <EmbeddedResource Include="Forms\modEditor.resx">
       <DependentUpon>modEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -147,6 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="card-address %281%29.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

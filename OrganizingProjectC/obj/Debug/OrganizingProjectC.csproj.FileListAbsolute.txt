@@ -9,5 +9,6 @@ c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\Organizin
 c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.pdb
 c:\users\rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.modEditor.resources
 C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.loadProject.resources
-C:\Users\Rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\System.Data.SQLite.xml
 C:\Users\Rick\documents\visual studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.addInstruction.resources
+C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\System.Data.SQLite.dll
+C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\OrganizingProjectC.Forms.addExtractionInstructionDialog.resources

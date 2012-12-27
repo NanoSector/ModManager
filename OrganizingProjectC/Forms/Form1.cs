@@ -66,7 +66,7 @@ namespace OrganizingProjectC
                 zip.Save(dir + "/compile.zip");
             }
 
-            System.Windows.Forms.MessageBox.Show("The package has been compiled and saved as compile.zip in the project directory.", "Package Compiled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("The package has been compiled and saved as compile.zip in the project directory.", "Package Compiled", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void editProjectButton_Click(object sender, EventArgs e)

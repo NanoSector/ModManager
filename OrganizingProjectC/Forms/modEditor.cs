@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Data.SQLite;
+using Ionic.Zip;
+using OrganizingProjectC.Forms;
 
 namespace OrganizingProjectC
 {
@@ -277,9 +279,17 @@ namespace OrganizingProjectC
                             case "replace":
                                 fintype = "replace";
                                 break;
+
+                            case "end":
+                                fintype = "end";
+                                break;
                         }
+
                         writer.WriteAttributeString("position", fintype);
-                        writer.WriteCData(Convert.ToString(reader["before"]));
+                        if (fintype != "end")
+                        {
+                            writer.WriteCData(Convert.ToString(reader["before"]));
+                        }
                         writer.WriteEndElement();
 
                         writer.WriteStartElement("add");
@@ -610,5 +620,63 @@ namespace OrganizingProjectC
         }
 
         #endregion
+
+        #region Compiling mods
+        private void compileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(workingDirectory) || !Directory.Exists(workingDirectory + "/Package") || !Directory.Exists(workingDirectory + "/Source"))
+            {
+                MessageBox.Show("Unable to compile project. Try saving it.", "Compiling project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Build the mod.
+            buildMod(workingDirectory);
+
+            SaveFileDialog sf = new SaveFileDialog();
+            sf.AddExtension = true;
+            sf.DefaultExt = "zip";
+            sf.InitialDirectory = workingDirectory;
+            sf.CheckFileExists = false;
+            sf.CheckPathExists = true;
+
+            sf.ShowDialog();
+
+            if (string.IsNullOrEmpty(sf.FileName))
+                return;
+
+            // Start the ZIP process.
+            using (ZipFile zip = new ZipFile())
+            {
+                // Add the Package directory to the root of the ZIP file.
+                zip.AddDirectory(workingDirectory + "/Package");
+
+                // Then add the Source directory to the files directory of the ZIP file.
+                zip.AddDirectory(workingDirectory + "/Source", "files");
+
+                // Now we can save the ZIP.
+                zip.Save(sf.FileName);
+            }
+
+            // And done!
+            MessageBox.Show("The package has been compiled and saved as compile.zip in the project directory.", "Package Compiled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        #endregion
+
+        private void addFileButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", workingDirectory);
+        }
+
+        private void extractionRefresh_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void createExtractionInstruction_Click(object sender, EventArgs e)
+        {
+            addExtractionInstructionDialog aeid = new addExtractionInstructionDialog(workingDirectory, this);
+            aeid.Show();
+        }
     }
 }

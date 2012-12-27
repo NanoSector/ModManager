@@ -63,6 +63,10 @@ namespace OrganizingProjectC
                             method.SelectedItem = "Add after";
                             break;
 
+                        case "end":
+                            method.SelectedItem = "At the end of file";
+                            break;
+
                         default:
                             method.SelectedItem = "Replace";
                             break;
@@ -83,7 +87,7 @@ namespace OrganizingProjectC
         {
             string type;
 
-            if (string.IsNullOrEmpty(before.Text) || string.IsNullOrEmpty(after.Text) || string.IsNullOrEmpty(fileEdited.Text) || string.IsNullOrEmpty(method.SelectedItem.ToString()))
+            if ((string.IsNullOrEmpty(before.Text) && method.SelectedItem.ToString() != "At the end of file") || string.IsNullOrEmpty(after.Text) || string.IsNullOrEmpty(fileEdited.Text) || string.IsNullOrEmpty(method.SelectedItem.ToString()))
             {
                 MessageBox.Show("Please check that you entered something in all the fields; they are all required.", "Check your content", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -98,6 +102,10 @@ namespace OrganizingProjectC
 
                 case "Add after":
                     type = "add_after";
+                    break;
+
+                case "At the end of file":
+                    type = "end";
                     break;
 
                 default:
@@ -147,6 +155,15 @@ namespace OrganizingProjectC
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void method_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (method.SelectedItem.ToString() == "At the end of file")
+            {
+                before.Text = "";
+                before.Enabled = false;
+            }
         }
     }
 }
