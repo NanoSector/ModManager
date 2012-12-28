@@ -50,7 +50,11 @@ namespace ModBuilder
                 {
                     before.Text = (string) reader["before"];
                     after.Text = (string) reader["after"];
-                    fileEdited.Text = (string) reader["file"];
+
+                    char[] chars = { '/' };
+                    string[] pieces = reader["file"].ToString().Split(chars, 2);
+                    filePrefix.SelectedItem = pieces[0];
+                    fileEdited.Text = pieces[1];
                     
                     // Gather and set the method.
                     switch ((string) reader["type"])
@@ -141,7 +145,7 @@ namespace ModBuilder
             command.Parameters.AddWithValue("@beforeText", before.Text);
             command.Parameters.AddWithValue("@afterText", after.Text);
             command.Parameters.AddWithValue("@type", type);
-            command.Parameters.AddWithValue("@fileEdited", fileEdited.Text);
+            command.Parameters.AddWithValue("@fileEdited", filePrefix.SelectedItem + "/" + fileEdited.Text);
             command.Parameters.AddWithValue("@optional", optional);
             command.Parameters.AddWithValue("@editing", editing);
 

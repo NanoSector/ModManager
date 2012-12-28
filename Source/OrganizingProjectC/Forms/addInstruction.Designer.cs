@@ -40,22 +40,25 @@
             this.method = new System.Windows.Forms.ComboBox();
             this.fileEdited = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.filePrefix = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // before
             // 
-            this.before.Location = new System.Drawing.Point(12, 25);
+            this.before.Location = new System.Drawing.Point(15, 25);
             this.before.Multiline = true;
             this.before.Name = "before";
             this.before.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.before.Size = new System.Drawing.Size(235, 238);
+            this.before.Size = new System.Drawing.Size(410, 312);
             this.before.TabIndex = 0;
+            this.before.WordWrap = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 9);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 13);
             this.label1.TabIndex = 1;
@@ -64,7 +67,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(268, 9);
+            this.label2.Location = new System.Drawing.Point(428, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 13);
             this.label2.TabIndex = 2;
@@ -72,12 +75,13 @@
             // 
             // after
             // 
-            this.after.Location = new System.Drawing.Point(271, 25);
+            this.after.Location = new System.Drawing.Point(431, 25);
             this.after.Multiline = true;
             this.after.Name = "after";
             this.after.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.after.Size = new System.Drawing.Size(253, 238);
+            this.after.Size = new System.Drawing.Size(406, 312);
             this.after.TabIndex = 3;
+            this.after.WordWrap = false;
             // 
             // panel1
             // 
@@ -88,9 +92,9 @@
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.method);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 298);
+            this.panel1.Location = new System.Drawing.Point(0, 369);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(536, 33);
+            this.panel1.Size = new System.Drawing.Size(849, 33);
             this.panel1.TabIndex = 4;
             // 
             // optionalCheck
@@ -114,7 +118,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(449, 7);
+            this.button2.Location = new System.Drawing.Point(762, 7);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -124,7 +128,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(368, 7);
+            this.button1.Location = new System.Drawing.Point(681, 7);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -149,25 +153,51 @@
             // 
             // fileEdited
             // 
-            this.fileEdited.Location = new System.Drawing.Point(133, 272);
+            this.fileEdited.Location = new System.Drawing.Point(282, 343);
             this.fileEdited.Name = "fileEdited";
-            this.fileEdited.Size = new System.Drawing.Size(391, 20);
+            this.fileEdited.Size = new System.Drawing.Size(555, 20);
             this.fileEdited.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 275);
+            this.label4.Location = new System.Drawing.Point(9, 346);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(124, 13);
+            this.label4.Size = new System.Drawing.Size(85, 13);
             this.label4.TabIndex = 6;
-            this.label4.Text = "File to be edited: ROOT/";
+            this.label4.Text = "File to be edited:";
+            // 
+            // filePrefix
+            // 
+            this.filePrefix.FormattingEnabled = true;
+            this.filePrefix.Items.AddRange(new object[] {
+            "$boarddir",
+            "$sourcedir",
+            "$themedir",
+            "$languagedir",
+            "$avatardir",
+            "$imagesdir"});
+            this.filePrefix.Location = new System.Drawing.Point(100, 343);
+            this.filePrefix.Name = "filePrefix";
+            this.filePrefix.Size = new System.Drawing.Size(157, 21);
+            this.filePrefix.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(263, 346);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(12, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "/";
             // 
             // addInstruction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 331);
+            this.ClientSize = new System.Drawing.Size(849, 402);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.filePrefix);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.fileEdited);
             this.Controls.Add(this.panel1);
@@ -198,5 +228,7 @@
         private System.Windows.Forms.TextBox fileEdited;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox optionalCheck;
+        private System.Windows.Forms.ComboBox filePrefix;
+        private System.Windows.Forms.Label label5;
     }
 }

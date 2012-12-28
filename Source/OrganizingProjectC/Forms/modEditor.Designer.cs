@@ -76,10 +76,30 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.deleteFiles = new System.Windows.Forms.TreeView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.deleteExtractButton = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
             this.extractionRefresh = new System.Windows.Forms.Button();
             this.createExtractionInstruction = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.extractFiles = new System.Windows.Forms.TreeView();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.customCodeUninstall = new System.Windows.Forms.TextBox();
+            this.customCodeInstall = new System.Windows.Forms.TextBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.uninstallDatabaseCode = new System.Windows.Forms.TextBox();
+            this.installDatabaseCode = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +122,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNewDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.modDetails.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -119,6 +140,10 @@
             this.panel2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -131,6 +156,8 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
@@ -600,6 +627,13 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.button3);
+            this.tabPage5.Controls.Add(this.deleteFiles);
+            this.tabPage5.Controls.Add(this.button1);
+            this.tabPage5.Controls.Add(this.label22);
+            this.tabPage5.Controls.Add(this.label21);
+            this.tabPage5.Controls.Add(this.deleteExtractButton);
+            this.tabPage5.Controls.Add(this.label17);
             this.tabPage5.Controls.Add(this.extractionRefresh);
             this.tabPage5.Controls.Add(this.createExtractionInstruction);
             this.tabPage5.Controls.Add(this.label13);
@@ -611,6 +645,64 @@
             this.tabPage5.TabIndex = 5;
             this.tabPage5.Text = "Extract files";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // deleteFiles
+            // 
+            this.deleteFiles.Location = new System.Drawing.Point(3, 145);
+            this.deleteFiles.Name = "deleteFiles";
+            this.deleteFiles.Size = new System.Drawing.Size(187, 140);
+            this.deleteFiles.TabIndex = 11;
+            this.deleteFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.deleteFiles_NodeMouseDoubleClick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(199, 213);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(114, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Add instruction";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(196, 184);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(333, 26);
+            this.label22.TabIndex = 9;
+            this.label22.Text = "Uninstallation instructions are not the same as installation instructions.\r\nThere" +
+    "fore you must manually specify the uninstallation instructions.";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(196, 171);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(81, 13);
+            this.label21.TabIndex = 8;
+            this.label21.Text = "Deleting files";
+            // 
+            // deleteExtractButton
+            // 
+            this.deleteExtractButton.Location = new System.Drawing.Point(199, 130);
+            this.deleteExtractButton.Name = "deleteExtractButton";
+            this.deleteExtractButton.Size = new System.Drawing.Size(114, 23);
+            this.deleteExtractButton.TabIndex = 7;
+            this.deleteExtractButton.Text = "Delete instruction";
+            this.deleteExtractButton.UseVisualStyleBackColor = true;
+            this.deleteExtractButton.Click += new System.EventHandler(this.deleteExtractButton_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(196, 113);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(226, 13);
+            this.label17.TabIndex = 6;
+            this.label17.Text = "To delete an entry, select it on the left";
             // 
             // extractionRefresh
             // 
@@ -644,11 +736,155 @@
             // 
             // extractFiles
             // 
-            this.extractFiles.Dock = System.Windows.Forms.DockStyle.Left;
             this.extractFiles.Location = new System.Drawing.Point(3, 3);
             this.extractFiles.Name = "extractFiles";
-            this.extractFiles.Size = new System.Drawing.Size(187, 282);
+            this.extractFiles.Size = new System.Drawing.Size(187, 140);
             this.extractFiles.TabIndex = 0;
+            this.extractFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.extractFiles_NodeMouseDoubleClick);
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.customCodeUninstall);
+            this.tabPage6.Controls.Add(this.customCodeInstall);
+            this.tabPage6.Controls.Add(this.panel3);
+            this.tabPage6.Location = new System.Drawing.Point(4, 22);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(583, 288);
+            this.tabPage6.TabIndex = 6;
+            this.tabPage6.Text = "Custom code";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // customCodeUninstall
+            // 
+            this.customCodeUninstall.Location = new System.Drawing.Point(305, 67);
+            this.customCodeUninstall.Multiline = true;
+            this.customCodeUninstall.Name = "customCodeUninstall";
+            this.customCodeUninstall.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.customCodeUninstall.Size = new System.Drawing.Size(270, 213);
+            this.customCodeUninstall.TabIndex = 4;
+            this.customCodeUninstall.WordWrap = false;
+            // 
+            // customCodeInstall
+            // 
+            this.customCodeInstall.Location = new System.Drawing.Point(8, 67);
+            this.customCodeInstall.Multiline = true;
+            this.customCodeInstall.Name = "customCodeInstall";
+            this.customCodeInstall.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.customCodeInstall.Size = new System.Drawing.Size(291, 213);
+            this.customCodeInstall.TabIndex = 2;
+            this.customCodeInstall.WordWrap = false;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.label14);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(577, 58);
+            this.panel3.TabIndex = 1;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(299, 36);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(73, 13);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "Uninstallation:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(5, 10);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(537, 13);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "You can specify your own code to be executed here. It is easier to copy it from a" +
+    " code editor than to write it here.";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(5, 36);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 13);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Installation:";
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.uninstallDatabaseCode);
+            this.tabPage7.Controls.Add(this.installDatabaseCode);
+            this.tabPage7.Controls.Add(this.panel4);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(583, 288);
+            this.tabPage7.TabIndex = 7;
+            this.tabPage7.Text = "Alter database";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // uninstallDatabaseCode
+            // 
+            this.uninstallDatabaseCode.Location = new System.Drawing.Point(305, 67);
+            this.uninstallDatabaseCode.Multiline = true;
+            this.uninstallDatabaseCode.Name = "uninstallDatabaseCode";
+            this.uninstallDatabaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.uninstallDatabaseCode.Size = new System.Drawing.Size(270, 213);
+            this.uninstallDatabaseCode.TabIndex = 5;
+            this.uninstallDatabaseCode.WordWrap = false;
+            // 
+            // installDatabaseCode
+            // 
+            this.installDatabaseCode.Location = new System.Drawing.Point(8, 67);
+            this.installDatabaseCode.Multiline = true;
+            this.installDatabaseCode.Name = "installDatabaseCode";
+            this.installDatabaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.installDatabaseCode.Size = new System.Drawing.Size(291, 213);
+            this.installDatabaseCode.TabIndex = 3;
+            this.installDatabaseCode.WordWrap = false;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.label18);
+            this.panel4.Controls.Add(this.label19);
+            this.panel4.Controls.Add(this.label20);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(3, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(577, 58);
+            this.panel4.TabIndex = 2;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(299, 36);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(73, 13);
+            this.label18.TabIndex = 5;
+            this.label18.Text = "Uninstallation:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(5, 10);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(557, 13);
+            this.label19.TabIndex = 0;
+            this.label19.Text = "You can specify your own database to be executed here. It is easier to copy it fr" +
+    "om a code editor than to write it here.";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(5, 36);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(60, 13);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Installation:";
             // 
             // menuStrip1
             // 
@@ -812,6 +1048,16 @@
             this.addAFileToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.addAFileToolStripMenuItem.Text = "Add a file";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(199, 243);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(114, 23);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Delete instruction";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // modEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -851,6 +1097,14 @@
             this.tabPage4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -932,5 +1186,26 @@
         private System.Windows.Forms.Button createExtractionInstruction;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TreeView extractFiles;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        public System.Windows.Forms.TextBox customCodeInstall;
+        public System.Windows.Forms.TextBox customCodeUninstall;
+        private System.Windows.Forms.Button deleteExtractButton;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TabPage tabPage7;
+        public System.Windows.Forms.TextBox installDatabaseCode;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        public System.Windows.Forms.TextBox uninstallDatabaseCode;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TreeView deleteFiles;
+        private System.Windows.Forms.Button button3;
     }
 }

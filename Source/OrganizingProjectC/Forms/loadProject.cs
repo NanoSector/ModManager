@@ -73,6 +73,15 @@ namespace ModBuilder
             if (File.Exists(dir + "/Package/readme.txt"))
                 me.modReadme.Text = File.ReadAllText(dir + "/Package/readme.txt");
 
+            if (File.Exists(dir + "/Package/install.php"))
+                me.customCodeInstall.Text = File.ReadAllText(dir + "/Package/install.php");
+            if (File.Exists(dir + "/Package/uninstall.php"))
+                me.customCodeUninstall.Text = File.ReadAllText(dir + "/Package/uninstall.php");
+            if (File.Exists(dir + "/Package/installDatabase.php"))
+                me.installDatabaseCode.Text = File.ReadAllText(dir + "/Package/installDatabase.php");
+            if (File.Exists(dir + "/Package/uninstallDatabase.php"))
+                me.uninstallDatabaseCode.Text = File.ReadAllText(dir + "/Package/installDatabase.php");
+
             if (!File.Exists(dir + "/data.sqlite"))
             {
                 MessageBox.Show("A required database was not found in your project. It will now be created.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -88,6 +97,7 @@ namespace ModBuilder
             me.hasConn = true;
 
             me.refreshInstructionTree();
+            me.refreshExtractionTree();
             me.PopulateFileTree(dir, me.files.Nodes[0]);
 
             me.Show();

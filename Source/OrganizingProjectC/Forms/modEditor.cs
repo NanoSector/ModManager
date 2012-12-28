@@ -198,6 +198,33 @@ namespace ModBuilder
                 // And installation XML.
                 writer.WriteElementString("modification", "install.xml");
 
+                // If we have a custom install code text thing entered, now's the time to add it.
+                if (!string.IsNullOrEmpty(customCodeInstall.Text))
+                    writer.WriteElementString("code", "install.php");
+                if (!string.IsNullOrEmpty(installDatabaseCode.Text))
+                    writer.WriteElementString("database", "installDatabase.php");
+                
+                // Now for the extraction of files and/or dirs.
+                if (hasConn)
+                {
+                    string sql = "SELECT id, file_name, destination FROM files";
+                    SQLiteCommand command = new SQLiteCommand(sql, conn);
+                    SQLiteDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        if (!File.Exists(workingDirectory + "\\Source\\" + reader["file_name"].ToString()) && Directory.Exists(workingDirectory + "\\Source\\" + reader["file_name"].ToString()))
+                            writer.WriteStartElement("require-dir");
+                        else
+                            writer.WriteStartElement("require-file");
+
+                        writer.WriteAttributeString("name", "files/" + reader["file_name"].ToString().Replace("\\", "/"));
+                        writer.WriteAttributeString("destination", reader["destination"].ToString().Replace("\\", "/"));
+
+                        writer.WriteEndElement();
+                    }
+                }
+
                 // End the element and document.
                 writer.WriteEndElement();
 
@@ -209,6 +236,39 @@ namespace ModBuilder
                 writer.WriteAttributeString("reverse", "true");
                 writer.WriteString("install.xml");
                 writer.WriteEndElement();
+
+                // Got custom uninstall code? Enter it.
+                if (!string.IsNullOrEmpty(customCodeUninstall.Text))
+                    writer.WriteElementString("code", "uninstall.php");
+                if (!string.IsNullOrEmpty(uninstallDatabaseCode.Text))
+                    writer.WriteElementString("database", "uninstallDatabase.php");
+
+
+                if (hasConn)
+                {
+                    // Now for the deletion of files and dirs.
+                    string sql2 = "SELECT id, file_name, type FROM files_delete";
+                    SQLiteCommand command2 = new SQLiteCommand(sql2, conn);
+                    SQLiteDataReader reader2 = command2.ExecuteReader();
+
+                    string intype = "";
+                    while (reader2.Read())
+                    {
+                        switch (reader2["type"].ToString())
+                        {
+                            case "dir":
+                                intype = "dir";
+                                break;
+
+                            default:
+                                intype = "file";
+                                break;
+                        }
+                        writer.WriteStartElement("remove-" + intype);
+                        writer.WriteAttributeString("name", reader2["file_name"].ToString());
+                        writer.WriteEndElement();
+                    }
+                }
 
                 writer.WriteEndElement();
 
@@ -249,7 +309,7 @@ namespace ModBuilder
                 writer.WriteElementString("version", modVersion.Text);
 
                 // Grab the data.
-                if (File.Exists(workingDirectory + "/data.sqlite"))
+                if (hasConn)
                 {
                     string sql = "SELECT id, before, after, type, file, optional FROM instructions";
                     SQLiteCommand command = new SQLiteCommand(sql, conn);
@@ -261,7 +321,7 @@ namespace ModBuilder
                         writer.WriteAttributeString("name", Convert.ToString(reader["file"]));
 
                         if (Convert.ToInt32(reader["optional"]) == 1)
-                            writer.WriteAttributeString("errors", "skip");
+                            writer.WriteAttributeString("error", "skip");
 
                         writer.WriteStartElement("operation");
 
@@ -311,6 +371,25 @@ namespace ModBuilder
             // Then write the readme.
             File.WriteAllText(workingDirectory + "/Package/readme.txt", modReadme.Text);
 
+            // Custom install and uninstall if we got it.
+            if (!string.IsNullOrEmpty(customCodeInstall.Text))
+                File.WriteAllText(workingDirectory + "/Package/install.php", customCodeInstall.Text);
+            if (!string.IsNullOrEmpty(customCodeUninstall.Text))
+                File.WriteAllText(workingDirectory + "/Package/uninstall.php", customCodeUninstall.Text);
+            if (!string.IsNullOrEmpty(installDatabaseCode.Text))
+                File.WriteAllText(workingDirectory + "/Package/installDatabase.php", installDatabaseCode.Text);
+            if (!string.IsNullOrEmpty(uninstallDatabaseCode.Text))
+                File.WriteAllText(workingDirectory + "/Package/uninstallDatabase.php", uninstallDatabaseCode.Text);
+
+            if (string.IsNullOrEmpty(customCodeInstall.Text) && File.Exists(workingDirectory + "/Package/install.php"))
+                File.Delete(workingDirectory + "/Package/install.php");
+            if (string.IsNullOrEmpty(customCodeUninstall.Text) && File.Exists(workingDirectory + "/Package/uninstall.php"))
+                File.Delete(workingDirectory + "/Package/uninstall.php");
+            if (string.IsNullOrEmpty(installDatabaseCode.Text) && File.Exists(workingDirectory + "/Package/installDatabase.php"))
+                File.Delete(workingDirectory + "/Package/installDatabase.php");
+            if (string.IsNullOrEmpty(uninstallDatabaseCode.Text) && File.Exists(workingDirectory + "/Package/uninstallDatabase.php"))
+                File.Delete(workingDirectory + "/Package/uninstallDatabase.php");
+
             // Do we have an empty database?
             if (!File.Exists(workingDirectory + "/data.sqlite"))
                 generateSQL(workingDirectory);
@@ -356,6 +435,8 @@ namespace ModBuilder
 
             if (result == false)
                 MessageBox.Show("An error occured while saving your project. Please try again.", "Saving project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            hasConn = true;
         }
         #endregion
 
@@ -544,6 +625,10 @@ namespace ModBuilder
             command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
 
+            sql = "CREATE TABLE files_delete(id INTEGER PRIMARY KEY, file_name VARCHAR(255))";
+            command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
             return true;
         }
         #endregion
@@ -620,6 +705,11 @@ namespace ModBuilder
             PopulateFileTree(workingDirectory, files.Nodes[0]);
         }
 
+        private void addFileButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", workingDirectory);
+        }
+
         #endregion
 
         #region Compiling mods
@@ -664,21 +754,103 @@ namespace ModBuilder
         }
         #endregion
 
-        private void addFileButton_Click(object sender, EventArgs e)
+        #region Extracting files
+        public void refreshExtractionTree()
         {
-            System.Diagnostics.Process.Start("explorer.exe", workingDirectory);
+            if (!hasConn)
+            {
+                System.Windows.Forms.MessageBox.Show("Please save your project before continuing.", "Adding new instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            extractFiles.BeginUpdate();
+            extractFiles.Nodes.Clear();
+            extractFiles.Nodes.Add("Files to be extracted on install");
+            int i = 1;
+            string sql = "SELECT id, file_name, destination FROM files";
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Convert.ToInt32(reader["id"]);
+                extractFiles.Nodes.Add("id" + id, "Extract \"" + reader["file_name"] + "\" to \"" + reader["destination"] + "\"", id);
+                i++;
+            }
+            extractFiles.EndUpdate();
+
+            deleteFiles.BeginUpdate();
+            deleteFiles.Nodes.Clear();
+            deleteFiles.Nodes.Add("Files to be removed on uninstall");
+            sql = "SELECT id, file_name FROM files_delete";
+            command = new SQLiteCommand(sql, conn);
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Convert.ToInt32(reader["id"]);
+                deleteFiles.Nodes.Add("id" + id, "Remove file \"" + reader["file_name"] + "\"", id);
+                i++;
+            }
+            deleteFiles.EndUpdate();
         }
 
         private void extractionRefresh_Click(object sender, EventArgs e)
         {
-
+            refreshExtractionTree();
         }
 
         private void createExtractionInstruction_Click(object sender, EventArgs e)
         {
-            addExtractionInstructionDialog aeid = new addExtractionInstructionDialog(workingDirectory, this);
+            addExtractionInstructionDialog aeid = new addExtractionInstructionDialog(workingDirectory, this, conn, 0);
             aeid.Show();
         }
+
+        private void extractFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            int index = extractFiles.SelectedNode.Index;
+
+            addExtractionInstructionDialog aeid = new addExtractionInstructionDialog(workingDirectory, this, conn, index);
+            aeid.Show();
+        }
+
+        private void deleteExtractButton_Click(object sender, EventArgs e)
+        {
+            if (extractFiles.SelectedNode == null || extractFiles.SelectedNode.Index == 0)
+                return;
+
+            // Get rid of it.
+            string sql = "DELETE FROM files WHERE id = " + extractFiles.SelectedNode.Index;
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
+            refreshExtractionTree();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            addDeletionInstructionDialog adid = new addDeletionInstructionDialog(workingDirectory, this, conn, 0);
+            adid.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (deleteFiles.SelectedNode == null || deleteFiles.SelectedNode.Index == 0)
+                return;
+
+            // Get rid of it.
+            string sql = "DELETE FROM files_delete WHERE id = " + deleteFiles.SelectedNode.Index;
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
+            refreshExtractionTree();
+        }
+
+        private void deleteFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            int index = deleteFiles.SelectedNode.Index;
+
+            addDeletionInstructionDialog ai = new addDeletionInstructionDialog(workingDirectory, this, conn, index);
+            ai.Show();
+        }
+        #endregion
 
         #region Unload SQL
         private void modEditor_FormClosing(object sender, FormClosingEventArgs e)

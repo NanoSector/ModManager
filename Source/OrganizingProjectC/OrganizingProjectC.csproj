@@ -75,6 +75,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\addDeletionInstructionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\addDeletionInstructionDialog.Designer.cs">
+      <DependentUpon>addDeletionInstructionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\addExtractionInstructionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\addDeletionInstructionDialog.resx">
+      <DependentUpon>addDeletionInstructionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\addExtractionInstructionDialog.resx">
       <DependentUpon>addExtractionInstructionDialog.cs</DependentUpon>
     </EmbeddedResource>
