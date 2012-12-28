@@ -1,0 +1,1 @@
+Before installing Mod Builder, please note that the software is in an early alpha stage. Most things work as expected, though there still may be errors in various actions.
