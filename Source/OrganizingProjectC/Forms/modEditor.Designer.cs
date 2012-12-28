@@ -123,6 +123,7 @@
             this.addNewDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button3 = new System.Windows.Forms.Button();
+            this.ignoreInstructions = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.modDetails.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -510,6 +511,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.ignoreInstructions);
             this.tabPage3.Controls.Add(this.delInstruction);
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.instructionsRefresh);
@@ -1058,6 +1060,16 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // ignoreInstructions
+            // 
+            this.ignoreInstructions.AutoSize = true;
+            this.ignoreInstructions.Location = new System.Drawing.Point(261, 263);
+            this.ignoreInstructions.Name = "ignoreInstructions";
+            this.ignoreInstructions.Size = new System.Drawing.Size(190, 17);
+            this.ignoreInstructions.TabIndex = 7;
+            this.ignoreInstructions.Text = "Ignore this step (will keep the data)";
+            this.ignoreInstructions.UseVisualStyleBackColor = true;
+            // 
             // modEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1207,5 +1219,6 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TreeView deleteFiles;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox ignoreInstructions;
     }
 }

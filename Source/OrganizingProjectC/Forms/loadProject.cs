@@ -50,6 +50,7 @@ namespace ModBuilder
                 // And the name element.
                 reader.ReadToFollowing("name");
                 me.modName.Text = reader.ReadElementContentAsString();
+                me.Text = me.modName.Text + " - Mod Editor";
 
                 // The version element.
                 reader.ReadToFollowing("version");
