@@ -81,7 +81,7 @@ namespace ModBuilder
             if (File.Exists(dir + "/Package/installDatabase.php"))
                 me.installDatabaseCode.Text = File.ReadAllText(dir + "/Package/installDatabase.php");
             if (File.Exists(dir + "/Package/uninstallDatabase.php"))
-                me.uninstallDatabaseCode.Text = File.ReadAllText(dir + "/Package/installDatabase.php");
+                me.uninstallDatabaseCode.Text = File.ReadAllText(dir + "/Package/uninstallDatabase.php");
 
             if (!File.Exists(dir + "/data.sqlite"))
             {
