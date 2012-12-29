@@ -40,11 +40,6 @@ Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\
 Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\Ionic.Zip.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\ModBuilder.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\ModBuilder.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\ModBuilder.vshost.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\ModBuilder.vshost.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\ModBuilder.vshost.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\OrganizingProjectC.vshost.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\OrganizingProjectC.vshost.exe.manifest"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
