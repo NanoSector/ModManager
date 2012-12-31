@@ -152,21 +152,24 @@ namespace ModBuilder
                 return false;
             }
 
-            // Insert some settings if we can.
-            string updateTo = "";
-            switch (ignoreInstructions.Checked)
+            if (hasConn)
             {
-                case true:
-                    updateTo = "true";
-                    break;
+                // Insert some settings if we can.
+                string updateTo = "";
+                switch (ignoreInstructions.Checked)
+                {
+                    case true:
+                        updateTo = "true";
+                        break;
 
-                default:
-                    updateTo = "false";
-                    break;
+                    default:
+                        updateTo = "false";
+                        break;
+                }
+                string updatesql = "UPDATE settings SET value = \"" + updateTo + "\" WHERE key = \"ignoreInstructions\"";
+                SQLiteCommand updatecommand = new SQLiteCommand(updatesql, conn);
+                updatecommand.ExecuteNonQuery();
             }
-            string updatesql = "UPDATE settings SET value = \"" + updateTo + "\" WHERE key = \"ignoreInstructions\"";
-            SQLiteCommand updatecommand = new SQLiteCommand(updatesql, conn);
-            updatecommand.ExecuteNonQuery();
 
             // Lets build the package_info.xml.
             using (FileStream fileStream = new FileStream(workingDirectory + "/Package/package-info.xml", FileMode.Create))
