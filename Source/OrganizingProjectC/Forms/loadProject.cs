@@ -99,7 +99,11 @@ namespace ModBuilder
 
             me.refreshInstructionTree();
             me.refreshExtractionTree();
+            me.reloadSettings();
             me.PopulateFileTree(dir, me.files.Nodes[0]);
+
+            if (me.settings["ignoreInstructions"] == "true")
+                me.ignoreInstructions.Checked = true;
 
             me.Show();
 

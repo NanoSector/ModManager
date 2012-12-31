@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
-            this.compileProjectButton = new System.Windows.Forms.Button();
             this.createProjectButton = new System.Windows.Forms.Button();
             this.editProjectButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,19 +46,9 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Please choose a task...";
             // 
-            // compileProjectButton
-            // 
-            this.compileProjectButton.Location = new System.Drawing.Point(15, 25);
-            this.compileProjectButton.Name = "compileProjectButton";
-            this.compileProjectButton.Size = new System.Drawing.Size(243, 23);
-            this.compileProjectButton.TabIndex = 1;
-            this.compileProjectButton.Text = "Compile a project";
-            this.compileProjectButton.UseVisualStyleBackColor = true;
-            this.compileProjectButton.Click += new System.EventHandler(this.compileProjectButton_Click);
-            // 
             // createProjectButton
             // 
-            this.createProjectButton.Location = new System.Drawing.Point(15, 54);
+            this.createProjectButton.Location = new System.Drawing.Point(15, 25);
             this.createProjectButton.Name = "createProjectButton";
             this.createProjectButton.Size = new System.Drawing.Size(243, 23);
             this.createProjectButton.TabIndex = 2;
@@ -69,7 +58,7 @@
             // 
             // editProjectButton
             // 
-            this.editProjectButton.Location = new System.Drawing.Point(15, 83);
+            this.editProjectButton.Location = new System.Drawing.Point(15, 54);
             this.editProjectButton.Name = "editProjectButton";
             this.editProjectButton.Size = new System.Drawing.Size(243, 23);
             this.editProjectButton.TabIndex = 3;
@@ -80,7 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 151);
+            this.label2.Location = new System.Drawing.Point(12, 119);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(180, 13);
             this.label2.TabIndex = 4;
@@ -97,7 +86,7 @@
             // 
             // repairProject
             // 
-            this.repairProject.Location = new System.Drawing.Point(15, 112);
+            this.repairProject.Location = new System.Drawing.Point(15, 83);
             this.repairProject.Name = "repairProject";
             this.repairProject.Size = new System.Drawing.Size(243, 23);
             this.repairProject.TabIndex = 6;
@@ -109,13 +98,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 173);
+            this.ClientSize = new System.Drawing.Size(284, 144);
             this.Controls.Add(this.repairProject);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.editProjectButton);
             this.Controls.Add(this.createProjectButton);
-            this.Controls.Add(this.compileProjectButton);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -128,7 +116,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button compileProjectButton;
         private System.Windows.Forms.Button createProjectButton;
         private System.Windows.Forms.Button editProjectButton;
         private System.Windows.Forms.Label label2;

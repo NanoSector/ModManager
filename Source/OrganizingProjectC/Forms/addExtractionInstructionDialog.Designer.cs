@@ -140,6 +140,10 @@
             this.Controls.Add(this.refreshComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.fileComboBox);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(511, 174);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(511, 174);
             this.Name = "addExtractionInstructionDialog";
             this.Text = "addExtractionInstructionDialog";
             this.ResumeLayout(false);

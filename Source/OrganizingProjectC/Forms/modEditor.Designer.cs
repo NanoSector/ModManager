@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Files");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(modEditor));
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.modDetails = new System.Windows.Forms.TabPage();
+            this.modDetailsTab = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.modType = new System.Windows.Forms.ComboBox();
             this.genPkgID = new System.Windows.Forms.CheckBox();
@@ -55,27 +54,26 @@
             this.authorName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.filesTab = new System.Windows.Forms.TabPage();
             this.refreshFileListButton = new System.Windows.Forms.Button();
             this.addFileButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.files = new System.Windows.Forms.TreeView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.readmeTab = new System.Windows.Forms.TabPage();
             this.modReadme = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.instructionsTab = new System.Windows.Forms.TabPage();
+            this.ignoreInstructions = new System.Windows.Forms.CheckBox();
             this.delInstruction = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.instructionsRefresh = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.instructions = new System.Windows.Forms.TreeView();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.label11 = new System.Windows.Forms.Label();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.extractFilesTab = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
             this.deleteFiles = new System.Windows.Forms.TreeView();
             this.button1 = new System.Windows.Forms.Button();
             this.label22 = new System.Windows.Forms.Label();
@@ -86,17 +84,15 @@
             this.createExtractionInstruction = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.extractFiles = new System.Windows.Forms.TreeView();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.customCodeTab = new System.Windows.Forms.TabPage();
             this.customCodeUninstall = new System.Windows.Forms.TextBox();
             this.customCodeInstall = new System.Windows.Forms.TextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.alterDatabaseTab = new System.Windows.Forms.TabPage();
             this.uninstallDatabaseCode = new System.Windows.Forms.TextBox();
             this.installDatabaseCode = new System.Windows.Forms.TextBox();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -105,27 +101,18 @@
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regenerateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.addNewDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addAFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button3 = new System.Windows.Forms.Button();
-            this.ignoreInstructions = new System.Windows.Forms.CheckBox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControl1.SuspendLayout();
-            this.modDetails.SuspendLayout();
+            this.modDetailsTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -134,31 +121,39 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.filesTab.SuspendLayout();
+            this.readmeTab.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.tabPage7.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.instructionsTab.SuspendLayout();
+            this.extractFilesTab.SuspendLayout();
+            this.customCodeTab.SuspendLayout();
+            this.alterDatabaseTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.modDetails);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.modDetailsTab);
+            this.tabControl1.Controls.Add(this.filesTab);
+            this.tabControl1.Controls.Add(this.readmeTab);
+            this.tabControl1.Controls.Add(this.instructionsTab);
+            this.tabControl1.Controls.Add(this.extractFilesTab);
+            this.tabControl1.Controls.Add(this.customCodeTab);
+            this.tabControl1.Controls.Add(this.alterDatabaseTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
@@ -166,20 +161,23 @@
             this.tabControl1.Size = new System.Drawing.Size(591, 314);
             this.tabControl1.TabIndex = 0;
             // 
-            // modDetails
+            // modDetailsTab
             // 
-            this.modDetails.Controls.Add(this.groupBox2);
-            this.modDetails.Controls.Add(this.groupBox1);
-            this.modDetails.Location = new System.Drawing.Point(4, 22);
-            this.modDetails.Name = "modDetails";
-            this.modDetails.Padding = new System.Windows.Forms.Padding(3);
-            this.modDetails.Size = new System.Drawing.Size(583, 288);
-            this.modDetails.TabIndex = 0;
-            this.modDetails.Text = "Mod Details";
-            this.modDetails.UseVisualStyleBackColor = true;
+            this.modDetailsTab.Controls.Add(this.groupBox2);
+            this.modDetailsTab.Controls.Add(this.groupBox1);
+            this.modDetailsTab.Location = new System.Drawing.Point(4, 22);
+            this.modDetailsTab.Name = "modDetailsTab";
+            this.modDetailsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.modDetailsTab.Size = new System.Drawing.Size(583, 288);
+            this.modDetailsTab.TabIndex = 0;
+            this.modDetailsTab.Text = "Mod Details";
+            this.modDetailsTab.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.modType);
             this.groupBox2.Controls.Add(this.genPkgID);
             this.groupBox2.Controls.Add(this.pictureBox6);
@@ -206,6 +204,8 @@
             // 
             // modType
             // 
+            this.modType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.modType.FormattingEnabled = true;
             this.modType.Items.AddRange(new object[] {
             "Modification",
@@ -242,6 +242,8 @@
             // 
             // modName
             // 
+            this.modName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.modName.Location = new System.Drawing.Point(223, 25);
             this.modName.Name = "modName";
             this.modName.Size = new System.Drawing.Size(334, 20);
@@ -261,6 +263,8 @@
             // 
             // modVersion
             // 
+            this.modVersion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.modVersion.Location = new System.Drawing.Point(223, 51);
             this.modVersion.Name = "modVersion";
             this.modVersion.Size = new System.Drawing.Size(334, 20);
@@ -348,6 +352,8 @@
             // 
             // modCompatibility
             // 
+            this.modCompatibility.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.modCompatibility.Location = new System.Drawing.Point(222, 149);
             this.modCompatibility.Name = "modCompatibility";
             this.modCompatibility.Size = new System.Drawing.Size(334, 20);
@@ -356,6 +362,8 @@
             // 
             // modID
             // 
+            this.modID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.modID.Enabled = false;
             this.modID.Location = new System.Drawing.Point(223, 104);
             this.modID.Name = "modID";
@@ -374,6 +382,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.authorName);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.pictureBox2);
@@ -386,6 +396,8 @@
             // 
             // authorName
             // 
+            this.authorName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.authorName.Location = new System.Drawing.Point(224, 27);
             this.authorName.Name = "authorName";
             this.authorName.Size = new System.Drawing.Size(334, 20);
@@ -412,19 +424,19 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
-            // tabPage1
+            // filesTab
             // 
-            this.tabPage1.Controls.Add(this.refreshFileListButton);
-            this.tabPage1.Controls.Add(this.addFileButton);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.files);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(583, 288);
-            this.tabPage1.TabIndex = 1;
-            this.tabPage1.Text = "Files";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.filesTab.Controls.Add(this.refreshFileListButton);
+            this.filesTab.Controls.Add(this.addFileButton);
+            this.filesTab.Controls.Add(this.label6);
+            this.filesTab.Controls.Add(this.files);
+            this.filesTab.Location = new System.Drawing.Point(4, 22);
+            this.filesTab.Name = "filesTab";
+            this.filesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.filesTab.Size = new System.Drawing.Size(583, 288);
+            this.filesTab.TabIndex = 1;
+            this.filesTab.Text = "Files";
+            this.filesTab.UseVisualStyleBackColor = true;
             // 
             // refreshFileListButton
             // 
@@ -468,21 +480,23 @@
             this.files.Size = new System.Drawing.Size(243, 282);
             this.files.TabIndex = 0;
             // 
-            // tabPage2
+            // readmeTab
             // 
-            this.tabPage2.Controls.Add(this.modReadme);
-            this.tabPage2.Controls.Add(this.panel1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(583, 288);
-            this.tabPage2.TabIndex = 2;
-            this.tabPage2.Text = "Readme";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.readmeTab.Controls.Add(this.modReadme);
+            this.readmeTab.Controls.Add(this.panel1);
+            this.readmeTab.Location = new System.Drawing.Point(4, 22);
+            this.readmeTab.Name = "readmeTab";
+            this.readmeTab.Padding = new System.Windows.Forms.Padding(3);
+            this.readmeTab.Size = new System.Drawing.Size(583, 288);
+            this.readmeTab.TabIndex = 2;
+            this.readmeTab.Text = "Readme";
+            this.readmeTab.UseVisualStyleBackColor = true;
             // 
             // modReadme
             // 
-            this.modReadme.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modReadme.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.modReadme.Location = new System.Drawing.Point(3, 3);
             this.modReadme.Multiline = true;
             this.modReadme.Name = "modReadme";
@@ -509,27 +523,31 @@
             this.label9.Text = "This is the readme your users will see when installing your mod. You can use BBCo" +
     "de.";
             // 
-            // tabPage3
+            // instructionsTab
             // 
-            this.tabPage3.Controls.Add(this.ignoreInstructions);
-            this.tabPage3.Controls.Add(this.delInstruction);
-            this.tabPage3.Controls.Add(this.label2);
-            this.tabPage3.Controls.Add(this.instructionsRefresh);
-            this.tabPage3.Controls.Add(this.button2);
-            this.tabPage3.Controls.Add(this.label12);
-            this.tabPage3.Controls.Add(this.instructions);
-            this.tabPage3.Controls.Add(this.panel2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(583, 288);
-            this.tabPage3.TabIndex = 3;
-            this.tabPage3.Text = "Instructions";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.instructionsTab.Controls.Add(this.panel2);
+            this.instructionsTab.Controls.Add(this.instructions);
+            this.instructionsTab.Location = new System.Drawing.Point(4, 22);
+            this.instructionsTab.Name = "instructionsTab";
+            this.instructionsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.instructionsTab.Size = new System.Drawing.Size(583, 288);
+            this.instructionsTab.TabIndex = 3;
+            this.instructionsTab.Text = "Instructions";
+            this.instructionsTab.UseVisualStyleBackColor = true;
+            // 
+            // ignoreInstructions
+            // 
+            this.ignoreInstructions.AutoSize = true;
+            this.ignoreInstructions.Location = new System.Drawing.Point(6, 181);
+            this.ignoreInstructions.Name = "ignoreInstructions";
+            this.ignoreInstructions.Size = new System.Drawing.Size(190, 17);
+            this.ignoreInstructions.TabIndex = 7;
+            this.ignoreInstructions.Text = "Ignore this step (will keep the data)";
+            this.ignoreInstructions.UseVisualStyleBackColor = true;
             // 
             // delInstruction
             // 
-            this.delInstruction.Location = new System.Drawing.Point(258, 147);
+            this.delInstruction.Location = new System.Drawing.Point(3, 150);
             this.delInstruction.Name = "delInstruction";
             this.delInstruction.Size = new System.Drawing.Size(120, 25);
             this.delInstruction.TabIndex = 6;
@@ -541,7 +559,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(258, 131);
+            this.label2.Location = new System.Drawing.Point(3, 134);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(226, 13);
             this.label2.TabIndex = 5;
@@ -549,7 +567,7 @@
             // 
             // instructionsRefresh
             // 
-            this.instructionsRefresh.Location = new System.Drawing.Point(258, 88);
+            this.instructionsRefresh.Location = new System.Drawing.Point(3, 91);
             this.instructionsRefresh.Name = "instructionsRefresh";
             this.instructionsRefresh.Size = new System.Drawing.Size(120, 23);
             this.instructionsRefresh.TabIndex = 4;
@@ -559,7 +577,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(258, 59);
+            this.button2.Location = new System.Drawing.Point(3, 62);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 23);
             this.button2.TabIndex = 3;
@@ -571,7 +589,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(258, 43);
+            this.label12.Location = new System.Drawing.Point(3, 16);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(120, 13);
             this.label12.TabIndex = 2;
@@ -579,86 +597,58 @@
             // 
             // instructions
             // 
-            this.instructions.Dock = System.Windows.Forms.DockStyle.Left;
-            this.instructions.Location = new System.Drawing.Point(3, 37);
+            this.instructions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.instructions.Location = new System.Drawing.Point(3, 6);
             this.instructions.Name = "instructions";
-            this.instructions.Size = new System.Drawing.Size(249, 248);
+            this.instructions.Size = new System.Drawing.Size(257, 279);
             this.instructions.TabIndex = 1;
             this.instructions.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.instructions_NodeMouseDoubleClick);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label11);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(577, 34);
-            this.panel2.TabIndex = 0;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 10);
+            this.label11.Location = new System.Drawing.Point(3, 33);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(537, 13);
+            this.label11.Size = new System.Drawing.Size(223, 26);
             this.label11.TabIndex = 0;
-            this.label11.Text = "You can specify any custom instructions like replacing code that need to be perfo" +
-    "rmed here. Double click to edit.";
+            this.label11.Text = "You can specify any custom instructions here.\r\nDouble click to edit.";
             // 
-            // tabPage4
+            // extractFilesTab
             // 
-            this.tabPage4.Controls.Add(this.label10);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(583, 288);
-            this.tabPage4.TabIndex = 4;
-            this.tabPage4.Text = "Hooks";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.extractFilesTab.Controls.Add(this.panel6);
+            this.extractFilesTab.Controls.Add(this.splitContainer1);
+            this.extractFilesTab.Location = new System.Drawing.Point(4, 22);
+            this.extractFilesTab.Name = "extractFilesTab";
+            this.extractFilesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.extractFilesTab.Size = new System.Drawing.Size(583, 288);
+            this.extractFilesTab.TabIndex = 5;
+            this.extractFilesTab.Text = "Extract files";
+            this.extractFilesTab.UseVisualStyleBackColor = true;
             // 
-            // label10
+            // button3
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(8, 3);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(659, 26);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Mod Manager can generate and insert a hook installer for your mod. If you wish to" +
-    " create your own installer, you can specify it\'s name here.\r\nMake sure you have " +
-    "added it in the Files tab.";
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Controls.Add(this.button3);
-            this.tabPage5.Controls.Add(this.deleteFiles);
-            this.tabPage5.Controls.Add(this.button1);
-            this.tabPage5.Controls.Add(this.label22);
-            this.tabPage5.Controls.Add(this.label21);
-            this.tabPage5.Controls.Add(this.deleteExtractButton);
-            this.tabPage5.Controls.Add(this.label17);
-            this.tabPage5.Controls.Add(this.extractionRefresh);
-            this.tabPage5.Controls.Add(this.createExtractionInstruction);
-            this.tabPage5.Controls.Add(this.label13);
-            this.tabPage5.Controls.Add(this.extractFiles);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(583, 288);
-            this.tabPage5.TabIndex = 5;
-            this.tabPage5.Text = "Extract files";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.button3.Location = new System.Drawing.Point(6, 248);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(114, 23);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "Delete instruction";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // deleteFiles
             // 
-            this.deleteFiles.Location = new System.Drawing.Point(3, 145);
+            this.deleteFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deleteFiles.Location = new System.Drawing.Point(0, 0);
             this.deleteFiles.Name = "deleteFiles";
-            this.deleteFiles.Size = new System.Drawing.Size(187, 140);
+            this.deleteFiles.Size = new System.Drawing.Size(234, 137);
             this.deleteFiles.TabIndex = 11;
             this.deleteFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.deleteFiles_NodeMouseDoubleClick);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(199, 213);
+            this.button1.Location = new System.Drawing.Point(6, 218);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(114, 23);
             this.button1.TabIndex = 10;
@@ -669,7 +659,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(196, 184);
+            this.label22.Location = new System.Drawing.Point(3, 189);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(333, 26);
             this.label22.TabIndex = 9;
@@ -680,7 +670,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(196, 171);
+            this.label21.Location = new System.Drawing.Point(3, 176);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(81, 13);
             this.label21.TabIndex = 8;
@@ -688,7 +678,7 @@
             // 
             // deleteExtractButton
             // 
-            this.deleteExtractButton.Location = new System.Drawing.Point(199, 130);
+            this.deleteExtractButton.Location = new System.Drawing.Point(6, 135);
             this.deleteExtractButton.Name = "deleteExtractButton";
             this.deleteExtractButton.Size = new System.Drawing.Size(114, 23);
             this.deleteExtractButton.TabIndex = 7;
@@ -700,7 +690,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(196, 113);
+            this.label17.Location = new System.Drawing.Point(3, 118);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(226, 13);
             this.label17.TabIndex = 6;
@@ -708,7 +698,7 @@
             // 
             // extractionRefresh
             // 
-            this.extractionRefresh.Location = new System.Drawing.Point(199, 57);
+            this.extractionRefresh.Location = new System.Drawing.Point(6, 62);
             this.extractionRefresh.Name = "extractionRefresh";
             this.extractionRefresh.Size = new System.Drawing.Size(114, 23);
             this.extractionRefresh.TabIndex = 3;
@@ -718,7 +708,7 @@
             // 
             // createExtractionInstruction
             // 
-            this.createExtractionInstruction.Location = new System.Drawing.Point(199, 28);
+            this.createExtractionInstruction.Location = new System.Drawing.Point(6, 33);
             this.createExtractionInstruction.Name = "createExtractionInstruction";
             this.createExtractionInstruction.Size = new System.Drawing.Size(114, 23);
             this.createExtractionInstruction.TabIndex = 2;
@@ -730,7 +720,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(196, 12);
+            this.label13.Location = new System.Drawing.Point(3, 17);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(117, 13);
             this.label13.TabIndex = 1;
@@ -738,60 +728,52 @@
             // 
             // extractFiles
             // 
-            this.extractFiles.Location = new System.Drawing.Point(3, 3);
+            this.extractFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.extractFiles.Location = new System.Drawing.Point(0, 0);
             this.extractFiles.Name = "extractFiles";
-            this.extractFiles.Size = new System.Drawing.Size(187, 140);
+            this.extractFiles.Size = new System.Drawing.Size(234, 135);
             this.extractFiles.TabIndex = 0;
             this.extractFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.extractFiles_NodeMouseDoubleClick);
             // 
-            // tabPage6
+            // customCodeTab
             // 
-            this.tabPage6.Controls.Add(this.customCodeUninstall);
-            this.tabPage6.Controls.Add(this.customCodeInstall);
-            this.tabPage6.Controls.Add(this.panel3);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(583, 288);
-            this.tabPage6.TabIndex = 6;
-            this.tabPage6.Text = "Custom code";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.customCodeTab.Controls.Add(this.splitContainer2);
+            this.customCodeTab.Controls.Add(this.label14);
+            this.customCodeTab.Location = new System.Drawing.Point(4, 22);
+            this.customCodeTab.Name = "customCodeTab";
+            this.customCodeTab.Padding = new System.Windows.Forms.Padding(3);
+            this.customCodeTab.Size = new System.Drawing.Size(583, 288);
+            this.customCodeTab.TabIndex = 6;
+            this.customCodeTab.Text = "Custom code";
+            this.customCodeTab.UseVisualStyleBackColor = true;
             // 
             // customCodeUninstall
             // 
-            this.customCodeUninstall.Location = new System.Drawing.Point(305, 67);
+            this.customCodeUninstall.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customCodeUninstall.Location = new System.Drawing.Point(0, 13);
             this.customCodeUninstall.Multiline = true;
             this.customCodeUninstall.Name = "customCodeUninstall";
             this.customCodeUninstall.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.customCodeUninstall.Size = new System.Drawing.Size(270, 213);
+            this.customCodeUninstall.Size = new System.Drawing.Size(267, 251);
             this.customCodeUninstall.TabIndex = 4;
             this.customCodeUninstall.WordWrap = false;
             // 
             // customCodeInstall
             // 
-            this.customCodeInstall.Location = new System.Drawing.Point(8, 67);
+            this.customCodeInstall.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customCodeInstall.Location = new System.Drawing.Point(0, 13);
             this.customCodeInstall.Multiline = true;
             this.customCodeInstall.Name = "customCodeInstall";
             this.customCodeInstall.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.customCodeInstall.Size = new System.Drawing.Size(291, 213);
+            this.customCodeInstall.Size = new System.Drawing.Size(306, 251);
             this.customCodeInstall.TabIndex = 2;
             this.customCodeInstall.WordWrap = false;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.label16);
-            this.panel3.Controls.Add(this.label14);
-            this.panel3.Controls.Add(this.label15);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(3, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(577, 58);
-            this.panel3.TabIndex = 1;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(299, 36);
+            this.label16.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label16.Location = new System.Drawing.Point(0, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(73, 13);
             this.label16.TabIndex = 5;
@@ -800,70 +782,64 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(5, 10);
+            this.label14.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label14.Location = new System.Drawing.Point(3, 3);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(537, 13);
+            this.label14.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.label14.Size = new System.Drawing.Size(537, 18);
             this.label14.TabIndex = 0;
             this.label14.Text = "You can specify your own code to be executed here. It is easier to copy it from a" +
-    " code editor than to write it here.";
+    " code editor than to write it here.\r\n";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(5, 36);
+            this.label15.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label15.Location = new System.Drawing.Point(0, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(60, 13);
             this.label15.TabIndex = 3;
             this.label15.Text = "Installation:";
             // 
-            // tabPage7
+            // alterDatabaseTab
             // 
-            this.tabPage7.Controls.Add(this.uninstallDatabaseCode);
-            this.tabPage7.Controls.Add(this.installDatabaseCode);
-            this.tabPage7.Controls.Add(this.panel4);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(583, 288);
-            this.tabPage7.TabIndex = 7;
-            this.tabPage7.Text = "Alter database";
-            this.tabPage7.UseVisualStyleBackColor = true;
+            this.alterDatabaseTab.Controls.Add(this.splitContainer3);
+            this.alterDatabaseTab.Controls.Add(this.label19);
+            this.alterDatabaseTab.Location = new System.Drawing.Point(4, 22);
+            this.alterDatabaseTab.Name = "alterDatabaseTab";
+            this.alterDatabaseTab.Padding = new System.Windows.Forms.Padding(3);
+            this.alterDatabaseTab.Size = new System.Drawing.Size(583, 288);
+            this.alterDatabaseTab.TabIndex = 7;
+            this.alterDatabaseTab.Text = "Alter database";
+            this.alterDatabaseTab.UseVisualStyleBackColor = true;
             // 
             // uninstallDatabaseCode
             // 
-            this.uninstallDatabaseCode.Location = new System.Drawing.Point(305, 67);
+            this.uninstallDatabaseCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uninstallDatabaseCode.Location = new System.Drawing.Point(0, 13);
             this.uninstallDatabaseCode.Multiline = true;
             this.uninstallDatabaseCode.Name = "uninstallDatabaseCode";
             this.uninstallDatabaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.uninstallDatabaseCode.Size = new System.Drawing.Size(270, 213);
+            this.uninstallDatabaseCode.Size = new System.Drawing.Size(300, 251);
             this.uninstallDatabaseCode.TabIndex = 5;
             this.uninstallDatabaseCode.WordWrap = false;
             // 
             // installDatabaseCode
             // 
-            this.installDatabaseCode.Location = new System.Drawing.Point(8, 67);
+            this.installDatabaseCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.installDatabaseCode.Location = new System.Drawing.Point(0, 13);
             this.installDatabaseCode.Multiline = true;
             this.installDatabaseCode.Name = "installDatabaseCode";
             this.installDatabaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.installDatabaseCode.Size = new System.Drawing.Size(291, 213);
+            this.installDatabaseCode.Size = new System.Drawing.Size(273, 251);
             this.installDatabaseCode.TabIndex = 3;
             this.installDatabaseCode.WordWrap = false;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.label18);
-            this.panel4.Controls.Add(this.label19);
-            this.panel4.Controls.Add(this.label20);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(3, 3);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(577, 58);
-            this.panel4.TabIndex = 2;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(299, 36);
+            this.label18.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label18.Location = new System.Drawing.Point(0, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(73, 13);
             this.label18.TabIndex = 5;
@@ -872,9 +848,11 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(5, 10);
+            this.label19.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label19.Location = new System.Drawing.Point(3, 3);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(557, 13);
+            this.label19.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
+            this.label19.Size = new System.Drawing.Size(557, 18);
             this.label19.TabIndex = 0;
             this.label19.Text = "You can specify your own database to be executed here. It is easier to copy it fr" +
     "om a code editor than to write it here.";
@@ -882,7 +860,8 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(5, 36);
+            this.label20.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label20.Location = new System.Drawing.Point(0, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(60, 13);
             this.label20.TabIndex = 3;
@@ -892,7 +871,6 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem,
-            this.editToolStripMenuItem,
             this.projectToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -913,97 +891,30 @@
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newProjectToolStripMenuItem.Text = "New project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // openProjectToolStripMenuItem
             // 
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openProjectToolStripMenuItem.Text = "Open project";
             this.openProjectToolStripMenuItem.Click += new System.EventHandler(this.openProjectToolStripMenuItem_Click);
             // 
             // saveProjectToolStripMenuItem
             // 
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveProjectToolStripMenuItem.Text = "Save project";
             this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undoToolStripMenuItem,
-            this.redoToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.cutToolStripMenuItem,
-            this.copyToolStripMenuItem,
-            this.pasteToolStripMenuItem,
-            this.deleteToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.selectAllToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // undoToolStripMenuItem
-            // 
-            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.undoToolStripMenuItem.Text = "Undo";
-            // 
-            // redoToolStripMenuItem
-            // 
-            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.redoToolStripMenuItem.Text = "Redo";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
-            // 
-            // cutToolStripMenuItem
-            // 
-            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.cutToolStripMenuItem.Text = "Cut";
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
-            // 
-            // pasteToolStripMenuItem
-            // 
-            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.pasteToolStripMenuItem.Text = "Paste";
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(119, 6);
-            // 
-            // selectAllToolStripMenuItem
-            // 
-            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.selectAllToolStripMenuItem.Text = "Select All";
             // 
             // projectToolStripMenuItem
             // 
             this.projectToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.compileToolStripMenuItem,
             this.buildToolStripMenuItem,
+            this.toolStripSeparator1,
             this.regenerateSQLToolStripMenuItem});
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
             this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
@@ -1030,45 +941,100 @@
             this.regenerateSQLToolStripMenuItem.Text = "Regenerate SQL";
             this.regenerateSQLToolStripMenuItem.Click += new System.EventHandler(this.regenerateSQLToolStripMenuItem_Click);
             // 
-            // contextMenuStrip1
+            // splitContainer1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNewDirectoryToolStripMenuItem,
-            this.addAFileToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(172, 48);
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(8, 6);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // addNewDirectoryToolStripMenuItem
+            // splitContainer1.Panel1
             // 
-            this.addNewDirectoryToolStripMenuItem.Name = "addNewDirectoryToolStripMenuItem";
-            this.addNewDirectoryToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.addNewDirectoryToolStripMenuItem.Text = "Add new directory";
+            this.splitContainer1.Panel1.Controls.Add(this.extractFiles);
             // 
-            // addAFileToolStripMenuItem
+            // splitContainer1.Panel2
             // 
-            this.addAFileToolStripMenuItem.Name = "addAFileToolStripMenuItem";
-            this.addAFileToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.addAFileToolStripMenuItem.Text = "Add a file";
+            this.splitContainer1.Panel2.Controls.Add(this.deleteFiles);
+            this.splitContainer1.Size = new System.Drawing.Size(234, 276);
+            this.splitContainer1.SplitterDistance = 135;
+            this.splitContainer1.TabIndex = 13;
             // 
-            // button3
+            // panel6
             // 
-            this.button3.Location = new System.Drawing.Point(199, 243);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(114, 23);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "Delete instruction";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.panel6.Controls.Add(this.label13);
+            this.panel6.Controls.Add(this.createExtractionInstruction);
+            this.panel6.Controls.Add(this.button3);
+            this.panel6.Controls.Add(this.extractionRefresh);
+            this.panel6.Controls.Add(this.button1);
+            this.panel6.Controls.Add(this.label17);
+            this.panel6.Controls.Add(this.label22);
+            this.panel6.Controls.Add(this.deleteExtractButton);
+            this.panel6.Controls.Add(this.label21);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel6.Location = new System.Drawing.Point(246, 3);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(334, 282);
+            this.panel6.TabIndex = 14;
             // 
-            // ignoreInstructions
+            // panel2
             // 
-            this.ignoreInstructions.AutoSize = true;
-            this.ignoreInstructions.Location = new System.Drawing.Point(261, 263);
-            this.ignoreInstructions.Name = "ignoreInstructions";
-            this.ignoreInstructions.Size = new System.Drawing.Size(190, 17);
-            this.ignoreInstructions.TabIndex = 7;
-            this.ignoreInstructions.Text = "Ignore this step (will keep the data)";
-            this.ignoreInstructions.UseVisualStyleBackColor = true;
+            this.panel2.Controls.Add(this.label12);
+            this.panel2.Controls.Add(this.ignoreInstructions);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.instructionsRefresh);
+            this.panel2.Controls.Add(this.delInstruction);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(266, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(314, 282);
+            this.panel2.TabIndex = 8;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(3, 21);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.customCodeInstall);
+            this.splitContainer2.Panel1.Controls.Add(this.label15);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.customCodeUninstall);
+            this.splitContainer2.Panel2.Controls.Add(this.label16);
+            this.splitContainer2.Size = new System.Drawing.Size(577, 264);
+            this.splitContainer2.SplitterDistance = 306;
+            this.splitContainer2.TabIndex = 6;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(3, 21);
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.installDatabaseCode);
+            this.splitContainer3.Panel1.Controls.Add(this.label20);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.uninstallDatabaseCode);
+            this.splitContainer3.Panel2.Controls.Add(this.label18);
+            this.splitContainer3.Size = new System.Drawing.Size(577, 264);
+            this.splitContainer3.SplitterDistance = 273;
+            this.splitContainer3.TabIndex = 6;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(154, 6);
             // 
             // modEditor
             // 
@@ -1084,7 +1050,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.modEditor_FormClosing);
             this.Load += new System.EventHandler(this.modEditor_Load);
             this.tabControl1.ResumeLayout(false);
-            this.modDetails.ResumeLayout(false);
+            this.modDetailsTab.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -1095,31 +1061,40 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.filesTab.ResumeLayout(false);
+            this.filesTab.PerformLayout();
+            this.readmeTab.ResumeLayout(false);
+            this.readmeTab.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
-            this.tabPage6.ResumeLayout(false);
-            this.tabPage6.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.instructionsTab.ResumeLayout(false);
+            this.extractFilesTab.ResumeLayout(false);
+            this.customCodeTab.ResumeLayout(false);
+            this.customCodeTab.PerformLayout();
+            this.alterDatabaseTab.ResumeLayout(false);
+            this.alterDatabaseTab.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.PerformLayout();
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1128,19 +1103,9 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage modDetails;
+        private System.Windows.Forms.TabPage modDetailsTab;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem undoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem redoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem projectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem compileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buildToolStripMenuItem;
@@ -1152,7 +1117,7 @@
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openProjectToolStripMenuItem;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage filesTab;
         private System.Windows.Forms.Button addFileButton;
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.ComboBox modType;
@@ -1161,18 +1126,12 @@
         public System.Windows.Forms.TextBox modName;
         public System.Windows.Forms.TextBox authorName;
         private System.Windows.Forms.ToolStripMenuItem saveProjectToolStripMenuItem;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem addNewDirectoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addAFileToolStripMenuItem;
+        private System.Windows.Forms.TabPage readmeTab;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TabPage instructionsTab;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label12;
@@ -1193,13 +1152,12 @@
         private System.Windows.Forms.Button delInstruction;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.TreeView files;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage extractFilesTab;
         private System.Windows.Forms.Button extractionRefresh;
         private System.Windows.Forms.Button createExtractionInstruction;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TreeView extractFiles;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TabPage customCodeTab;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
@@ -1207,9 +1165,8 @@
         public System.Windows.Forms.TextBox customCodeUninstall;
         private System.Windows.Forms.Button deleteExtractButton;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage alterDatabaseTab;
         public System.Windows.Forms.TextBox installDatabaseCode;
-        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
@@ -1219,6 +1176,12 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TreeView deleteFiles;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.CheckBox ignoreInstructions;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        public System.Windows.Forms.CheckBox ignoreInstructions;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

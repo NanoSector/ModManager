@@ -21,6 +21,7 @@ namespace ModBuilder
         public string workingDirectory;
         public SQLiteConnection conn;
         public bool hasConn = false;
+        public Dictionary<string, string> settings = new Dictionary<string,string>();
 
         #region Load
         // Shows the actual editor
@@ -29,12 +30,20 @@ namespace ModBuilder
             InitializeComponent();
         }
 
-        // Loads a mod project in the following steps:
-        // First it wipes all the fields.
-        // Second it shows the user 
-        public void loadModProject(string projectDir)
+        public void reloadSettings()
         {
+            if (!hasConn)
+                return;
 
+
+            string sql = "SELECT key, value FROM settings";
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                settings.Add(reader["key"].ToString(), reader["value"].ToString());
+            }
         }
 
         private void modEditor_Load(object sender, EventArgs e)
@@ -119,7 +128,7 @@ namespace ModBuilder
             {
                 // Yes it is, warn the user and reset to the main tab.
                 System.Windows.Forms.MessageBox.Show("You forgot to fill in some details.", "Saving modification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                tabControl1.SelectedTab = modDetails;
+                tabControl1.SelectedTab = modDetailsTab;
 
                 // Also mark the required fields in a nice red colour. It goes away once something's typed. First up is name.
                 if (String.IsNullOrEmpty(modName.Text))
@@ -142,6 +151,22 @@ namespace ModBuilder
                     modCompatibility.BackColor = Color.Red;
                 return false;
             }
+
+            // Insert some settings if we can.
+            string updateTo = "";
+            switch (ignoreInstructions.Checked)
+            {
+                case true:
+                    updateTo = "true";
+                    break;
+
+                default:
+                    updateTo = "false";
+                    break;
+            }
+            string updatesql = "UPDATE settings SET value = \"" + updateTo + "\" WHERE key = \"ignoreInstructions\"";
+            SQLiteCommand updatecommand = new SQLiteCommand(updatesql, conn);
+            updatecommand.ExecuteNonQuery();
 
             // Lets build the package_info.xml.
             using (FileStream fileStream = new FileStream(workingDirectory + "/Package/package-info.xml", FileMode.Create))
@@ -638,6 +663,14 @@ namespace ModBuilder
             command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
 
+            sql = "CREATE TABLE settings(key VARCHAR(255), value VARCHAR(255))";
+            command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
+            sql = "INSERT INTO settings(key, value) VALUES(\"ignoreInstructions\", \"false\")";
+            command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
             return true;
         }
         #endregion
@@ -736,6 +769,7 @@ namespace ModBuilder
             SaveFileDialog sf = new SaveFileDialog();
             sf.AddExtension = true;
             sf.DefaultExt = "zip";
+            sf.Filter = "Compressed files|*.zip";
             sf.InitialDirectory = workingDirectory;
             sf.CheckFileExists = false;
             sf.CheckPathExists = true;
@@ -763,7 +797,7 @@ namespace ModBuilder
             }
 
             // And done!
-            MessageBox.Show("The package has been compiled and saved as compile.zip in the project directory.", "Package Compiled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("The package has been compiled.", "Package Compiled", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
 

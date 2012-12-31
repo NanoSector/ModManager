@@ -135,7 +135,12 @@
             this.Controls.Add(this.fileName);
             this.Controls.Add(this.filePrefix);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(500, 137);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(500, 137);
             this.Name = "addDeletionInstructionDialog";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "addDeletionInstructionDialog";
             this.ResumeLayout(false);
             this.PerformLayout();

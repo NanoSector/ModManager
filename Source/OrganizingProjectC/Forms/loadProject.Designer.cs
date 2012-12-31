@@ -37,9 +37,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 13);
+            this.label1.Size = new System.Drawing.Size(239, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Please wait while we load your project...";
+            this.label1.Text = "Please wait while your project is being prepared...";
             // 
             // progressBar1
             // 
@@ -57,6 +57,8 @@
             this.ControlBox = false;
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(332, 107);
+            this.MinimumSize = new System.Drawing.Size(332, 107);
             this.Name = "loadProject";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
