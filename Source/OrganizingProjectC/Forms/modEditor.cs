@@ -575,6 +575,7 @@ namespace ModBuilder
                 instructions.Nodes.Add("id" + id, "Operation #" + i + " on file ROOT/" + reader["file"] + opt, id);
                 i++;
             }
+            instructions.Nodes.Add(i - 1 + " instructions total.");
             instructions.EndUpdate();
         }
 
@@ -822,6 +823,7 @@ namespace ModBuilder
                 extractFiles.Nodes.Add("id" + id, "Extract \"" + reader["file_name"] + "\" to \"" + reader["destination"] + "\"", id);
                 i++;
             }
+            extractFiles.Nodes.Add(i - 1 + " instructions total.");
             extractFiles.EndUpdate();
 
             deleteFiles.BeginUpdate();
@@ -830,12 +832,14 @@ namespace ModBuilder
             sql = "SELECT id, file_name FROM files_delete";
             command = new SQLiteCommand(sql, conn);
             reader = command.ExecuteReader();
+            i = 1;
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["id"]);
                 deleteFiles.Nodes.Add("id" + id, "Remove \"" + reader["file_name"] + "\"", id);
                 i++;
             }
+            deleteFiles.Nodes.Add(i - 1 + " instructions total.");
             deleteFiles.EndUpdate();
         }
 
