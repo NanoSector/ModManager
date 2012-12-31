@@ -469,7 +469,10 @@ namespace ModBuilder
             bool result = buildMod(workingDirectory);
 
             if (result == false)
+            {
                 MessageBox.Show("An error occured while saving your project. Please try again.", "Saving project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             hasConn = true;
 
