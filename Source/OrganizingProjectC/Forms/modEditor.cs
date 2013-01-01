@@ -364,11 +364,11 @@ namespace ModBuilder
                             switch (Convert.ToString(reader["type"]))
                             {
                                 case "add_before":
-                                    fintype = "before";
+                                    fintype = "after";
                                     break;
 
                                 case "add_after":
-                                    fintype = "after";
+                                    fintype = "before";
                                     break;
 
                                 case "replace":

@@ -9,10 +9,8 @@
     <install for="2.0 - 2.0.99">
         <readme parsebbc="true">readme.txt</readme>
         <modification>install.xml</modification>
-        <code>install.php</code>
     </install>
     <uninstall for="2.0 - 2.0.99">
         <modification reverse="true">install.xml</modification>
-        <code>uninstall.php</code>
     </uninstall>
 </package-info>
