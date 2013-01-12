@@ -107,7 +107,7 @@ namespace ModBuilder
             {
                 MessageBox.Show("Your project does not contain all the required settings; please try to repair your project.", "Loading project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 me.conn.Close();
-                Close();
+                return false;
             }
 
             if (me.settings["ignoreInstructions"] == "true")
