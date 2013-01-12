@@ -103,7 +103,7 @@ namespace ModBuilder
             me.PopulateFileTree(dir, me.files.Nodes[0]);
 
             // Checks.
-            if (me.settings.ContainsKey("ignoreInstructions") || me.settings.ContainsKey("autoGenerateModID"))
+            if (!me.settings.ContainsKey("ignoreInstructions") || !me.settings.ContainsKey("autoGenerateModID"))
             {
                 MessageBox.Show("Your project does not contain all the required settings; please try to repair your project.", "Loading project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 me.conn.Close();
