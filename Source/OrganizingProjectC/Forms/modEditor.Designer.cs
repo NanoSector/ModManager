@@ -1113,7 +1113,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label versionLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox genPkgID;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openProjectToolStripMenuItem;
         private System.Windows.Forms.Label label5;
@@ -1183,5 +1182,6 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         public System.Windows.Forms.CheckBox ignoreInstructions;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        public System.Windows.Forms.CheckBox genPkgID;
     }
 }

@@ -18,9 +18,7 @@ namespace ModBuilder
         private modEditor me;
         int editing = 0;
 
-        // <summary>
         // Loads and sets up the environment.
-        // </summary>
         public addInstruction(string workingDirectory, SQLiteConnection conn, int editing, modEditor mode)
         {
             // Start the form.
@@ -84,9 +82,7 @@ namespace ModBuilder
             }
         }
 
-        // <summary>
         // Handles the saving and checking of the values entered in the form.
-        // </summary>
         private void button2_Click(object sender, EventArgs e)
         {
             string type;
@@ -129,16 +125,16 @@ namespace ModBuilder
                     break;
             }   
 
-            // Insert the row, if we weren't editing. Else update the row.
+            // Start the sql string.
             string sql;
+
+            // If we are not editing an instruction, we are going to insert a new one.
             if (editing == 0)
-            {
                 sql = "INSERT INTO instructions(id, before, after, type, file, optional) VALUES(null, @beforeText, @afterText, @type, @fileEdited, @optional)";
-            }
+
+            // If we *are* editing an instruction, update the existing entry instead.
             else
-            {
                 sql = "UPDATE instructions SET before = @beforeText, after = @afterText, type = @type, file = @fileEdited, optional = @optional WHERE id = @editing";
-            }
 
             // Create the query.
             SQLiteCommand command = new SQLiteCommand(sql, co);
@@ -149,6 +145,7 @@ namespace ModBuilder
             command.Parameters.AddWithValue("@optional", optional);
             command.Parameters.AddWithValue("@editing", editing);
 
+            // And execute it.
             command.ExecuteNonQuery();
 
             me.refreshInstructionTree();

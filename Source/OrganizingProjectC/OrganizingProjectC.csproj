@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIs\Notify.cs" />
     <Compile Include="Forms\addDeletionInstructionDialog.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -35,6 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.repairProject = new System.Windows.Forms.Button();
+            this.createProjectFromPackage = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -50,7 +51,7 @@
             // 
             this.createProjectButton.Location = new System.Drawing.Point(15, 25);
             this.createProjectButton.Name = "createProjectButton";
-            this.createProjectButton.Size = new System.Drawing.Size(243, 23);
+            this.createProjectButton.Size = new System.Drawing.Size(243, 30);
             this.createProjectButton.TabIndex = 2;
             this.createProjectButton.Text = "Create a new project";
             this.createProjectButton.UseVisualStyleBackColor = true;
@@ -58,9 +59,9 @@
             // 
             // editProjectButton
             // 
-            this.editProjectButton.Location = new System.Drawing.Point(15, 54);
+            this.editProjectButton.Location = new System.Drawing.Point(15, 61);
             this.editProjectButton.Name = "editProjectButton";
-            this.editProjectButton.Size = new System.Drawing.Size(243, 23);
+            this.editProjectButton.Size = new System.Drawing.Size(243, 30);
             this.editProjectButton.TabIndex = 3;
             this.editProjectButton.Text = "Edit a project";
             this.editProjectButton.UseVisualStyleBackColor = true;
@@ -69,7 +70,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 119);
+            this.label2.Location = new System.Drawing.Point(12, 181);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(180, 13);
             this.label2.TabIndex = 4;
@@ -86,19 +87,31 @@
             // 
             // repairProject
             // 
-            this.repairProject.Location = new System.Drawing.Point(15, 83);
+            this.repairProject.Location = new System.Drawing.Point(15, 97);
             this.repairProject.Name = "repairProject";
-            this.repairProject.Size = new System.Drawing.Size(243, 23);
+            this.repairProject.Size = new System.Drawing.Size(243, 29);
             this.repairProject.TabIndex = 6;
             this.repairProject.Text = "Repair a project";
             this.repairProject.UseVisualStyleBackColor = true;
             this.repairProject.Click += new System.EventHandler(this.repairProject_Click);
             // 
+            // createProjectFromPackage
+            // 
+            this.createProjectFromPackage.Enabled = false;
+            this.createProjectFromPackage.Location = new System.Drawing.Point(15, 132);
+            this.createProjectFromPackage.Name = "createProjectFromPackage";
+            this.createProjectFromPackage.Size = new System.Drawing.Size(243, 32);
+            this.createProjectFromPackage.TabIndex = 7;
+            this.createProjectFromPackage.Text = "Create project from package";
+            this.createProjectFromPackage.UseVisualStyleBackColor = true;
+            this.createProjectFromPackage.Click += new System.EventHandler(this.createProjectFromPackage_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 144);
+            this.ClientSize = new System.Drawing.Size(284, 208);
+            this.Controls.Add(this.createProjectFromPackage);
             this.Controls.Add(this.repairProject);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -106,6 +119,8 @@
             this.Controls.Add(this.createProjectButton);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Mod Manager Agent";
             this.ResumeLayout(false);
@@ -121,6 +136,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button repairProject;
+        private System.Windows.Forms.Button createProjectFromPackage;
     }
 }
 

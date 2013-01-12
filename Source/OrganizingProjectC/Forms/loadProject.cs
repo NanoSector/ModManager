@@ -102,8 +102,19 @@ namespace ModBuilder
             me.reloadSettings();
             me.PopulateFileTree(dir, me.files.Nodes[0]);
 
+            // Checks.
+            if (me.settings.ContainsKey("ignoreInstructions") || me.settings.ContainsKey("autoGenerateModID"))
+            {
+                MessageBox.Show("Your project does not contain all the required settings; please try to repair your project.", "Loading project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                me.conn.Close();
+                Close();
+            }
+
             if (me.settings["ignoreInstructions"] == "true")
                 me.ignoreInstructions.Checked = true;
+
+            if (me.settings["autoGenerateModID"] == "false")
+                me.genPkgID.Checked = false;
 
             me.Show();
 

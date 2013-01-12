@@ -35,6 +35,7 @@ namespace ModBuilder
             if (!hasConn)
                 return;
 
+            settings.Clear();
 
             string sql = "SELECT key, value FROM settings";
             SQLiteCommand command = new SQLiteCommand(sql, conn);
@@ -168,6 +169,20 @@ namespace ModBuilder
                 }
                 string updatesql = "UPDATE settings SET value = \"" + updateTo + "\" WHERE key = \"ignoreInstructions\"";
                 SQLiteCommand updatecommand = new SQLiteCommand(updatesql, conn);
+                updatecommand.ExecuteNonQuery();
+
+                switch (genPkgID.Checked)
+                {
+                    case true:
+                        updateTo = "true";
+                        break;
+
+                    default:
+                        updateTo = "false";
+                        break;
+                }
+                updatesql = "UPDATE settings SET value = \"" + updateTo + "\" WHERE key = \"autoGenerateModID\"";
+                updatecommand = new SQLiteCommand(updatesql, conn);
                 updatecommand.ExecuteNonQuery();
             }
 
@@ -617,7 +632,8 @@ namespace ModBuilder
 
             if (result == DialogResult.Yes)
             {
-                conn.Close();
+                if (hasConn)
+                    conn.Close();
 
                 try
                 {
@@ -644,39 +660,62 @@ namespace ModBuilder
             }
         }
 
-        public bool generateSQL(string dir)
+        public bool generateSQL(string dir, bool deleteFile = true)
         {
             // Create the file.
-            SQLiteConnection.CreateFile(dir + "/data.sqlite");
+            if (deleteFile)
+            {
+                // If we have a connection, close it.
+                if (hasConn)
+                    conn.Close();
+
+                // Create a new file.
+                SQLiteConnection.CreateFile(dir + "/data.sqlite");
+            }
 
             // Immediately connect.
             conn = new SQLiteConnection("Data Source=\"" + dir + "/data.sqlite\";Version=3;");
             conn.Open();
 
+            // Trick the ME into believing that we have a valid connection, which we in fact have.
+            hasConn = true;
+
             // Create our tables.
-            string sql = "CREATE TABLE instructions(id INTEGER PRIMARY KEY, before VARCHAR(255), after VARCHAR(255), type VARCHAR(20), file VARCHAR(255), optional INTEGER)";
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-            command.ExecuteNonQuery();
+            string[] sqlcomm = new string[5]
+            {
+                "CREATE TABLE IF NOT EXISTS instructions(id INTEGER PRIMARY KEY, before VARCHAR(255), after VARCHAR(255), type VARCHAR(20), file VARCHAR(255), optional INTEGER)",
+                "CREATE TABLE IF NOT EXISTS hooks(id INTEGER PRIMARY KEY, hook_name VARCHAR(255), value VARCHAR(255))",
+                "CREATE TABLE IF NOT EXISTS files(id INTEGER PRIMARY KEY, file_name VARCHAR(255), destination VARCHAR(255))",
+                "CREATE TABLE IF NOT EXISTS files_delete(id INTEGER PRIMARY KEY, file_name VARCHAR(255), type VARCHAR(255))",
+                "CREATE TABLE IF NOT EXISTS settings(key VARCHAR(255), value VARCHAR(255))"
+            };
 
-            sql = "CREATE TABLE hooks(id INTEGER PRIMARY KEY, hook_name VARCHAR(255), value VARCHAR(255))";
-            command = new SQLiteCommand(sql, conn);
-            command.ExecuteNonQuery();
+            SQLiteCommand command;
+            foreach (string sql in sqlcomm)
+            {
+                command = new SQLiteCommand(sql, conn);
+                command.ExecuteNonQuery();
+            }
 
-            sql = "CREATE TABLE files(id INTEGER PRIMARY KEY, file_name VARCHAR(255), destination VARCHAR(255))";
-            command = new SQLiteCommand(sql, conn);
-            command.ExecuteNonQuery();
+            // Reload the settings.
+            reloadSettings();
 
-            sql = "CREATE TABLE files_delete(id INTEGER PRIMARY KEY, file_name VARCHAR(255), type VARCHAR(255))";
-            command = new SQLiteCommand(sql, conn);
-            command.ExecuteNonQuery();
+            string q;
 
-            sql = "CREATE TABLE settings(key VARCHAR(255), value VARCHAR(255))";
-            command = new SQLiteCommand(sql, conn);
-            command.ExecuteNonQuery();
+            // If a setting doesn't exist, insert it.
+            if (!settings.ContainsKey("ignoreInstructions"))
+            {
+                q = "INSERT INTO settings(key, value) VALUES(\"ignoreInstructions\", \"false\")";
+                command = new SQLiteCommand(q, conn);
+                command.ExecuteNonQuery();
+            }
 
-            sql = "INSERT INTO settings(key, value) VALUES(\"ignoreInstructions\", \"false\")";
-            command = new SQLiteCommand(sql, conn);
-            command.ExecuteNonQuery();
+            if (!settings.ContainsKey("autoGenerateModID"))
+            {
+                q = "INSERT INTO settings(key, value) VALUES(\"autoGenerateModID\", \"true\")";
+                command = new SQLiteCommand(q, conn);
+                command.ExecuteNonQuery();
+            }
 
             return true;
         }
@@ -749,6 +788,9 @@ namespace ModBuilder
 
         private void refreshFileListButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(workingDirectory))
+                return;
+
             files.Nodes.Clear();
             files.Nodes.Add(new TreeNode("Files"));
             PopulateFileTree(workingDirectory, files.Nodes[0]);
@@ -756,6 +798,9 @@ namespace ModBuilder
 
         private void addFileButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(workingDirectory))
+                return;
+
             System.Diagnostics.Process.Start("explorer.exe", workingDirectory);
         }
 
@@ -936,5 +981,6 @@ namespace ModBuilder
                 conn.Close();
         }
         #endregion
+
     }
 }
