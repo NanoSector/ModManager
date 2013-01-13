@@ -36,6 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.repairProject = new System.Windows.Forms.Button();
             this.createProjectFromPackage = new System.Windows.Forms.Button();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -74,7 +75,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(180, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "(c) 2012 - Rick \"Yoshi2889\" Kerkhof";
+            this.label2.Text = "(c) 2013 - Rick \"Yoshi2889\" Kerkhof";
             // 
             // label3
             // 
@@ -106,11 +107,22 @@
             this.createProjectFromPackage.UseVisualStyleBackColor = true;
             this.createProjectFromPackage.Click += new System.EventHandler(this.createProjectFromPackage_Click);
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(219, 181);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(39, 13);
+            this.linkLabel1.TabIndex = 8;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Credits";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 208);
+            this.ClientSize = new System.Drawing.Size(270, 208);
+            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.createProjectFromPackage);
             this.Controls.Add(this.repairProject);
             this.Controls.Add(this.label3);
@@ -137,6 +149,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button repairProject;
         private System.Windows.Forms.Button createProjectFromPackage;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }
 

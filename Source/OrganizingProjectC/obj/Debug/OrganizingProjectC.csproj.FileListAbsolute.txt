@@ -16,3 +16,4 @@ C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\Organizin
 C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\x86\SQLite.Interop.dll
 C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\System.Data.SQLite.Linq.dll
 C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\ModBuilder.Forms.addDeletionInstructionDialog.resources
+C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\ModBuilder.Forms.ModConsole.resources

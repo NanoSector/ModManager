@@ -106,6 +106,12 @@
     <Compile Include="Forms\loadProject.Designer.cs">
       <DependentUpon>loadProject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ModConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModConsole.Designer.cs">
+      <DependentUpon>ModConsole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\modEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\loadProject.resx">
       <DependentUpon>loadProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ModConsole.resx">
+      <DependentUpon>ModConsole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\modEditor.resx">
       <DependentUpon>modEditor.cs</DependentUpon>
