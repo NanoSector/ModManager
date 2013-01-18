@@ -98,7 +98,6 @@
             // 
             // createProjectFromPackage
             // 
-            this.createProjectFromPackage.Enabled = false;
             this.createProjectFromPackage.Location = new System.Drawing.Point(15, 132);
             this.createProjectFromPackage.Name = "createProjectFromPackage";
             this.createProjectFromPackage.Size = new System.Drawing.Size(243, 32);

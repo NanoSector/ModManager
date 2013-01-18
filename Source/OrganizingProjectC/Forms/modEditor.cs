@@ -17,13 +17,15 @@ namespace ModBuilder
 {
     public partial class modEditor : Form
     {
-        // Strings and other variables.
+        // The big big Mod Editor class! Dozens of functions here, split up into regions for your convenience :)
+        #region Strings and other variables.
         public string workingDirectory;
         public SQLiteConnection conn;
         public bool hasConn = false;
         public Dictionary<string, string> settings = new Dictionary<string,string>();
         //public bool changesPending = false; - For later :)
-        public ModConsole mc;
+        public modConsole mc;
+        #endregion
 
         #region Load
         // Shows the actual editor
@@ -514,6 +516,7 @@ namespace ModBuilder
         #region Mod Saver
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // If we have no working directory yet, prompt for one.
             if (!Directory.Exists(workingDirectory))
             {
                 // Show our known folderbrowserdialog.

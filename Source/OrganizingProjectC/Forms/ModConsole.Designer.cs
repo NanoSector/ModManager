@@ -1,6 +1,6 @@
 ﻿namespace ModBuilder.Forms
 {
-    partial class ModConsole
+    partial class modConsole
     {
         /// <summary>
         /// Required designer variable.

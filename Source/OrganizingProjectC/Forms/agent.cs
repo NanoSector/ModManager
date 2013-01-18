@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using ModBuilder.Forms;
 
 namespace ModBuilder
 {
@@ -55,41 +56,76 @@ namespace ModBuilder
 
         private void createProjectButton_Click(object sender, EventArgs e)
         {
+            // Start a new instance of the Mod Editor.
             modEditor me = new modEditor();
+
+            // Assign a new mod console to this instance.
+            me.mc = new modConsole();
+
+            // Some default values.
+            me.genPkgID.Checked = true;
+
+            // Show the instance.
             me.Show();
         }
 
         private void repairProject_Click(object sender, EventArgs e)
         {
+            // Start a new Folder Browser Dialog.
             FolderBrowserDialog fb = new FolderBrowserDialog();
+
+            // Some settings for it.
             fb.Description = "Please select the directory that your project resides in.";
             fb.ShowNewFolderButton = false;
-            fb.ShowDialog();
+
+            // And show it.
+            DialogResult bresult = fb.ShowDialog();
 
             // Get the path.
             string dir = fb.SelectedPath;
 
-            if (string.IsNullOrEmpty(dir))
+            // Check if it is empty or if the user clicked Cancel.
+            if (bresult == DialogResult.Cancel || string.IsNullOrEmpty(dir))
                 return;
 
+            // Check if it is a valid project.
             if (!Directory.Exists(dir + "/Package") || !Directory.Exists(dir + "/Source") || !File.Exists(dir + "/Package/package-info.xml"))
-                MessageBox.Show("The selected project is not a valid project.", "Repairing project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                message.error("The selected project is not a valid project.", MessageBoxButtons.OK);
+                return;
+            }
 
+            // Ask if the user wants to generate a new database, or to just add the tables.
             DialogResult result = message.question("Should I generate a new database for this project? Answering no will instead try to add all missing tables.", MessageBoxButtons.YesNoCancel);
 
             // New instance of the mod editor.
             modEditor me = new modEditor();
-            if (result == DialogResult.Yes)
-                me.generateSQL(dir);
-            else if (result == DialogResult.No)
-                me.generateSQL(dir, false);
-            else if (result == DialogResult.Cancel)
-                return;
 
+            // Switch the result, to see what the user has answered.
+            switch (result)
+            {
+                // Generate an all new shiny database.
+                case (DialogResult.Yes):
+                    me.generateSQL(dir);
+                    break;
+
+                // Only add the missing tables.
+                case (DialogResult.No):
+                    me.generateSQL(dir, false);
+                    break;
+
+                // Or don't do anything at all! :D
+                case (DialogResult.Cancel):
+                    return;
+            }
+
+            // Ask if the user wants to load the project.
             result = message.question("Your project has been repaired, should I load it now?", MessageBoxButtons.YesNo);
 
+            // Yes? Load the project.
             if (result == DialogResult.Yes)
             {
+                // Show a loadProject dialog.
                 loadProject lp = new loadProject();
                 lp.Show();
 
@@ -100,7 +136,7 @@ namespace ModBuilder
                 if (stat == false)
                     message.error("An error occured while loading the project.", MessageBoxButtons.OK);
 
-                // Tyvm!
+                // Close the loadProject dialog.
                 lp.Close();
             }
 
@@ -108,6 +144,9 @@ namespace ModBuilder
 
         private void createProjectFromPackage_Click(object sender, EventArgs e)
         {
+            // !WIP!
+            Forms.convertProject cp = new Forms.convertProject();
+            cp.Show();
             return;
 
             FolderBrowserDialog fb = new FolderBrowserDialog();

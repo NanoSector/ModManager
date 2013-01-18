@@ -31,7 +31,7 @@ namespace ModBuilder
             modEditor me = new modEditor();
 
             // Open up a new mod console.
-            ModConsole mc = new ModConsole();
+            modConsole mc = new modConsole();
 
             // Try to parse the package_info.xml.
             XmlReaderSettings settings = new XmlReaderSettings();

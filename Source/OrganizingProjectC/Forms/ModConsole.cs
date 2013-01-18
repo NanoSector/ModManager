@@ -9,12 +9,12 @@ using System.Windows.Forms;
 
 namespace ModBuilder.Forms
 {
-    public partial class ModConsole : Form
+    public partial class modConsole : Form
     {
         private modEditor me;
 
         DateTime starttime = new DateTime();
-        public ModConsole()
+        public modConsole()
         {
             InitializeComponent();
         }

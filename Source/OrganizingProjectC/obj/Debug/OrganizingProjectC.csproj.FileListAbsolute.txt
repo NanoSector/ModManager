@@ -17,3 +17,23 @@ C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\Organizin
 C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\System.Data.SQLite.Linq.dll
 C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\ModBuilder.Forms.addDeletionInstructionDialog.resources
 C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\obj\Debug\ModBuilder.Forms.ModConsole.resources
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\ModBuilder.exe.config
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.exe
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.pdb
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\x64\SQLite.Interop.dll
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\x86\SQLite.Interop.dll
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\ModBuilder.exe
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\ModBuilder.pdb
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\System.Data.SQLite.dll
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\OrganizingProjectC.csprojResolveAssemblyReference.cache
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.Forms.addDeletionInstructionDialog.resources
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.Forms.addExtractionInstructionDialog.resources
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.addInstruction.resources
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.Forms.convertProject.resources
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.Form1.resources
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.loadProject.resources
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.Forms.ModConsole.resources
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.modEditor.resources
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.Properties.Resources.resources
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\OrganizingProjectC.csproj.GenerateResource.Cache
