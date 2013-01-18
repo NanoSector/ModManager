@@ -36,14 +36,14 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\ModBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\Ionic.Zip.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\ModBuilder.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\ModBuilder.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Rick\Documents\Visual Studio 2012\Projects\OrganizingProjectC\OrganizingProjectC\bin\Debug\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\ModBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\Ionic.Zip.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\ModBuilder.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\ModBuilder.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
