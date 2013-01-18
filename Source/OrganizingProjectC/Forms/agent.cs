@@ -64,6 +64,7 @@ namespace ModBuilder
 
             // Some default values.
             me.genPkgID.Checked = true;
+            me.includeModManLine.Checked = true;
 
             // Show the instance.
             me.Show();

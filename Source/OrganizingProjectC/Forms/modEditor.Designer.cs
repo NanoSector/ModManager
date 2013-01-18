@@ -35,10 +35,15 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.modType = new System.Windows.Forms.ComboBox();
             this.genPkgID = new System.Windows.Forms.CheckBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.modName = new System.Windows.Forms.TextBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.modVersion = new System.Windows.Forms.TextBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.versionLabel = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,7 +53,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.authorName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.filesTab = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
             this.refreshFileListButton = new System.Windows.Forms.Button();
             this.addFileButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
@@ -95,6 +102,9 @@
             this.uninstallDatabaseCode = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label23 = new System.Windows.Forms.Label();
+            this.includeModManLine = new System.Windows.Forms.CheckBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,21 +115,17 @@
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.regenerateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.includeModManLine = new System.Windows.Forms.CheckBox();
-            this.label23 = new System.Windows.Forms.Label();
             this.showConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.modDetailsTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.filesTab.SuspendLayout();
             this.readmeTab.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -141,14 +147,8 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -234,6 +234,17 @@
             this.genPkgID.UseVisualStyleBackColor = true;
             this.genPkgID.CheckedChanged += new System.EventHandler(this.genPkgID_CheckedChanged);
             // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Help;
+            this.pictureBox6.Image = global::ModBuilder.Properties.Resources.question;
+            this.pictureBox6.Location = new System.Drawing.Point(6, 55);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox6.TabIndex = 23;
+            this.pictureBox6.TabStop = false;
+            this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
+            // 
             // modName
             // 
             this.modName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -243,6 +254,17 @@
             this.modName.Size = new System.Drawing.Size(334, 20);
             this.modName.TabIndex = 4;
             this.modName.TextChanged += new System.EventHandler(this.modName_TextChanged);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Help;
+            this.pictureBox5.Image = global::ModBuilder.Properties.Resources.question;
+            this.pictureBox5.Location = new System.Drawing.Point(6, 82);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox5.TabIndex = 22;
+            this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
             // 
             // modVersion
             // 
@@ -254,6 +276,17 @@
             this.modVersion.TabIndex = 3;
             this.modVersion.TextChanged += new System.EventHandler(this.modVersion_TextChanged);
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Help;
+            this.pictureBox4.Image = global::ModBuilder.Properties.Resources.question;
+            this.pictureBox4.Location = new System.Drawing.Point(6, 108);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox4.TabIndex = 21;
+            this.pictureBox4.TabStop = false;
+            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -263,6 +296,17 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Mod name";
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Help;
+            this.pictureBox3.Image = global::ModBuilder.Properties.Resources.question;
+            this.pictureBox3.Location = new System.Drawing.Point(6, 153);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox3.TabIndex = 20;
+            this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
             // versionLabel
             // 
             this.versionLabel.AutoSize = true;
@@ -271,6 +315,17 @@
             this.versionLabel.Size = new System.Drawing.Size(65, 13);
             this.versionLabel.TabIndex = 6;
             this.versionLabel.Text = "Mod version";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Help;
+            this.pictureBox1.Image = global::ModBuilder.Properties.Resources.question;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 29);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox1.TabIndex = 18;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label3
             // 
@@ -362,6 +417,17 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "Username";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Help;
+            this.pictureBox2.Image = global::ModBuilder.Properties.Resources.question;
+            this.pictureBox2.Location = new System.Drawing.Point(7, 27);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
+            this.pictureBox2.TabIndex = 19;
+            this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
             // filesTab
             // 
             this.filesTab.Controls.Add(this.label10);
@@ -376,6 +442,15 @@
             this.filesTab.TabIndex = 1;
             this.filesTab.Text = "Files";
             this.filesTab.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(262, 82);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(298, 13);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "From this panel, you can view any files present in your project.";
             // 
             // refreshFileListButton
             // 
@@ -896,6 +971,37 @@
             this.label19.Text = "You can specify your own database to be executed here. It is easier to copy it fr" +
     "om a code editor than to write it here.";
             // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label23);
+            this.tabPage1.Controls.Add(this.includeModManLine);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(583, 284);
+            this.tabPage1.TabIndex = 8;
+            this.tabPage1.Text = "Other settings";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(5, 26);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(263, 13);
+            this.label23.TabIndex = 1;
+            this.label23.Text = "I\'d really appreciate it if you would leave this option on.";
+            // 
+            // includeModManLine
+            // 
+            this.includeModManLine.AutoSize = true;
+            this.includeModManLine.Location = new System.Drawing.Point(8, 6);
+            this.includeModManLine.Name = "includeModManLine";
+            this.includeModManLine.Size = new System.Drawing.Size(303, 17);
+            this.includeModManLine.TabIndex = 0;
+            this.includeModManLine.Text = "Include \"Generated by Mod Manager\" line in package files";
+            this.includeModManLine.UseVisualStyleBackColor = true;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -976,118 +1082,12 @@
             this.regenerateSQLToolStripMenuItem.Text = "Regenerate SQL";
             this.regenerateSQLToolStripMenuItem.Click += new System.EventHandler(this.regenerateSQLToolStripMenuItem_Click);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(262, 82);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(298, 13);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "From this panel, you can view any files present in your project.";
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.label23);
-            this.tabPage1.Controls.Add(this.includeModManLine);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(583, 284);
-            this.tabPage1.TabIndex = 8;
-            this.tabPage1.Text = "Other settings";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // includeModManLine
-            // 
-            this.includeModManLine.AutoSize = true;
-            this.includeModManLine.Location = new System.Drawing.Point(8, 6);
-            this.includeModManLine.Name = "includeModManLine";
-            this.includeModManLine.Size = new System.Drawing.Size(303, 17);
-            this.includeModManLine.TabIndex = 0;
-            this.includeModManLine.Text = "Include \"Generated by Mod Manager\" line in package files";
-            this.includeModManLine.UseVisualStyleBackColor = true;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(5, 26);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(263, 13);
-            this.label23.TabIndex = 1;
-            this.label23.Text = "I\'d really appreciate it if you would leave this option on.";
-            // 
             // showConsoleToolStripMenuItem
             // 
             this.showConsoleToolStripMenuItem.Name = "showConsoleToolStripMenuItem";
             this.showConsoleToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.showConsoleToolStripMenuItem.Text = "Show console";
             this.showConsoleToolStripMenuItem.Click += new System.EventHandler(this.showConsoleToolStripMenuItem_Click);
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Help;
-            this.pictureBox6.Image = global::ModBuilder.Properties.Resources.question;
-            this.pictureBox6.Location = new System.Drawing.Point(6, 55);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox6.TabIndex = 23;
-            this.pictureBox6.TabStop = false;
-            this.pictureBox6.Click += new System.EventHandler(this.pictureBox6_Click);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Help;
-            this.pictureBox5.Image = global::ModBuilder.Properties.Resources.question;
-            this.pictureBox5.Location = new System.Drawing.Point(6, 82);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox5.TabIndex = 22;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Help;
-            this.pictureBox4.Image = global::ModBuilder.Properties.Resources.question;
-            this.pictureBox4.Location = new System.Drawing.Point(6, 108);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox4.TabIndex = 21;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Help;
-            this.pictureBox3.Image = global::ModBuilder.Properties.Resources.question;
-            this.pictureBox3.Location = new System.Drawing.Point(6, 153);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox3.TabIndex = 20;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Help;
-            this.pictureBox1.Image = global::ModBuilder.Properties.Resources.question;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 29);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Help;
-            this.pictureBox2.Image = global::ModBuilder.Properties.Resources.question;
-            this.pictureBox2.Location = new System.Drawing.Point(7, 27);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(16, 16);
-            this.pictureBox2.TabIndex = 19;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // modEditor
             // 
@@ -1106,8 +1106,14 @@
             this.modDetailsTab.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.filesTab.ResumeLayout(false);
             this.filesTab.PerformLayout();
             this.readmeTab.ResumeLayout(false);
@@ -1140,16 +1146,10 @@
             this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -39,17 +39,17 @@
             "Mod Console started"});
             this.modConsoleBox.Location = new System.Drawing.Point(0, 0);
             this.modConsoleBox.Name = "modConsoleBox";
-            this.modConsoleBox.Size = new System.Drawing.Size(571, 213);
+            this.modConsoleBox.Size = new System.Drawing.Size(591, 211);
             this.modConsoleBox.TabIndex = 0;
             // 
-            // ModConsole
+            // modConsole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(571, 213);
+            this.ClientSize = new System.Drawing.Size(591, 211);
             this.ControlBox = false;
             this.Controls.Add(this.modConsoleBox);
-            this.Name = "ModConsole";
+            this.Name = "modConsole";
             this.Text = "Mod Editor Console";
             this.Load += new System.EventHandler(this.ModConsole_Load);
             this.ResumeLayout(false);

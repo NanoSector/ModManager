@@ -25,6 +25,7 @@ namespace ModBuilder
         public Dictionary<string, string> settings = new Dictionary<string,string>();
         //public bool changesPending = false; - For later :)
         public modConsole mc;
+        APIs.Notify message = new APIs.Notify();
         #endregion
 
         #region Load
@@ -104,23 +105,9 @@ namespace ModBuilder
         #region Mod builder
         private bool buildMod(string dir)
         {
-            // If we don't have a working directory, ask/beg for one.
+            // If we don't have a working directory, we're screwed.
             if (string.IsNullOrEmpty(workingDirectory))
-            {
-                FolderBrowserDialog af = new FolderBrowserDialog();
-                af.Description = "Select a directory for your project, or create one.";
-                af.ShowNewFolderButton = true;
-                af.ShowDialog();
-
-                if (string.IsNullOrEmpty(af.SelectedPath))
-                {
-                    System.Windows.Forms.MessageBox.Show("An error occured while saving the project, because you did not select a (valid) directory. Nothing has been saved.", "Saving Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return false;
-                }
-
-                // Set the working directory.
-                workingDirectory = af.SelectedPath;
-            }
+                return false;
 
             mc.Message("----------------------------------------------------------------------------");
             mc.Message("Build started...");
@@ -138,7 +125,9 @@ namespace ModBuilder
             if (String.IsNullOrEmpty(modName.Text) || String.IsNullOrEmpty(modVersion.Text) || String.IsNullOrEmpty(modType.Text) || String.IsNullOrEmpty(modID.Text) || String.IsNullOrEmpty(modCompatibility.Text))
             {
                 // Yes it is, warn the user and reset to the main tab.
-                System.Windows.Forms.MessageBox.Show("You forgot to fill in some details.", "Saving modification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                mc.Message("Not all the required fields are filled in. Build aborted.");
+                mc.endMeasureTime();
+                message.warning("You forgot to fill in some details.", MessageBoxButtons.OK);
                 tabControl1.SelectedTab = modDetailsTab;
 
                 // Also mark the required fields in a nice red colour. It goes away once something's typed. First up is name.
@@ -495,9 +484,11 @@ namespace ModBuilder
             if (!hasConn)
                 generateSQL(workingDirectory);
 
+            // Finish up the mod console log.
             mc.Message("Build finished!");
             mc.endMeasureTime();
 
+            // Return true so we know.
             return true;
         }
 
@@ -507,9 +498,7 @@ namespace ModBuilder
             bool result = buildMod(workingDirectory);
 
             if (result == false)
-                MessageBox.Show("An error occured while building your mod. Please try again.", "Building mod", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else
-                MessageBox.Show("Project has been build.", "Building project", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.error("An error occured while building your mod. Please try again.", MessageBoxButtons.OK);
         }
         #endregion
 
@@ -532,11 +521,18 @@ namespace ModBuilder
                 // Rare scenario, yet possible.
                 if (!Directory.Exists(fb.SelectedPath))
                 {
-                    MessageBox.Show("An error occured while saving your project, the destination directory does not exist.", "Saving project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    message.error("An error occured while saving your project, the destination directory does not exist.", MessageBoxButtons.OK);
                     return;
                 }
 
+                // Generate a new SQL file.
+                generateSQL(fb.SelectedPath);
+
+                // Set the working directory.
                 workingDirectory = fb.SelectedPath;
+
+                // Reload the settings.
+                reloadSettings();
             }
 
             // Build the mod.
@@ -545,7 +541,7 @@ namespace ModBuilder
             // Did we get an error from the builder?
             if (result == false)
             {
-                MessageBox.Show("An error occured while saving your project. Please try again.", "Saving project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                message.error("An error occured while saving your project. Please try again.", MessageBoxButtons.OK);
                 return;
             }
 
@@ -561,7 +557,7 @@ namespace ModBuilder
 
         private void showHelp(string text)
         {
-            System.Windows.Forms.MessageBox.Show(text, "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            message.information(text, MessageBoxButtons.OK);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -617,7 +613,7 @@ namespace ModBuilder
         {
             if (!hasConn)
             {
-                System.Windows.Forms.MessageBox.Show("Please save your project before continuing.", "Adding new instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
                 return;
             }
 
@@ -637,7 +633,7 @@ namespace ModBuilder
         {
             if (!File.Exists(workingDirectory + "/data.sqlite"))
             {
-                System.Windows.Forms.MessageBox.Show("Please save your project before continuing.", "Adding new instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
                 return;
             }
             // Grab the data.
@@ -687,12 +683,12 @@ namespace ModBuilder
             // If we have no working directory set, we have no saved project here or the project has become corrupt. Either way, cancel.
             if (!Directory.Exists(workingDirectory))
             {
-                MessageBox.Show("Either your project is not saved or you have a corrupted project. Please try saving your project.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                message.error("Either your project is not saved or you have a corrupted project. Please try saving your project.", MessageBoxButtons.OK);
                 return;
             }
 
             // Confirmation...
-            DialogResult result = MessageBox.Show("Are you sure you want to regenerate the database file? You will lose almost all your data!", "Regenerate SQL", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = message.question("Are you sure you want to regenerate the database file? You will lose almost all your data!", MessageBoxButtons.YesNo);
 
             // They're sure. Lets start.
             if (result == DialogResult.Yes)
@@ -708,7 +704,7 @@ namespace ModBuilder
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show("The database file is in use by another process. Please try again in a few seconds.", "Database file is locked", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    message.warning("The database file is in use by another process. Please try again in a few seconds.", MessageBoxButtons.OK);
                     return;
                 }
 
@@ -716,7 +712,7 @@ namespace ModBuilder
                 generateSQL(workingDirectory);
 
                 // Information.
-                MessageBox.Show("A new database has been generated. Your project will now be reloaded.", "Generating SQL", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.information("A new database has been generated. Your project will now be reloaded.", MessageBoxButtons.OK);
 
                 // And reload the project to take advantage of the changes.
                 loadProject lp = new loadProject();
@@ -829,7 +825,7 @@ namespace ModBuilder
 
             // Check the status.
             if (stat == false)
-                System.Windows.Forms.MessageBox.Show("An error occured while loading the project.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                message.error("An error occured while loading the project.", MessageBoxButtons.OK);
 
             // Tyvm!
             lp.Close();
@@ -892,7 +888,7 @@ namespace ModBuilder
         {
             if (!Directory.Exists(workingDirectory) || !Directory.Exists(workingDirectory + "/Package") || !Directory.Exists(workingDirectory + "/Source"))
             {
-                MessageBox.Show("Unable to compile project. Try saving it.", "Compiling project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                message.error("Unable to compile project. Try saving it.", MessageBoxButtons.OK);
                 return;
             }
 
@@ -930,7 +926,7 @@ namespace ModBuilder
             }
 
             // And done!
-            MessageBox.Show("The package has been compiled.", "Package Compiled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            message.information("The package has been compiled.", MessageBoxButtons.OK);
         }
         #endregion
 
@@ -939,7 +935,7 @@ namespace ModBuilder
         {
             if (!hasConn)
             {
-                System.Windows.Forms.MessageBox.Show("Please save your project before continuing.", "Adding new instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
                 return;
             }
             extractFiles.BeginUpdate();
@@ -979,7 +975,7 @@ namespace ModBuilder
         {
             if (!hasConn)
             {
-                System.Windows.Forms.MessageBox.Show("Please save your project before continuing.", "Adding new instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
                 return;
             }
             refreshExtractionTree();
@@ -989,7 +985,7 @@ namespace ModBuilder
         {
             if (!hasConn)
             {
-                System.Windows.Forms.MessageBox.Show("Please save your project before continuing.", "Adding new instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK); 
                 return;
             }
             addExtractionInstructionDialog aeid = new addExtractionInstructionDialog(workingDirectory, this, conn, 0);
@@ -1000,7 +996,7 @@ namespace ModBuilder
         {
             if (!hasConn)
             {
-                System.Windows.Forms.MessageBox.Show("Please save your project before continuing.", "Adding new instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK); 
                 return;
             }
             int index = extractFiles.SelectedNode.Index;
@@ -1026,7 +1022,7 @@ namespace ModBuilder
         {
             if (!hasConn)
             {
-                System.Windows.Forms.MessageBox.Show("Please save your project before continuing.", "Adding new instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
                 return;
             }
             addDeletionInstructionDialog adid = new addDeletionInstructionDialog(workingDirectory, this, conn, 0);
