@@ -18,6 +18,7 @@ namespace ModBuilder
         // This version of Mod Builder.
         string mbversion = "1.0";
 
+        string dlfilename;
         APIs.Notify message = new APIs.Notify();
         public Form1()
         {
@@ -173,15 +174,89 @@ namespace ModBuilder
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(dlfilename) && File.Exists(dlfilename))
+            {
+                System.Diagnostics.Process.Start(dlfilename);
+                return;
+            }
+
             try
             {
+                WebClient client = new WebClient();
+                
+                // Start a new download of the latest version number thing.
+                string lver = client.DownloadString("https://raw.github.com/Yoshi2889/ModManager/master/latestver");
 
+                Version mver = new Version(mbversion);
+                Version lmver = new Version(lver);
+
+                // Compare the versions.
+                int status = mver.CompareTo(lmver);
+
+                if (status > 0 || status == 0)
+                {
+                    message.information("You are using the latest version of Mod Manager.", MessageBoxButtons.OK);
+                    return;
+                }
+                else if (status < 0)
+                {
+                    DialogResult result = message.question("A new version of Mod Manager has been released. Do you want to download the update?", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        // Create a new save dialog.
+                        SaveFileDialog sf = new SaveFileDialog();
+                        sf.DefaultExt = "exe";
+                        sf.AddExtension = true;
+                        sf.FileName = "setup.exe";
+                        sf.Filter = "Executable files|exe";
+                        sf.CheckFileExists = false;
+                        sf.CheckPathExists = true;
+
+                        // Show the dialog.
+                        DialogResult sfres = sf.ShowDialog();
+
+                        // Quit if we did something wrong-err, weird.
+                        if (sfres == DialogResult.Cancel || string.IsNullOrEmpty(sf.FileName))
+                            return;
+
+                        // Rezise the form a bit :)
+                        Size = new Size(Size.Width, 325);
+
+                        // Start downloading! DLUpdateCompleted will take over once it's done.
+                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(DLUpdateCompleted);
+                        client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+                        client.DownloadFileAsync(new Uri("https://github.com/Yoshi2889/ModManager/blob/master/setup.exe?raw=true"), @sf.FileName);
+                        dlfilename = sf.FileName;
+                    }
+                }
             }
             catch
             {
                 message.error("An error occured while checking for updates. Please check your internet connection or try later.", MessageBoxButtons.OK);
                 return;
             }
+        }
+
+        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void DLUpdateCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+                return;
+
+            DialogResult result = message.information("The download has completed. Do you want to start the installer now? This will close Mod Manager and any open Mod Editor windows, so save your work before continuing.", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                System.Diagnostics.Process.Start(dlfilename);
+                Close();
+            }
+
+            linkLabel2.Text = "Update pending...";
+            Size = new Size(Size.Width, 264);
         }
     }
 }
