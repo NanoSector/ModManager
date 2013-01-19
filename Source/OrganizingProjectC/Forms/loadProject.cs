@@ -124,6 +124,7 @@ namespace ModBuilder
             }
 
             mc.Message("Setting environment variables.");
+            me.mc = mc;
             me.workingDirectory = dir;
             mc.Message("Working directory: " + dir);
             me.conn = new SQLiteConnection("Data Source=\"" + dir + "/data.sqlite\";Version=3;");
@@ -155,8 +156,6 @@ namespace ModBuilder
 
             if (me.settings["includeModManLine"] == "true")
                 me.includeModManLine.Checked = true;
-
-            me.mc = mc;
 
             mc.Message("Opening Mod Editor");
             me.Show();

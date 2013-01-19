@@ -341,9 +341,9 @@ namespace ModBuilder
 
             // Some settings before we start writing install.xml.
             #region Build install.xml
-            mc.Message("Attempting to build install.xml");
             if (!ignoreInstructions.Checked)
             {
+                mc.Message("Attempting to build install.xml");
                 using (FileStream fileStream = new FileStream(workingDirectory + "/Package/install.xml", FileMode.Create))
                 using (StreamWriter sw = new StreamWriter(fileStream))
                 using (XmlTextWriter writer = new XmlTextWriter(sw))
@@ -431,54 +431,58 @@ namespace ModBuilder
                     writer.Flush();
                     writer.Close();
                 }
+                mc.Message("install.xml has been build.");
             }
-            mc.Message("install.xml has been build.");
+            // If we did select to ignore the instructions part, delete the install.xml file. The data is stored in the database anyway.
+            else if (ignoreInstructions.Checked && File.Exists(workingDirectory + "/Package/install.xml"))
+            {
+                mc.Message("Custom instructions are set to be ignored, and install.xml exists. Deleting install.xml.");
+                File.Delete(workingDirectory + "/Package/install.xml");
+            }
             #endregion
 
             #region Writing files
-            mc.Message("Writing files...");
-            // Then write the readme.
-            if (!string.IsNullOrEmpty(modReadme.Text))
-                File.WriteAllText(workingDirectory + "/Package/readme.txt", modReadme.Text);
+            mc.Message("Writing and deleting unused files...");
 
-            if (string.IsNullOrEmpty(modReadme.Text) && File.Exists(workingDirectory + "/Package/readme.txt"))
-                File.Delete(workingDirectory + "/Package/readme.txt");
+            // File -> string to write
+            Dictionary<string, string> filesToHandle = new Dictionary<string, string>();
 
-            // Custom install code if we got it.
-            if (!string.IsNullOrEmpty(customCodeInstall.Text))
-                File.WriteAllText(workingDirectory + "/Package/install.php", customCodeInstall.Text);
+            // The readme.
+            filesToHandle.Add("readme.txt", modReadme.Text);
 
-            // Custom uninstall code if we got it.
-            if (!string.IsNullOrEmpty(customCodeUninstall.Text))
-                File.WriteAllText(workingDirectory + "/Package/uninstall.php", customCodeUninstall.Text);
+            // Custom installation file.
+            filesToHandle.Add("install.php", customCodeInstall.Text);
 
-            // Same for custom database code.
-            if (!string.IsNullOrEmpty(installDatabaseCode.Text))
-                File.WriteAllText(workingDirectory + "/Package/installDatabase.php", installDatabaseCode.Text);
+            // Custom uninstallation file.
+            filesToHandle.Add("uninstall.php", customCodeUninstall.Text);
 
-            // And the uninstall of it.
-            if (!string.IsNullOrEmpty(uninstallDatabaseCode.Text))
-                File.WriteAllText(workingDirectory + "/Package/uninstallDatabase.php", uninstallDatabaseCode.Text);
+            // Custom database installation file.
+            filesToHandle.Add("installDatabase.php", installDatabaseCode.Text);
 
-            mc.Message("Files written. Now deleting unused files.");
-            // Delete install.php if it would be empty otherwise. Keep the project clean!
-            if (string.IsNullOrEmpty(customCodeInstall.Text) && File.Exists(workingDirectory + "/Package/install.php"))
-                File.Delete(workingDirectory + "/Package/install.php");
+            // Custom database deinstallation file.
+            filesToHandle.Add("uninstallDatabase.php", uninstallDatabaseCode.Text);
 
-            // Do the same for uninstall.php
-            if (string.IsNullOrEmpty(customCodeUninstall.Text) && File.Exists(workingDirectory + "/Package/uninstall.php"))
-                File.Delete(workingDirectory + "/Package/uninstall.php");
+            // For every file, perform a few operations.
+            foreach (var pair in filesToHandle)
+            {
+                // If we have a valid check, write the file.
+                if (!string.IsNullOrEmpty(pair.Value))
+                {
+                    // Write the file.
+                    File.WriteAllText(workingDirectory + "/Package/" + pair.Key, pair.Value);
+                    mc.Message("Wrote file \"" + pair.Key + "\".");
+                }
 
-            // Also for installDatabase.php
-            if (string.IsNullOrEmpty(installDatabaseCode.Text) && File.Exists(workingDirectory + "/Package/installDatabase.php"))
-                File.Delete(workingDirectory + "/Package/installDatabase.php");
+                // Else if we left out data for this file, remove it to save possible space and empty files in the package
+                else if (string.IsNullOrEmpty(pair.Value) && File.Exists(workingDirectory + "/Package/" + pair.Key))
+                {
+                    File.Delete(workingDirectory + "/Package/" + pair.Key);
+                    mc.Message("Deleted file \"" + pair.Key + "\".");
+                }
+            }
 
-            // And uninstallDatabase.php
-            if (string.IsNullOrEmpty(uninstallDatabaseCode.Text) && File.Exists(workingDirectory + "/Package/uninstallDatabase.php"))
-                File.Delete(workingDirectory + "/Package/uninstallDatabase.php");
-
-            mc.Message("Files deleted.");
-#endregion
+            mc.Message("Files have been updated.");
+            #endregion
 
             // Do we have a database?
             if (!hasConn)
@@ -638,9 +642,17 @@ namespace ModBuilder
 
         private void instructions_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            int index = instructions.SelectedNode.Index;
+            if (!hasConn)
+            {
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
+                return;
+            }
+            var tindex = instructions.SelectedNode.Name;
+            if (String.IsNullOrEmpty(tindex))
+                return;
+            int index = Convert.ToInt32(tindex.Replace("id", ""));
 
-            addInstruction ai = new addInstruction(workingDirectory, conn, instructions.SelectedNode.Index, this);
+            addInstruction ai = new addInstruction(workingDirectory, conn, index, this);
             ai.Show();
         }
 
@@ -675,11 +687,18 @@ namespace ModBuilder
 
         private void delInstruction_Click(object sender, EventArgs e)
         {
-            if (instructions.SelectedNode == null || instructions.SelectedNode.Index == 0)
+            if (!hasConn)
+            {
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
                 return;
+            }
+            var tindex = extractFiles.SelectedNode.Name;
+            if (String.IsNullOrEmpty(tindex))
+                return;
+            int index = Convert.ToInt32(tindex.Replace("id", ""));
 
             // Get rid of it.
-            string sql = "DELETE FROM instructions WHERE id = " + instructions.SelectedNode.Index;
+            string sql = "DELETE FROM instructions WHERE id = " + index;
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
 
@@ -832,6 +851,7 @@ namespace ModBuilder
 
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Show them the loading box.
             loadProject lp = new loadProject();
             lp.Show();
 
@@ -844,12 +864,19 @@ namespace ModBuilder
             // Get the path.
             string dir = fb.SelectedPath;
 
+            // Avoid the annoying An error occured dialog.
+            if (string.IsNullOrEmpty(dir))
+            {
+                lp.Close();
+                return;
+            }
+
             // Load the project.
             bool stat = lp.openProjDir(dir);
 
             // Check the status.
             if (stat == false)
-                message.error("An error occured while loading the project.", MessageBoxButtons.OK);
+                message.error("An error occured while loading the project, some files could not be found or the project is corrupt.", MessageBoxButtons.OK);
 
             // Tyvm!
             lp.Close();
@@ -962,8 +989,13 @@ namespace ModBuilder
                 message.information("Please save your project before continuing.", MessageBoxButtons.OK);
                 return;
             }
+            mc.Message("Refreshing extraction and deletion instructions...");
+
+            // Allow us to update.
             extractFiles.BeginUpdate();
             extractFiles.Nodes.Clear();
+
+            // Add a "header" node.
             extractFiles.Nodes.Add("Files to be extracted on install");
             int i = 1;
             string sql = "SELECT id, file_name, destination FROM files";
@@ -972,9 +1004,10 @@ namespace ModBuilder
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["id"]);
-                extractFiles.Nodes.Add("id" + id, "Extract \"" + reader["file_name"] + "\" to \"" + reader["destination"] + "\"", id);
+                extractFiles.Nodes.Add("id" + id, "Extract \"" + reader["file_name"] + "\" to \"" + reader["destination"] + "\"");
                 i++;
             }
+            mc.Message("Added " + (i - 1) + " instructions.");
             extractFiles.Nodes.Add(i - 1 + " instructions total.");
             extractFiles.EndUpdate();
 
@@ -1023,19 +1056,28 @@ namespace ModBuilder
                 message.information("Please save your project before continuing.", MessageBoxButtons.OK); 
                 return;
             }
-            int index = extractFiles.SelectedNode.Index;
-
+            var tindex = extractFiles.SelectedNode.Name;
+            if (String.IsNullOrEmpty(tindex))
+                return;
+            int index = Convert.ToInt32(tindex.Replace("id", ""));
             addExtractionInstructionDialog aeid = new addExtractionInstructionDialog(workingDirectory, this, conn, index);
             aeid.Show();
         }
 
         private void deleteExtractButton_Click(object sender, EventArgs e)
         {
-            if (extractFiles.SelectedNode == null || extractFiles.SelectedNode.Index == 0)
+            if (!hasConn)
+            {
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
                 return;
+            }
+            var tindex = extractFiles.SelectedNode.Name;
+            if (String.IsNullOrEmpty(tindex))
+                return;
+            int index = Convert.ToInt32(tindex.Replace("id", ""));
 
             // Get rid of it.
-            string sql = "DELETE FROM files WHERE id = " + extractFiles.SelectedNode.Index;
+            string sql = "DELETE FROM files WHERE id = " + index;
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
 
@@ -1055,11 +1097,18 @@ namespace ModBuilder
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (deleteFiles.SelectedNode == null || deleteFiles.SelectedNode.Index == 0)
+            if (!hasConn)
+            {
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
                 return;
+            }
+            var tindex = deleteFiles.SelectedNode.Name;
+            if (String.IsNullOrEmpty(tindex))
+                return;
+            int index = Convert.ToInt32(tindex.Replace("id", ""));
 
             // Get rid of it.
-            string sql = "DELETE FROM files_delete WHERE id = " + deleteFiles.SelectedNode.Index;
+            string sql = "DELETE FROM files_delete WHERE id = " + index;
             SQLiteCommand command = new SQLiteCommand(sql, conn);
             command.ExecuteNonQuery();
 
@@ -1068,7 +1117,15 @@ namespace ModBuilder
 
         private void deleteFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            int index = deleteFiles.SelectedNode.Index;
+            if (!hasConn)
+            {
+                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
+                return;
+            }
+            var tindex = deleteFiles.SelectedNode.Name;
+            if (String.IsNullOrEmpty(tindex))
+                return;
+            int index = Convert.ToInt32(tindex.Replace("id", ""));
 
             addDeletionInstructionDialog ai = new addDeletionInstructionDialog(workingDirectory, this, conn, index);
             ai.Show();
