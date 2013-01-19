@@ -582,12 +582,27 @@ namespace ModBuilder
 
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            showHelp("The compatibility range is important, because it defines the versions of SMF that work with your modification. We recommend you use 2.0 - 2.0.99 as your compatibility range when developing your mod for the 2.x branch.");
+            showHelp("The compatibility range is important, because it defines the versions of SMF that work with your modification. We recommend you use 2.0 - 2.0.99 as your compatibility range when developing your mod for the 2.x branch, and 1.1 - 1.1.99 when developing for the 1.1.x branch.");
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             showHelp("This field is not required when you want to enter your own mod ID. It helps the generator in creating a unique mod ID and is not used in your mod.");
+        }
+
+        private void filesHelp_Click(object sender, EventArgs e)
+        {
+            showHelp("This screen gives you a brief overview of all the files, including project files, in your project. Click on the \"Open directory\" button to open the project in Windows Explorer.");
+        }
+
+        private void readmeHelp_Click(object sender, EventArgs e)
+        {
+            showHelp("This screen allows you to enter a detailed description of your modification. A few examples of topic to handle would be your mods features, a link to contact the author and what the mod should do once installed. You may use Bulletin Board Code (BBCode) tags here.");
+        }
+
+        private void instructionHelp_Click(object sender, EventArgs e)
+        {
+            showHelp("This area allows you to specify any custom edits to be made to SMFs files. Click \"Add instruction\" to get started.");
         }
 #endregion
 
@@ -803,6 +818,15 @@ namespace ModBuilder
         {
             // Just start an all new instance. Simple as that.
             modEditor me = new modEditor();
+
+            // Except that it's not.
+            me.mc = new modConsole();
+
+            // Some default values.
+            me.genPkgID.Checked = true;
+            me.includeModManLine.Checked = true;
+
+            // Show the instance.
             me.Show();
         }
 

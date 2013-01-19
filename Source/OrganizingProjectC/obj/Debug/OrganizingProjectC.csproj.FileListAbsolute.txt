@@ -37,3 +37,8 @@ C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\Mo
 C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.modEditor.resources
 C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.Properties.Resources.resources
 C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\OrganizingProjectC.csproj.GenerateResource.Cache
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\ModBuilder.exe.manifest
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\ModBuilder.application
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.TrustInfo.xml
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.exe.manifest
+C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\obj\Debug\ModBuilder.application
