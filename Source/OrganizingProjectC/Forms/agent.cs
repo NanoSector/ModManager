@@ -16,7 +16,7 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.0";
+        string mbversion = "1.0.1";
 
         string dlfilename;
         APIs.Notify message = new APIs.Notify();
@@ -176,7 +176,13 @@ namespace ModBuilder
         {
             if (!string.IsNullOrEmpty(dlfilename) && File.Exists(dlfilename))
             {
-                System.Diagnostics.Process.Start(dlfilename);
+                DialogResult res = message.question("Do you want to start the updater now? This will close Mod Manager, save any open projects.", MessageBoxButtons.YesNo);
+
+                if (res == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(dlfilename);
+                    Close();
+                }
                 return;
             }
 
@@ -209,7 +215,7 @@ namespace ModBuilder
                         sf.DefaultExt = "exe";
                         sf.AddExtension = true;
                         sf.FileName = "setup.exe";
-                        sf.Filter = "Executable files|exe";
+                        sf.Filter = "Executable files|*.exe";
                         sf.CheckFileExists = false;
                         sf.CheckPathExists = true;
 
