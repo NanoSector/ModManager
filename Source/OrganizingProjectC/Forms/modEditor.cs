@@ -93,10 +93,8 @@ namespace ModBuilder
         {
             if (genPkgID.Checked == true && !string.IsNullOrEmpty(authorName.Text) && !string.IsNullOrEmpty(modName.Text))
             {
-                string an = authorName.Text;
-                an.Replace(" ", "");
-                string mn = modName.Text;
-                mn.Replace(" ", "");
+                string an = System.Text.RegularExpressions.Regex.Replace(authorName.Text, @"[^a-zA-Z0-9]", "");
+                string mn = System.Text.RegularExpressions.Regex.Replace(modName.Text, @"[^a-zA-Z0-9]", "");
                 modID.Text = an + ":" + mn;
             }
         }
