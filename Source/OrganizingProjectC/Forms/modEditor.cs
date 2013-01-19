@@ -84,7 +84,7 @@ namespace ModBuilder
 
         private void modID_TextChanged(object sender, EventArgs e)
         {
-            modID.Text = modID.Text.Replace(" ", "");
+            modID.Text = System.Text.RegularExpressions.Regex.Replace(modID.Text, @"[^a-zA-Z0-9:]", "");
 
             modID.BackColor = Color.White;
         }

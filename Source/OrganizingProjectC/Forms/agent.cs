@@ -9,11 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using ModBuilder.Forms;
+using System.Net;
 
 namespace ModBuilder
 {
     public partial class Form1 : Form
     {
+        // This version of Mod Builder.
+        string mbversion = "1.0";
+
         APIs.Notify message = new APIs.Notify();
         public Form1()
         {
@@ -165,6 +169,19 @@ namespace ModBuilder
             // Show it again.
             fb.Description = "Please select the directory where the project should be generated.";
             fb.ShowNewFolderButton = true;
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch
+            {
+                message.error("An error occured while checking for updates. Please check your internet connection or try later.", MessageBoxButtons.OK);
+                return;
+            }
         }
     }
 }
