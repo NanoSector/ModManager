@@ -960,9 +960,9 @@ namespace ModBuilder
             // Start the ZIP process.
             using (ZipFile zip = new ZipFile())
             {
-                zip.CompressionMethod = CompressionMethod.Deflate;
-                zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Level0;
-                zip.UseZip64WhenSaving = Zip64Option.Always;
+                //zip.CompressionMethod = CompressionMethod.Deflate;
+                //zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Level0;
+                //zip.UseZip64WhenSaving = Zip64Option.Always;
 
                 // Add the Package directory to the root of the ZIP file.
                 zip.AddDirectory(workingDirectory + "/Package");

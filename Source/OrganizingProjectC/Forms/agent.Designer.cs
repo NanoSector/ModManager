@@ -36,12 +36,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.repairProject = new System.Windows.Forms.Button();
             this.createProjectFromPackage = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
-            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
+            this.versionLabel = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -111,16 +110,6 @@
             this.createProjectFromPackage.UseVisualStyleBackColor = true;
             this.createProjectFromPackage.Click += new System.EventHandler(this.createProjectFromPackage_Click);
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(219, 181);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(39, 13);
-            this.linkLabel1.TabIndex = 8;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Credits";
-            // 
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
@@ -148,34 +137,34 @@
             this.progressBar1.Size = new System.Drawing.Size(246, 17);
             this.progressBar1.TabIndex = 11;
             // 
-            // shapeContainer1
+            // versionLabel
             // 
-            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
-            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeContainer1.Name = "shapeContainer1";
-            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
-            this.lineShape1});
-            this.shapeContainer1.Size = new System.Drawing.Size(270, 225);
-            this.shapeContainer1.TabIndex = 12;
-            this.shapeContainer1.TabStop = false;
+            this.versionLabel.AutoSize = true;
+            this.versionLabel.Location = new System.Drawing.Point(222, 9);
+            this.versionLabel.Name = "versionLabel";
+            this.versionLabel.Size = new System.Drawing.Size(26, 13);
+            this.versionLabel.TabIndex = 13;
+            this.versionLabel.Text = "vx.x";
             // 
-            // lineShape1
+            // label5
             // 
-            this.lineShape1.Name = "lineShape1";
-            this.lineShape1.X1 = 15;
-            this.lineShape1.X2 = 256;
-            this.lineShape1.Y1 = 231;
-            this.lineShape1.Y2 = 231;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 216);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(247, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "________________________________________";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(270, 225);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.linkLabel2);
-            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.createProjectFromPackage);
             this.Controls.Add(this.repairProject);
             this.Controls.Add(this.label3);
@@ -183,13 +172,13 @@
             this.Controls.Add(this.editProjectButton);
             this.Controls.Add(this.createProjectButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.shapeContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Mod Manager Agent";
+            this.Shown += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,12 +193,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button repairProject;
         private System.Windows.Forms.Button createProjectFromPackage;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
-        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
+        private System.Windows.Forms.Label versionLabel;
+        private System.Windows.Forms.Label label5;
     }
 }
 

@@ -55,6 +55,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.usernameHelp = new System.Windows.Forms.PictureBox();
             this.filesTab = new System.Windows.Forms.TabPage();
+            this.filesHelp = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
             this.refreshFileListButton = new System.Windows.Forms.Button();
             this.addFileButton = new System.Windows.Forms.Button();
@@ -63,9 +64,11 @@
             this.readmeTab = new System.Windows.Forms.TabPage();
             this.modReadme = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.readmeHelp = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.instructionsTab = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.instructionHelp = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
             this.ignoreInstructions = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -116,9 +119,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.regenerateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.filesHelp = new System.Windows.Forms.PictureBox();
-            this.readmeHelp = new System.Windows.Forms.PictureBox();
-            this.instructionHelp = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.modDetailsTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -130,10 +130,13 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usernameHelp)).BeginInit();
             this.filesTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filesHelp)).BeginInit();
             this.readmeTab.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).BeginInit();
             this.instructionsTab.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).BeginInit();
             this.extractFilesTab.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -152,9 +155,6 @@
             this.splitContainer3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filesHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -450,6 +450,18 @@
             this.filesTab.Text = "Files";
             this.filesTab.UseVisualStyleBackColor = true;
             // 
+            // filesHelp
+            // 
+            this.filesHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.filesHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.filesHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.filesHelp.Location = new System.Drawing.Point(559, 6);
+            this.filesHelp.Name = "filesHelp";
+            this.filesHelp.Size = new System.Drawing.Size(16, 16);
+            this.filesHelp.TabIndex = 22;
+            this.filesHelp.TabStop = false;
+            this.filesHelp.Click += new System.EventHandler(this.filesHelp_Click);
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -535,6 +547,18 @@
             this.panel1.Size = new System.Drawing.Size(577, 38);
             this.panel1.TabIndex = 1;
             // 
+            // readmeHelp
+            // 
+            this.readmeHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.readmeHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.readmeHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.readmeHelp.Location = new System.Drawing.Point(556, 11);
+            this.readmeHelp.Name = "readmeHelp";
+            this.readmeHelp.Size = new System.Drawing.Size(16, 16);
+            this.readmeHelp.TabIndex = 23;
+            this.readmeHelp.TabStop = false;
+            this.readmeHelp.Click += new System.EventHandler(this.readmeHelp_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -572,6 +596,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(314, 278);
             this.panel2.TabIndex = 8;
+            // 
+            // instructionHelp
+            // 
+            this.instructionHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.instructionHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.instructionHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.instructionHelp.Location = new System.Drawing.Point(293, 3);
+            this.instructionHelp.Name = "instructionHelp";
+            this.instructionHelp.Size = new System.Drawing.Size(16, 16);
+            this.instructionHelp.TabIndex = 24;
+            this.instructionHelp.TabStop = false;
+            this.instructionHelp.Click += new System.EventHandler(this.instructionHelp_Click);
             // 
             // label12
             // 
@@ -1106,42 +1142,6 @@
             this.showConsoleToolStripMenuItem.Text = "Show console";
             this.showConsoleToolStripMenuItem.Click += new System.EventHandler(this.showConsoleToolStripMenuItem_Click);
             // 
-            // filesHelp
-            // 
-            this.filesHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.filesHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.filesHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.filesHelp.Location = new System.Drawing.Point(559, 6);
-            this.filesHelp.Name = "filesHelp";
-            this.filesHelp.Size = new System.Drawing.Size(16, 16);
-            this.filesHelp.TabIndex = 22;
-            this.filesHelp.TabStop = false;
-            this.filesHelp.Click += new System.EventHandler(this.filesHelp_Click);
-            // 
-            // readmeHelp
-            // 
-            this.readmeHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.readmeHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.readmeHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.readmeHelp.Location = new System.Drawing.Point(556, 11);
-            this.readmeHelp.Name = "readmeHelp";
-            this.readmeHelp.Size = new System.Drawing.Size(16, 16);
-            this.readmeHelp.TabIndex = 23;
-            this.readmeHelp.TabStop = false;
-            this.readmeHelp.Click += new System.EventHandler(this.readmeHelp_Click);
-            // 
-            // instructionHelp
-            // 
-            this.instructionHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.instructionHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.instructionHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.instructionHelp.Location = new System.Drawing.Point(293, 3);
-            this.instructionHelp.Name = "instructionHelp";
-            this.instructionHelp.Size = new System.Drawing.Size(16, 16);
-            this.instructionHelp.TabIndex = 24;
-            this.instructionHelp.TabStop = false;
-            this.instructionHelp.Click += new System.EventHandler(this.instructionHelp_Click);
-            // 
             // modEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1169,13 +1169,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.usernameHelp)).EndInit();
             this.filesTab.ResumeLayout(false);
             this.filesTab.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filesHelp)).EndInit();
             this.readmeTab.ResumeLayout(false);
             this.readmeTab.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).EndInit();
             this.instructionsTab.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).EndInit();
             this.extractFilesTab.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -1203,9 +1206,6 @@
             this.tabPage1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filesHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

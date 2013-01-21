@@ -16,13 +16,19 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.0.1";
+        string mbversion = "1.0.2";
 
         string dlfilename;
         APIs.Notify message = new APIs.Notify();
         public Form1()
         {
             InitializeComponent();
+            versionLabel.Text = "v" + mbversion;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            checkUpdate(false);
         }
 
         private void editProjectButton_Click(object sender, EventArgs e)
@@ -186,10 +192,36 @@ namespace ModBuilder
                 return;
             }
 
+            checkUpdate();
+        }
+
+        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void DLUpdateCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+                return;
+
+            DialogResult result = message.information("The download has completed. Do you want to start the installer now? This will close Mod Manager and any open Mod Editor windows, so save your work before continuing.", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                System.Diagnostics.Process.Start(dlfilename);
+                Close();
+            }
+
+            linkLabel2.Text = "Update pending...";
+            Size = new Size(Size.Width, 264);
+        }
+
+        private void checkUpdate(bool throwMessage = true)
+        {
             try
             {
                 WebClient client = new WebClient();
-                
+
                 // Start a new download of the latest version number thing.
                 string lver = client.DownloadString("https://raw.github.com/Yoshi2889/ModManager/master/latestver");
 
@@ -201,12 +233,14 @@ namespace ModBuilder
 
                 if (status > 0 || status == 0)
                 {
-                    message.information("You are using the latest version of Mod Manager.", MessageBoxButtons.OK);
+                    // If we are running in silent mode, skip this message.
+                    if (throwMessage)
+                        message.information("You are using the latest version of Mod Manager.", MessageBoxButtons.OK);
                     return;
                 }
                 else if (status < 0)
                 {
-                    DialogResult result = message.question("A new version of Mod Manager has been released. Do you want to download the update?", MessageBoxButtons.YesNo);
+                    DialogResult result = message.question("A new version (" + lver + ") of Mod Manager has been released. Do you want to download the update?", MessageBoxButtons.YesNo);
 
                     if (result == DialogResult.Yes)
                     {
@@ -239,30 +273,11 @@ namespace ModBuilder
             }
             catch
             {
-                message.error("An error occured while checking for updates. Please check your internet connection or try later.", MessageBoxButtons.OK);
+                // Silent mode? Shhh.
+                if (throwMessage)
+                    message.error("An error occured while checking for updates. Please check your internet connection or try later.", MessageBoxButtons.OK);
                 return;
             }
-        }
-
-        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            progressBar1.Value = e.ProgressPercentage;
-        }
-
-        private void DLUpdateCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-                return;
-
-            DialogResult result = message.information("The download has completed. Do you want to start the installer now? This will close Mod Manager and any open Mod Editor windows, so save your work before continuing.", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
-            {
-                System.Diagnostics.Process.Start(dlfilename);
-                Close();
-            }
-
-            linkLabel2.Text = "Update pending...";
-            Size = new Size(Size.Width, 264);
         }
     }
 }
