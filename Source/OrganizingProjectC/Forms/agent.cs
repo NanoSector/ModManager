@@ -16,7 +16,7 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.0.3";
+        string mbversion = "1.0.4";
 
         string dlfilename;
         APIs.Notify message = new APIs.Notify();
@@ -303,6 +303,23 @@ namespace ModBuilder
                     message.error("An error occured while checking for updates. Please check your internet connection or try later.", MessageBoxButtons.OK);
                 return;
             }
+        }
+
+        private void supportLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("http://goo.gl/WYQxf");
+            }
+            catch
+            {
+                System.Diagnostics.Process.Start("iexplore", "http://goo.gl/WYQxf");
+            }
+        }
+
+        private void versionLabel_Click(object sender, EventArgs e)
+        {
+            createProjectFromPackage.Enabled = true;
         }
     }
 }

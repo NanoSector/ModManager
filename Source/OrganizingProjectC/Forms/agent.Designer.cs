@@ -41,6 +41,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.versionLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.supportLink = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -102,11 +103,12 @@
             // 
             // createProjectFromPackage
             // 
+            this.createProjectFromPackage.Enabled = false;
             this.createProjectFromPackage.Location = new System.Drawing.Point(15, 132);
             this.createProjectFromPackage.Name = "createProjectFromPackage";
             this.createProjectFromPackage.Size = new System.Drawing.Size(243, 32);
             this.createProjectFromPackage.TabIndex = 7;
-            this.createProjectFromPackage.Text = "Create project from package";
+            this.createProjectFromPackage.Text = "Create project from package (unfinished)";
             this.createProjectFromPackage.UseVisualStyleBackColor = true;
             this.createProjectFromPackage.Click += new System.EventHandler(this.createProjectFromPackage_Click);
             // 
@@ -145,6 +147,7 @@
             this.versionLabel.Size = new System.Drawing.Size(26, 13);
             this.versionLabel.TabIndex = 13;
             this.versionLabel.Text = "vx.x";
+            this.versionLabel.Click += new System.EventHandler(this.versionLabel_Click);
             // 
             // label5
             // 
@@ -155,11 +158,23 @@
             this.label5.TabIndex = 14;
             this.label5.Text = "________________________________________";
             // 
+            // supportLink
+            // 
+            this.supportLink.AutoSize = true;
+            this.supportLink.Location = new System.Drawing.Point(214, 203);
+            this.supportLink.Name = "supportLink";
+            this.supportLink.Size = new System.Drawing.Size(44, 13);
+            this.supportLink.TabIndex = 15;
+            this.supportLink.TabStop = true;
+            this.supportLink.Text = "Support";
+            this.supportLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.supportLink_LinkClicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(270, 225);
+            this.Controls.Add(this.supportLink);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.progressBar1);
@@ -198,6 +213,7 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label versionLabel;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.LinkLabel supportLink;
     }
 }
 
