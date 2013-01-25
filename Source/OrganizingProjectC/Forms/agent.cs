@@ -16,7 +16,7 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.0.2";
+        string mbversion = "1.0.3";
 
         string dlfilename;
         APIs.Notify message = new APIs.Notify();
@@ -28,7 +28,22 @@ namespace ModBuilder
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            checkUpdate(false);
+            // Have we asked the user if he or she wants to check for an update on each run?
+            if (!Properties.Settings.Default.hasAskedACU)
+            {
+                DialogResult result = message.question("Do you want Mod Manager to check if an update is available automatically on each run?", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                    Properties.Settings.Default.autoCheckUpdates = true;
+
+                Properties.Settings.Default.hasAskedACU = true;
+
+                Properties.Settings.Default.Save();
+            }
+
+            // Check for updates, if set to do so.
+            if (Properties.Settings.Default.autoCheckUpdates)
+                checkUpdate(false);
         }
 
         private void editProjectButton_Click(object sender, EventArgs e)
@@ -235,7 +250,17 @@ namespace ModBuilder
                 {
                     // If we are running in silent mode, skip this message.
                     if (throwMessage)
-                        message.information("You are using the latest version of Mod Manager.", MessageBoxButtons.OK);
+                    {
+                        DialogResult result = message.information("You are using the latest version of Mod Manager. Should Mod Manager automatically check for updates on each startup? (answering No will disable this feature if it is enabled)", MessageBoxButtons.YesNo);
+
+                        if (DialogResult == DialogResult.Yes)
+                            Properties.Settings.Default.autoCheckUpdates = true;
+                        else
+                            Properties.Settings.Default.autoCheckUpdates = false;
+
+                        // Save settings!
+                        Properties.Settings.Default.Save();
+                    }
                     return;
                 }
                 else if (status < 0)

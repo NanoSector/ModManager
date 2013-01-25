@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModBuilder.exe" size="104448">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModBuilder.exe" size="113664">
       <assemblyIdentity name="ModBuilder" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>GLKvSeCnKhPB3TvN7MOYOgYPK9k=</dsig:DigestValue>
+        <dsig:DigestValue>xX5kgrqic0Q7GEYOLWDBgkjZles=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -99,13 +99,13 @@
       <dsig:DigestValue>+/jVYhG/bSesrWg+zyHpjS51caU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ModBuilder.exe.config" size="167">
+  <file name="ModBuilder.exe.config" size="1038">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>4RnS12hQBk60yafGQFP+/DKgMKQ=</dsig:DigestValue>
+      <dsig:DigestValue>KssSYXR17U4AK1BOdxzOJZMVNT4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="x64\SQLite.Interop.dll" size="1045504">
