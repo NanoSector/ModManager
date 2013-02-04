@@ -35,7 +35,7 @@ namespace ModBuilder
 
             // Try to parse the package_info.xml.
             XmlReaderSettings settings = new XmlReaderSettings();
-            settings.DtdProcessing = DtdProcessing.Parse;
+            settings.DtdProcessing = DtdProcessing.Ignore;
             XmlReader reader = XmlReader.Create(dir + "/Package/package-info.xml", settings);
 
             // Post.

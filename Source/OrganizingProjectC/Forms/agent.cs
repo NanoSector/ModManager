@@ -16,7 +16,7 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.0.4";
+        string mbversion = "1.0.5";
 
         string dlfilename;
         APIs.Notify message = new APIs.Notify();

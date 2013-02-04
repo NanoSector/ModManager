@@ -1156,5 +1156,45 @@ namespace ModBuilder
         }
         #endregion
 
+        #region BBCode Editor
+        private void insertBBC(string tag, bool close = true)
+        {
+            string insert1 = "[" + tag + "]";
+            int selectstart = modReadme.SelectionStart;
+            string text = modReadme.Text.Insert(selectstart, insert1);
+            modReadme.Text = text;
+
+            // Or the end tag?
+            if (close)
+            {
+                text = modReadme.Text.Insert((selectstart + insert1.Length), "[/" + tag + "]");
+                modReadme.Text = text;
+            }
+
+            modReadme.Focus();
+            modReadme.SelectionStart = (selectstart + insert1.Length);
+            modReadme.SelectionLength = 0;
+        }
+
+        private void bbcB_Click(object sender, EventArgs e)
+        {
+            insertBBC("b");
+        }
+
+        private void bbcU_Click(object sender, EventArgs e)
+        {
+            insertBBC("u");
+        }
+
+        private void bbcI_Click(object sender, EventArgs e)
+        {
+            insertBBC("i");
+        }
+
+        private void bbcS_Click(object sender, EventArgs e)
+        {
+            insertBBC("s");
+        }
+        #endregion
     }
 }

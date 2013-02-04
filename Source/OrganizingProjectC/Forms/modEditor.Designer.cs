@@ -119,6 +119,11 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.regenerateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.bbcB = new System.Windows.Forms.Button();
+            this.bbcU = new System.Windows.Forms.Button();
+            this.bbcI = new System.Windows.Forms.Button();
+            this.bbcS = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.modDetailsTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -155,6 +160,7 @@
             this.splitContainer3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -171,7 +177,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(591, 310);
+            this.tabControl1.Size = new System.Drawing.Size(595, 308);
             this.tabControl1.TabIndex = 0;
             // 
             // modDetailsTab
@@ -181,7 +187,7 @@
             this.modDetailsTab.Location = new System.Drawing.Point(4, 22);
             this.modDetailsTab.Name = "modDetailsTab";
             this.modDetailsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.modDetailsTab.Size = new System.Drawing.Size(583, 284);
+            this.modDetailsTab.Size = new System.Drawing.Size(587, 282);
             this.modDetailsTab.TabIndex = 0;
             this.modDetailsTab.Text = "Mod Details";
             this.modDetailsTab.UseVisualStyleBackColor = true;
@@ -210,7 +216,7 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Location = new System.Drawing.Point(8, 7);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(564, 199);
+            this.groupBox2.Size = new System.Drawing.Size(568, 197);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "General information";
@@ -225,7 +231,7 @@
             "Avatar pack"});
             this.modType.Location = new System.Drawing.Point(223, 77);
             this.modType.Name = "modType";
-            this.modType.Size = new System.Drawing.Size(334, 21);
+            this.modType.Size = new System.Drawing.Size(338, 21);
             this.modType.TabIndex = 5;
             this.modType.SelectedIndexChanged += new System.EventHandler(this.modType_SelectedIndexChanged);
             // 
@@ -257,7 +263,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.modName.Location = new System.Drawing.Point(223, 25);
             this.modName.Name = "modName";
-            this.modName.Size = new System.Drawing.Size(334, 20);
+            this.modName.Size = new System.Drawing.Size(338, 20);
             this.modName.TabIndex = 3;
             this.modName.TextChanged += new System.EventHandler(this.modName_TextChanged);
             // 
@@ -278,7 +284,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.modVersion.Location = new System.Drawing.Point(223, 51);
             this.modVersion.Name = "modVersion";
-            this.modVersion.Size = new System.Drawing.Size(334, 20);
+            this.modVersion.Size = new System.Drawing.Size(338, 20);
             this.modVersion.TabIndex = 4;
             this.modVersion.TextChanged += new System.EventHandler(this.modVersion_TextChanged);
             // 
@@ -367,7 +373,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.modCompatibility.Location = new System.Drawing.Point(222, 149);
             this.modCompatibility.Name = "modCompatibility";
-            this.modCompatibility.Size = new System.Drawing.Size(334, 20);
+            this.modCompatibility.Size = new System.Drawing.Size(338, 20);
             this.modCompatibility.TabIndex = 8;
             this.modCompatibility.TextChanged += new System.EventHandler(this.modCompatibility_TextChanged);
             // 
@@ -377,7 +383,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.modID.Location = new System.Drawing.Point(223, 104);
             this.modID.Name = "modID";
-            this.modID.Size = new System.Drawing.Size(334, 20);
+            this.modID.Size = new System.Drawing.Size(338, 20);
             this.modID.TabIndex = 6;
             this.modID.TextChanged += new System.EventHandler(this.modID_TextChanged);
             // 
@@ -397,9 +403,9 @@
             this.groupBox1.Controls.Add(this.authorName);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.usernameHelp);
-            this.groupBox1.Location = new System.Drawing.Point(6, 212);
+            this.groupBox1.Location = new System.Drawing.Point(6, 210);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(566, 64);
+            this.groupBox1.Size = new System.Drawing.Size(570, 64);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Author information";
@@ -410,7 +416,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.authorName.Location = new System.Drawing.Point(224, 27);
             this.authorName.Name = "authorName";
-            this.authorName.Size = new System.Drawing.Size(334, 20);
+            this.authorName.Size = new System.Drawing.Size(338, 20);
             this.authorName.TabIndex = 9;
             this.authorName.TextChanged += new System.EventHandler(this.authorName_TextChanged);
             // 
@@ -445,7 +451,7 @@
             this.filesTab.Location = new System.Drawing.Point(4, 22);
             this.filesTab.Name = "filesTab";
             this.filesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.filesTab.Size = new System.Drawing.Size(583, 284);
+            this.filesTab.Size = new System.Drawing.Size(587, 282);
             this.filesTab.TabIndex = 1;
             this.filesTab.Text = "Files";
             this.filesTab.UseVisualStyleBackColor = true;
@@ -455,7 +461,7 @@
             this.filesHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.filesHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.filesHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.filesHelp.Location = new System.Drawing.Point(559, 6);
+            this.filesHelp.Location = new System.Drawing.Point(563, 6);
             this.filesHelp.Name = "filesHelp";
             this.filesHelp.Size = new System.Drawing.Size(16, 16);
             this.filesHelp.TabIndex = 22;
@@ -510,31 +516,29 @@
             treeNode1.Text = "Files";
             this.files.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
-            this.files.Size = new System.Drawing.Size(243, 278);
+            this.files.Size = new System.Drawing.Size(243, 276);
             this.files.TabIndex = 0;
             // 
             // readmeTab
             // 
-            this.readmeTab.Controls.Add(this.modReadme);
             this.readmeTab.Controls.Add(this.panel1);
+            this.readmeTab.Controls.Add(this.panel3);
+            this.readmeTab.Controls.Add(this.modReadme);
             this.readmeTab.Location = new System.Drawing.Point(4, 22);
             this.readmeTab.Name = "readmeTab";
             this.readmeTab.Padding = new System.Windows.Forms.Padding(3);
-            this.readmeTab.Size = new System.Drawing.Size(583, 284);
+            this.readmeTab.Size = new System.Drawing.Size(587, 282);
             this.readmeTab.TabIndex = 2;
             this.readmeTab.Text = "Readme";
             this.readmeTab.UseVisualStyleBackColor = true;
             // 
             // modReadme
             // 
-            this.modReadme.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.modReadme.Location = new System.Drawing.Point(3, 3);
+            this.modReadme.Location = new System.Drawing.Point(3, 35);
             this.modReadme.Multiline = true;
             this.modReadme.Name = "modReadme";
             this.modReadme.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.modReadme.Size = new System.Drawing.Size(577, 234);
+            this.modReadme.Size = new System.Drawing.Size(577, 202);
             this.modReadme.TabIndex = 0;
             // 
             // panel1
@@ -542,9 +546,9 @@
             this.panel1.Controls.Add(this.readmeHelp);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 243);
+            this.panel1.Location = new System.Drawing.Point(3, 241);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(577, 38);
+            this.panel1.Size = new System.Drawing.Size(581, 38);
             this.panel1.TabIndex = 1;
             // 
             // readmeHelp
@@ -552,7 +556,7 @@
             this.readmeHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.readmeHelp.Cursor = System.Windows.Forms.Cursors.Help;
             this.readmeHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.readmeHelp.Location = new System.Drawing.Point(556, 11);
+            this.readmeHelp.Location = new System.Drawing.Point(560, 11);
             this.readmeHelp.Name = "readmeHelp";
             this.readmeHelp.Size = new System.Drawing.Size(16, 16);
             this.readmeHelp.TabIndex = 23;
@@ -576,7 +580,7 @@
             this.instructionsTab.Location = new System.Drawing.Point(4, 22);
             this.instructionsTab.Name = "instructionsTab";
             this.instructionsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.instructionsTab.Size = new System.Drawing.Size(583, 284);
+            this.instructionsTab.Size = new System.Drawing.Size(587, 282);
             this.instructionsTab.TabIndex = 3;
             this.instructionsTab.Text = "Instructions";
             this.instructionsTab.UseVisualStyleBackColor = true;
@@ -592,9 +596,9 @@
             this.panel2.Controls.Add(this.delInstruction);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(266, 3);
+            this.panel2.Location = new System.Drawing.Point(270, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(314, 278);
+            this.panel2.Size = new System.Drawing.Size(314, 276);
             this.panel2.TabIndex = 8;
             // 
             // instructionHelp
@@ -685,7 +689,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.instructions.Location = new System.Drawing.Point(3, 6);
             this.instructions.Name = "instructions";
-            this.instructions.Size = new System.Drawing.Size(257, 270);
+            this.instructions.Size = new System.Drawing.Size(261, 268);
             this.instructions.TabIndex = 1;
             this.instructions.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.instructions_NodeMouseDoubleClick);
             // 
@@ -696,7 +700,7 @@
             this.extractFilesTab.Location = new System.Drawing.Point(4, 22);
             this.extractFilesTab.Name = "extractFilesTab";
             this.extractFilesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.extractFilesTab.Size = new System.Drawing.Size(583, 284);
+            this.extractFilesTab.Size = new System.Drawing.Size(587, 282);
             this.extractFilesTab.TabIndex = 5;
             this.extractFilesTab.Text = "Extract files";
             this.extractFilesTab.UseVisualStyleBackColor = true;
@@ -713,9 +717,9 @@
             this.panel6.Controls.Add(this.deleteExtractButton);
             this.panel6.Controls.Add(this.label21);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(246, 3);
+            this.panel6.Location = new System.Drawing.Point(250, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(334, 278);
+            this.panel6.Size = new System.Drawing.Size(334, 276);
             this.panel6.TabIndex = 14;
             // 
             // label13
@@ -824,8 +828,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.deleteFiles);
-            this.splitContainer1.Size = new System.Drawing.Size(234, 272);
-            this.splitContainer1.SplitterDistance = 133;
+            this.splitContainer1.Size = new System.Drawing.Size(238, 270);
+            this.splitContainer1.SplitterDistance = 132;
             this.splitContainer1.TabIndex = 13;
             // 
             // extractFiles
@@ -833,7 +837,7 @@
             this.extractFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.extractFiles.Location = new System.Drawing.Point(0, 0);
             this.extractFiles.Name = "extractFiles";
-            this.extractFiles.Size = new System.Drawing.Size(234, 133);
+            this.extractFiles.Size = new System.Drawing.Size(238, 132);
             this.extractFiles.TabIndex = 0;
             this.extractFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.extractFiles_NodeMouseDoubleClick);
             // 
@@ -842,7 +846,7 @@
             this.deleteFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deleteFiles.Location = new System.Drawing.Point(0, 0);
             this.deleteFiles.Name = "deleteFiles";
-            this.deleteFiles.Size = new System.Drawing.Size(234, 135);
+            this.deleteFiles.Size = new System.Drawing.Size(238, 134);
             this.deleteFiles.TabIndex = 11;
             this.deleteFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.deleteFiles_NodeMouseDoubleClick);
             // 
@@ -853,7 +857,7 @@
             this.customCodeTab.Location = new System.Drawing.Point(4, 22);
             this.customCodeTab.Name = "customCodeTab";
             this.customCodeTab.Padding = new System.Windows.Forms.Padding(3);
-            this.customCodeTab.Size = new System.Drawing.Size(583, 284);
+            this.customCodeTab.Size = new System.Drawing.Size(587, 282);
             this.customCodeTab.TabIndex = 6;
             this.customCodeTab.Text = "Custom code";
             this.customCodeTab.UseVisualStyleBackColor = true;
@@ -873,8 +877,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.customCodeUninstall);
             this.splitContainer2.Panel2.Controls.Add(this.label16);
-            this.splitContainer2.Size = new System.Drawing.Size(577, 260);
-            this.splitContainer2.SplitterDistance = 272;
+            this.splitContainer2.Size = new System.Drawing.Size(581, 258);
+            this.splitContainer2.SplitterDistance = 273;
             this.splitContainer2.TabIndex = 6;
             // 
             // customCodeInstall
@@ -884,7 +888,7 @@
             this.customCodeInstall.Multiline = true;
             this.customCodeInstall.Name = "customCodeInstall";
             this.customCodeInstall.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.customCodeInstall.Size = new System.Drawing.Size(272, 247);
+            this.customCodeInstall.Size = new System.Drawing.Size(273, 245);
             this.customCodeInstall.TabIndex = 2;
             this.customCodeInstall.WordWrap = false;
             // 
@@ -905,7 +909,7 @@
             this.customCodeUninstall.Multiline = true;
             this.customCodeUninstall.Name = "customCodeUninstall";
             this.customCodeUninstall.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.customCodeUninstall.Size = new System.Drawing.Size(301, 247);
+            this.customCodeUninstall.Size = new System.Drawing.Size(304, 245);
             this.customCodeUninstall.TabIndex = 4;
             this.customCodeUninstall.WordWrap = false;
             // 
@@ -938,7 +942,7 @@
             this.alterDatabaseTab.Location = new System.Drawing.Point(4, 22);
             this.alterDatabaseTab.Name = "alterDatabaseTab";
             this.alterDatabaseTab.Padding = new System.Windows.Forms.Padding(3);
-            this.alterDatabaseTab.Size = new System.Drawing.Size(583, 284);
+            this.alterDatabaseTab.Size = new System.Drawing.Size(587, 282);
             this.alterDatabaseTab.TabIndex = 7;
             this.alterDatabaseTab.Text = "Alter database";
             this.alterDatabaseTab.UseVisualStyleBackColor = true;
@@ -958,8 +962,8 @@
             // 
             this.splitContainer3.Panel2.Controls.Add(this.uninstallDatabaseCode);
             this.splitContainer3.Panel2.Controls.Add(this.label18);
-            this.splitContainer3.Size = new System.Drawing.Size(577, 260);
-            this.splitContainer3.SplitterDistance = 273;
+            this.splitContainer3.Size = new System.Drawing.Size(581, 258);
+            this.splitContainer3.SplitterDistance = 274;
             this.splitContainer3.TabIndex = 6;
             // 
             // installDatabaseCode
@@ -969,7 +973,7 @@
             this.installDatabaseCode.Multiline = true;
             this.installDatabaseCode.Name = "installDatabaseCode";
             this.installDatabaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.installDatabaseCode.Size = new System.Drawing.Size(273, 247);
+            this.installDatabaseCode.Size = new System.Drawing.Size(274, 245);
             this.installDatabaseCode.TabIndex = 3;
             this.installDatabaseCode.WordWrap = false;
             // 
@@ -990,7 +994,7 @@
             this.uninstallDatabaseCode.Multiline = true;
             this.uninstallDatabaseCode.Name = "uninstallDatabaseCode";
             this.uninstallDatabaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.uninstallDatabaseCode.Size = new System.Drawing.Size(300, 247);
+            this.uninstallDatabaseCode.Size = new System.Drawing.Size(303, 245);
             this.uninstallDatabaseCode.TabIndex = 5;
             this.uninstallDatabaseCode.WordWrap = false;
             // 
@@ -1023,7 +1027,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(583, 284);
+            this.tabPage1.Size = new System.Drawing.Size(587, 282);
             this.tabPage1.TabIndex = 8;
             this.tabPage1.Text = "Other settings";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1054,7 +1058,8 @@
             this.projectToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(591, 24);
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.menuStrip1.Size = new System.Drawing.Size(595, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1142,11 +1147,67 @@
             this.showConsoleToolStripMenuItem.Text = "Show console";
             this.showConsoleToolStripMenuItem.Click += new System.EventHandler(this.showConsoleToolStripMenuItem_Click);
             // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.bbcS);
+            this.panel3.Controls.Add(this.bbcI);
+            this.panel3.Controls.Add(this.bbcU);
+            this.panel3.Controls.Add(this.bbcB);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(581, 26);
+            this.panel3.TabIndex = 2;
+            // 
+            // bbcB
+            // 
+            this.bbcB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bbcB.Location = new System.Drawing.Point(3, 0);
+            this.bbcB.Name = "bbcB";
+            this.bbcB.Size = new System.Drawing.Size(24, 23);
+            this.bbcB.TabIndex = 0;
+            this.bbcB.Text = "B";
+            this.bbcB.UseVisualStyleBackColor = true;
+            this.bbcB.Click += new System.EventHandler(this.bbcB_Click);
+            // 
+            // bbcU
+            // 
+            this.bbcU.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bbcU.Location = new System.Drawing.Point(33, 0);
+            this.bbcU.Name = "bbcU";
+            this.bbcU.Size = new System.Drawing.Size(24, 23);
+            this.bbcU.TabIndex = 1;
+            this.bbcU.Text = "U";
+            this.bbcU.UseVisualStyleBackColor = true;
+            this.bbcU.Click += new System.EventHandler(this.bbcU_Click);
+            // 
+            // bbcI
+            // 
+            this.bbcI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bbcI.Location = new System.Drawing.Point(63, 0);
+            this.bbcI.Name = "bbcI";
+            this.bbcI.Size = new System.Drawing.Size(24, 23);
+            this.bbcI.TabIndex = 2;
+            this.bbcI.Text = "I";
+            this.bbcI.UseVisualStyleBackColor = true;
+            this.bbcI.Click += new System.EventHandler(this.bbcI_Click);
+            // 
+            // bbcS
+            // 
+            this.bbcS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bbcS.Location = new System.Drawing.Point(93, 0);
+            this.bbcS.Name = "bbcS";
+            this.bbcS.Size = new System.Drawing.Size(24, 23);
+            this.bbcS.TabIndex = 3;
+            this.bbcS.Text = "S";
+            this.bbcS.UseVisualStyleBackColor = true;
+            this.bbcS.Click += new System.EventHandler(this.bbcS_Click);
+            // 
             // modEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(591, 334);
+            this.ClientSize = new System.Drawing.Size(595, 332);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1206,6 +1267,7 @@
             this.tabPage1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1302,5 +1364,10 @@
         private System.Windows.Forms.PictureBox filesHelp;
         private System.Windows.Forms.PictureBox readmeHelp;
         private System.Windows.Forms.PictureBox instructionHelp;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button bbcS;
+        private System.Windows.Forms.Button bbcI;
+        private System.Windows.Forms.Button bbcU;
+        private System.Windows.Forms.Button bbcB;
     }
 }

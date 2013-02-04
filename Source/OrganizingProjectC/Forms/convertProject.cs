@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml;
+using System.Data.SQLite;
+using System.Xml.Linq;
 
 namespace ModBuilder.Forms
 {
@@ -92,7 +94,7 @@ namespace ModBuilder.Forms
                     packageInfoXMLPath.Text = fb.SelectedPath + "\\package-info.xml";
                     
                     XmlReaderSettings settings = new XmlReaderSettings();
-                    settings.DtdProcessing = DtdProcessing.Parse;
+                    settings.DtdProcessing = DtdProcessing.Ignore;
                     XmlReader reader = XmlReader.Create(fb.SelectedPath + "/package-info.xml", settings);
 
                     while (reader.Read())
@@ -164,6 +166,7 @@ namespace ModBuilder.Forms
             }
         }
 
+        #region Browse for files
         private string browseFile(string description, string filter)
         {
             // New file browser.
@@ -255,84 +258,108 @@ namespace ModBuilder.Forms
 
             uninstallDatabasePHPPath.Text = result;
         }
+        #endregion
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            /*// Parse the XML again.
+            modEditor me = new modEditor();
+
+            me.generateSQL(outputDirectory.Text);
+
+            // Parse the XML again.
             #region Read the package-info.xml, if it exists.
-            if (File.Exists(packageInfoXMLPath.Text))
+            if (File.Exists(installXmlPath.Text))
             {
-
+                #region Obsolete code
+                /*
                 XmlReaderSettings settings = new XmlReaderSettings();
-                settings.DtdProcessing = DtdProcessing.Parse;
-                XmlReader reader = XmlReader.Create(packageInfoXMLPath.Text, settings);
+                settings.DtdProcessing = DtdProcessing.Ignore;
+                XmlReader reader = XmlReader.Create(installXmlPath.Text, settings);
 
+                // Some variables which will be reset.
+                string filename = "";
+                string position = "";
+                string search = "";
+                string add = "";
+                string temp = "";
+                bool optional = false;
                 while (reader.Read())
                 {
-                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "install")
+                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "file")
                     {
+                        filename = reader.GetAttribute("name");
+                        if (reader.GetAttribute("error") == "skip")
+                            optional = true;
+
                         while (reader.NodeType != XmlNodeType.EndElement)
                         {
                             reader.Read();
-                            if (reader.Name == "modification")
+                            if (reader.NodeType == XmlNodeType.Element && reader.Name == "operation")
                             {
-                                reader.Read();
-                                if (reader.NodeType == XmlNodeType.Text)
-                                    installXmlPath.Text = packageInputPath.Text + "/" + reader.Value;
-                            }
+                                string sql = "INSERT INTO instructions(id, before, after, type, file, optional) VALUES(null, @beforeText, @afterText, @type, @fileEdited, @optional)";
 
-                            if (reader.Name == "code")
-                            {
-                                reader.Read();
-                                if (reader.NodeType == XmlNodeType.Text)
-                                    installPHPPath.Text = packageInputPath.Text + "/" + reader.Value;
-                            }
+                                // Create the query.
+                                SQLiteCommand command = new SQLiteCommand(sql, me.conn);
+                                Console.WriteLine("File: " + filename);
+                                command.Parameters.AddWithValue("@fileEdited", filename);
+                                command.Parameters.AddWithValue("@optional", optional);
 
-                            if (reader.Name == "database")
-                            {
-                                reader.Read();
-                                if (reader.NodeType == XmlNodeType.Text)
-                                    installDatabasePHPPath.Text = packageInputPath.Text + "/" + reader.Value;
-                            }
-
-                            if (reader.Name == "readme")
-                            {
-                                reader.Read();
-                                if (reader.NodeType == XmlNodeType.Text)
+                                while (reader.NodeType != XmlNodeType.EndElement)
                                 {
-                                    if (File.Exists(packageInputPath.Text + "/" + reader.Value))
-                                        readmeTXTPath.Text = packageInputPath.Text + "/" + reader.Value;
-                                    else
-                                        readmeTXTPath.Text = "Inline (package-info.xml)";
+                                    reader.Read();
+                                    if (reader.Name == "search")
+                                    {
+                                        temp = reader.GetAttribute("position");
+                                        message.information(temp, MessageBoxButtons.OK);
+
+                                        switch (temp)
+                                        {
+                                            case "before":
+                                                position = "add_before";
+                                                break;
+                                            case "after":
+                                                position = "add_after";
+                                                break;
+                                            case "end":
+                                                position = "end";
+                                                break;
+                                            case "":
+                                                continue;
+                                            default:
+                                                position = "replace";
+                                                break;
+                                        }
+
+                                        command.Parameters.AddWithValue("@type", position);
+                                        Console.WriteLine("Position: " + position);
+
+                                        if (reader.NodeType == XmlNodeType.Text)
+                                        {
+                                            search = reader.Value;
+                                            command.Parameters.AddWithValue("@beforeText", search);
+                                            Console.WriteLine("Search: " + search);
+                                        }
+                                    }
+                                    if (reader.Name == "add")
+                                    {
+                                        add = reader.Value;
+                                        command.Parameters.AddWithValue("@afterText", add);
+                                    }
                                 }
+
+                                //command.ExecuteNonQuery();
                             }
                         }
                     }
+                }*/
+                #endregion
 
-                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "uninstall")
-                    {
-                        while (reader.NodeType != XmlNodeType.EndElement)
-                        {
-                            reader.Read();
+                XmlDocument doc = new XmlDocument();
+                doc.Load(installXmlPath.Text);
 
-                            if (reader.Name == "code")
-                            {
-                                reader.Read();
-                                if (reader.NodeType == XmlNodeType.Text)
-                                    uninstallPHPPath.Text = fb.SelectedPath + "/" + reader.Value;
-                            }
 
-                            if (reader.Name == "database")
-                            {
-                                reader.Read();
-                                if (reader.NodeType == XmlNodeType.Text)
-                                    uninstallDatabasePHPPath.Text = fb.SelectedPath + "/" + reader.Value;
-                            }
-                        }
-                    }
-                }
             }
-            #endregion*/
+            #endregion
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
