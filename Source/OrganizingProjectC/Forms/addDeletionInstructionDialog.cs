@@ -33,8 +33,13 @@ namespace ModBuilder.Forms
                 {
                     char[] chars = { '/' };
                     string[] pieces = reader["file_name"].ToString().Split(chars, 2);
-                    filePrefix.SelectedItem = pieces[0];
-                    fileName.Text = pieces[1];
+                    if (pieces.Length == 1)
+                        fileName.Text = pieces[0];
+                    else if (pieces.Length == 2)
+                    {
+                        filePrefix.SelectedItem = pieces[0];
+                        fileName.Text = pieces[1];
+                    }
 
                     switch (reader["type"].ToString())
                     {

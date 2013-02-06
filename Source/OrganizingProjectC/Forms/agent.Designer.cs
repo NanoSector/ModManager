@@ -103,12 +103,11 @@
             // 
             // createProjectFromPackage
             // 
-            this.createProjectFromPackage.Enabled = false;
             this.createProjectFromPackage.Location = new System.Drawing.Point(15, 132);
             this.createProjectFromPackage.Name = "createProjectFromPackage";
             this.createProjectFromPackage.Size = new System.Drawing.Size(243, 32);
             this.createProjectFromPackage.TabIndex = 7;
-            this.createProjectFromPackage.Text = "Create project from package (unfinished)";
+            this.createProjectFromPackage.Text = "Convert package to project";
             this.createProjectFromPackage.UseVisualStyleBackColor = true;
             this.createProjectFromPackage.Click += new System.EventHandler(this.createProjectFromPackage_Click);
             // 
@@ -147,7 +146,6 @@
             this.versionLabel.Size = new System.Drawing.Size(26, 13);
             this.versionLabel.TabIndex = 13;
             this.versionLabel.Text = "vx.x";
-            this.versionLabel.Click += new System.EventHandler(this.versionLabel_Click);
             // 
             // label5
             // 

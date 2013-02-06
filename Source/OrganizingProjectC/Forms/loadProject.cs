@@ -34,51 +34,45 @@ namespace ModBuilder
             modConsole mc = new modConsole();
 
             // Try to parse the package_info.xml.
-            XmlReaderSettings settings = new XmlReaderSettings();
-            settings.DtdProcessing = DtdProcessing.Ignore;
-            XmlReader reader = XmlReader.Create(dir + "/Package/package-info.xml", settings);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(dir + "/Package/package-info.xml");
 
             // Post.
             mc.Message("package-info.xml has been detected. Parsing data...");
 
             // Read it!
             #region Boring XML parsing
-            using (reader)
+            foreach (XmlNode l_packageNode in doc.LastChild.ChildNodes)
             {
-                // Read until we get to the ID element.
-                reader.ReadToFollowing("id");
-                string mid = reader.ReadElementContentAsString();
-                me.modID.Text = mid;
+                Console.WriteLine("Test node name: " + l_packageNode.Name);
+                Console.WriteLine("Test value: " + l_packageNode.InnerText);
+                switch (l_packageNode.Name)
+                {
+                    case "id":
+                        string mid = l_packageNode.InnerText;
+                        me.modID.Text = mid;
 
-                // Determine the mod author.
-                string[] pieces = mid.Split(':');
-                me.authorName.Text = pieces[0];
-                mc.Message("Found and inserted ID and author.");
-
-                // And the name element.
-                mc.Message("Found and inserted name.");
-                reader.ReadToFollowing("name");
-                me.modName.Text = reader.ReadElementContentAsString();
-                me.Text = me.modName.Text + " - Mod Editor";
-
-                // The version element.
-                reader.ReadToFollowing("version");
-                me.modVersion.Text = reader.ReadElementContentAsString();
-                mc.Message("Found and inserted version.");
-
-                // Type.
-                reader.ReadToFollowing("type");
-                if (reader.ReadElementContentAsString() == "modification")
-                    me.modType.SelectedItem = "Modification";
-                else
-                    me.modType.SelectedItem = "Avatar pack";
-                mc.Message("Found and inserted type.");
-
-                // Move on to the install element to determine the compatibility range.
-                reader.ReadToFollowing("install");
-                reader.MoveToAttribute("for");
-                me.modCompatibility.Text = reader.Value;
-                mc.Message("Found and inserted compatibility range.");
+                        // Determine the mod author.
+                        string[] pieces = mid.Split(':');
+                        me.authorName.Text = pieces[0];
+                        mc.Message("Found and inserted ID and author.");
+                        break;
+                    case "name":
+                        me.modName.Text = l_packageNode.InnerText;
+                        break;
+                    case "version":
+                        me.modVersion.Text = l_packageNode.InnerText;
+                        break;
+                    case "type":
+                        if (l_packageNode.InnerText == "modification")
+                            me.modType.SelectedItem = "Modification";
+                        else
+                            me.modType.SelectedItem = "Avatar pack";
+                        break;
+                    case "install":
+                        me.modCompatibility.Text = l_packageNode.Attributes["for"].Value;
+                        break;
+                }
             }
             #endregion
 

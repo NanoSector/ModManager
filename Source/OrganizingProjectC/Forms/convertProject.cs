@@ -92,71 +92,48 @@ namespace ModBuilder.Forms
                 if (File.Exists(fb.SelectedPath + "/package-info.xml"))
                 {
                     packageInfoXMLPath.Text = fb.SelectedPath + "\\package-info.xml";
-                    
-                    XmlReaderSettings settings = new XmlReaderSettings();
-                    settings.DtdProcessing = DtdProcessing.Ignore;
-                    XmlReader reader = XmlReader.Create(fb.SelectedPath + "/package-info.xml", settings);
 
-                    while (reader.Read())
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(fb.SelectedPath + "/package-info.xml");
+
+                    foreach (XmlNode l_packageNode in doc.LastChild.ChildNodes)
                     {
-                        if (reader.NodeType == XmlNodeType.Element && reader.Name == "install")
+                        if (l_packageNode.Name == "install")
                         {
-                            while (reader.NodeType != XmlNodeType.EndElement)
+                            foreach (XmlNode l_operationNode in l_packageNode.ChildNodes)
                             {
-                                reader.Read();
-                                if (reader.Name == "modification")
+                                switch (l_operationNode.Name)
                                 {
-                                    reader.Read();
-                                    if (reader.NodeType == XmlNodeType.Text)
-                                        installXmlPath.Text = fb.SelectedPath + "/" + reader.Value;
-                                }
-
-                                if (reader.Name == "code")
-                                {
-                                    reader.Read();
-                                    if (reader.NodeType == XmlNodeType.Text)
-                                        installPHPPath.Text = fb.SelectedPath + "/" + reader.Value;
-                                }
-
-                                if (reader.Name == "database")
-                                {
-                                    reader.Read();
-                                    if (reader.NodeType == XmlNodeType.Text)
-                                        installDatabasePHPPath.Text = fb.SelectedPath + "/" + reader.Value;
-                                }
-
-                                if (reader.Name == "readme")
-                                {
-                                    reader.Read();
-                                    if (reader.NodeType == XmlNodeType.Text)
-                                    {
-                                        if (File.Exists(fb.SelectedPath + "/" + reader.Value))
-                                            readmeTXTPath.Text = fb.SelectedPath + "/" + reader.Value;
+                                    case "modification":
+                                        installXmlPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        break;
+                                    case "code":
+                                        installPHPPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        break;
+                                    case "database":
+                                        installDatabasePHPPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        break;
+                                    case "readme":
+                                        if (File.Exists(fb.SelectedPath + "/" + l_operationNode.InnerText))
+                                            readmeTXTPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
                                         else
-                                            readmeTXTPath.Text = "Inline (package-info.xml)";
-                                    }
+                                            readmeTXTPath.Text = "Inline";
+                                        break;
                                 }
                             }
                         }
-                           
-                        if (reader.NodeType == XmlNodeType.Element && reader.Name == "uninstall")
+                        if (l_packageNode.Name == "uninstall")
                         {
-                            while (reader.NodeType != XmlNodeType.EndElement)
+                            foreach (XmlNode l_operationNode in l_packageNode.ChildNodes)
                             {
-                                reader.Read();
-
-                                if (reader.Name == "code")
+                                switch (l_operationNode.Name)
                                 {
-                                    reader.Read();
-                                    if (reader.NodeType == XmlNodeType.Text)
-                                        uninstallPHPPath.Text = fb.SelectedPath + "/" + reader.Value;
-                                }
-
-                                if (reader.Name == "database")
-                                {
-                                    reader.Read();
-                                    if (reader.NodeType == XmlNodeType.Text)
-                                        uninstallDatabasePHPPath.Text = fb.SelectedPath + "/" + reader.Value;
+                                    case "code":
+                                        uninstallPHPPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        break;
+                                    case "database":
+                                        uninstallDatabasePHPPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        break;
                                 }
                             }
                         }
@@ -262,104 +239,251 @@ namespace ModBuilder.Forms
 
         private void okButton_Click(object sender, EventArgs e)
         {
+            if (!Directory.Exists(packageInputPath.Text))
+            {
+                message.error("Your input directory does not exist. Please select a different one.", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (!Directory.Exists(outputDirectory.Text))
+                Directory.CreateDirectory(outputDirectory.Text);
+
             modEditor me = new modEditor();
 
             me.generateSQL(outputDirectory.Text);
 
-            // Parse the XML again.
-            #region Read the package-info.xml, if it exists.
+            // Update a setting.
+            string updatesql = "UPDATE settings SET value = \"false\" WHERE key = \"autoGenerateModID\"";
+            SQLiteCommand ucomm = new SQLiteCommand(updatesql, me.conn);
+            ucomm.ExecuteNonQuery();
+
+            // Create a readme.txt if the text is inline.
+            bool readmeTextInline = false;
+
+            if (readmeTXTPath.Text == "Inline")
+                readmeTextInline = true;
+
+            // Parse the XML.
+            #region Read the install.xml, if it exists.
             if (File.Exists(installXmlPath.Text))
             {
-                #region Obsolete code
-                /*
-                XmlReaderSettings settings = new XmlReaderSettings();
-                settings.DtdProcessing = DtdProcessing.Ignore;
-                XmlReader reader = XmlReader.Create(installXmlPath.Text, settings);
+                XmlDocument l_document = new XmlDocument();
+                l_document.Load(installXmlPath.Text);
 
-                // Some variables which will be reset.
                 string filename = "";
-                string position = "";
-                string search = "";
-                string add = "";
-                string temp = "";
                 bool optional = false;
-                while (reader.Read())
+                string search = "";
+                foreach (XmlNode l_fileNode in l_document.ChildNodes[l_document.ChildNodes.Count - 1].ChildNodes)
                 {
-                    if (reader.NodeType == XmlNodeType.Element && reader.Name == "file")
+                    if (l_fileNode.Name == "file")
                     {
-                        filename = reader.GetAttribute("name");
-                        if (reader.GetAttribute("error") == "skip")
-                            optional = true;
+                        filename = l_fileNode.Attributes["name"].Value;
 
-                        while (reader.NodeType != XmlNodeType.EndElement)
+                        if (l_fileNode.ChildNodes.Count > 0 && l_fileNode.ChildNodes[0].Name == "operation")
                         {
-                            reader.Read();
-                            if (reader.NodeType == XmlNodeType.Element && reader.Name == "operation")
+                            optional = l_fileNode.Attributes["error"].Value == "skip";
+                            string sql = "INSERT INTO instructions(id, before, after, type, file, optional) VALUES(null, @beforeText, @afterText, @type, @fileEdited, @optional)";
+
+                            // Create the query.
+                            SQLiteCommand command = new SQLiteCommand(sql, me.conn);
+                            command.Parameters.AddWithValue("@fileEdited", filename);
+                            command.Parameters.AddWithValue("@optional", optional);
+
+                            // Empty out the search var.
+                            search = "";
+
+                            foreach (XmlNode l_operationNode in l_fileNode.ChildNodes[0].ChildNodes)
                             {
-                                string sql = "INSERT INTO instructions(id, before, after, type, file, optional) VALUES(null, @beforeText, @afterText, @type, @fileEdited, @optional)";
-
-                                // Create the query.
-                                SQLiteCommand command = new SQLiteCommand(sql, me.conn);
-                                Console.WriteLine("File: " + filename);
-                                command.Parameters.AddWithValue("@fileEdited", filename);
-                                command.Parameters.AddWithValue("@optional", optional);
-
-                                while (reader.NodeType != XmlNodeType.EndElement)
+                                switch (l_operationNode.Name)
                                 {
-                                    reader.Read();
-                                    if (reader.Name == "search")
-                                    {
-                                        temp = reader.GetAttribute("position");
-                                        message.information(temp, MessageBoxButtons.OK);
+                                    case "search":
+                                        command.Parameters.AddWithValue("@type", l_operationNode.Attributes["position"].Value);
 
-                                        switch (temp)
+                                        if (l_operationNode.ChildNodes.Count > 0)
                                         {
-                                            case "before":
-                                                position = "add_before";
-                                                break;
-                                            case "after":
-                                                position = "add_after";
-                                                break;
-                                            case "end":
-                                                position = "end";
-                                                break;
-                                            case "":
-                                                continue;
-                                            default:
-                                                position = "replace";
-                                                break;
+                                            search = l_operationNode.ChildNodes[0].Value;
                                         }
+                                        break;
 
-                                        command.Parameters.AddWithValue("@type", position);
-                                        Console.WriteLine("Position: " + position);
-
-                                        if (reader.NodeType == XmlNodeType.Text)
+                                    case "add":
+                                        if (l_operationNode.ChildNodes.Count > 0)
                                         {
-                                            search = reader.Value;
-                                            command.Parameters.AddWithValue("@beforeText", search);
-                                            Console.WriteLine("Search: " + search);
+                                            command.Parameters.AddWithValue("@afterText", l_operationNode.ChildNodes[0].Value);
                                         }
-                                    }
-                                    if (reader.Name == "add")
-                                    {
-                                        add = reader.Value;
-                                        command.Parameters.AddWithValue("@afterText", add);
-                                    }
+                                        break;
                                 }
+                            }
 
-                                //command.ExecuteNonQuery();
+                            command.Parameters.AddWithValue("@beforeText", search);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            // Copy over any remaining files.
+            Dictionary<string, string> pfiles = new Dictionary<string, string>();
+            Directory.CreateDirectory(outputDirectory.Text + "/Package");
+            Directory.CreateDirectory(outputDirectory.Text + "/Source");
+
+            pfiles.Add("Package/package-info.xml", packageInfoXMLPath.Text);
+            if (!string.IsNullOrEmpty(readmeTXTPath.Text))
+                pfiles.Add("Package/readme.txt", readmeTXTPath.Text);
+            if (!string.IsNullOrEmpty(installPHPPath.Text))
+                pfiles.Add("Package/install.php", installPHPPath.Text);
+            if (!string.IsNullOrEmpty(uninstallPHPPath.Text))
+                pfiles.Add("Package/uninstall.php", uninstallPHPPath.Text);
+            if (!string.IsNullOrEmpty(installDatabasePHPPath.Text))
+                pfiles.Add("Package/installDatabase.php", installDatabasePHPPath.Text);
+            if (!string.IsNullOrEmpty(uninstallDatabasePHPPath.Text))
+                pfiles.Add("Package/uninstallDatabase.php", uninstallDatabasePHPPath.Text);
+
+            foreach (var pair in pfiles)
+            {
+                if (!File.Exists(pair.Value))
+                    continue;
+
+                if (File.Exists(outputDirectory.Text + "/" + pair.Key))
+                    File.Delete(outputDirectory.Text + "/" + pair.Key);
+
+                File.Copy(pair.Value, outputDirectory.Text + "/" + pair.Key);
+            }
+
+            #region Read the package.xml, if it exists, for any further information.
+            
+            if (File.Exists(packageInfoXMLPath.Text))
+            {
+                XmlDocument l_document = new XmlDocument();
+                l_document.Load(packageInfoXMLPath.Text);
+
+                SQLiteCommand sql;
+                string sqlquery;
+                foreach (XmlNode l_packageNode in l_document.LastChild.ChildNodes)
+                {
+                    Console.WriteLine("Test node name: " + l_packageNode.Name);
+                    if (l_packageNode.Name == "readme" && readmeTextInline)
+                    {
+                        File.CreateText(outputDirectory.Text + "/Package/readme.txt");
+                        File.WriteAllText(outputDirectory.Text + "/Package/readme.txt", l_packageNode.InnerText);
+                    }
+                    if (l_packageNode.Name == "install")
+                    {
+                        foreach (XmlNode l_operationNode in l_packageNode.ChildNodes)
+                        {
+                            Console.WriteLine(
+                                 "Test child node name: " + l_operationNode.Name);
+                            switch (l_operationNode.Name)
+                            {
+                                case "require-file":
+                                     Console.WriteLine("File name: " + l_operationNode.Attributes["name"].Value);
+                                     Console.WriteLine("Destination: " + l_operationNode.Attributes["destination"].Value);
+                                     string[] pieces = l_operationNode.Attributes["name"].Value.Split('/');
+                                     string lastpiece = pieces[pieces.Length - 1];
+
+                                     if (!Directory.Exists(outputDirectory.Text + "/Source/" + l_operationNode.Attributes["name"].Value.Replace("/" + lastpiece, "")) && l_operationNode.Attributes["name"].Value != lastpiece)
+                                         Directory.CreateDirectory(outputDirectory.Text + "/Source/" + l_operationNode.Attributes["name"].Value.Replace("/" + lastpiece, ""));
+
+                                     File.Copy(packageInputPath.Text + "/" + l_operationNode.Attributes["name"].Value, outputDirectory.Text + "/Source/" + l_operationNode.Attributes["name"].Value, true);
+                                     Console.WriteLine("Copied file");
+
+                                    // Set up a query.
+                                     sqlquery = "INSERT INTO files(id, file_name, destination) VALUES(null, @fileName, @destination)";
+                                     sql = new SQLiteCommand(sqlquery, me.conn);
+
+                                     sql.Parameters.AddWithValue("@fileName", l_operationNode.Attributes["name"].Value);
+                                     sql.Parameters.AddWithValue("@destination", l_operationNode.Attributes["destination"].Value);
+
+                                     sql.ExecuteNonQuery();
+
+                                     break;
+                                case "require-dir":
+                                    // Just copy over the dir.
+                                     DirectoryCopy(packageInputPath.Text + "/" + l_operationNode.Attributes["name"].Value, outputDirectory.Text + "/Source/" + l_operationNode.Attributes["name"].Value, true);
+
+                                     // Set up a query.
+                                     sqlquery = "INSERT INTO files(id, file_name, destination) VALUES(null, @fileName, @destination)";
+                                     sql = new SQLiteCommand(sqlquery, me.conn);
+
+                                     sql.Parameters.AddWithValue("@fileName", l_operationNode.Attributes["name"].Value);
+                                     sql.Parameters.AddWithValue("@destination", l_operationNode.Attributes["destination"].Value);
+
+                                     sql.ExecuteNonQuery();
+                                    break;
                             }
                         }
                     }
-                }*/
-                #endregion
+                    if (l_packageNode.Name == "uninstall")
+                    {
+                        foreach (XmlNode l_operationNode in l_packageNode.ChildNodes)
+                        {
+                            switch (l_operationNode.Name)
+                            {
+                                case "remove-file":
+                                    sqlquery = "INSERT INTO files_delete(id, file_name, type) VALUES(null, @fileName, @type)";
+                                    sql = new SQLiteCommand(sqlquery, me.conn);
+                                    sql.Parameters.AddWithValue("@fileName", l_operationNode.Attributes["name"].Value);
+                                    sql.Parameters.AddWithValue("@type", "file");
+                                    sql.ExecuteNonQuery();
+                                    break;
 
-                XmlDocument doc = new XmlDocument();
-                doc.Load(installXmlPath.Text);
-
-
+                                case "remove-dir":
+                                    sqlquery = "INSERT INTO files_delete(id, file_name, type) VALUES(null, @fileName, @type)";
+                                    sql = new SQLiteCommand(sqlquery, me.conn);
+                                    sql.Parameters.AddWithValue("@fileName", l_operationNode.Attributes["name"].Value);
+                                    sql.Parameters.AddWithValue("@type", "dir");
+                                    sql.ExecuteNonQuery();
+                                    break;
+                            }
+                        }
+                    }
+                }
             }
             #endregion
+
+            me.Close();
+
+            DialogResult result = message.information("Package has been converted, do you want to load it now?", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                loadProject lp = new loadProject();
+                lp.openProjDir(outputDirectory.Text);
+            }
+            Close();
+        }
+
+        private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string temppath = Path.Combine(destDirName, file.Name);
+                file.CopyTo(temppath, true);
+            }
+
+            if (copySubDirs)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string temppath = Path.Combine(destDirName, subdir.Name);
+                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                }
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)

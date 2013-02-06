@@ -16,7 +16,7 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.0.5";
+        string mbversion = "1.1";
 
         string dlfilename;
         APIs.Notify message = new APIs.Notify();
@@ -174,23 +174,6 @@ namespace ModBuilder
             // !WIP!
             Forms.convertProject cp = new Forms.convertProject();
             cp.Show();
-            return;
-
-            FolderBrowserDialog fb = new FolderBrowserDialog();
-            fb.Description = "Please select the directory that your package resides in.";
-            fb.ShowNewFolderButton = false;
-            fb.ShowDialog();
-
-            // Get the path.
-            string packdir = fb.SelectedPath;
-
-            // No valid directory? Shame on you.
-            if (string.IsNullOrEmpty(packdir))
-                return;
-
-            // Show it again.
-            fb.Description = "Please select the directory where the project should be generated.";
-            fb.ShowNewFolderButton = true;
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -251,7 +234,7 @@ namespace ModBuilder
                     // If we are running in silent mode, skip this message.
                     if (throwMessage)
                     {
-                        DialogResult result = message.information("You are using the latest version of Mod Manager. Should Mod Manager automatically check for updates on each startup? (answering No will disable this feature if it is enabled)", MessageBoxButtons.YesNo);
+                        DialogResult result = message.information("You are using the latest version of Mod Manager. Should Mod Manager automatically check for updates on each startup?", MessageBoxButtons.YesNoCancel);
 
                         if (DialogResult == DialogResult.Yes)
                             Properties.Settings.Default.autoCheckUpdates = true;
@@ -315,11 +298,6 @@ namespace ModBuilder
             {
                 System.Diagnostics.Process.Start("iexplore", "http://goo.gl/WYQxf");
             }
-        }
-
-        private void versionLabel_Click(object sender, EventArgs e)
-        {
-            createProjectFromPackage.Enabled = true;
         }
     }
 }
