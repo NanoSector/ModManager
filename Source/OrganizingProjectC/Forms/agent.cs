@@ -16,7 +16,7 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.1";
+        string mbversion = "1.1.1";
 
         string dlfilename;
         APIs.Notify message = new APIs.Notify();
@@ -238,7 +238,7 @@ namespace ModBuilder
 
                         if (DialogResult == DialogResult.Yes)
                             Properties.Settings.Default.autoCheckUpdates = true;
-                        else
+                        else if (DialogResult == DialogResult.No)
                             Properties.Settings.Default.autoCheckUpdates = false;
 
                         // Save settings!
