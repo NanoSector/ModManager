@@ -301,14 +301,14 @@ namespace ModBuilder.Forms
 
                                         if (l_operationNode.ChildNodes.Count > 0)
                                         {
-                                            search = l_operationNode.ChildNodes[0].Value;
+                                            search = l_operationNode.ChildNodes[0].Value.Replace("\r", "\n").Replace("\n", "\r\n");
                                         }
                                         break;
 
                                     case "add":
                                         if (l_operationNode.ChildNodes.Count > 0)
                                         {
-                                            command.Parameters.AddWithValue("@afterText", l_operationNode.ChildNodes[0].Value);
+                                            command.Parameters.AddWithValue("@afterText", l_operationNode.ChildNodes[0].Value.Replace("\r", "\n").Replace("\n", "\r\n"));
                                         }
                                         break;
                                 }
@@ -362,11 +362,6 @@ namespace ModBuilder.Forms
                 foreach (XmlNode l_packageNode in l_document.LastChild.ChildNodes)
                 {
                     Console.WriteLine("Test node name: " + l_packageNode.Name);
-                    if (l_packageNode.Name == "readme" && readmeTextInline)
-                    {
-                        File.CreateText(outputDirectory.Text + "/Package/readme.txt");
-                        File.WriteAllText(outputDirectory.Text + "/Package/readme.txt", l_packageNode.InnerText);
-                    }
                     if (l_packageNode.Name == "install")
                     {
                         foreach (XmlNode l_operationNode in l_packageNode.ChildNodes)
@@ -375,6 +370,10 @@ namespace ModBuilder.Forms
                                  "Test child node name: " + l_operationNode.Name);
                             switch (l_operationNode.Name)
                             {
+                                case "readme":
+                                    if (readmeTextInline)
+                                        File.WriteAllText(outputDirectory.Text + "/Package/readme.txt", l_operationNode.InnerText.Replace("\r", "\n").Replace("\n", "\r\n"));
+                                    break;
                                 case "require-file":
                                      Console.WriteLine("File name: " + l_operationNode.Attributes["name"].Value);
                                      Console.WriteLine("Destination: " + l_operationNode.Attributes["destination"].Value);

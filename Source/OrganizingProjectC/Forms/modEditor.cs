@@ -84,7 +84,11 @@ namespace ModBuilder
 
         private void modID_TextChanged(object sender, EventArgs e)
         {
-            modID.Text = System.Text.RegularExpressions.Regex.Replace(modID.Text, @"[^a-zA-Z0-9:]", "");
+            string tmpstr = System.Text.RegularExpressions.Regex.Replace(modID.Text, @"[^a-zA-Z0-9:_]", "");
+            if (tmpstr.Length > 32)
+                tmpstr = tmpstr.Substring(0, 32);
+            modID.Text = tmpstr;
+
 
             modID.BackColor = Color.White;
         }
@@ -93,9 +97,12 @@ namespace ModBuilder
         {
             if (genPkgID.Checked == true && !string.IsNullOrEmpty(authorName.Text) && !string.IsNullOrEmpty(modName.Text))
             {
-                string an = System.Text.RegularExpressions.Regex.Replace(authorName.Text, @"[^a-zA-Z0-9]", "");
-                string mn = System.Text.RegularExpressions.Regex.Replace(modName.Text, @"[^a-zA-Z0-9]", "");
-                modID.Text = an + ":" + mn;
+                string an = System.Text.RegularExpressions.Regex.Replace(authorName.Text, @"[^a-zA-Z0-9_]", "");
+                string mn = System.Text.RegularExpressions.Regex.Replace(modName.Text, @"[^a-zA-Z0-9_]", "");
+                string tmpstr = (an + ":" + mn).Substring(0, 32);
+                if (tmpstr.Length > 32)
+                    tmpstr = tmpstr.Substring(0, 32);
+                modID.Text = tmpstr;
             }
         }
         #endregion
