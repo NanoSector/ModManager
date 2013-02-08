@@ -84,11 +84,16 @@ namespace ModBuilder
 
         private void modID_TextChanged(object sender, EventArgs e)
         {
-            string tmpstr = System.Text.RegularExpressions.Regex.Replace(modID.Text, @"[^a-zA-Z0-9:_]", "");
-            if (tmpstr.Length > 32)
-                tmpstr = tmpstr.Substring(0, 32);
-            modID.Text = tmpstr;
+            if (genPkgID.Checked == false)
+            {
+                string tmpstr = System.Text.RegularExpressions.Regex.Replace(modID.Text, @"[^a-zA-Z0-9:_-]", "");
+                if (tmpstr.Length > 32)
+                    genModIDWarn.Visible = true;
+                else
+                    genModIDWarn.Visible = false;
 
+                modID.Text = tmpstr;
+            }
 
             modID.BackColor = Color.White;
         }
@@ -97,9 +102,9 @@ namespace ModBuilder
         {
             if (genPkgID.Checked == true && !string.IsNullOrEmpty(authorName.Text) && !string.IsNullOrEmpty(modName.Text))
             {
-                string an = System.Text.RegularExpressions.Regex.Replace(authorName.Text, @"[^a-zA-Z0-9_]", "");
-                string mn = System.Text.RegularExpressions.Regex.Replace(modName.Text, @"[^a-zA-Z0-9_]", "");
-                string tmpstr = (an + ":" + mn).Substring(0, 32);
+                string an = System.Text.RegularExpressions.Regex.Replace(authorName.Text, @"[^a-zA-Z0-9_-]", "");
+                string mn = System.Text.RegularExpressions.Regex.Replace(modName.Text, @"[^a-zA-Z0-9_-]", "");
+                string tmpstr = (an + ":" + mn);
                 if (tmpstr.Length > 32)
                     tmpstr = tmpstr.Substring(0, 32);
                 modID.Text = tmpstr;
@@ -154,6 +159,13 @@ namespace ModBuilder
                 // Compatibility.
                 if (String.IsNullOrEmpty(modCompatibility.Text))
                     modCompatibility.BackColor = Color.Red;
+                return false;
+            }
+
+            if (modID.Text.Length > 32)
+            {
+                mc.Message("Build aborted; mod ID is too long (" + modID.Text.Length + " characters as opposed to 32 max)");
+                message.error("The mod ID is too long. Please shorten it to (less than) 32 characters. Build aborted.", MessageBoxButtons.OK);
                 return false;
             }
 

@@ -33,6 +33,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.modDetailsTab = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.genModIDWarn = new System.Windows.Forms.Label();
             this.modType = new System.Windows.Forms.ComboBox();
             this.genPkgID = new System.Windows.Forms.CheckBox();
             this.modVersionHelp = new System.Windows.Forms.PictureBox();
@@ -62,10 +63,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.files = new System.Windows.Forms.TreeView();
             this.readmeTab = new System.Windows.Forms.TabPage();
-            this.modReadme = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.readmeHelp = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.bbcS = new System.Windows.Forms.Button();
+            this.bbcI = new System.Windows.Forms.Button();
+            this.bbcU = new System.Windows.Forms.Button();
+            this.bbcB = new System.Windows.Forms.Button();
+            this.modReadme = new System.Windows.Forms.TextBox();
             this.instructionsTab = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.instructionHelp = new System.Windows.Forms.PictureBox();
@@ -119,11 +125,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.regenerateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.bbcB = new System.Windows.Forms.Button();
-            this.bbcU = new System.Windows.Forms.Button();
-            this.bbcI = new System.Windows.Forms.Button();
-            this.bbcS = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.modDetailsTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -139,6 +140,7 @@
             this.readmeTab.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).BeginInit();
+            this.panel3.SuspendLayout();
             this.instructionsTab.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).BeginInit();
@@ -160,7 +162,6 @@
             this.splitContainer3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -197,6 +198,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.genModIDWarn);
             this.groupBox2.Controls.Add(this.modType);
             this.groupBox2.Controls.Add(this.genPkgID);
             this.groupBox2.Controls.Add(this.modVersionHelp);
@@ -220,6 +222,18 @@
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "General information";
+            // 
+            // genModIDWarn
+            // 
+            this.genModIDWarn.AutoSize = true;
+            this.genModIDWarn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.genModIDWarn.ForeColor = System.Drawing.Color.Red;
+            this.genModIDWarn.Location = new System.Drawing.Point(220, 128);
+            this.genModIDWarn.Name = "genModIDWarn";
+            this.genModIDWarn.Size = new System.Drawing.Size(339, 13);
+            this.genModIDWarn.TabIndex = 24;
+            this.genModIDWarn.Text = "The mod ID is too long, please shorten it to 32 characters!";
+            this.genModIDWarn.Visible = false;
             // 
             // modType
             // 
@@ -532,15 +546,6 @@
             this.readmeTab.Text = "Readme";
             this.readmeTab.UseVisualStyleBackColor = true;
             // 
-            // modReadme
-            // 
-            this.modReadme.Location = new System.Drawing.Point(3, 35);
-            this.modReadme.Multiline = true;
-            this.modReadme.Name = "modReadme";
-            this.modReadme.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.modReadme.Size = new System.Drawing.Size(577, 202);
-            this.modReadme.TabIndex = 0;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.readmeHelp);
@@ -572,6 +577,71 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "This is the readme your users will see when installing your mod. Leave empty to i" +
     "gnore this step. BBCode is allowed.";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.bbcS);
+            this.panel3.Controls.Add(this.bbcI);
+            this.panel3.Controls.Add(this.bbcU);
+            this.panel3.Controls.Add(this.bbcB);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(581, 26);
+            this.panel3.TabIndex = 2;
+            // 
+            // bbcS
+            // 
+            this.bbcS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bbcS.Location = new System.Drawing.Point(93, 0);
+            this.bbcS.Name = "bbcS";
+            this.bbcS.Size = new System.Drawing.Size(24, 23);
+            this.bbcS.TabIndex = 3;
+            this.bbcS.Text = "S";
+            this.bbcS.UseVisualStyleBackColor = true;
+            this.bbcS.Click += new System.EventHandler(this.bbcS_Click);
+            // 
+            // bbcI
+            // 
+            this.bbcI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bbcI.Location = new System.Drawing.Point(63, 0);
+            this.bbcI.Name = "bbcI";
+            this.bbcI.Size = new System.Drawing.Size(24, 23);
+            this.bbcI.TabIndex = 2;
+            this.bbcI.Text = "I";
+            this.bbcI.UseVisualStyleBackColor = true;
+            this.bbcI.Click += new System.EventHandler(this.bbcI_Click);
+            // 
+            // bbcU
+            // 
+            this.bbcU.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bbcU.Location = new System.Drawing.Point(33, 0);
+            this.bbcU.Name = "bbcU";
+            this.bbcU.Size = new System.Drawing.Size(24, 23);
+            this.bbcU.TabIndex = 1;
+            this.bbcU.Text = "U";
+            this.bbcU.UseVisualStyleBackColor = true;
+            this.bbcU.Click += new System.EventHandler(this.bbcU_Click);
+            // 
+            // bbcB
+            // 
+            this.bbcB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bbcB.Location = new System.Drawing.Point(3, 0);
+            this.bbcB.Name = "bbcB";
+            this.bbcB.Size = new System.Drawing.Size(24, 23);
+            this.bbcB.TabIndex = 0;
+            this.bbcB.Text = "B";
+            this.bbcB.UseVisualStyleBackColor = true;
+            this.bbcB.Click += new System.EventHandler(this.bbcB_Click);
+            // 
+            // modReadme
+            // 
+            this.modReadme.Location = new System.Drawing.Point(3, 35);
+            this.modReadme.Multiline = true;
+            this.modReadme.Name = "modReadme";
+            this.modReadme.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.modReadme.Size = new System.Drawing.Size(577, 202);
+            this.modReadme.TabIndex = 0;
             // 
             // instructionsTab
             // 
@@ -1147,62 +1217,6 @@
             this.showConsoleToolStripMenuItem.Text = "Show console";
             this.showConsoleToolStripMenuItem.Click += new System.EventHandler(this.showConsoleToolStripMenuItem_Click);
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.bbcS);
-            this.panel3.Controls.Add(this.bbcI);
-            this.panel3.Controls.Add(this.bbcU);
-            this.panel3.Controls.Add(this.bbcB);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(3, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(581, 26);
-            this.panel3.TabIndex = 2;
-            // 
-            // bbcB
-            // 
-            this.bbcB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bbcB.Location = new System.Drawing.Point(3, 0);
-            this.bbcB.Name = "bbcB";
-            this.bbcB.Size = new System.Drawing.Size(24, 23);
-            this.bbcB.TabIndex = 0;
-            this.bbcB.Text = "B";
-            this.bbcB.UseVisualStyleBackColor = true;
-            this.bbcB.Click += new System.EventHandler(this.bbcB_Click);
-            // 
-            // bbcU
-            // 
-            this.bbcU.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bbcU.Location = new System.Drawing.Point(33, 0);
-            this.bbcU.Name = "bbcU";
-            this.bbcU.Size = new System.Drawing.Size(24, 23);
-            this.bbcU.TabIndex = 1;
-            this.bbcU.Text = "U";
-            this.bbcU.UseVisualStyleBackColor = true;
-            this.bbcU.Click += new System.EventHandler(this.bbcU_Click);
-            // 
-            // bbcI
-            // 
-            this.bbcI.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bbcI.Location = new System.Drawing.Point(63, 0);
-            this.bbcI.Name = "bbcI";
-            this.bbcI.Size = new System.Drawing.Size(24, 23);
-            this.bbcI.TabIndex = 2;
-            this.bbcI.Text = "I";
-            this.bbcI.UseVisualStyleBackColor = true;
-            this.bbcI.Click += new System.EventHandler(this.bbcI_Click);
-            // 
-            // bbcS
-            // 
-            this.bbcS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bbcS.Location = new System.Drawing.Point(93, 0);
-            this.bbcS.Name = "bbcS";
-            this.bbcS.Size = new System.Drawing.Size(24, 23);
-            this.bbcS.TabIndex = 3;
-            this.bbcS.Text = "S";
-            this.bbcS.UseVisualStyleBackColor = true;
-            this.bbcS.Click += new System.EventHandler(this.bbcS_Click);
-            // 
             // modEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1236,6 +1250,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).EndInit();
+            this.panel3.ResumeLayout(false);
             this.instructionsTab.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -1267,7 +1282,6 @@
             this.tabPage1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1369,5 +1383,6 @@
         private System.Windows.Forms.Button bbcI;
         private System.Windows.Forms.Button bbcU;
         private System.Windows.Forms.Button bbcB;
+        private System.Windows.Forms.Label genModIDWarn;
     }
 }
