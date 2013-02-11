@@ -9,10 +9,8 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ModBuilder</RootNamespace>
     <AssemblyName>ModBuilder</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkProfile />
     <PublishUrl>ftp://ftp.map3forum.tk/public_html/modmanager/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,6 +26,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -73,7 +73,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zip">
-      <HintPath>..\..\..\..\..\Downloads\DotNetZipLib-DevKit-v1.9\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
+      <HintPath>Resources\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="ScintillaNET">
@@ -81,10 +81,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite, Version=1.0.82.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\System.Data.SQLite.1.0.82.0\lib\net40\System.Data.SQLite.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.SQLite.Linq">
       <HintPath>..\packages\System.Data.SQLite.1.0.82.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
@@ -96,6 +92,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>Resources\System.Data.SQLite.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIs\Notify.cs" />
@@ -135,12 +134,6 @@
     <Compile Include="Forms\loadProject.Designer.cs">
       <DependentUpon>loadProject.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\modConsole.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\modConsole.Designer.cs">
-      <DependentUpon>modConsole.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\modEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,9 +160,6 @@
     <EmbeddedResource Include="Forms\loadProject.resx">
       <DependentUpon>loadProject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\modConsole.resx">
-      <DependentUpon>modConsole.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\modEditor.resx">
       <DependentUpon>modEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -195,6 +185,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Forms\ModConsole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ModConsole.Designer.cs">
+      <DependentUpon>ModConsole.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\ModConsole.resx">
+      <DependentUpon>ModConsole.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
