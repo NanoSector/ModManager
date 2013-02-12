@@ -23,6 +23,8 @@ function mbPermissions(&$permissionGroups, &$permissionList)
 		'add' => false,
 		
 		'remove_projects' => true,
+		
+		'edit_projects' => true,
 	);
 
 	// Insert the permissions.
@@ -30,8 +32,8 @@ function mbPermissions(&$permissionGroups, &$permissionList)
 	{
 		if ($ownany)
 		{
-			$permissionList['membergroup']['mb_' . $perm . '_own'] = array(false, 'mb_classic', 'mb_simple');
 			$permissionList['membergroup']['mb_' . $perm . '_any'] = array(false, 'mb_classic', 'mb_simple');
+			$permissionList['membergroup']['mb_' . $perm . '_own'] = array(false, 'mb_classic', 'mb_simple');
 		}
 		else
 			$permissionList['membergroup']['mb_' . $perm] = array(false, 'mb_classic', 'mb_simple');

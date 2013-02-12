@@ -11,5 +11,9 @@ $txt['permissionname_mb_view_private_projects_own'] = 'View the private projects
 
 $txt['permissionname_mb_add'] = 'Add a new project';
 
-$txt['permissionname_mb_remove_project_any'] = 'Remove projects of anyone';
-$txt['permissionname_mb_remove_project_own'] = 'Remove projects of their own';
+$txt['permissionname_mb_remove_projects_any'] = 'Remove projects of anyone';
+$txt['permissionname_mb_remove_projects_own'] = 'Remove projects of their own';
+
+$txt['permissionname_mb_edit_projects_any'] = 'Edit anyones project';
+$txt['permissionname_mb_edit_projects_own'] = 'Edit their own project';
+

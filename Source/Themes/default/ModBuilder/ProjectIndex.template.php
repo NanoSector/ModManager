@@ -5,24 +5,29 @@ function template_mbViewProjects()
 {
 	global $context, $txt, $scripturl, $settings;
 	
-//	echo '<span class="subject">', sprintf($txt['mb_vp_title'], $context['mb']['username']), '</span>';
+	// Allow this user to create a project, if they can.
+	if ($context['mb']['can_create'])
+	{
+		$poll_buttons = array(
+			'vote' => array('text' => 'mb_create_project', 'lang' => true, 'url' => $scripturl . '?action=mb;sa=create', 'active' => true),
+		);
+
+		template_button_strip($poll_buttons);
+		
+		echo '<br />';
+	}
 	
 	if (!empty($context['mb']['projects']))
 	{
-		echo '
-	<table style="width: 100%">
-		<tr>';
-		
-		$i = 0;
 		$wbg = 0;
 		foreach ($context['mb']['projects'] as $index => $project)
-		{
+		{	
 			echo '
-			<td style="width:25%">
+			<div class="floatleft projbox">
 				<div class="cat_bar">
 					<h3 class="catbg">
 						<span class="floatleft">
-							<a href="', $scripturl, '?action=mb;sa=edit;project=', $project['id'], '">', $project['name'], '</a>
+							', $context['mb']['can_edit'] ? '<a href="' . $scripturl . '?action=mb;sa=edit;project=' . $project['id'] . '">' . $project['name'] . '</a>' : $project['name'], ' (v', $project['version'], ')
 						</span>';
 			
 			if ($context['mb']['can_delete_projects'])
@@ -39,30 +44,35 @@ function template_mbViewProjects()
 				<div class="windowbg', $wbg == 1 ? '2' : '', '">
 					<span class="topslice"><span></span></span>
 					<div style="padding-left:10px">
-						', $txt['mb_possible_actions'], '
+						', sprintf($txt['mb_version'], $project['version']), '<br />
+						', sprintf($txt['mb_type'], $txt['mb_type_' . $project['type']]), '<br />';
+					
+			if ($context['mb']['can_edit'])
+				echo '<br />', $txt['mb_possible_actions'], '
 						<ul>
-							<li>Test</li>
-							<li>Test</li>
-							<li>Test</li>
-							<li>Test</li>
-						</ul>
+							<li><a href="', $scripturl, '?action=mb;sa=edit;project=', $project['id'], ';area=details">', $txt['mb_action_edit'], '</a></li>
+							<li><a href="', $scripturl, '?action=mb;sa=edit;project=', $project['id'], ';area=readme">', $txt['mb_action_edit_readme'], '</a></li>
+							<li><a href="', $scripturl, '?action=mb;sa=edit;project=', $project['id'], ';area=instructions">', $txt['mb_action_edit_instructions'], '</a></li>
+							<li><a href="', $scripturl, '?action=mb;sa=compile;project=', $project['id'], '">', $txt['mb_action_compile'], '</a></li>
+						</ul>';
+						
+			echo '
 					</div>
 					<span class="botslice"><span></span></span>
 				</div>
-			</td>';
+			</div>';
 			
-			$i++;
-			if ($i == 4 && $index != count($context['mb']['projects']) - 1)
-			{
-				echo '
-		</tr>
-		<tr>';
-				$i = 0;
-			}
 			$wbg = $wbg == 1 ? 0 : 1;
 		}
 		echo '
-		</tr>
-	</table>';
+			<br class="clear" />';
 	}
+	else
+		echo '
+			<div class="cat_bar">
+				<h3 class="catbg centertext">
+					', $txt['mb_no_projects'], '
+				</h3>
+			</div>
+			<br class="clear" />';
 }
