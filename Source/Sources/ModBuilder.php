@@ -384,9 +384,12 @@ function mbAdd()
 		var mbmethod = \'create\';
 		
 		// Since this is a new project, check the autogenid thing and hide the mod ID textbox.
-		$(\'input#mod_autogenid\').prop(\'checked\', true);
-		$(\'input#mod_modid\').prop(\'disabled\', true);
-		$(\'div#mod_modid_container\').hide();
+		$(document).ready(function ()
+		{
+			$(\'input#mod_autogenid\').prop(\'checked\', true);
+			$(\'input#mod_modid\').prop(\'disabled\', true);
+			$(\'div#mod_modid_container\').hide();
+		});
 		
 		//]]>
 	</script>

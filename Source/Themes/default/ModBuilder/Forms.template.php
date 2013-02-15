@@ -43,22 +43,22 @@ function template_mb_project_settings()
 	// Mod name.
 	echo '
 					<tr>
-						<td><span id="l_mod_name"><strong>', $txt['mb']['mod_name'], '</strong></span></td>
+						<td><label for="mod_name"><span id="l_mod_name"><strong>', $txt['mb']['mod_name'], '</strong></span></label></td>
 						<td><input type="text" id="mod_name" name="mod_name" value="', $context['mb']['project']['name'], '" size="80" /></td>
 					</tr>';
 				
 	// Mod version.
 	echo '
 					<tr>
-						<td><span id="l_mod_version"><strong>', $txt['mb']['mod_version'], '</strong></span></td>
+						<td><label for="mod_version"><span id="l_mod_version"><strong>', $txt['mb']['mod_version'], '</strong></span></label></td>
 						<td><input type="text" id="mod_version" name="mod_version" value="', $context['mb']['project']['version'], '" />
 					</tr>';
 					
 	// Mod type.
 	echo '
 					<tr>
-						<td><strong>', $txt['mb']['mod_type'], '</strong></td>
-						<td><select name="mod_type">
+						<td><label for="mod_type"><strong>', $txt['mb']['mod_type'], '</strong></label></td>
+						<td><select name="mod_type" id="mod_type">
 							<option value="1"', $context['mb']['project']['type'] == 1 ? ' selected="selected"' : '', '>', $txt['mb']['type_1'], '</option>
 							<option value="2"', $context['mb']['project']['type'] == 2 ? ' selected="selected"' : '', '>', $txt['mb']['type_2'], '</option>
 						</select></td>
@@ -77,7 +77,8 @@ function template_mb_project_settings()
 						<input type="text" id="mod_id" name="mod_id" value="', $context['mb']['project']['modid'], '" maxlength="32" size="32" />
 						<button type="button" id="genmodid">', $txt['mb']['genmodid'], '</button>
 					</div>
-					<input type="checkbox" id="mod_autogenid" name="mod_id_autogen" /> ', $txt['mb']['mod_id_autogen'];
+					<input type="checkbox" id="mod_autogenid" name="mod_id_autogen" /> 
+					<label for="mod_autogenid">', $txt['mb']['mod_id_autogen'], '</label>';
 					
 	if ($context['mb']['can_transfer'])
 		echo '
