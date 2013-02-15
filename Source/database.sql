@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 11, 2013 at 11:41 PM
+-- Generation Time: Feb 15, 2013 at 12:01 PM
 -- Server version: 5.5.29-0ubuntu0.12.10.1
 -- PHP Version: 5.4.6-1ubuntu1.1
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `approval`
+-- Database: `smf`
 --
 
 -- --------------------------------------------------------
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `smf_mb_projects`
 --
 
-DROP TABLE IF EXISTS `smf_mb_projects`;
 CREATE TABLE IF NOT EXISTS `smf_mb_projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` mediumtext NOT NULL,
@@ -37,7 +36,21 @@ CREATE TABLE IF NOT EXISTS `smf_mb_projects` (
   `authorid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `smf_mb_readmes`
+--
+
+CREATE TABLE IF NOT EXISTS `smf_mb_readmes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pid` int(11) NOT NULL,
+  `text` longtext NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`,`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

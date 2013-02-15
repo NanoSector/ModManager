@@ -18,13 +18,15 @@ function mbPermissions(&$permissionGroups, &$permissionList)
 	// Permission name => any and own (true) or not (false)
 	$permissions = array(
 		'view_projects' => true,
-		'view_private_projects' => true,
 		
 		'add' => false,
 		
 		'remove_projects' => true,
 		
 		'edit_projects' => true,
+		'edit_project_instructions' => true,
+		
+		'transfer_projects' => true,
 	);
 
 	// Insert the permissions.

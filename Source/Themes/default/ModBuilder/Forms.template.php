@@ -1,7 +1,61 @@
 <?php
 
 // Mod Builder by Yoshi2889 - Forms and Inputs
-function template_mb_mod_settings()
+function template_mb_project_settings()
+{
+	global $context, $txt, $settings;
+	
+	// Show a message if we have saved.
+	if (isset($_GET['saved']))
+		echo '
+	<div class="windowbg" id="profile_success">
+		', $txt['mb']['mod_saved'], '
+	</div>';
+	
+	// Any errors, doc?
+	if (!empty($context['mb']['errors']))
+	{
+		// Unfortunately, yes...
+		echo '
+	<div class="errorbox">
+		<strong>', $txt['mb']['errors_occured'], '</strong>
+		<ul class="reset">';
+
+		foreach ($context['mb']['errors'] as $error)
+			echo '
+			<li class="error">', $txt['mb'][$error], '</li>';
+
+		echo '
+		</ul>
+	</div>';
+	}
+	
+	// Then start up our regular stuff.
+	echo '
+	<div class="cat_bar">
+		<h3 class="catbg">
+			', $context['mb']['settings_title'], '
+		</h3>
+	</div>
+	<div class="windowbg">
+		<span class="topslice"><span></span></span>
+		<div class="mbformcontent">
+			<a id="mbformadvsettings">
+				<img id="mbformadvsettings_icon" class="icon" src="', $settings['images_url'], '/expand.gif" alt="" /> 
+				<span id="mbformadvsettings_text">', $txt['mb']['advanced_options'], '</span>
+			</a>
+			<div id="mbformadvsettings_content">
+				<strong>', $txt['mb']['advanced_settings_desc'], '</strong><br />
+				<label for="mod_modid"><strong>', $txt['mb']['mod_id'], '&nbsp;</strong></label>
+				<input type="text" id="mod_modid" name="mod_modid" value="', $context['mb']['project']['modid'], '" maxlength="32" />
+				<br class="clear" />
+			</div>
+		</div>
+		<span class="botslice"><span></span></span>
+	</div>';
+}
+
+function template_mb_mod_readme()
 {
 	global $context, $txt;
 	
@@ -9,8 +63,79 @@ function template_mb_mod_settings()
 	if (isset($_GET['saved']))
 		echo '
 	<div class="windowbg" id="profile_success">
-		', $txt['mb_mod_saved'], '
+		', $txt['mb']['mod_saved'], '
 	</div>';
+	
+	// If the user wants to see how their readme looks - the preview section is where it's at!
+	if (!empty($context['mb']['previewing']))
+		echo '
+	<div id="preview_section">
+		<div class="cat_bar">
+			<h3 class="catbg">
+				<span id="preview_subject">', $txt['mb']['preview_readme'], '</span>
+			</h3>
+		</div>
+		<div class="windowbg">
+			<span class="topslice"><span></span></span>
+			<div class="content">
+					', empty($context['mb']['preview_readme']) ? $txt['mb']['readme_left_empty'] : $context['mb']['preview_readme'], '
+			</div>
+			<span class="botslice"><span></span></span>
+		</div>
+	</div><br />';
+	
+	echo '
+	<div class="cat_bar">
+		<h3 class="catbg">
+			', $context['mb']['page_title'], '
+		</h3>
+	</div>
+	<div class="windowbg">
+		<span class="topslice"><span></span></span>
+		<div class="mbformcontent">
+			<form action="', $context['mb']['post_url'], '" method="post">
+				<div id="bbcBox_message"></div>
+				<div id="smileyBox_message"></div>
+				', template_control_richedit($context['post_box_name'], 'smileyBox_message', 'bbcBox_message') . '
+				<input type="hidden" name="mod_pid" value="', $context['mb']['project']['id'], '" />
+				<div class="floatright">
+					', template_control_richedit_buttons($context['post_box_name']), '
+				</div>
+				<br class="clear" />
+			</form>
+		</div>
+		<span class="botslice"><span></span></span>
+	</div>';
+}
+
+function template_mb_flexible_settings()
+{
+	global $context, $txt;
+	
+	// Show a message if we have saved.
+	if (isset($_GET['saved']))
+		echo '
+	<div class="windowbg" id="profile_success">
+		', $txt['mb']['mod_saved'], '
+	</div>';
+	
+	// Any errors, doc?
+	if (!empty($context['mb']['errors']))
+	{
+		// Unfortunately, yes...
+		echo '
+	<div class="errorbox">
+		<strong>', $txt['mb']['errors_occured'], '</strong>
+		<ul class="reset">';
+
+		foreach ($context['mb']['errors'] as $error)
+			echo '
+			<li class="error">', $txt['mb']['' . $error], '</li>';
+
+		echo '
+		</ul>
+	</div>';
+	}
 	
 	// First show a title if we have one.
 	if (!empty($context['mb']['settings_title']))
@@ -23,7 +148,7 @@ function template_mb_mod_settings()
 	echo '
 	<div class="windowbg">
 		<span class="topslice"><span></span></span>
-		<div style="padding: 0 12%">';
+		<div class="mbformcontent">';
 		
 	// Now enter the configuration stuff.
 	if (!empty($context['mb']['config_vars']))
@@ -41,7 +166,9 @@ function template_mb_mod_settings()
 			// Show a label?
 			if (!in_array($setting[0], array('check', 'link')))
 				echo '
-						<td style="padding-right:10px"><strong>', $setting[3], '</strong></td>
+						<td style="padding-right:10px">
+							<strong>', !empty($context['mb']['mark_errors']) && empty($context['mb']['project'][$setting[1]]) ? '<span class="error">' . $setting[3] . '</span>' : $setting[3], '</strong>
+						</td>
 						<td>';
 			else
 				echo '
@@ -54,24 +181,24 @@ function template_mb_mod_settings()
 				// A checkbox?
 				case 'check':
 					echo '
-							<input type="checkbox" id="', $setting[2], '" name="', $setting[2], '"', $setting[4] ? ' checked="checked"' : '', ' /> ', $setting[3];
+							<input type="checkbox" id="', $setting[2], '" name="', $setting[2], '"', $context['mb']['project'][$setting[1]] ? ' checked="checked"' : '', ' /> ', $setting[3];
 					break;
 				case 'text':
 					echo '
-							<input type="text" id="', $setting[2], '" name="', $setting[2], '" value="', $setting[4], '"', !empty($setting[5]) ? ' size="' . $setting[5] . '"' : '', !empty($setting[6]) ? ' maxlength="' . $setting[6] . '"' : '', ' />';
+							<input type="text" id="', $setting[2], '" name="', $setting[2], '" value="', $context['mb']['project'][$setting[1]], '"', !empty($setting[4]) ? ' size="' . $setting[4] . '"' : '', !empty($setting[5]) ? ' maxlength="' . $setting[5] . '"' : '', ' />';
 					break;
 				case 'textarea':
 					echo '
-							<textarea id="', $setting[2], '" name="', $setting[2], '"', !empty($setting[5]) ? ' rows="' . $setting[5] . '"' : '', !empty($setting[6]) ? ' cols="' . $setting[6] . '"' : '', '>', $setting[4], '</textarea>';
+							<textarea id="', $setting[2], '" name="', $setting[2], '"', !empty($setting[4]) ? ' rows="' . $setting[4] . '"' : '', !empty($setting[5]) ? ' cols="' . $setting[5] . '"' : '', '>', $context['mb']['project'][$setting[1]], '</textarea>';
 					break;
 				case 'select':
 					echo '
 							<select name="', $setting[2], '">';
 							
-					foreach ($setting[5] as $option => $text)
+					foreach ($setting[4] as $option => $text)
 					{
 						echo '
-								<option value="', $option, '"', $setting[4] == $option ? ' selected="selected"' : '', '>', $text, '</option>';
+								<option value="', $option, '"', $context['mb']['project']['type'] == $option ? ' selected="selected"' : '', '>', $text, '</option>';
 					}
 					
 					echo '
@@ -103,7 +230,7 @@ function template_mb_mod_settings()
 		
 		echo '
 				<div class="floatright">
-					<input type="submit" value="', $txt['mb_mod_submit'], '" onclick="return submitThisOnce(this);" class="button_submit" />
+					<input type="submit" value="', $txt['mb']['mod_submit'], '" onclick="return submitThisOnce(this);" class="button_submit" />
 				</div>
 				<br class="clear" />
 			</form>';
@@ -118,39 +245,4 @@ function template_mb_mod_settings()
 		<span class="botslice"><span></span></span>
 	</div>
 	<br class="clear" />';
-}
-
-function template_mb_mod_readme()
-{
-	global $context, $txt;
-	
-	// Show a message if we have saved.
-	if (isset($_GET['saved']))
-		echo '
-	<div class="windowbg" id="profile_success">
-		', $txt['mb_mod_saved'], '
-	</div>';
-	
-	echo '
-	<div class="cat_bar">
-		<h3 class="catbg">
-			', $context['mb']['page_title'], '
-		</h3>
-	</div>
-	<div class="windowbg">
-		<span class="topslice"><span></span></span>
-		<div style="padding: 0 12%">
-			<form action="', $context['mb']['post_url'], '" method="post">
-				<div id="bbcBox_message"></div>
-				<div id="smileyBox_message"></div>
-				', template_control_richedit($context['post_box_name'], 'smileyBox_message', 'bbcBox_message') . '
-				<input type="hidden" name="mod_pid" value="', $context['mb']['project']['id'], '" />
-				<div class="floatright">
-					<input type="submit" value="', $txt['mb_mod_submit'], '" onclick="return submitThisOnce(this);" class="button_submit" />
-				</div>
-				<br class="clear" />
-			</form>
-		</div>
-		<span class="botslice"><span></span></span>
-	</div>';
 }
