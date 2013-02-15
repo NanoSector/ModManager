@@ -6,29 +6,26 @@ function template_mb_project_settings()
 	global $context, $txt, $settings;
 	
 	// Show a message if we have saved.
-	if (isset($_GET['saved']))
-		echo '
+	echo '
 	<div class="windowbg" id="profile_success">
 		', $txt['mb']['mod_saved'], '
 	</div>';
 	
 	// Any errors, doc?
+	echo '
+	<div class="errorbox" id="errors_container"', empty($context['mb']['errors']) ? ' style="display: none;"' : '', '>
+		<strong>', $txt['mb']['ferrors']['errors_occured'], '</strong>
+		<ul class="reset" id="form_errors">';
+		
+	// Fallback for lazy browsers.
 	if (!empty($context['mb']['errors']))
-	{
-		// Unfortunately, yes...
-		echo '
-	<div class="errorbox">
-		<strong>', $txt['mb']['errors_occured'], '</strong>
-		<ul class="reset">';
-
 		foreach ($context['mb']['errors'] as $error)
 			echo '
-			<li class="error">', $txt['mb'][$error], '</li>';
+			<li class="error">', $txt['mb']['ferrors'][$error], '</li>';
 
 		echo '
 		</ul>
 	</div>';
-	}
 	
 	// Then start up our regular stuff.
 	echo '
@@ -40,19 +37,75 @@ function template_mb_project_settings()
 	<div class="windowbg">
 		<span class="topslice"><span></span></span>
 		<div class="mbformcontent">
-			<a id="mbformadvsettings">
-				<img id="mbformadvsettings_icon" class="icon" src="', $settings['images_url'], '/expand.gif" alt="" /> 
-				<span id="mbformadvsettings_text">', $txt['mb']['advanced_options'], '</span>
-			</a>
-			<div id="mbformadvsettings_content">
-				<strong>', $txt['mb']['advanced_settings_desc'], '</strong><br />
-				<label for="mod_modid"><strong>', $txt['mb']['mod_id'], '&nbsp;</strong></label>
-				<input type="text" id="mod_modid" name="mod_modid" value="', $context['mb']['project']['modid'], '" maxlength="32" />
+			<form action="', $context['mb']['post_url'], '" method="post" id="mod_form">
+				<table>';
+			
+	// Mod name.
+	echo '
+					<tr>
+						<td><span id="l_mod_name"><strong>', $txt['mb']['mod_name'], '</strong></span></td>
+						<td><input type="text" id="mod_name" name="mod_name" value="', $context['mb']['project']['name'], '" size="80" /></td>
+					</tr>';
+				
+	// Mod version.
+	echo '
+					<tr>
+						<td><span id="l_mod_version"><strong>', $txt['mb']['mod_version'], '</strong></span></td>
+						<td><input type="text" id="mod_version" name="mod_version" value="', $context['mb']['project']['version'], '" />
+					</tr>';
+					
+	// Mod type.
+	echo '
+					<tr>
+						<td><strong>', $txt['mb']['mod_type'], '</strong></td>
+						<td><select name="mod_type">
+							<option value="1"', $context['mb']['project']['type'] == 1 ? ' selected="selected"' : '', '>', $txt['mb']['type_1'], '</option>
+							<option value="2"', $context['mb']['project']['type'] == 2 ? ' selected="selected"' : '', '>', $txt['mb']['type_2'], '</option>
+						</select></td>
+					</tr>';
+					
+	echo '
+				</table>			
+				<a id="mbformadvsettings">
+					<img id="mbformadvsettings_icon" class="icon" src="', $settings['images_url'], '/expand.gif" alt="" /> 
+					<span id="mbformadvsettings_text">', $txt['mb']['advanced_options'], '</span>
+				</a>
+				<div id="mbformadvsettings_content">
+					', $txt['mb']['advanced_settings_desc'], '<br />
+					<div id="mod_modid_container">
+						<span id="l_mod_id"><strong>', $txt['mb']['mod_id'], '&nbsp;</strong></span>
+						<input type="text" id="mod_id" name="mod_id" value="', $context['mb']['project']['modid'], '" maxlength="32" size="32" />
+						<button type="button" id="genmodid">', $txt['mb']['genmodid'], '</button>
+					</div>
+					<input type="checkbox" id="mod_autogenid" name="mod_id_autogen" /> ', $txt['mb']['mod_id_autogen'];
+					
+	if ($context['mb']['can_transfer'])
+		echo '
+					<hr />
+					<a href="', $scripturl, '?action=mb;sa=edit;area=transfer;project=', $context['mb']['project']['id'], '">', $txt['mb']['mod_transfer_ownership'], '</a>';
+					
+	echo '
+			</div>';
+				
+	if (!empty($context['mb']['hidden_config_vars']))
+	{
+		foreach ($context['mb']['hidden_config_vars'] as $hsetting)
+		{
+			echo '
+				<input type="hidden" name="', $hsetting[0], '" value="', $hsetting[1], '" />';
+		}
+	}
+	
+	echo '
+				<div class="floatright">
+					<input type="submit" class="button_submit" value="', $txt['mb']['mod_submit'], '" />
+				</div>
 				<br class="clear" />
-			</div>
+			</form>
 		</div>
 		<span class="botslice"><span></span></span>
-	</div>';
+	</div>
+	<br class="clear" />';
 }
 
 function template_mb_mod_readme()

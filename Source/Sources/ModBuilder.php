@@ -248,11 +248,11 @@ function mbAdd()
 	
 	// Set up some config vars.
 	$context['mb']['config_vars'] = array(
-		array('text', 'name', 'mod_name', $txt['mb']['mod_name'], 80),
-		array('text', 'version', 'mod_version', $txt['mb']['mod_version']),
-		array('select', 'type', 'mod_type', $txt['mb']['mod_type'], array('1' => $txt['mb']['type_1'], '2' => $txt['mb']['type_2'])),
-		array('text', 'modid', 'mod_id', $txt['mb']['mod_id'], 32, 32),
-		array('check', 'autogenmodid', 'mod_id_autogen', $txt['mb']['mod_id_autogen']),
+		array('text', 'name', 'mod_name'),
+		array('text', 'version', 'mod_version'),
+		array('select', 'type', 'mod_type'),
+		array('text', 'modid', 'mod_id'),
+		array('check', 'autogenmodid', 'mod_id_autogen'),
 	);
 	
 	// Is there data to be saved?
@@ -262,6 +262,7 @@ function mbAdd()
 		$keys = array();
 		$values = array();
 		$context['mb']['errors'] = array();
+		//die(var_dump($_POST['mod_id_autogen'], $_POST['mod_id']));
 		foreach ($context['mb']['config_vars'] as $key => $setting)
 		{
 			// Skip links.
@@ -269,7 +270,7 @@ function mbAdd()
 				continue;
 			
 			// If there is no $_POST variable for this, something is wrong.
-			if (empty($_POST[$setting[2]]))
+			if (empty($_POST[$setting[2]]) && $setting[0] != 'check')
 				$context['mb']['errors'][] = 'empty_' . $setting[2];
 			
 			// Get the type.
@@ -299,14 +300,36 @@ function mbAdd()
 				$keys,
 				$values,
 				array());
+				
+			// Grab the ID.
+			$id = $smcFunc['db_insert_id']('{db_prefix}mb_projects', 'id');
+			$url = $scripturl . '?action=mb;sa=edit;project=' . $id . ';saved';
 		
 			// And exit.
-			redirectexit('action=mb');
+			if ($context['mb']['is_ajax'])
+			{
+				echo json_encode(array('success' => $url));
+				exit;
+			}
+			else
+				redirectexit($url);
 		}
 		
 		// We do... Try to find any valid fields.
 		else
 		{
+			// Though not if we're in AJAX mode.
+			if ($context['mb']['is_ajax'])
+			{
+				$errortexts = array();
+				foreach ($context['mb']['errors'] as $error)
+				{
+					$errortexts[$error] = $txt['mb']['ferrors'][$error];
+				}
+				echo json_encode(array('error' => $errortexts));
+				exit;
+			}
+			
 			$context['mb']['project'] = array(
 				'name' => $smcFunc['htmlspecialchars']($_POST['mod_name']),
 				'version' => $smcFunc['htmlspecialchars']($_POST['mod_version']),
@@ -329,6 +352,9 @@ function mbAdd()
 			'autogenmodid' => true
 		);
 	}
+	
+	// We can't transfer projects which have yet to be created.
+	$context['mb']['can_transfer'] = false;
 	
 	// Set up the post_url.
 	$context['mb']['post_url'] = $scripturl . '?action=mb;sa=create;save';
@@ -353,29 +379,18 @@ function mbAdd()
 	<script type="text/javascript">
 		//<![CDATA[
 		
-		$(document).ready(function ()
-		{
-			$(\'#mbformadvsettings\').click(function ()
-			{	
-				if ($(\'#mbformadvsettings_content\').is(":hidden"))
-				{
-					$(\'#mbformadvsettings_content\').show(\'slow\')
-					$(\'#mbformadvsettings_text\').text(' . javascriptescape($txt['mb']['advanced_options_hide']) . ');
-					$(\'#mbformadvsettings_icon\').attr(\'src\', smf_images_url + \'/collapse.gif\');
-				}
-				else
-				{
-					$(\'#mbformadvsettings_content\').hide(\'slow\')
-					$(\'#mbformadvsettings_text\').text(' . javascriptescape($txt['mb']['advanced_options']) . ');
-					$(\'#mbformadvsettings_icon\').attr(\'src\', smf_images_url + \'/expand.gif\');
-				}
-			});
-			
-			$(\'#mbformadvsettings_content\').hide();
-		});
+		var smf_user_name = ' . javascriptescape($context['user']['name']) . ';
+		var mbtexts = ' . json_encode($txt['mb']['ferrors']) . ';
+		var mbmethod = \'create\';
+		
+		// Since this is a new project, check the autogenid thing and hide the mod ID textbox.
+		$(\'input#mod_autogenid\').prop(\'checked\', true);
+		$(\'input#mod_modid\').prop(\'disabled\', true);
+		$(\'div#mod_modid_container\').hide();
 		
 		//]]>
-	</script>';
+	</script>
+	<script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/mb/editor.js"></script>';
 }
 
 function EditModDetails()
@@ -387,11 +402,11 @@ function EditModDetails()
 	
 	// Set up some config vars.
 	$context['mb']['config_vars'] = array(
-		array('text', 'name', 'mod_name', $txt['mb']['mod_name'], 80),
-		array('text', 'version', 'mod_version', $txt['mb']['mod_version']),
-		array('select', 'type', 'mod_type', $txt['mb']['mod_type'], array('1' => $txt['mb']['type_1'], '2' => $txt['mb']['type_2'])),
-		array('text', 'modid', 'mod_id', $txt['mb']['mod_id'], 32, 32),
-		array('check', 'autogenmodid', 'mod_id_autogen', $txt['mb']['mod_id_autogen']),
+		array('text', 'name', 'mod_name'),
+		array('text', 'version', 'mod_version'),
+		array('select', 'type', 'mod_type'),
+		array('text', 'modid', 'mod_id'),
+		array('check', 'autogenmodid', 'mod_id_autogen'),
 	);
 	
 	if (allowedTo('mb_transfer_projects_any') || ($context['mb']['project']['authorid'] == $context['user']['id'] && allowedTo('mb_transfer_projects_own')))
@@ -420,7 +435,7 @@ function EditModDetails()
 				continue;
 			
 			// If there is no $_POST variable for this, something is wrong.
-			if (empty($_POST[$setting[2]]))
+			if (empty($_POST[$setting[2]]) && $setting[0] != 'check')
 				$context['mb']['errors'][] = 'empty_' . $setting[2];
 			else
 			{
@@ -457,10 +472,27 @@ function EditModDetails()
 				)));
 		
 			// And exit.
-			redirectexit('action=mb;sa=edit;project=' . $context['mb']['project']['id'] . ';saved');
+			if (!$context['mb']['is_ajax'])
+				redirectexit('action=mb;sa=edit;project=' . $context['mb']['project']['id'] . ';saved');
+			else
+			{
+				echo json_encode(array('success' => true));
+				exit;
+			}
 		}
 		else
 		{
+			if ($context['mb']['is_ajax'])
+			{
+				$errortexts = array();
+				foreach ($context['mb']['errors'] as $error)
+				{
+					$errortexts[$error] = $txt['mb']['ferrors'][$error];
+				}
+				echo json_encode(array('error' => $errortexts));
+				exit;
+			}
+			
 			// Try to save some data.
 			$context['mb']['project'] = array_merge(
 				$context['mb']['project'],
@@ -477,6 +509,9 @@ function EditModDetails()
 			$context['mb']['mark_errors'] = true;
 		}
 	}
+	
+	// Can we transfer this project?
+	$context['mb']['can_transfer'] = allowedTo('mb_transfer_projects_any') || (allowedTo('mb_transfer_projects_own') && $context['user']['id'] == $context['mb']['project']['authorid']);
 	
 	// Set up the post_url.
 	$context['mb']['post_url'] = $scripturl . '?action=mb;sa=edit;project=' . $context['mb']['project']['id'] . ';save';
@@ -498,7 +533,7 @@ function EditModDetails()
 	);
 	
 	// And set the sub template.
-	$context['sub_template'] = 'mb_mod_settings';
+	$context['sub_template'] = 'mb_project_settings';
 	
 	// And our page title.
 	$context['page_title'] = $context['mb']['settings_title'];
@@ -508,29 +543,27 @@ function EditModDetails()
 	<script type="text/javascript">
 		//<![CDATA[
 		
+			var smf_user_name = ' . javascriptescape($context['user']['name']) . ';
+			var mbtexts = ' . json_encode($txt['mb']['ferrors']) . ';
+			var mbpid = ' . javascriptescape($context['mb']['project']['id']) . ';
+			var mbmethod = \'edit\';';
+	
+	if (!empty($context['mb']['project']['autogenmodid']))
+		$context['html_headers'] .= '
 		$(document).ready(function ()
 		{
-			$(\'#mbformadvsettings\').click(function ()
-			{	
-				if ($(\'#mbformadvsettings_content\').is(":hidden"))
-				{
-					$(\'#mbformadvsettings_content\').show(\'slow\')
-					$(\'#mbformadvsettings_text\').text(' . javascriptescape($txt['mb']['advanced_options_hide']) . ');
-					$(\'#mbformadvsettings_icon\').attr(\'src\', \'' . $settings['images_url'] . '/collapse.gif\');
-				}
-				else
-				{
-					$(\'#mbformadvsettings_content\').hide(\'slow\')
-					$(\'#mbformadvsettings_text\').text(' . javascriptescape($txt['mb']['advanced_options']) . ');
-					$(\'#mbformadvsettings_icon\').attr(\'src\', \'' . $settings['images_url'] . '/expand.gif\');
-				}
-			});
-			
-			$(\'#mbformadvsettings_content\').hide();
-		});
+			$(\'input#mod_autogenid\').prop(\'checked\', true);
+			$(\'div#mod_modid_container\').hide();
+		});';
 		
+	if (isset($_GET['saved']))
+		$context['html_headers'] .= '
+		var is_saved = true;';
+		
+	$context['html_headers'] .= '
 		//]]>
-	</script>';
+	</script>
+	<script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/mb/editor.js"></script>';
 }
 
 function EditModReadme()

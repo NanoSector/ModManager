@@ -35,6 +35,8 @@ $txt['mb']['mod_id_autogen'] = 'Automatically generate mod ID on save?';
 $txt['mb']['mod_transfer_ownership'] = 'Transfer ownership of this project...';
 $txt['mb']['advanced_options'] = 'Show advanced options for this project';
 $txt['mb']['advanced_options_hide'] = 'Hide advanced options for this project';
+$txt['mb']['advanced_settings_desc'] = 'Do not change this options unless you know what you are doing.';
+$txt['mb']['genmodid'] = 'Generate mod ID';
 
 // Editor - Readme
 $txt['mb']['create_readme'] = 'Creating readme for mod "%s"';
@@ -49,10 +51,11 @@ $txt['mb']['mod_saved'] = 'Your changes have been saved.';
 $txt['mb']['is_sure'] = 'Are you sure?';
 
 // Editor - Errors
-$txt['mb']['errors_occured'] = 'The following errors occured while saving the project:';
-$txt['mb']['empty_mod_name'] = 'The mod name was left empty.';
-$txt['mb']['empty_mod_version'] = 'The mod version was left empty.';
-$txt['mb']['empty_mod_id'] = 'The mod ID was left empty.';
+$txt['mb']['ferrors']['errors_occured'] = 'The following errors occured while saving the project:';
+$txt['mb']['ferrors']['empty_mod_name'] = 'The mod name was left empty.';
+$txt['mb']['ferrors']['empty_mod_version'] = 'The mod version was left empty.';
+$txt['mb']['ferrors']['empty_mod_id'] = 'The mod ID was left empty.';
+$txt['mb']['ferrors']['invalid_mod_id'] = 'The mod ID is invalid.';
 
 // Transfer Ownership - General
 $txt['mb']['transfer_ownership'] = 'Transfer Ownership of a Project';

@@ -48,7 +48,7 @@ function template_mbViewProjects()
 			if ($context['mb']['can_delete_projects'])
 				echo '
 						<span class="floatright">
-							<a href="#" onclick="removeProject(', $project['id'], ')">
+							<a onclick="removeProject(', $project['id'], ')">
 								<img src="', $settings['default_images_url'], '/icons/delete.gif" alt="" />
 							</a>
 						</span>';
