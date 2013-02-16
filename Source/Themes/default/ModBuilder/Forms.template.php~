@@ -99,6 +99,7 @@ function template_mb_project_settings()
 	
 	echo '
 				<div class="floatright">
+					<span id="form_sload"><img class="icon" src="', $settings['images_url'], '/mb_sloading.gif" alt="" /></span>
 					<input type="submit" class="button_submit" value="', $txt['mb']['mod_submit'], '" />
 				</div>
 				<br class="clear" />

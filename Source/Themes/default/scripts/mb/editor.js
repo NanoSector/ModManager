@@ -31,52 +31,6 @@ $(document).ready(function ()
 		$('input#mod_id').val(modid);
 	}
 			
-	function mbValidateForm()
-	{
-		$('ul#form_errors').empty();
-		if ($('input#mod_name').val() === "")
-		{
-			$('ul#form_errors').append('<li class="error">' + mbtexts.empty_mod_name + '</li>');
-			$('span#l_mod_name').addClass('error');
-		}
-		else
-			$('span#l_mod_name').removeClass('error');
-				if ($('input#mod_version').val() === "")
-		{
-			$('ul#form_errors').append('<li class="error">' + mbtexts.empty_mod_version + '</li>');
-			$('span#l_mod_version').addClass('error');
-		}
-		else
-			$('span#l_mod_version').removeClass('error');
-		
-		var modid = $('input#mod_id').val();
-		var gmodid = $('input#mod_autogenid').is(':checked');
-		if (!gmodid && modid !== "" && (modid[modid.length - 1] === ":" || modid.indexOf(':') === -1))
-		{
-			$('ul#form_errors').append('<li class="error">' + mbtexts.invalid_mod_id + '</li>');
-			$('span#l_mod_id').addClass('error');
-		}
-		
-		if (modid === "" && !gmodid)
-		{
-			$('ul#form_errors').append('<li class="error">' + mbtexts.empty_mod_id + '</li>');
-			$('span#l_mod_id').addClass('error');
-		}
-		else if (!gmodid)
-			$('span#l_mod_id').removeClass('error');
-			
-		if ($('ul#form_errors').html() !== "")
-		{
-			$('div#errors_container').show('slow');
-			return false;
-		}
-		else
-		{
-			$('div#errors_container').hide('fast');
-			return true;
-		}
-	}
-			
 	$('#mod_autogenid').change(function ()
 	{
 		if (this.checked === false)
@@ -103,8 +57,7 @@ $(document).ready(function ()
 			
 		event.preventDefault();
 		
-		//if (mbValidateForm() === false)
-		//	return false;
+		$('#form_sload').show();
 		
 		if (mbmethod === 'edit')
 			$.post(
@@ -130,6 +83,8 @@ $(document).ready(function ()
 							$('#profile_success').fadeOut('slow');
 						}, 5000);
 					}
+						
+					$('#form_sload').hide();
                 		},
                 		'json'
 			);
@@ -151,14 +106,12 @@ $(document).ready(function ()
 					}
 					else if (typeof data.success != 'undefined')
 						window.location = data.success;
+						
+					$('#form_sload').hide();
 				},
 				'json'
 			);
 	});
-	
-	// Loose JS bits.	
-	$('#mbformadvsettings_content').hide();
-	$('#profile_success').hide();
 	
 	if ($('#profile_success').length !== 0 && typeof is_saved != 'undefined')
 	{

@@ -7,7 +7,7 @@ function template_mb_project_settings()
 	
 	// Show a message if we have saved.
 	echo '
-	<div class="windowbg" id="profile_success">
+	<div class="windowbg" id="profile_success" style="display: none;">
 		', $txt['mb']['mod_saved'], '
 	</div>';
 	
@@ -70,7 +70,7 @@ function template_mb_project_settings()
 					<img id="mbformadvsettings_icon" class="icon" src="', $settings['images_url'], '/expand.gif" alt="" /> 
 					<span id="mbformadvsettings_text">', $txt['mb']['advanced_options'], '</span>
 				</a>
-				<div id="mbformadvsettings_content">
+				<div id="mbformadvsettings_content" style="display: none;">
 					', $txt['mb']['advanced_settings_desc'], '<br />
 					<div id="mod_modid_container">
 						<span id="l_mod_id"><strong>', $txt['mb']['mod_id'], '&nbsp;</strong></span>
@@ -99,6 +99,7 @@ function template_mb_project_settings()
 	
 	echo '
 				<div class="floatright">
+					<span id="form_sload" class="icon" style="display: none;"><img src="', $settings['images_url'], '/mb_sloading.gif" alt="" /></span>
 					<input type="submit" class="button_submit" value="', $txt['mb']['mod_submit'], '" />
 				</div>
 				<br class="clear" />
