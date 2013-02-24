@@ -103,7 +103,7 @@ function ViewProjects()
 	while ($tproject = $smcFunc['db_fetch_assoc']($result))
 	{
 		// Add it up
-		$context['mb']['projects'][] = $tproject;
+		$context['mb']['projects'][$tproject['id']] = $tproject;
 	}
 	
 	// Free the result.
@@ -159,27 +159,11 @@ function ViewProjects()
 	$context['html_headers'] .= '
 	<script type="text/javascript">
 		//<![CDATA[
-		function removeProject(pid)
-		{
-			var agr = confirm(' . javascriptescape($txt['mb']['really_delete_project']) . ');
-			
-			if (agr)
-			{
-				$.ajax(smf_scripturl + \'?action=mb;sa=remove;project=\' + pid + \';mb_ajax\',
-				{
-					dataType: "json",
-					success: function (response)
-					{
-						if (typeof response.error != \'undefined\')
-							alert(response.error);
-						else
-							$(\'div#proj_\' + pid).hide(\'slow\');
-					}
-				});
-			}
-		}
+		var mbtexts = ' . json_encode(array('really_delete_project' => $txt['mb']['really_delete_project'])) . ';
+		var mbprojects = ' . json_encode(array_keys($context['mb']['projects'])) . ';
 		//]]>
-	</script>';
+	</script>
+	<script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/mb/projects.js"></script>';
 }
 
 // Edit a project.

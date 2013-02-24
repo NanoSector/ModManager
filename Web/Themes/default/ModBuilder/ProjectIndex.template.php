@@ -48,7 +48,7 @@ function template_mbViewProjects()
 			if ($context['mb']['can_delete_projects'])
 				echo '
 						<span class="floatright">
-							<a onclick="removeProject(', $project['id'], ')">
+							<a id="rem_proj_', $project['id'], '">
 								<img src="', $settings['default_images_url'], '/icons/delete.gif" alt="" />
 							</a>
 						</span>';
@@ -80,22 +80,19 @@ function template_mbViewProjects()
 			$wbg = $wbg == 1 ? 0 : 1;
 		}
 		echo '
-			<br class="clear" />';
+			<br class="clear" id="proj_clear" />';
 	}
-	else
-	{
-		echo '
-			<div class="cat_bar">
+	echo '
+			<div class="cat_bar" id="no_projects" style="display: none;">
 				<h3 class="catbg centertext">';
 				
-		if ($context['mb']['current_user'] == $context['user']['id'])
-			echo sprintf($txt['mb']['no_projects_personal'], ($context['mb']['can_create'] ? '<a href="' . $scripturl . '?action=mb;sa=create">' . $txt['mb']['create_project'] . '</a>' : ''));
-		else
-			echo $txt['mb']['no_projects'];
+	if ($context['mb']['current_user'] == $context['user']['id'])
+		echo sprintf($txt['mb']['no_projects_personal'], ($context['mb']['can_create'] ? '<a href="' . $scripturl . '?action=mb;sa=create">' . $txt['mb']['create_project'] . '</a>' : ''));
+	else
+		echo $txt['mb']['no_projects'];
 			
-		echo '
+	echo '
 				</h3>
 			</div>
 			<br class="clear" />';
-	}
 }
