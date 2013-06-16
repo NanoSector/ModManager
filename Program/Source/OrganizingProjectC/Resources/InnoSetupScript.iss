@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Mod Builder"
-#define MyAppVersion "1.1.3"
+#define MyAppVersion "1.2"
 #define MyAppPublisher "Yoshi2889"
 #define MyAppURL "http://map3forum.tk"
 #define MyAppExeName "ModBuilder.exe"
@@ -22,8 +22,8 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\SMF Mod Builder
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\Resources\LICENSE.TXT
-InfoBeforeFile=C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\Resources\INFO.TXT
+;LicenseFile="C:\Users\Rick\My Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\Resources\LICENSE.TXT"
+;InfoBeforeFile="C:\Users\Rick\My Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\Resources\INFO.TXT"
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
@@ -36,14 +36,14 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Release\ModBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Release\Ionic.Zip.dll"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\ModBuilder.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Debug\ModBuilder.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Source\OrganizingProjectC\bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\ModBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\Ionic.Zip.dll"; DestDir: "{app}"; Flags: ignoreversion
+;Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Debug\ModBuilder.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+;Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Debug\ModBuilder.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

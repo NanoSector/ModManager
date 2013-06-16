@@ -44,6 +44,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.testInstruction = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -97,6 +98,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.testInstruction);
             this.panel1.Controls.Add(this.optionalCheck);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button2);
@@ -238,6 +240,17 @@
             this.panel2.Size = new System.Drawing.Size(849, 35);
             this.panel2.TabIndex = 10;
             // 
+            // testInstruction
+            // 
+            this.testInstruction.Dock = System.Windows.Forms.DockStyle.Right;
+            this.testInstruction.Location = new System.Drawing.Point(555, 0);
+            this.testInstruction.Name = "testInstruction";
+            this.testInstruction.Size = new System.Drawing.Size(126, 26);
+            this.testInstruction.TabIndex = 5;
+            this.testInstruction.Text = "Test instruction";
+            this.testInstruction.UseVisualStyleBackColor = true;
+            this.testInstruction.Click += new System.EventHandler(this.testInstruction_Click);
+            // 
             // addInstruction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -248,6 +261,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "addInstruction";
             this.Text = "Add/edit an instruction";
+            this.Load += new System.EventHandler(this.addInstruction_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -280,5 +294,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button testInstruction;
     }
 }

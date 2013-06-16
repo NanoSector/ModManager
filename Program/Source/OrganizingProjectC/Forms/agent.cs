@@ -16,7 +16,7 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.1.3";
+        string mbversion = "1.2";
 
         string dlfilename;
         APIs.Notify message = new APIs.Notify();
@@ -44,6 +44,7 @@ namespace ModBuilder
             // Check for updates, if set to do so.
             if (Properties.Settings.Default.autoCheckUpdates)
                 checkUpdate(false);
+
         }
 
         private void editProjectButton_Click(object sender, EventArgs e)
@@ -92,11 +93,13 @@ namespace ModBuilder
             me.genPkgID.Checked = true;
             me.includeModManLine.Checked = true;
 
+            me.authorName.Text = Properties.Settings.Default.idUsername;
+
             // Show the instance.
             me.Show();
         }
 
-        private void repairProject_Click(object sender, EventArgs e)
+        private void repairAProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Start a new Folder Browser Dialog.
             FolderBrowserDialog fb = new FolderBrowserDialog();
@@ -166,31 +169,13 @@ namespace ModBuilder
                 // Close the loadProject dialog.
                 lp.Close();
             }
-
         }
 
-        private void createProjectFromPackage_Click(object sender, EventArgs e)
+        private void convertAPackageToAProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // !WIP!
             Forms.convertProject cp = new Forms.convertProject();
             cp.Show();
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(dlfilename) && File.Exists(dlfilename))
-            {
-                DialogResult res = message.question("Do you want to start the updater now? This will close Mod Manager, save any open projects.", MessageBoxButtons.YesNo);
-
-                if (res == DialogResult.Yes)
-                {
-                    System.Diagnostics.Process.Start(dlfilename);
-                    Close();
-                }
-                return;
-            }
-
-            checkUpdate();
         }
 
         private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -210,8 +195,8 @@ namespace ModBuilder
                 Close();
             }
 
-            linkLabel2.Text = "Update pending...";
-            Size = new Size(Size.Width, 264);
+            checkForUpdatesToolStripMenuItem.Text = "Update pending...";
+            Size = new Size(Size.Width, 173);
         }
 
         private void checkUpdate(bool throwMessage = true)
@@ -229,24 +214,14 @@ namespace ModBuilder
                 // Compare the versions.
                 int status = mver.CompareTo(lmver);
 
-                if (status > 0 || status == 0)
+                if (status >= 0)
                 {
                     // If we are running in silent mode, skip this message.
                     if (throwMessage)
-                    {
-                        DialogResult result = message.information("You are using the latest version of Mod Manager. Should Mod Manager automatically check for updates on each startup?", MessageBoxButtons.YesNoCancel);
-
-                        if (DialogResult == DialogResult.Yes)
-                            Properties.Settings.Default.autoCheckUpdates = true;
-                        else if (DialogResult == DialogResult.No)
-                            Properties.Settings.Default.autoCheckUpdates = false;
-
-                        // Save settings!
-                        Properties.Settings.Default.Save();
-                    }
+                        message.information("You are using the latest version of Mod Manager.");
                     return;
                 }
-                else if (status < 0)
+                else
                 {
                     DialogResult result = message.question("A new version (" + lver + ") of Mod Manager has been released. Do you want to download the update?", MessageBoxButtons.YesNo);
 
@@ -269,7 +244,7 @@ namespace ModBuilder
                             return;
 
                         // Rezise the form a bit :)
-                        Size = new Size(Size.Width, 325);
+                        Size = new Size(Size.Width, 236);
 
                         // Start downloading! DLUpdateCompleted will take over once it's done.
                         client.DownloadFileCompleted += new AsyncCompletedEventHandler(DLUpdateCompleted);
@@ -288,7 +263,12 @@ namespace ModBuilder
             }
         }
 
-        private void supportLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            message.information("Mod Builder, a tool to help you create modifications for SMF (Simple Machines Forum).\nSMF is © Simple Machines, http://simplemachines.org/ \n Mod Builder is © Rick \"Yoshi2889\" Kerkhof");
+        }
+
+        private void supportToolstripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -298,6 +278,29 @@ namespace ModBuilder
             {
                 System.Diagnostics.Process.Start("iexplore", "http://goo.gl/WYQxf");
             }
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(dlfilename) && File.Exists(dlfilename))
+            {
+                DialogResult res = message.question("Do you want to start the updater now? This will close Mod Manager, save any open projects.", MessageBoxButtons.YesNo);
+
+                if (res == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(dlfilename);
+                    Close();
+                }
+                return;
+            }
+
+            checkUpdate();
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Options op = new Options();
+            op.ShowDialog();
         }
     }
 }

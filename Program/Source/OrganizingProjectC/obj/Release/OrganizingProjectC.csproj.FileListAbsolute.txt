@@ -49,3 +49,4 @@ C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\obj\
 C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\obj\Release\ModBuilder.TrustInfo.xml
 C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\obj\Release\ModBuilder.exe.manifest
 C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\obj\Release\ModBuilder.application
+C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\obj\Release\ModBuilder.Forms.Options.resources

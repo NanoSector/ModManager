@@ -36,7 +36,6 @@ namespace ModBuilder.Forms
 
         public void endMeasureTime()
         {
-            System.Threading.Thread.Sleep(1000);
             DateTime elapsedTime = DateTime.Now;
             var measuredTime = (starttime - elapsedTime).TotalSeconds;
             Message("Took " + measuredTime + " seconds");

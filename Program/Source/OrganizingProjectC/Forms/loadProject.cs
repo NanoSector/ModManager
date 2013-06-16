@@ -11,11 +11,13 @@ using System.IO;
 using System.Xml;
 using System.Data.SQLite;
 using ModBuilder.Forms;
+using ModBuilder.APIs;
 
 namespace ModBuilder
 {
     public partial class loadProject : Form
     {
+        ModBuilder.APIs.Notify message = new ModBuilder.APIs.Notify();
         public loadProject()
         {
             InitializeComponent();
@@ -33,45 +35,46 @@ namespace ModBuilder
             // Open up a new mod console.
             modConsole mc = new modConsole();
 
-            // Try to parse the package_info.xml.
-            XmlDocument doc = new XmlDocument();
-            doc.Load(dir + "/Package/package-info.xml");
-
-            // Post.
-            mc.Message("package-info.xml has been detected. Parsing data...");
-
-            // Read it!
             #region Boring XML parsing
-            foreach (XmlNode l_packageNode in doc.LastChild.ChildNodes)
+            // Try to parse the package_info.xml.
+            XmlTextReader xmldoc = new XmlTextReader(dir + "/Package/package-info.xml");
+            xmldoc.DtdProcessing = DtdProcessing.Ignore;
+            while (xmldoc.Read())
             {
-                Console.WriteLine("Test node name: " + l_packageNode.Name);
-                Console.WriteLine("Test value: " + l_packageNode.InnerText);
-                switch (l_packageNode.Name)
+                if (xmldoc.NodeType.Equals(XmlNodeType.Element))
                 {
-                    case "id":
-                        string mid = l_packageNode.InnerText;
-                        me.modID.Text = mid;
+                    switch (xmldoc.LocalName)
+                    {
+                        case "id":
+                            string mid = xmldoc.ReadElementContentAsString();
+                            me.modID.Text = mid;
 
-                        // Determine the mod author.
-                        string[] pieces = mid.Split(':');
-                        me.authorName.Text = pieces[0];
-                        mc.Message("Found and inserted ID and author.");
-                        break;
-                    case "name":
-                        me.modName.Text = l_packageNode.InnerText;
-                        break;
-                    case "version":
-                        me.modVersion.Text = l_packageNode.InnerText;
-                        break;
-                    case "type":
-                        if (l_packageNode.InnerText == "modification")
-                            me.modType.SelectedItem = "Modification";
-                        else
-                            me.modType.SelectedItem = "Avatar pack";
-                        break;
-                    case "install":
-                        me.modCompatibility.Text = l_packageNode.Attributes["for"].Value;
-                        break;
+                            // Determine the mod author.
+                            string[] pieces = mid.Split(':');
+                            me.authorName.Text = pieces[0];
+                            mc.Message("Found and inserted ID and author.");
+                            break;
+
+                        case "name":
+                            me.modName.Text = xmldoc.ReadElementContentAsString();
+                            break;
+
+                        case "version":
+                            me.modVersion.Text = xmldoc.ReadElementContentAsString();
+                            break;
+
+                        case "type":
+                            if (xmldoc.ReadElementContentAsString() == "modification")
+                                me.modType.SelectedItem = "Modification";
+                            else
+                                me.modType.SelectedItem = "Avatar pack";
+                            break;
+
+                        case "install":
+                            me.modCompatibility.Text = xmldoc.GetAttribute("for");
+                            
+                            break;
+                    }
                 }
             }
             #endregion
@@ -109,12 +112,12 @@ namespace ModBuilder
             if (!File.Exists(dir + "/data.sqlite"))
             {
                 mc.Message("Unable to read data.sqlite; File not found.");
-                MessageBox.Show("A required database was not found in your project. It will now be created.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.information("A required database file was not found in your project. It will now be generated. Your instructions and extraction instructions will be lost.");
 
                 me.generateSQL(dir);
                 mc.Message("A new database has been generated.");
 
-                MessageBox.Show("A database file has been successfully created.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                message.information("A new database file was successfully generated. The project will now be loaded.");
             }
 
             mc.Message("Setting environment variables.");
@@ -136,7 +139,7 @@ namespace ModBuilder
             // Checks.
             if (!me.settings.ContainsKey("ignoreInstructions") || !me.settings.ContainsKey("autoGenerateModID") || !me.settings.ContainsKey("includeModManLine"))
             {
-                MessageBox.Show("Your project does not contain all the required settings; please try to repair your project.", "Loading project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                message.error("Your project does not include all the required settings. Please try to repair your project and try again.");
                 me.conn.Close();
                 return false;
             }

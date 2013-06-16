@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.IO;
 
 namespace ModBuilder
 {
@@ -17,6 +18,8 @@ namespace ModBuilder
         private SQLiteConnection co;
         private modEditor me;
         int editing = 0;
+
+        APIs.Notify message = new APIs.Notify();
 
         // Loads and sets up the environment.
         public addInstruction(string workingDirectory, SQLiteConnection conn, int editing, modEditor mode)
@@ -165,6 +168,38 @@ namespace ModBuilder
                 before.Text = "";
                 before.Enabled = false;
             }
+        }
+
+        private void testInstruction_Click(object sender, EventArgs e)
+        {
+            string path = Properties.Settings.Default.smfPath;
+            string file = (filePrefix.SelectedItem + "/" + fileEdited.Text).Replace("$boarddir", path).Replace("$sourcedir", path + "/Sources").Replace("$themedir", path + "/Themes").Replace("$languagedir", path + "/Themes/default/languages").Replace("$avatardir", path + "/Avatars").Replace("$imagesdir", path + "/Themes/default/images");
+            if (!File.Exists(file))
+            {
+                message.warning("The specified file was not found. This instruction will NOT successfully be executed.");
+                return;
+            }
+
+            if (method.SelectedItem.ToString() != "At the end of file")
+            {
+                // If it exists...read it.
+                string contents = File.ReadAllText(file);
+
+                // Try to find the before text in the mess.
+                if (contents.IndexOf(before.Text) == -1)
+                {
+                    message.warning("The text to search for was not found. The instruction will NOT be successfully executed.");
+                    return;
+                }
+            }
+
+            message.information("The instruction should successfully be executed upon installation.");
+        }
+
+        private void addInstruction_Load(object sender, EventArgs e)
+        {
+            if (!Directory.Exists(Properties.Settings.Default.smfPath))
+                testInstruction.Enabled = false;
         }
     }
 }

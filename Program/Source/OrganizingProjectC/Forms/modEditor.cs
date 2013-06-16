@@ -392,19 +392,35 @@ namespace ModBuilder
                     // Grab the data.
                     if (hasConn)
                     {
-                        string sql = "SELECT id, before, after, type, file, optional FROM instructions";
+                        string sql = "SELECT id, before, after, type, file, optional FROM instructions ORDER BY file";
                         SQLiteCommand command = new SQLiteCommand(sql, conn);
                         SQLiteDataReader reader = command.ExecuteReader();
 
+                        string lastfile = "";
+                        string file = "";
+                        bool hasstarted = false;
                         while (reader.Read())
                         {
-                            writer.WriteStartElement("file");
-                            writer.WriteAttributeString("name", Convert.ToString(reader["file"]));
+                            if (string.IsNullOrEmpty(lastfile))
+                                lastfile = file;
+                            file = Convert.ToString(reader["file"]);
 
-                            if (Convert.ToInt32(reader["optional"]) == 1)
-                                writer.WriteAttributeString("error", "skip");
+                            if (lastfile != file && Properties.Settings.Default.groupInstructions)
+                            {
+                                if (hasstarted)
+                                    writer.WriteEndElement();
+                                writer.WriteStartElement("file");
+                                writer.WriteAttributeString("name", file);
+                            }
+                            else if (!Properties.Settings.Default.groupInstructions)
+                            {
+                                writer.WriteStartElement("file");
+                                writer.WriteAttributeString("name", file);
+                            }
 
                             writer.WriteStartElement("operation");
+                            if (Convert.ToInt32(reader["optional"]) == 1)
+                                writer.WriteAttributeString("error", "skip");
 
                             writer.WriteStartElement("search");
                             string fintype = "";
@@ -430,15 +446,23 @@ namespace ModBuilder
                             writer.WriteAttributeString("position", fintype);
                             if (fintype != "end")
                             {
-                                writer.WriteCData(Convert.ToString(reader["before"]));
+                                writer.WriteRaw("<![CDATA[" + Convert.ToString(reader["before"]).Replace("]]>", "]]]]><![CDATA[>") + "]]>");
                             }
+                            // search end
                             writer.WriteEndElement();
 
                             writer.WriteStartElement("add");
-                            writer.WriteCData(Convert.ToString(reader["after"]));
+                            writer.WriteRaw("<![CDATA[" + Convert.ToString(reader["after"]).Replace("]]>", "]]]]><![CDATA[>") + "]]>");
                             writer.WriteEndElement();
+
+                            // operation end
                             writer.WriteEndElement();
-                            writer.WriteEndElement();
+
+                            if (!Properties.Settings.Default.groupInstructions)
+                                writer.WriteEndElement();
+
+                            lastfile = file;
+                            hasstarted = true;
                         }
                     }
 
@@ -956,7 +980,7 @@ namespace ModBuilder
         {
             if (!Directory.Exists(workingDirectory) || !Directory.Exists(workingDirectory + "/Package") || !Directory.Exists(workingDirectory + "/Source"))
             {
-                message.error("Unable to compile project. Try saving it.", MessageBoxButtons.OK);
+                message.error("Unable to compile project because not all required files are in place. Please save your project and try again.", MessageBoxButtons.OK);
                 return;
             }
 
@@ -970,7 +994,6 @@ namespace ModBuilder
             sf.InitialDirectory = workingDirectory;
             sf.CheckFileExists = false;
             sf.CheckPathExists = true;
-
             sf.ShowDialog();
 
             if (string.IsNullOrEmpty(sf.FileName))
@@ -979,15 +1002,19 @@ namespace ModBuilder
             // Start the ZIP process.
             using (ZipFile zip = new ZipFile())
             {
-                //zip.CompressionMethod = CompressionMethod.Deflate;
-                //zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Level0;
-                //zip.UseZip64WhenSaving = Zip64Option.Always;
+                if (Properties.Settings.Default.bypassArchiveError)
+                {
+                    zip.CompressionMethod = CompressionMethod.Deflate;
+                    zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Level0;
+                    zip.UseZip64WhenSaving = Zip64Option.Always;
+                }
 
                 // Add the Package directory to the root of the ZIP file.
                 zip.AddDirectory(workingDirectory + "/Package");
 
                 // Then add the Source directory to the files directory of the ZIP file.
-                zip.AddDirectory(workingDirectory + "/Source", "files");
+                if (Directory.GetFiles(workingDirectory + "/Source").Length != 0)
+                    zip.AddDirectory(workingDirectory + "/Source", "files");
 
                 // Now we can save the ZIP.
                 zip.Save(sf.FileName);
