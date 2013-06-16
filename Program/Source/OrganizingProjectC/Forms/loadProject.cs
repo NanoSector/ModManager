@@ -77,6 +77,7 @@ namespace ModBuilder
                     }
                 }
             }
+            xmldoc.Close();
             #endregion
 
             mc.Message("package-info.xml parsed. Reading files.");
