@@ -169,6 +169,14 @@ namespace ModBuilder
                 return false;
             }
 
+            // Grab the amount of instructions.
+            string csql = "SELECT count(id) FROM instructions";
+            SQLiteCommand ccommand = new SQLiteCommand(csql, conn);
+            SQLiteDataReader creader = ccommand.ExecuteReader();
+            creader.Read();
+
+            int numinst = Convert.ToInt32(creader[0]);
+
             mc.Message("All strings filled. Updating settings.");
 
             #region Update settings
@@ -266,7 +274,7 @@ namespace ModBuilder
                 }
 
                 // And installation XML.
-                if (!ignoreInstructions.Checked)
+                if (!ignoreInstructions.Checked && numinst != 0)
                     writer.WriteElementString("modification", "install.xml");
 
                 // If we have a custom install code text thing entered, now's the time to add it.
@@ -303,7 +311,7 @@ namespace ModBuilder
                 writer.WriteStartElement("uninstall");
                 writer.WriteAttributeString("for", modCompatibility.Text);
 
-                if (!ignoreInstructions.Checked)
+                if (!ignoreInstructions.Checked && numinst != 0)
                 {
                     writer.WriteStartElement("modification");
                     writer.WriteAttributeString("reverse", "true");
@@ -362,12 +370,7 @@ namespace ModBuilder
             {
                 mc.Message("Attempting to build install.xml");
 
-                string csql = "SELECT count(id) FROM instructions";
-                SQLiteCommand ccommand = new SQLiteCommand(csql, conn);
-                SQLiteDataReader creader = ccommand.ExecuteReader();
-                creader.Read();
-
-                if (Convert.ToInt32(creader[0]) != 0)
+                if (numinst != 0)
                 {
                     using (FileStream fileStream = new FileStream(workingDirectory + "/Package/install.xml", FileMode.Create))
                     using (StreamWriter sw = new StreamWriter(fileStream))
