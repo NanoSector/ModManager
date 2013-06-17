@@ -33,6 +33,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.after = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.testInstruction = new System.Windows.Forms.Button();
             this.optionalCheck = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -44,7 +45,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.testInstruction = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -109,6 +109,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(849, 26);
             this.panel1.TabIndex = 4;
+            // 
+            // testInstruction
+            // 
+            this.testInstruction.Dock = System.Windows.Forms.DockStyle.Right;
+            this.testInstruction.Location = new System.Drawing.Point(555, 0);
+            this.testInstruction.Name = "testInstruction";
+            this.testInstruction.Size = new System.Drawing.Size(126, 26);
+            this.testInstruction.TabIndex = 5;
+            this.testInstruction.Text = "Test instruction";
+            this.testInstruction.UseVisualStyleBackColor = true;
+            this.testInstruction.Click += new System.EventHandler(this.testInstruction_Click);
             // 
             // optionalCheck
             // 
@@ -239,17 +250,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(849, 35);
             this.panel2.TabIndex = 10;
-            // 
-            // testInstruction
-            // 
-            this.testInstruction.Dock = System.Windows.Forms.DockStyle.Right;
-            this.testInstruction.Location = new System.Drawing.Point(555, 0);
-            this.testInstruction.Name = "testInstruction";
-            this.testInstruction.Size = new System.Drawing.Size(126, 26);
-            this.testInstruction.TabIndex = 5;
-            this.testInstruction.Text = "Test instruction";
-            this.testInstruction.UseVisualStyleBackColor = true;
-            this.testInstruction.Click += new System.EventHandler(this.testInstruction_Click);
             // 
             // addInstruction
             // 

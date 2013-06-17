@@ -16,6 +16,7 @@ namespace ModBuilder.Forms
         modEditor me;
         SQLiteConnection conn;
         int editing;
+        APIs.Notify message = new APIs.Notify();
         public addDeletionInstructionDialog(string workingDirectory, modEditor me, SQLiteConnection conn, int editing)
         {
             InitializeComponent();
@@ -57,16 +58,6 @@ namespace ModBuilder.Forms
             }
         }
 
-        private void whatIs_Dir_CheckedChanged(object sender, EventArgs e)
-        {
-            whatIs_File.Checked = false;
-        }
-
-        private void whatIs_File_CheckedChanged(object sender, EventArgs e)
-        {
-            whatIs_Dir.Checked = false;
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
@@ -76,19 +67,21 @@ namespace ModBuilder.Forms
         {
             if (string.IsNullOrEmpty(fileName.Text) || string.IsNullOrEmpty(filePrefix.SelectedItem.ToString()))
             {
-                MessageBox.Show("You did not fill in all fields; all fields are required.", "Saving instruction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                message.warning("You did not fill in all fields; all fields are required.");
+                return;
+            }
+
+            if (whatIs_Dir.Checked == false && whatIs_File.Checked == false)
+            {
+                message.error("Please select the type of the item you want to delete before continuing.");
                 return;
             }
 
             string sql;
             if (editing == 0)
-            {
                 sql = "INSERT INTO files_delete(id, file_name, type) VALUES(null, @fileName, @type)";
-            }
             else
-            {
                 sql = "UPDATE files_delete SET file_name = @fileName, type = @type WHERE id = @editing";
-            }
 
             string type = "";
             if (whatIs_Dir.Checked == true)

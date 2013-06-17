@@ -16,7 +16,7 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.2.1";
+        string mbversion = "1.2.2";
 
         string dlfilename;
         APIs.Notify message = new APIs.Notify();
@@ -28,28 +28,15 @@ namespace ModBuilder
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Have we asked the user if he or she wants to check for an update on each run?
-            if (!Properties.Settings.Default.hasAskedACU)
-            {
-                DialogResult result = message.question("Do you want Mod Manager to check if an update is available automatically on each run?", MessageBoxButtons.YesNo);
-
-                if (result == DialogResult.Yes)
-                    Properties.Settings.Default.autoCheckUpdates = true;
-
-                Properties.Settings.Default.hasAskedACU = true;
-
-                Properties.Settings.Default.Save();
-            }
-
             // Check for updates, if set to do so.
             if (Properties.Settings.Default.autoCheckUpdates)
                 checkUpdate(false);
 
         }
 
-        private void editProjectButton_Click(object sender, EventArgs e)
+        #region Opening projects
+        private void openProjectButton(object sender, EventArgs e)
         {
-
             // Show them the loading box.
             loadProject lp = new loadProject();
             lp.Show();
@@ -80,8 +67,10 @@ namespace ModBuilder
             // Tyvm!
             lp.Close();
         }
+        #endregion
 
-        private void createProjectButton_Click(object sender, EventArgs e)
+        #region New project
+        private void openNewProject(object sender, EventArgs e)
         {
             // Start a new instance of the Mod Editor.
             modEditor me = new modEditor();
@@ -98,7 +87,9 @@ namespace ModBuilder
             // Show the instance.
             me.Show();
         }
+        #endregion
 
+        #region Repair projects
         private void repairAProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Start a new Folder Browser Dialog.
@@ -170,19 +161,25 @@ namespace ModBuilder
                 lp.Close();
             }
         }
+        #endregion
 
+        #region Convert a Package to a Project
         private void convertAPackageToAProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // !WIP!
             Forms.convertProject cp = new Forms.convertProject();
             cp.Show();
         }
+        #endregion
 
+        #region Updating
+        #region Progress Change
         private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
+        #endregion
 
+        #region Download Complete
         private void DLUpdateCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Cancelled)
@@ -198,22 +195,28 @@ namespace ModBuilder
             checkForUpdatesToolStripMenuItem.Text = "Update pending...";
             Size = new Size(Size.Width, 173);
         }
+        #endregion
 
+        #region Check for updates
         private void checkUpdate(bool throwMessage = true)
         {
+            // Catch any exceptions.
             try
             {
+                // Start a new webclient.
                 WebClient client = new WebClient();
 
                 // Start a new download of the latest version number thing.
                 string lver = client.DownloadString("https://raw.github.com/Yoshi2889/ModManager/master/latestver");
 
+                // Pour them over as versions.
                 Version mver = new Version(mbversion);
                 Version lmver = new Version(lver);
 
                 // Compare the versions.
                 int status = mver.CompareTo(lmver);
 
+                // If the status is equal to or bigger than 0 we are running the latest version.
                 if (status >= 0)
                 {
                     // If we are running in silent mode, skip this message.
@@ -262,24 +265,9 @@ namespace ModBuilder
                 return;
             }
         }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            message.information("Mod Builder, a tool to help you create modifications for SMF (Simple Machines Forum).\nSMF is © Simple Machines, http://simplemachines.org/ \n Mod Builder is © Rick \"Yoshi2889\" Kerkhof");
-        }
-
-        private void supportToolstripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                System.Diagnostics.Process.Start("http://goo.gl/WYQxf");
-            }
-            catch
-            {
-                System.Diagnostics.Process.Start("iexplore", "http://goo.gl/WYQxf");
-            }
-        }
-
+        #endregion
+        #endregion
+        #region Check for updates button
         private void checkForUpdatesToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(dlfilename) && File.Exists(dlfilename))
@@ -296,11 +284,35 @@ namespace ModBuilder
 
             checkUpdate();
         }
+        #endregion
 
+        #region About
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            message.information("Mod Builder, a tool to help you create modifications for SMF (Simple Machines Forum).\nSMF is © Simple Machines, http://simplemachines.org/ \n Mod Builder is © Rick \"Yoshi2889\" Kerkhof");
+        }
+        #endregion
+
+        #region Support
+        private void supportToolstripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("http://goo.gl/WYQxf");
+            }
+            catch
+            {
+                System.Diagnostics.Process.Start("iexplore", "http://goo.gl/WYQxf");
+            }
+        }
+        #endregion
+
+        #region Options
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Options op = new Options();
             op.ShowDialog();
         }
+        #endregion
     }
 }

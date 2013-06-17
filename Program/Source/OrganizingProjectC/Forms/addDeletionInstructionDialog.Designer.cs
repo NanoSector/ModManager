@@ -34,8 +34,10 @@
             this.fileName = new System.Windows.Forms.TextBox();
             this.filePrefix = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.whatIs_File = new System.Windows.Forms.RadioButton();
             this.whatIs_Dir = new System.Windows.Forms.RadioButton();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label3
@@ -98,37 +100,43 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "File/directory:";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.whatIs_Dir);
+            this.panel1.Controls.Add(this.whatIs_File);
+            this.panel1.Location = new System.Drawing.Point(12, 59);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(206, 32);
+            this.panel1.TabIndex = 20;
+            // 
             // whatIs_File
             // 
             this.whatIs_File.AutoSize = true;
-            this.whatIs_File.Checked = true;
-            this.whatIs_File.Location = new System.Drawing.Point(12, 68);
+            this.whatIs_File.Location = new System.Drawing.Point(3, 9);
             this.whatIs_File.Name = "whatIs_File";
             this.whatIs_File.Size = new System.Drawing.Size(41, 17);
-            this.whatIs_File.TabIndex = 18;
+            this.whatIs_File.TabIndex = 0;
             this.whatIs_File.TabStop = true;
             this.whatIs_File.Text = "File";
             this.whatIs_File.UseVisualStyleBackColor = true;
-            this.whatIs_File.CheckedChanged += new System.EventHandler(this.whatIs_File_CheckedChanged);
             // 
             // whatIs_Dir
             // 
             this.whatIs_Dir.AutoSize = true;
-            this.whatIs_Dir.Location = new System.Drawing.Point(68, 68);
+            this.whatIs_Dir.Location = new System.Drawing.Point(67, 9);
             this.whatIs_Dir.Name = "whatIs_Dir";
             this.whatIs_Dir.Size = new System.Drawing.Size(67, 17);
-            this.whatIs_Dir.TabIndex = 19;
+            this.whatIs_Dir.TabIndex = 1;
+            this.whatIs_Dir.TabStop = true;
             this.whatIs_Dir.Text = "Directory";
             this.whatIs_Dir.UseVisualStyleBackColor = true;
-            this.whatIs_Dir.CheckedChanged += new System.EventHandler(this.whatIs_Dir_CheckedChanged);
             // 
             // addDeletionInstructionDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 99);
-            this.Controls.Add(this.whatIs_Dir);
-            this.Controls.Add(this.whatIs_File);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -142,6 +150,8 @@
             this.Name = "addDeletionInstructionDialog";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "addDeletionInstructionDialog";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,7 +165,8 @@
         private System.Windows.Forms.TextBox fileName;
         private System.Windows.Forms.ComboBox filePrefix;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton whatIs_File;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton whatIs_Dir;
+        private System.Windows.Forms.RadioButton whatIs_File;
     }
 }

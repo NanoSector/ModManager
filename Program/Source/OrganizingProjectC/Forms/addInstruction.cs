@@ -173,7 +173,7 @@ namespace ModBuilder
         private void testInstruction_Click(object sender, EventArgs e)
         {
             string path = Properties.Settings.Default.smfPath;
-            string file = (filePrefix.SelectedItem + "/" + fileEdited.Text).Replace("$boarddir", path).Replace("$sourcedir", path + "/Sources").Replace("$themedir", path + "/Themes").Replace("$languagedir", path + "/Themes/default/languages").Replace("$avatardir", path + "/Avatars").Replace("$imagesdir", path + "/Themes/default/images");
+            string file = (filePrefix.SelectedItem + "/" + fileEdited.Text).Replace("$boarddir", path).Replace("$sourcedir", path + "/Sources").Replace("$themedir", path + "/Themes/default").Replace("$languagedir", path + "/Themes/default/languages").Replace("$avatardir", path + "/Avatars").Replace("$imagesdir", path + "/Themes/default/images");
             if (!File.Exists(file))
             {
                 message.warning("The specified file was not found. This instruction will NOT successfully be executed.");

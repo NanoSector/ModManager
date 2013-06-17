@@ -361,118 +361,133 @@ namespace ModBuilder
             if (!ignoreInstructions.Checked)
             {
                 mc.Message("Attempting to build install.xml");
-                using (FileStream fileStream = new FileStream(workingDirectory + "/Package/install.xml", FileMode.Create))
-                using (StreamWriter sw = new StreamWriter(fileStream))
-                using (XmlTextWriter writer = new XmlTextWriter(sw))
+
+                string csql = "SELECT count(id) FROM instructions";
+                SQLiteCommand ccommand = new SQLiteCommand(csql, conn);
+                SQLiteDataReader creader = ccommand.ExecuteReader();
+                creader.Read();
+
+                if (Convert.ToInt32(creader[0]) != 0)
                 {
-                    // Some settings before we start.
-                    writer.Formatting = Formatting.Indented;
-                    writer.Indentation = 4;
-
-                    // Start the document.
-                    writer.WriteStartDocument();
-
-                    // Doctype (the writer.WriteDocType stuff was confusing me)
-                    writer.WriteDocType("modification", null, "http://www.simplemachines.org/xml/modification", null);
-
-                    // Some sort of generator copyright.
-                    if (includeModManLine.Checked == true)
-                        writer.WriteComment("Generated with Mod Manager (c) 2013 Yoshi2889");
-
-                    // Write the package-info start element.
-                    writer.WriteStartElement("modification", "http://www.simplemachines.org/xml/modification");
-                    writer.WriteAttributeString("xmlns", "smf", null, "http://www.simplemachines.org/");
-
-                    // Write the ID.
-                    writer.WriteElementString("id", modID.Text);
-
-                    // Version.
-                    writer.WriteElementString("version", modVersion.Text);
-
-                    // Grab the data.
-                    if (hasConn)
+                    using (FileStream fileStream = new FileStream(workingDirectory + "/Package/install.xml", FileMode.Create))
+                    using (StreamWriter sw = new StreamWriter(fileStream))
+                    using (XmlTextWriter writer = new XmlTextWriter(sw))
                     {
-                        string sql = "SELECT id, before, after, type, file, optional FROM instructions ORDER BY file";
-                        SQLiteCommand command = new SQLiteCommand(sql, conn);
-                        SQLiteDataReader reader = command.ExecuteReader();
+                        // Some settings before we start.
+                        writer.Formatting = Formatting.Indented;
+                        writer.Indentation = 4;
 
-                        string lastfile = "";
-                        string file = "";
-                        bool hasstarted = false;
-                        while (reader.Read())
+                        // Start the document.
+                        writer.WriteStartDocument();
+
+                        // Doctype (the writer.WriteDocType stuff was confusing me)
+                        writer.WriteDocType("modification", null, "http://www.simplemachines.org/xml/modification", null);
+
+                        // Some sort of generator copyright.
+                        if (includeModManLine.Checked == true)
+                            writer.WriteComment("Generated with Mod Manager (c) 2013 Yoshi2889");
+
+                        // Write the package-info start element.
+                        writer.WriteStartElement("modification", "http://www.simplemachines.org/xml/modification");
+                        writer.WriteAttributeString("xmlns", "smf", null, "http://www.simplemachines.org/");
+
+                        // Write the ID.
+                        writer.WriteElementString("id", modID.Text);
+
+                        // Version.
+                        writer.WriteElementString("version", modVersion.Text);
+
+                        // Grab the data.
+                        if (hasConn)
                         {
-                            if (string.IsNullOrEmpty(lastfile))
-                                lastfile = file;
-                            file = Convert.ToString(reader["file"]);
+                            string sql = "SELECT id, before, after, type, file, optional FROM instructions ORDER BY file";
+                            SQLiteCommand command = new SQLiteCommand(sql, conn);
+                            SQLiteDataReader reader = command.ExecuteReader();
 
-                            if (lastfile != file && Properties.Settings.Default.groupInstructions)
+                            string lastfile = "";
+                            string file = "";
+                            bool hasstarted = false;
+                            while (reader.Read())
                             {
-                                if (hasstarted)
-                                    writer.WriteEndElement();
-                                writer.WriteStartElement("file");
-                                writer.WriteAttributeString("name", file);
-                            }
-                            else if (!Properties.Settings.Default.groupInstructions)
-                            {
-                                writer.WriteStartElement("file");
-                                writer.WriteAttributeString("name", file);
-                            }
+                                if (string.IsNullOrEmpty(lastfile))
+                                    lastfile = file;
+                                file = Convert.ToString(reader["file"]);
 
-                            writer.WriteStartElement("operation");
-                            if (Convert.ToInt32(reader["optional"]) == 1)
-                                writer.WriteAttributeString("error", "skip");
+                                if (lastfile != file && Properties.Settings.Default.groupInstructions)
+                                {
+                                    if (hasstarted)
+                                        writer.WriteEndElement();
+                                    writer.WriteStartElement("file");
+                                    writer.WriteAttributeString("name", file);
+                                }
+                                else if (!Properties.Settings.Default.groupInstructions)
+                                {
+                                    writer.WriteStartElement("file");
+                                    writer.WriteAttributeString("name", file);
+                                }
 
-                            writer.WriteStartElement("search");
-                            string fintype = "";
-                            switch (Convert.ToString(reader["type"]))
-                            {
-                                case "add_before":
-                                    fintype = "after";
-                                    break;
+                                writer.WriteStartElement("operation");
+                                if (Convert.ToInt32(reader["optional"]) == 1)
+                                    writer.WriteAttributeString("error", "skip");
 
-                                case "add_after":
-                                    fintype = "before";
-                                    break;
+                                writer.WriteStartElement("search");
+                                string fintype = "";
+                                switch (Convert.ToString(reader["type"]))
+                                {
+                                    case "add_before":
+                                        fintype = "after";
+                                        break;
 
-                                case "replace":
-                                    fintype = "replace";
-                                    break;
+                                    case "add_after":
+                                        fintype = "before";
+                                        break;
 
-                                case "end":
-                                    fintype = "end";
-                                    break;
-                            }
+                                    case "replace":
+                                        fintype = "replace";
+                                        break;
 
-                            writer.WriteAttributeString("position", fintype);
-                            if (fintype != "end")
-                            {
-                                writer.WriteRaw("<![CDATA[" + Convert.ToString(reader["before"]).Replace("]]>", "]]]]><![CDATA[>") + "]]>");
-                            }
-                            // search end
-                            writer.WriteEndElement();
+                                    case "end":
+                                        fintype = "end";
+                                        break;
+                                }
 
-                            writer.WriteStartElement("add");
-                            writer.WriteRaw("<![CDATA[" + Convert.ToString(reader["after"]).Replace("]]>", "]]]]><![CDATA[>") + "]]>");
-                            writer.WriteEndElement();
-
-                            // operation end
-                            writer.WriteEndElement();
-
-                            if (!Properties.Settings.Default.groupInstructions)
+                                writer.WriteAttributeString("position", fintype);
+                                if (fintype != "end")
+                                {
+                                    writer.WriteRaw("<![CDATA[" + Convert.ToString(reader["before"]).Replace("]]>", "]]]]><![CDATA[>") + "]]>");
+                                }
+                                // search end
                                 writer.WriteEndElement();
 
-                            lastfile = file;
-                            hasstarted = true;
+                                writer.WriteStartElement("add");
+                                writer.WriteRaw("<![CDATA[" + Convert.ToString(reader["after"]).Replace("]]>", "]]]]><![CDATA[>") + "]]>");
+                                writer.WriteEndElement();
+
+                                // operation end
+                                writer.WriteEndElement();
+
+                                if (!Properties.Settings.Default.groupInstructions)
+                                    writer.WriteEndElement();
+
+                                lastfile = file;
+                                hasstarted = true;
+                            }
                         }
+
+                        writer.WriteEndElement();
+                        writer.WriteEndDocument();
+
+                        writer.Flush();
+                        writer.Close();
                     }
-
-                    writer.WriteEndElement();
-                    writer.WriteEndDocument();
-
-                    writer.Flush();
-                    writer.Close();
+                    mc.Message("install.xml has been built.");
                 }
-                mc.Message("install.xml has been build.");
+                else
+                {
+                    mc.Message("install.xml has not been built because there are no instructions.");
+                    if (File.Exists(workingDirectory + "/Package/install.xml"))
+                        File.Delete(workingDirectory + "/Package/install.xml");
+                }
             }
             // If we did select to ignore the instructions part, delete the install.xml file. The data is stored in the database anyway.
             else if (ignoreInstructions.Checked && File.Exists(workingDirectory + "/Package/install.xml"))
@@ -733,7 +748,8 @@ namespace ModBuilder
                 message.information("Please save your project before continuing.", MessageBoxButtons.OK);
                 return;
             }
-            var tindex = extractFiles.SelectedNode.Name;
+
+            var tindex = instructions.SelectedNode.Name;
             if (String.IsNullOrEmpty(tindex))
                 return;
             int index = Convert.ToInt32(tindex.Replace("id", ""));
