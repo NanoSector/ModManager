@@ -1029,7 +1029,7 @@ namespace ModBuilder
                 zip.AddDirectory(workingDirectory + "/Package");
 
                 // Then add the Source directory to the files directory of the ZIP file.
-                if (Directory.GetFiles(workingDirectory + "/Source").Length != 0)
+                if (Directory.GetFiles(workingDirectory + "/Source").Length != 0 || Directory.GetDirectories(workingDirectory + "/Source").Length != 0)
                     zip.AddDirectory(workingDirectory + "/Source", "files");
 
                 // Now we can save the ZIP.
