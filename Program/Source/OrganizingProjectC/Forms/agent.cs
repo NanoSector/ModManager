@@ -16,22 +16,22 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.2.4";
+        string mbversion = "1.2.3";
 
         string dlfilename;
         APIs.Notify message = new APIs.Notify();
+
         public Form1()
         {
             InitializeComponent();
-            versionLabel.Text = "v" + mbversion;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             // Check for updates, if set to do so.
+            versionLabel.Text = "v" + mbversion;
             if (Properties.Settings.Default.autoCheckUpdates)
                 checkUpdate(false);
-
         }
 
         #region Opening projects
@@ -193,7 +193,7 @@ namespace ModBuilder
             }
 
             checkForUpdatesToolStripMenuItem.Text = "Update pending...";
-            Size = new Size(Size.Width, 173);
+            Size = new Size(Size.Width, 184);
         }
         #endregion
 
@@ -207,7 +207,8 @@ namespace ModBuilder
                 WebClient client = new WebClient();
 
                 // Start a new download of the latest version number thing.
-                string lver = client.DownloadString("https://raw.github.com/Yoshi2889/ModManager/master/latestver");
+                string dver = "https://raw.github.com/Yoshi2889/ModManager/master/latestver";
+                string lver = client.DownloadString(dver);
 
                 // Pour them over as versions.
                 Version mver = new Version(mbversion);
@@ -226,34 +227,18 @@ namespace ModBuilder
                 }
                 else
                 {
-                    DialogResult result = message.question("A new version (" + lver + ") of Mod Manager has been released. Do you want to download the update?", MessageBoxButtons.YesNo);
+                    DialogResult result = message.question("A new version (" + lver + ") of Mod Manager has been released. Do you want to download and install the update?", MessageBoxButtons.YesNo);
 
                     if (result == DialogResult.Yes)
                     {
-                        // Create a new save dialog.
-                        SaveFileDialog sf = new SaveFileDialog();
-                        sf.DefaultExt = "exe";
-                        sf.AddExtension = true;
-                        sf.FileName = "setup.exe";
-                        sf.Filter = "Executable files|*.exe";
-                        sf.CheckFileExists = false;
-                        sf.CheckPathExists = true;
-
-                        // Show the dialog.
-                        DialogResult sfres = sf.ShowDialog();
-
-                        // Quit if we did something wrong-err, weird.
-                        if (sfres == DialogResult.Cancel || string.IsNullOrEmpty(sf.FileName))
-                            return;
-
                         // Rezise the form a bit :)
-                        Size = new Size(Size.Width, 236);
+                        Size = new Size(Size.Width, 247);
 
                         // Start downloading! DLUpdateCompleted will take over once it's done.
                         client.DownloadFileCompleted += new AsyncCompletedEventHandler(DLUpdateCompleted);
                         client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                        client.DownloadFileAsync(new Uri("https://github.com/Yoshi2889/ModManager/blob/master/setup.exe?raw=true"), @sf.FileName);
-                        dlfilename = sf.FileName;
+                        client.DownloadFileAsync(new Uri("https://github.com/Yoshi2889/ModManager/blob/master/setup.exe?raw=true"), @AppDomain.CurrentDomain.BaseDirectory + "/update_" + lver.Replace(".", "-") + ".exe");
+                        dlfilename = AppDomain.CurrentDomain.BaseDirectory + "/update_" + lver.Replace(".", "-") + ".exe";
                     }
                 }
             }
