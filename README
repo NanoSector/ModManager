@@ -1,15 +1,8 @@
-== Mod Manager ==
+== Mod Manager / Mod Builder ==
 
-Mod Manager is being rewritten in PHP as of now running on top of SMF.
+Mod Builder is a tool that lets you easily create modifications for SMF.
+It currently includes the following components:
+- Agent (screen hosting all the editor windows)
+- Editor (the actual mod editor)
 
-To install:
-1. Copy over the contents of /Source to the root / of your SMF forum.
-2. Open up phpMyAdmin or similar and import the database.sql file.
-3. Run the file mbHooks.php with no parameters.
-
-== mbHooks.php
-mbHooks.php installs the required hooks for Mod Builder.
-It acceps the following parameters:
-- (no parameters) - Install the hooks.
-- ?uninstall - Uninstall the hooks.
-- ?reinstall - Uninstall and then install the hooks.
+In version 2.0 I am planning to replace both for a powerful IDE.
