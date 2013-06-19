@@ -25,6 +25,24 @@ namespace ModBuilder.Forms
             InitializeComponent();
         }
 
+        private void Options_Load(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.smfPath) && Directory.Exists(Properties.Settings.Default.smfPath) && File.Exists(Properties.Settings.Default.smfPath + "/index.php"))
+            {
+                string contents = File.ReadAllText(Properties.Settings.Default.smfPath + "/index.php");
+
+                Match match = Regex.Match(contents, @"'SMF ([^']*)'");
+                if (match.Success)
+                    dsmfver.Text = match.Groups[1].Value;
+            }
+
+            string[] updates = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "update_*.exe");
+            foreach (string file in updates)
+            {
+                comboBox1.Items.Add(file.Replace(AppDomain.CurrentDomain.BaseDirectory + "update_", "").Replace(".exe", "").Replace("-", "."));
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
@@ -230,18 +248,6 @@ namespace ModBuilder.Forms
             dl11.Text = "Downloading... " + e.ProgressPercentage + "%";
         }
 
-        private void Options_Load(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(Properties.Settings.Default.smfPath) && Directory.Exists(Properties.Settings.Default.smfPath) && File.Exists(Properties.Settings.Default.smfPath + "/index.php"))
-            {
-                string contents = File.ReadAllText(Properties.Settings.Default.smfPath + "/index.php");
-                
-                Match match = Regex.Match(contents, @"'SMF ([^']*)'");
-                if (match.Success)
-                    dsmfver.Text = match.Groups[1].Value;
-            }
-        }
-
         private void testSmOrgDetails_Click(object sender, EventArgs e)
         {
             // Create hashed strings
@@ -269,6 +275,29 @@ namespace ModBuilder.Forms
             System.Buffer.BlockCopy(a, 0, c, 0, a.Length);
             System.Buffer.BlockCopy(b, 0, c, a.Length, b.Length);
             return c;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string[] toDelete = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "update_*.exe");
+
+            foreach (string file in toDelete)
+            {
+                File.Delete(file);
+            }
+
+            message.information(toDelete.Length + " update executables have been deleted.");
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DialogResult result = message.question("This will revert this version of Mod Builder to the selected version, and this version will be closed. Are you okay with this?", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "update_" + comboBox1.SelectedItem.ToString().Replace(".", "-") + ".exe");
+                Application.Exit();
+            }
         }
     }
 }
