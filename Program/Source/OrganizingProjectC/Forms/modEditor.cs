@@ -12,6 +12,7 @@ using System.Xml;
 using System.Data.SQLite;
 using Ionic.Zip;
 using ModBuilder.Forms;
+using System.Diagnostics;
 
 namespace ModBuilder
 {
@@ -1081,29 +1082,65 @@ namespace ModBuilder
             if (string.IsNullOrEmpty(sf.FileName))
                 return;
 
-            // Start the ZIP process.
-            using (ZipFile zip = new ZipFile())
+            // Throw the package together.
+            Directory.CreateDirectory(workingDirectory + "/tempcomp");
+
+            DirectoryInfo tc = new DirectoryInfo(workingDirectory + "/tempcomp");
+            DirectoryInfo pkg = new DirectoryInfo(workingDirectory + "/Package");
+            DirectoryInfo src = new DirectoryInfo(workingDirectory + "/Source");
+
+            // Copy everything in /Package to /tempcomp.
+            CopyFilesRecursively(pkg, tc);
+
+            // Now the files.
+            if (Directory.GetFiles(workingDirectory + "/Source").Length != 0 || Directory.GetDirectories(workingDirectory + "/Source").Length != 0)
             {
-                if (Properties.Settings.Default.bypassArchiveError)
-                {
-                    zip.CompressionMethod = CompressionMethod.Deflate;
-                    zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Level0;
-                    zip.UseZip64WhenSaving = Zip64Option.Always;
-                }
-
-                // Add the Package directory to the root of the ZIP file.
-                zip.AddDirectory(workingDirectory + "/Package");
-
-                // Then add the Source directory to the files directory of the ZIP file.
-                if (Directory.GetFiles(workingDirectory + "/Source").Length != 0 || Directory.GetDirectories(workingDirectory + "/Source").Length != 0)
-                    zip.AddDirectory(workingDirectory + "/Source", "files");
-
-                // Now we can save the ZIP.
-                zip.Save(sf.FileName);
+                Directory.CreateDirectory(workingDirectory + "/tempcomp/files");
+                DirectoryInfo tcf = new DirectoryInfo(workingDirectory + "/tempcomp/files");
+                CopyFilesRecursively(src, tcf);
             }
+            
+            // Try a test call on this instance.
+            
+            Process p = new Process();
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            p.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"\7za.exe";
+            p.StartInfo.Arguments = " a -tzip \"" + sf.FileName + "\" \"" + workingDirectory + "/tempcomp/*\"";
+            p.Start();
+
+            // Read the output.
+            string output = p.StandardOutput.ReadToEnd();
+
+            // Grab the focus back!
+            this.TopMost = true;
+            this.TopMost = false;
+            this.Activate();
+
+            DeleteRecursively(tc);
 
             // And done!
-            message.information("The package has been compiled.", MessageBoxButtons.OK);
+            if (output.IndexOf("Everything is Ok") != -1)
+                message.information("The package has been compiled.", MessageBoxButtons.OK);
+            else
+                message.error("Something went wrong while compiling your package. Please try again.");
+        }
+        public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
+        {
+            foreach (DirectoryInfo dir in source.GetDirectories())
+                CopyFilesRecursively(dir, target.CreateSubdirectory(dir.Name));
+            foreach (FileInfo file in source.GetFiles())
+                file.CopyTo(Path.Combine(target.FullName, file.Name));
+        }
+        public static void DeleteRecursively(DirectoryInfo source)
+        {
+            foreach (DirectoryInfo dir in source.GetDirectories())
+                DeleteRecursively(dir);
+            foreach (FileInfo file in source.GetFiles())
+                File.Delete(file.FullName);
+
+            Directory.Delete(source.FullName);
         }
         #endregion
 
@@ -1367,12 +1404,55 @@ namespace ModBuilder
                 return;
             }
 
+            // Write the code to a temporary file.
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + @"\temp.php", code);
 
+            // Start a process.
+            Process p = new Process();
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            p.StartInfo.FileName = Properties.Settings.Default.phppath;
+            p.StartInfo.Arguments = " \"" + AppDomain.CurrentDomain.BaseDirectory + "\\temp.php\"";
+            p.Start();
+
+            // Read the output.
+            p.StandardOutput.ReadLine();
+            string output = p.StandardOutput.ReadLine();
+
+            // Grab the focus back!
+            this.TopMost = true;
+            this.TopMost = false;
+            this.Activate();
+
+            if (!String.IsNullOrWhiteSpace(output) && output.IndexOf("Parse error") != -1)
+                message.error(output.Replace(" in " + AppDomain.CurrentDomain.BaseDirectory + "temp.php", ""));
+            else if (String.IsNullOrWhiteSpace(output))
+                message.information("No parse errors were detected.");
+            else
+                message.error("Something went wrong when checking for errors. Please check that the path to php.exe is set correctly and try again.");
+
+            File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"\temp.php");
         }
 
         private void cfeInstallCode_Click(object sender, EventArgs e)
         {
+            checkCode(customCodeInstall.Text);
+        }
 
+        private void cfeUninstallCode_Click(object sender, EventArgs e)
+        {
+            checkCode(customCodeUninstall.Text);
+        }
+
+        private void cfeDBInstall_Click(object sender, EventArgs e)
+        {
+            checkCode(installDatabaseCode.Text);
+        }
+
+        private void cfeDBUninstall_Click(object sender, EventArgs e)
+        {
+            checkCode(uninstallDatabaseCode.Text);
         }
 
         #endregion

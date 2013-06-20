@@ -213,16 +213,10 @@
     <None Include="templates\code_uninstall\Settings.php">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="templates\database_install\Hooks.php">
+    <None Include="templates\database_install\Create tables.php">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="templates\database_install\Settings.php">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="templates\database_uninstall\Hooks.php">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="templates\database_uninstall\Settings.php">
+    <None Include="templates\database_uninstall\Drop tables.php">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -250,6 +244,9 @@
     <None Include="Resources\question.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="7za.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="card-address %281%29.ico" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

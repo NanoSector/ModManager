@@ -64,15 +64,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.files = new System.Windows.Forms.TreeView();
             this.readmeTab = new System.Windows.Forms.TabPage();
+            this.modReadme = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.readmeHelp = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
             this.bbcS = new System.Windows.Forms.Button();
             this.bbcI = new System.Windows.Forms.Button();
             this.bbcU = new System.Windows.Forms.Button();
             this.bbcB = new System.Windows.Forms.Button();
-            this.modReadme = new System.Windows.Forms.TextBox();
             this.instructionsTab = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.instructionHelp = new System.Windows.Forms.PictureBox();
@@ -84,8 +85,12 @@
             this.delInstruction = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.instructions = new System.Windows.Forms.TreeView();
+            this.deleteModInstructionStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editInstructionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteThisInstructionToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.extractFilesTab = new System.Windows.Forms.TabPage();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label28 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.createExtractionInstruction = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -97,19 +102,42 @@
             this.label21 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.extractFiles = new System.Windows.Forms.TreeView();
+            this.extractingInstructionsStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editExtractMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteThisInstructionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteFiles = new System.Windows.Forms.TreeView();
+            this.deletingInstructionsStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteThisInstructionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.customCodeTab = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.customCodeInstall = new System.Windows.Forms.TextBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.cfeInstallCode = new System.Windows.Forms.Button();
+            this.ccodeInstallTemplates = new System.Windows.Forms.ComboBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.customCodeUninstall = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.cfeUninstallCode = new System.Windows.Forms.Button();
+            this.ccodeUninstallTemplates = new System.Windows.Forms.ComboBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.alterDatabaseTab = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.installDatabaseCode = new System.Windows.Forms.TextBox();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.cfeDBInstall = new System.Windows.Forms.Button();
+            this.adatabaseInstallTemplates = new System.Windows.Forms.ComboBox();
+            this.label27 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.uninstallDatabaseCode = new System.Windows.Forms.TextBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.cfeDBUninstall = new System.Windows.Forms.Button();
+            this.adatabaseUninstallTemplates = new System.Windows.Forms.ComboBox();
+            this.label26 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -126,34 +154,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.regenerateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showConsoleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ccodeUninstallTemplates = new System.Windows.Forms.ComboBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.ccodeInstallTemplates = new System.Windows.Forms.ComboBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.adatabaseUninstallTemplates = new System.Windows.Forms.ComboBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.adatabaseInstallTemplates = new System.Windows.Forms.ComboBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.extractingInstructionsStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteThisInstructionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deletingInstructionsStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deleteThisInstructionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteModInstructionStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.deleteThisInstructionToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.editInstructionMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label28 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.editExtractMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cfeUninstallCode = new System.Windows.Forms.Button();
-            this.cfeInstallCode = new System.Windows.Forms.Button();
-            this.cfeDBInstall = new System.Windows.Forms.Button();
-            this.cfeDBUninstall = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.modDetailsTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -173,31 +173,31 @@
             this.instructionsTab.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).BeginInit();
+            this.deleteModInstructionStrip.SuspendLayout();
             this.extractFilesTab.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.extractingInstructionsStrip.SuspendLayout();
+            this.deletingInstructionsStrip.SuspendLayout();
             this.customCodeTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.alterDatabaseTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.extractingInstructionsStrip.SuspendLayout();
-            this.deletingInstructionsStrip.SuspendLayout();
-            this.deleteModInstructionStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -582,6 +582,16 @@
             this.readmeTab.Text = "Readme";
             this.readmeTab.UseVisualStyleBackColor = true;
             // 
+            // modReadme
+            // 
+            this.modReadme.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modReadme.Location = new System.Drawing.Point(3, 29);
+            this.modReadme.Multiline = true;
+            this.modReadme.Name = "modReadme";
+            this.modReadme.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.modReadme.Size = new System.Drawing.Size(754, 299);
+            this.modReadme.TabIndex = 0;
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.readmeHelp);
@@ -627,6 +637,16 @@
             this.panel3.Size = new System.Drawing.Size(754, 26);
             this.panel3.TabIndex = 2;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(123, 0);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(41, 23);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "URL";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.bbcbutton);
+            // 
             // bbcS
             // 
             this.bbcS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -670,16 +690,6 @@
             this.bbcB.Text = "B";
             this.bbcB.UseVisualStyleBackColor = true;
             this.bbcB.Click += new System.EventHandler(this.bbcbutton);
-            // 
-            // modReadme
-            // 
-            this.modReadme.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modReadme.Location = new System.Drawing.Point(3, 29);
-            this.modReadme.Multiline = true;
-            this.modReadme.Name = "modReadme";
-            this.modReadme.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.modReadme.Size = new System.Drawing.Size(754, 299);
-            this.modReadme.TabIndex = 0;
             // 
             // instructionsTab
             // 
@@ -804,6 +814,27 @@
             this.instructions.TabIndex = 1;
             this.instructions.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.instructions_NodeMouseDoubleClick);
             // 
+            // deleteModInstructionStrip
+            // 
+            this.deleteModInstructionStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editInstructionMenuItem,
+            this.deleteThisInstructionToolStripMenuItem2});
+            this.deleteModInstructionStrip.Name = "deleteModInstructionStrip";
+            this.deleteModInstructionStrip.Size = new System.Drawing.Size(191, 48);
+            // 
+            // editInstructionMenuItem
+            // 
+            this.editInstructionMenuItem.Name = "editInstructionMenuItem";
+            this.editInstructionMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.editInstructionMenuItem.Text = "Edit this source edit";
+            // 
+            // deleteThisInstructionToolStripMenuItem2
+            // 
+            this.deleteThisInstructionToolStripMenuItem2.Name = "deleteThisInstructionToolStripMenuItem2";
+            this.deleteThisInstructionToolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
+            this.deleteThisInstructionToolStripMenuItem2.Text = "Delete this source edit";
+            this.deleteThisInstructionToolStripMenuItem2.Click += new System.EventHandler(this.delInstruction_Click);
+            // 
             // extractFilesTab
             // 
             this.extractFilesTab.Controls.Add(this.panel6);
@@ -833,6 +864,17 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(416, 363);
             this.panel6.TabIndex = 14;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(3, 3);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(401, 26);
+            this.label28.TabIndex = 13;
+            this.label28.Text = "The SMF package manager allows you to extract files to the forum upon installatio" +
+    "n.\r\nYou can specify instructions for that here. Double click an instruction to e" +
+    "dit it.";
             // 
             // label13
             // 
@@ -941,7 +983,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.deleteFiles);
             this.splitContainer1.Size = new System.Drawing.Size(330, 357);
-            this.splitContainer1.SplitterDistance = 174;
+            this.splitContainer1.SplitterDistance = 173;
             this.splitContainer1.TabIndex = 13;
             // 
             // extractFiles
@@ -950,9 +992,42 @@
             this.extractFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.extractFiles.Location = new System.Drawing.Point(0, 0);
             this.extractFiles.Name = "extractFiles";
-            this.extractFiles.Size = new System.Drawing.Size(330, 174);
+            this.extractFiles.Size = new System.Drawing.Size(330, 173);
             this.extractFiles.TabIndex = 0;
             this.extractFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.extractFiles_NodeMouseDoubleClick);
+            // 
+            // extractingInstructionsStrip
+            // 
+            this.extractingInstructionsStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editExtractMenuItem,
+            this.createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.deleteThisInstructionToolStripMenuItem});
+            this.extractingInstructionsStrip.Name = "extractingInstructionsStrip";
+            this.extractingInstructionsStrip.Size = new System.Drawing.Size(355, 76);
+            // 
+            // editExtractMenuItem
+            // 
+            this.editExtractMenuItem.Name = "editExtractMenuItem";
+            this.editExtractMenuItem.Size = new System.Drawing.Size(354, 22);
+            this.editExtractMenuItem.Text = "Edit this instruction";
+            // 
+            // createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem
+            // 
+            this.createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem.Name = "createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem";
+            this.createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem.Size = new System.Drawing.Size(354, 22);
+            this.createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem.Text = "Create a delete file instruction against this instruction";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(351, 6);
+            // 
+            // deleteThisInstructionToolStripMenuItem
+            // 
+            this.deleteThisInstructionToolStripMenuItem.Name = "deleteThisInstructionToolStripMenuItem";
+            this.deleteThisInstructionToolStripMenuItem.Size = new System.Drawing.Size(354, 22);
+            this.deleteThisInstructionToolStripMenuItem.Text = "Delete this instruction";
             // 
             // deleteFiles
             // 
@@ -960,9 +1035,23 @@
             this.deleteFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deleteFiles.Location = new System.Drawing.Point(0, 0);
             this.deleteFiles.Name = "deleteFiles";
-            this.deleteFiles.Size = new System.Drawing.Size(330, 179);
+            this.deleteFiles.Size = new System.Drawing.Size(330, 180);
             this.deleteFiles.TabIndex = 11;
             this.deleteFiles.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.deleteFiles_NodeMouseDoubleClick);
+            // 
+            // deletingInstructionsStrip
+            // 
+            this.deletingInstructionsStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteThisInstructionToolStripMenuItem1});
+            this.deletingInstructionsStrip.Name = "deletingInstructionsStrip";
+            this.deletingInstructionsStrip.Size = new System.Drawing.Size(190, 26);
+            // 
+            // deleteThisInstructionToolStripMenuItem1
+            // 
+            this.deleteThisInstructionToolStripMenuItem1.Name = "deleteThisInstructionToolStripMenuItem1";
+            this.deleteThisInstructionToolStripMenuItem1.Size = new System.Drawing.Size(189, 22);
+            this.deleteThisInstructionToolStripMenuItem1.Text = "Delete this instruction";
+            this.deleteThisInstructionToolStripMenuItem1.Click += new System.EventHandler(this.deleteExtractButton_Click);
             // 
             // customCodeTab
             // 
@@ -1008,6 +1097,45 @@
             this.customCodeInstall.TabIndex = 2;
             this.customCodeInstall.WordWrap = false;
             // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.cfeInstallCode);
+            this.panel5.Controls.Add(this.ccodeInstallTemplates);
+            this.panel5.Controls.Add(this.label25);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(0, 319);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(376, 26);
+            this.panel5.TabIndex = 9;
+            // 
+            // cfeInstallCode
+            // 
+            this.cfeInstallCode.Location = new System.Drawing.Point(230, 1);
+            this.cfeInstallCode.Name = "cfeInstallCode";
+            this.cfeInstallCode.Size = new System.Drawing.Size(143, 23);
+            this.cfeInstallCode.TabIndex = 9;
+            this.cfeInstallCode.Text = "Check for errors...";
+            this.cfeInstallCode.UseVisualStyleBackColor = true;
+            this.cfeInstallCode.Click += new System.EventHandler(this.cfeInstallCode_Click);
+            // 
+            // ccodeInstallTemplates
+            // 
+            this.ccodeInstallTemplates.FormattingEnabled = true;
+            this.ccodeInstallTemplates.Location = new System.Drawing.Point(70, 3);
+            this.ccodeInstallTemplates.Name = "ccodeInstallTemplates";
+            this.ccodeInstallTemplates.Size = new System.Drawing.Size(154, 21);
+            this.ccodeInstallTemplates.TabIndex = 6;
+            this.ccodeInstallTemplates.SelectedIndexChanged += new System.EventHandler(this.ccodeInstallTemplates_SelectedIndexChanged);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(5, 6);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(59, 13);
+            this.label25.TabIndex = 7;
+            this.label25.Text = "Templates:";
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -1028,6 +1156,45 @@
             this.customCodeUninstall.Size = new System.Drawing.Size(374, 306);
             this.customCodeUninstall.TabIndex = 4;
             this.customCodeUninstall.WordWrap = false;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.cfeUninstallCode);
+            this.panel4.Controls.Add(this.ccodeUninstallTemplates);
+            this.panel4.Controls.Add(this.label24);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 319);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(374, 26);
+            this.panel4.TabIndex = 8;
+            // 
+            // cfeUninstallCode
+            // 
+            this.cfeUninstallCode.Location = new System.Drawing.Point(228, 1);
+            this.cfeUninstallCode.Name = "cfeUninstallCode";
+            this.cfeUninstallCode.Size = new System.Drawing.Size(143, 23);
+            this.cfeUninstallCode.TabIndex = 8;
+            this.cfeUninstallCode.Text = "Check for errors...";
+            this.cfeUninstallCode.UseVisualStyleBackColor = true;
+            this.cfeUninstallCode.Click += new System.EventHandler(this.cfeUninstallCode_Click);
+            // 
+            // ccodeUninstallTemplates
+            // 
+            this.ccodeUninstallTemplates.FormattingEnabled = true;
+            this.ccodeUninstallTemplates.Location = new System.Drawing.Point(68, 3);
+            this.ccodeUninstallTemplates.Name = "ccodeUninstallTemplates";
+            this.ccodeUninstallTemplates.Size = new System.Drawing.Size(154, 21);
+            this.ccodeUninstallTemplates.TabIndex = 6;
+            this.ccodeUninstallTemplates.SelectedIndexChanged += new System.EventHandler(this.ccodeUninstallTemplates_SelectedIndexChanged);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(3, 6);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(59, 13);
+            this.label24.TabIndex = 7;
+            this.label24.Text = "Templates:";
             // 
             // label16
             // 
@@ -1095,6 +1262,45 @@
             this.installDatabaseCode.TabIndex = 3;
             this.installDatabaseCode.WordWrap = false;
             // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.cfeDBInstall);
+            this.panel8.Controls.Add(this.adatabaseInstallTemplates);
+            this.panel8.Controls.Add(this.label27);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel8.Location = new System.Drawing.Point(0, 319);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(376, 26);
+            this.panel8.TabIndex = 9;
+            // 
+            // cfeDBInstall
+            // 
+            this.cfeDBInstall.Location = new System.Drawing.Point(230, 1);
+            this.cfeDBInstall.Name = "cfeDBInstall";
+            this.cfeDBInstall.Size = new System.Drawing.Size(143, 23);
+            this.cfeDBInstall.TabIndex = 9;
+            this.cfeDBInstall.Text = "Check for errors...";
+            this.cfeDBInstall.UseVisualStyleBackColor = true;
+            this.cfeDBInstall.Click += new System.EventHandler(this.cfeDBInstall_Click);
+            // 
+            // adatabaseInstallTemplates
+            // 
+            this.adatabaseInstallTemplates.FormattingEnabled = true;
+            this.adatabaseInstallTemplates.Location = new System.Drawing.Point(70, 3);
+            this.adatabaseInstallTemplates.Name = "adatabaseInstallTemplates";
+            this.adatabaseInstallTemplates.Size = new System.Drawing.Size(154, 21);
+            this.adatabaseInstallTemplates.TabIndex = 6;
+            this.adatabaseInstallTemplates.SelectedIndexChanged += new System.EventHandler(this.adatabaseInstallTemplates_SelectedIndexChanged);
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(5, 6);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(59, 13);
+            this.label27.TabIndex = 7;
+            this.label27.Text = "Templates:";
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -1115,6 +1321,45 @@
             this.uninstallDatabaseCode.Size = new System.Drawing.Size(374, 306);
             this.uninstallDatabaseCode.TabIndex = 5;
             this.uninstallDatabaseCode.WordWrap = false;
+            // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.cfeDBUninstall);
+            this.panel7.Controls.Add(this.adatabaseUninstallTemplates);
+            this.panel7.Controls.Add(this.label26);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel7.Location = new System.Drawing.Point(0, 319);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(374, 26);
+            this.panel7.TabIndex = 9;
+            // 
+            // cfeDBUninstall
+            // 
+            this.cfeDBUninstall.Location = new System.Drawing.Point(226, 1);
+            this.cfeDBUninstall.Name = "cfeDBUninstall";
+            this.cfeDBUninstall.Size = new System.Drawing.Size(143, 23);
+            this.cfeDBUninstall.TabIndex = 9;
+            this.cfeDBUninstall.Text = "Check for errors...";
+            this.cfeDBUninstall.UseVisualStyleBackColor = true;
+            this.cfeDBUninstall.Click += new System.EventHandler(this.cfeDBUninstall_Click);
+            // 
+            // adatabaseUninstallTemplates
+            // 
+            this.adatabaseUninstallTemplates.FormattingEnabled = true;
+            this.adatabaseUninstallTemplates.Location = new System.Drawing.Point(68, 3);
+            this.adatabaseUninstallTemplates.Name = "adatabaseUninstallTemplates";
+            this.adatabaseUninstallTemplates.Size = new System.Drawing.Size(154, 21);
+            this.adatabaseUninstallTemplates.TabIndex = 6;
+            this.adatabaseUninstallTemplates.SelectedIndexChanged += new System.EventHandler(this.adatabaseUninstallTemplates_SelectedIndexChanged);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(3, 6);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(59, 13);
+            this.label26.TabIndex = 7;
+            this.label26.Text = "Templates:";
             // 
             // label18
             // 
@@ -1266,248 +1511,6 @@
             this.showConsoleToolStripMenuItem.Text = "Show console";
             this.showConsoleToolStripMenuItem.Click += new System.EventHandler(this.showConsoleToolStripMenuItem_Click);
             // 
-            // ccodeUninstallTemplates
-            // 
-            this.ccodeUninstallTemplates.FormattingEnabled = true;
-            this.ccodeUninstallTemplates.Location = new System.Drawing.Point(68, 3);
-            this.ccodeUninstallTemplates.Name = "ccodeUninstallTemplates";
-            this.ccodeUninstallTemplates.Size = new System.Drawing.Size(154, 21);
-            this.ccodeUninstallTemplates.TabIndex = 6;
-            this.ccodeUninstallTemplates.SelectedIndexChanged += new System.EventHandler(this.ccodeUninstallTemplates_SelectedIndexChanged);
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(3, 6);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(59, 13);
-            this.label24.TabIndex = 7;
-            this.label24.Text = "Templates:";
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.cfeUninstallCode);
-            this.panel4.Controls.Add(this.ccodeUninstallTemplates);
-            this.panel4.Controls.Add(this.label24);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 319);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(374, 26);
-            this.panel4.TabIndex = 8;
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.cfeInstallCode);
-            this.panel5.Controls.Add(this.ccodeInstallTemplates);
-            this.panel5.Controls.Add(this.label25);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 319);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(376, 26);
-            this.panel5.TabIndex = 9;
-            // 
-            // ccodeInstallTemplates
-            // 
-            this.ccodeInstallTemplates.FormattingEnabled = true;
-            this.ccodeInstallTemplates.Location = new System.Drawing.Point(70, 3);
-            this.ccodeInstallTemplates.Name = "ccodeInstallTemplates";
-            this.ccodeInstallTemplates.Size = new System.Drawing.Size(154, 21);
-            this.ccodeInstallTemplates.TabIndex = 6;
-            this.ccodeInstallTemplates.SelectedIndexChanged += new System.EventHandler(this.ccodeInstallTemplates_SelectedIndexChanged);
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(5, 6);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(59, 13);
-            this.label25.TabIndex = 7;
-            this.label25.Text = "Templates:";
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.cfeDBUninstall);
-            this.panel7.Controls.Add(this.adatabaseUninstallTemplates);
-            this.panel7.Controls.Add(this.label26);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 319);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(374, 26);
-            this.panel7.TabIndex = 9;
-            // 
-            // adatabaseUninstallTemplates
-            // 
-            this.adatabaseUninstallTemplates.FormattingEnabled = true;
-            this.adatabaseUninstallTemplates.Location = new System.Drawing.Point(68, 3);
-            this.adatabaseUninstallTemplates.Name = "adatabaseUninstallTemplates";
-            this.adatabaseUninstallTemplates.Size = new System.Drawing.Size(154, 21);
-            this.adatabaseUninstallTemplates.TabIndex = 6;
-            this.adatabaseUninstallTemplates.SelectedIndexChanged += new System.EventHandler(this.adatabaseUninstallTemplates_SelectedIndexChanged);
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(3, 6);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(59, 13);
-            this.label26.TabIndex = 7;
-            this.label26.Text = "Templates:";
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.cfeDBInstall);
-            this.panel8.Controls.Add(this.adatabaseInstallTemplates);
-            this.panel8.Controls.Add(this.label27);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 319);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(376, 26);
-            this.panel8.TabIndex = 9;
-            // 
-            // adatabaseInstallTemplates
-            // 
-            this.adatabaseInstallTemplates.FormattingEnabled = true;
-            this.adatabaseInstallTemplates.Location = new System.Drawing.Point(70, 3);
-            this.adatabaseInstallTemplates.Name = "adatabaseInstallTemplates";
-            this.adatabaseInstallTemplates.Size = new System.Drawing.Size(154, 21);
-            this.adatabaseInstallTemplates.TabIndex = 6;
-            this.adatabaseInstallTemplates.SelectedIndexChanged += new System.EventHandler(this.adatabaseInstallTemplates_SelectedIndexChanged);
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(5, 6);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(59, 13);
-            this.label27.TabIndex = 7;
-            this.label27.Text = "Templates:";
-            // 
-            // extractingInstructionsStrip
-            // 
-            this.extractingInstructionsStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editExtractMenuItem,
-            this.createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.deleteThisInstructionToolStripMenuItem});
-            this.extractingInstructionsStrip.Name = "extractingInstructionsStrip";
-            this.extractingInstructionsStrip.Size = new System.Drawing.Size(355, 76);
-            // 
-            // createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem
-            // 
-            this.createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem.Name = "createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem";
-            this.createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem.Size = new System.Drawing.Size(354, 22);
-            this.createADeletingFilesInstructionAgainstThisInstructionToolStripMenuItem.Text = "Create a delete file instruction against this instruction";
-            // 
-            // deleteThisInstructionToolStripMenuItem
-            // 
-            this.deleteThisInstructionToolStripMenuItem.Name = "deleteThisInstructionToolStripMenuItem";
-            this.deleteThisInstructionToolStripMenuItem.Size = new System.Drawing.Size(354, 22);
-            this.deleteThisInstructionToolStripMenuItem.Text = "Delete this instruction";
-            // 
-            // deletingInstructionsStrip
-            // 
-            this.deletingInstructionsStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteThisInstructionToolStripMenuItem1});
-            this.deletingInstructionsStrip.Name = "deletingInstructionsStrip";
-            this.deletingInstructionsStrip.Size = new System.Drawing.Size(190, 26);
-            // 
-            // deleteThisInstructionToolStripMenuItem1
-            // 
-            this.deleteThisInstructionToolStripMenuItem1.Name = "deleteThisInstructionToolStripMenuItem1";
-            this.deleteThisInstructionToolStripMenuItem1.Size = new System.Drawing.Size(189, 22);
-            this.deleteThisInstructionToolStripMenuItem1.Text = "Delete this instruction";
-            this.deleteThisInstructionToolStripMenuItem1.Click += new System.EventHandler(this.deleteExtractButton_Click);
-            // 
-            // deleteModInstructionStrip
-            // 
-            this.deleteModInstructionStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editInstructionMenuItem,
-            this.deleteThisInstructionToolStripMenuItem2});
-            this.deleteModInstructionStrip.Name = "deleteModInstructionStrip";
-            this.deleteModInstructionStrip.Size = new System.Drawing.Size(191, 48);
-            // 
-            // deleteThisInstructionToolStripMenuItem2
-            // 
-            this.deleteThisInstructionToolStripMenuItem2.Name = "deleteThisInstructionToolStripMenuItem2";
-            this.deleteThisInstructionToolStripMenuItem2.Size = new System.Drawing.Size(190, 22);
-            this.deleteThisInstructionToolStripMenuItem2.Text = "Delete this source edit";
-            this.deleteThisInstructionToolStripMenuItem2.Click += new System.EventHandler(this.delInstruction_Click);
-            // 
-            // editInstructionMenuItem
-            // 
-            this.editInstructionMenuItem.Name = "editInstructionMenuItem";
-            this.editInstructionMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.editInstructionMenuItem.Text = "Edit this source edit";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(3, 3);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(401, 26);
-            this.label28.TabIndex = 13;
-            this.label28.Text = "The SMF package manager allows you to extract files to the forum upon installatio" +
-    "n.\r\nYou can specify instructions for that here. Double click an instruction to e" +
-    "dit it.";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(123, 0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(41, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "URL";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.bbcbutton);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(351, 6);
-            // 
-            // editExtractMenuItem
-            // 
-            this.editExtractMenuItem.Name = "editExtractMenuItem";
-            this.editExtractMenuItem.Size = new System.Drawing.Size(354, 22);
-            this.editExtractMenuItem.Text = "Edit this instruction";
-            // 
-            // cfeUninstallCode
-            // 
-            this.cfeUninstallCode.Location = new System.Drawing.Point(228, 1);
-            this.cfeUninstallCode.Name = "cfeUninstallCode";
-            this.cfeUninstallCode.Size = new System.Drawing.Size(143, 23);
-            this.cfeUninstallCode.TabIndex = 8;
-            this.cfeUninstallCode.Text = "Check for errors...";
-            this.cfeUninstallCode.UseVisualStyleBackColor = true;
-            // 
-            // cfeInstallCode
-            // 
-            this.cfeInstallCode.Location = new System.Drawing.Point(230, 1);
-            this.cfeInstallCode.Name = "cfeInstallCode";
-            this.cfeInstallCode.Size = new System.Drawing.Size(143, 23);
-            this.cfeInstallCode.TabIndex = 9;
-            this.cfeInstallCode.Text = "Check for errors...";
-            this.cfeInstallCode.UseVisualStyleBackColor = true;
-            this.cfeInstallCode.Click += new System.EventHandler(this.cfeInstallCode_Click);
-            // 
-            // cfeDBInstall
-            // 
-            this.cfeDBInstall.Location = new System.Drawing.Point(230, 1);
-            this.cfeDBInstall.Name = "cfeDBInstall";
-            this.cfeDBInstall.Size = new System.Drawing.Size(143, 23);
-            this.cfeDBInstall.TabIndex = 9;
-            this.cfeDBInstall.Text = "Check for errors...";
-            this.cfeDBInstall.UseVisualStyleBackColor = true;
-            // 
-            // cfeDBUninstall
-            // 
-            this.cfeDBUninstall.Location = new System.Drawing.Point(226, 1);
-            this.cfeDBUninstall.Name = "cfeDBUninstall";
-            this.cfeDBUninstall.Size = new System.Drawing.Size(143, 23);
-            this.cfeDBUninstall.TabIndex = 9;
-            this.cfeDBUninstall.Text = "Check for errors...";
-            this.cfeDBUninstall.UseVisualStyleBackColor = true;
-            // 
             // modEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1546,6 +1549,7 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).EndInit();
+            this.deleteModInstructionStrip.ResumeLayout(false);
             this.extractFilesTab.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -1553,6 +1557,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.extractingInstructionsStrip.ResumeLayout(false);
+            this.deletingInstructionsStrip.ResumeLayout(false);
             this.customCodeTab.ResumeLayout(false);
             this.customCodeTab.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -1561,6 +1567,10 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.alterDatabaseTab.ResumeLayout(false);
             this.alterDatabaseTab.PerformLayout();
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -1569,21 +1579,14 @@
             this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            this.extractingInstructionsStrip.ResumeLayout(false);
-            this.deletingInstructionsStrip.ResumeLayout(false);
-            this.deleteModInstructionStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Mod Builder"
-#define MyAppVersion "1.2.4"
+#define MyAppVersion "1.3"
 #define MyAppPublisher "Yoshi2889"
 #define MyAppURL "http://map3forum.tk"
 #define MyAppExeName "ModBuilder.exe"
@@ -37,6 +37,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\ModBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\7za.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\Ionic.Zip.dll"; DestDir: "{app}"; Flags: ignoreversion
 ;Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Debug\ModBuilder.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 ;Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Debug\ModBuilder.pdb"; DestDir: "{app}"; Flags: ignoreversion
@@ -44,6 +45,7 @@ Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProj
 Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

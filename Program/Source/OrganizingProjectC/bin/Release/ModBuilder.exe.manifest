@@ -60,14 +60,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModBuilder.exe" size="152576">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModBuilder.exe" size="154624">
       <assemblyIdentity name="ModBuilder" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>IXDNcvXiUfn67GhtuTTE2zYQxsU=</dsig:DigestValue>
+        <dsig:DigestValue>2dLuVW+A1vtqodgrja93vH4HFYE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -95,6 +95,15 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="7za.exe" size="587776">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>zuF42h+wX5mvejVHCTEiiTvR60Y=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="card-address (1).ico" size="5430">
     <hash>
       <dsig:Transforms>

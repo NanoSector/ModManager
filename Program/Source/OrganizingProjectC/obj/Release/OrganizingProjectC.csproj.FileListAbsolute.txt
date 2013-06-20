@@ -54,7 +54,6 @@ C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\
 C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\code_install\Settings.php
 C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\code_uninstall\Hooks.php
 C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\code_uninstall\Settings.php
-C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\database_install\Hooks.php
-C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\database_install\Settings.php
-C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\database_uninstall\Hooks.php
-C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\database_uninstall\Settings.php
+C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\7za.exe
+C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\database_install\Create tables.php
+C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\database_uninstall\Drop tables.php
