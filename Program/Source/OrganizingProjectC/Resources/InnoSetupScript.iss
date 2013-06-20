@@ -45,7 +45,7 @@ Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProj
 Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\*"; DestDir: "{app}\templates"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
