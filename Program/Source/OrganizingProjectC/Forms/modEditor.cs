@@ -55,6 +55,69 @@ namespace ModBuilder
         private void modEditor_Load(object sender, EventArgs e)
         {
             modType.SelectedItem = "Modification";
+
+            string[] updates;
+
+            // Grab the respective templates for every component that can handle templates.
+            //ccodeInstallTemplates
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_install"))
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_install");
+            else
+            {
+                updates = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_install");
+                foreach (string file in updates)
+                {
+                    if (file.Split('.').Last() == "php")
+                        ccodeInstallTemplates.Items.Add(file.Replace(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_install\", "").Replace(".php", ""));
+                }
+            }
+
+            //ccodeUninstallTemplates
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_uninstall"))
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_uninstall");
+            else
+            {
+                updates = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_uninstall");
+                foreach (string file in updates)
+                {
+                    if (file.Split('.').Last() == "php")
+                        ccodeUninstallTemplates.Items.Add(file.Replace(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_uninstall\", "").Replace(".php", ""));
+                }
+            }
+
+            //adatabaseInstallTemplates
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_install"))
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_install");
+            else
+            {
+                updates = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_install");
+                foreach (string file in updates)
+                {
+                    if (file.Split('.').Last() == "php")
+                        adatabaseInstallTemplates.Items.Add(file.Replace(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_install\", "").Replace(".php", ""));
+                }
+            }
+
+            //adatabaseUninstallTemplates
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_install"))
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_install");
+            else
+            {
+                updates = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_uninstall");
+                foreach (string file in updates)
+                {
+                    if (file.Split('.').Last() == "php")
+                        adatabaseUninstallTemplates.Items.Add(file.Replace(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_uninstall\", "").Replace(".php", ""));
+                }
+            }
+
+            if (!File.Exists(Properties.Settings.Default.phppath))
+            {
+                cfeDBInstall.Enabled = false;
+                cfeDBUninstall.Enabled = false;
+                cfeInstallCode.Enabled = false;
+                cfeUninstallCode.Enabled = false;
+            }
         }
         #endregion
 
@@ -620,7 +683,7 @@ namespace ModBuilder
 
         private void showHelp(string text)
         {
-            message.information(text, MessageBoxButtons.OK);
+            message.information(text);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -1240,26 +1303,79 @@ namespace ModBuilder
             modReadme.SelectionStart = (selectstart + insert1.Length);
             modReadme.SelectionLength = 0;
         }
-
-        private void bbcB_Click(object sender, EventArgs e)
+        
+        private void bbcbutton(object sender, EventArgs e)
         {
-            insertBBC("b");
-        }
-
-        private void bbcU_Click(object sender, EventArgs e)
-        {
-            insertBBC("u");
-        }
-
-        private void bbcI_Click(object sender, EventArgs e)
-        {
-            insertBBC("i");
-        }
-
-        private void bbcS_Click(object sender, EventArgs e)
-        {
-            insertBBC("s");
+            Button btn = (Button)sender;
+            insertBBC(btn.Text.ToLower());
         }
         #endregion
+
+        #region Templates
+        private void ccodeInstallTemplates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_install\" + ccodeInstallTemplates.SelectedItem.ToString() + ".php"))
+            {
+                string tcontents = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_install\" + ccodeInstallTemplates.SelectedItem.ToString() + ".php");
+                customCodeInstall.Text = tcontents;
+            }
+            else
+                message.error("The requested template does not exist!");
+        }
+
+        private void ccodeUninstallTemplates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_uninstall\" + ccodeUninstallTemplates.SelectedItem.ToString() + ".php"))
+            {
+                string tcontents = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\templates\code_uninstall\" + ccodeUninstallTemplates.SelectedItem.ToString() + ".php");
+                customCodeUninstall.Text = tcontents;
+            }
+            else
+                message.error("The requested template does not exist!");
+        }
+
+        private void adatabaseInstallTemplates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_install\" + adatabaseInstallTemplates.SelectedItem.ToString() + ".php"))
+            {
+                string tcontents = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_install\" + adatabaseInstallTemplates.SelectedItem.ToString() + ".php");
+                installDatabaseCode.Text = tcontents;
+            }
+            else
+                message.error("The requested template does not exist!");
+        }
+
+        private void adatabaseUninstallTemplates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_install\" + adatabaseUninstallTemplates.SelectedItem.ToString() + ".php"))
+            {
+                string tcontents = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + @"\templates\database_install\" + adatabaseUninstallTemplates.SelectedItem.ToString() + ".php");
+                uninstallDatabaseCode.Text = tcontents;
+            }
+            else
+                message.error("The requested template does not exist!");
+        }
+        #endregion
+
+        #region Code error checking
+
+        private void checkCode(string code)
+        {
+            if (!File.Exists(Properties.Settings.Default.phppath))
+            {
+                message.error("PHP was not found; can't check for errors.");
+                return;
+            }
+
+
+        }
+
+        private void cfeInstallCode_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
     }
 }

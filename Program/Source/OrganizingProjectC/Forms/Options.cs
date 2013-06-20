@@ -12,6 +12,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using Ionic.Zip;
 using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace ModBuilder.Forms
 {
@@ -248,35 +249,6 @@ namespace ModBuilder.Forms
             dl11.Text = "Downloading... " + e.ProgressPercentage + "%";
         }
 
-        private void testSmOrgDetails_Click(object sender, EventArgs e)
-        {
-            // Create hashed strings
-            string base64username = System.Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(smOrgUsername.Text));
-            
-            // Now create a hash.
-            string toencode = smOrgUsername.Text.ToLower() + smOrgPassword.Text;
-
-
-            SHA1 hash = SHA1CryptoServiceProvider.Create();
-            byte[] buffer = Encoding.UTF8.GetBytes(toencode);
-            byte[] result = hash.ComputeHash(Combine(hash.ComputeHash(buffer), Encoding.UTF8.GetBytes("w$--IN5~2a")));
-
-            
-            /*using (SHA1 shaM = new SHA1Managed())
-            {
-                result = shaM.ComputeHash(Encoding.UTF8.GetBytes(shaM.ComputeHash(buffer) + "w$--IN5~2a"));
-            }*/
-
-            idUsername.Text = "web_user=" + base64username + "&check&web_pass=" + BitConverter.ToString(result).Replace("-", "");
-        }
-        private byte[] Combine(byte[] a, byte[] b)
-        {
-            byte[] c = new byte[a.Length + b.Length];
-            System.Buffer.BlockCopy(a, 0, c, 0, a.Length);
-            System.Buffer.BlockCopy(b, 0, c, a.Length, b.Length);
-            return c;
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             string[] toDelete = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "update_*.exe");
@@ -291,12 +263,51 @@ namespace ModBuilder.Forms
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DialogResult result = message.question("This will revert this version of Mod Builder to the selected version, and this version will be closed. Are you okay with this?", MessageBoxButtons.YesNo);
+            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "update_" + comboBox1.SelectedItem.ToString().Replace(".", "-") + ".exe"))
+                message.error("The requested version has either been moved or deleted, or was not found.");
+            
+            DialogResult result = message.question("This will start an installer to revert this version of Mod Builder to the selected version, and this version will be closed. Are you okay with this?", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
                 System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "update_" + comboBox1.SelectedItem.ToString().Replace(".", "-") + ".exe");
                 Application.Exit();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "php.exe files|php.exe";
+            fd.CheckFileExists = true;
+            DialogResult result = fd.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                // Try a test call on this instance.
+                Process p = new Process();
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                p.StartInfo.FileName = fd.FileName;
+                p.StartInfo.Arguments = " -v";
+                p.Start();
+
+                string output = p.StandardOutput.ReadLine();
+
+                message.information(output);
+
+                if (output.Substring(0, 3) != "PHP")
+                    message.error("The PHP instance is either not correctly compiled or is no PHP instance. Please try again.");
+
+                Match version = Regex.Match(output, @"PHP ([^']*) \(");
+                if (version.Success)
+                {
+                    phpver.Text = version.Groups[1].Value;
+                    phppath.Text = fd.FileName;
+                }
+                else
+                    message.error("The PHP instance is either not correctly compiled or is no PHP instance. Please try again.");
             }
         }
     }

@@ -30,14 +30,6 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.testSmOrgDetails = new System.Windows.Forms.Button();
-            this.smOrgPassword = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.smOrgUsername = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.idUsername = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -53,37 +45,43 @@
             this.browseSmfPath = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.smfPath = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.bypassArchiveError = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupInstr = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.autoCheckUpdates = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.label12 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.phpver = new System.Windows.Forms.Label();
+            this.idUsername = new System.Windows.Forms.TextBox();
+            this.smfPath = new System.Windows.Forms.TextBox();
+            this.bypassArchiveError = new System.Windows.Forms.CheckBox();
+            this.groupInstr = new System.Windows.Forms.CheckBox();
+            this.autoCheckUpdates = new System.Windows.Forms.CheckBox();
+            this.phppath = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -102,7 +100,6 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.idUsername);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label7);
@@ -113,87 +110,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.testSmOrgDetails);
-            this.groupBox3.Controls.Add(this.smOrgPassword);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.smOrgUsername);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Location = new System.Drawing.Point(8, 101);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(354, 113);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Simple Machines integration";
-            this.groupBox3.Visible = false;
-            // 
-            // testSmOrgDetails
-            // 
-            this.testSmOrgDetails.Location = new System.Drawing.Point(213, 84);
-            this.testSmOrgDetails.Name = "testSmOrgDetails";
-            this.testSmOrgDetails.Size = new System.Drawing.Size(126, 23);
-            this.testSmOrgDetails.TabIndex = 5;
-            this.testSmOrgDetails.Text = "Test your login details";
-            this.testSmOrgDetails.UseVisualStyleBackColor = true;
-            this.testSmOrgDetails.Click += new System.EventHandler(this.testSmOrgDetails_Click);
-            // 
-            // smOrgPassword
-            // 
-            this.smOrgPassword.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ModBuilder.Properties.Settings.Default, "smOrgPassword", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.smOrgPassword.Location = new System.Drawing.Point(98, 58);
-            this.smOrgPassword.Name = "smOrgPassword";
-            this.smOrgPassword.Size = new System.Drawing.Size(241, 20);
-            this.smOrgPassword.TabIndex = 4;
-            this.smOrgPassword.Text = global::ModBuilder.Properties.Settings.Default.smOrgPassword;
-            this.smOrgPassword.UseSystemPasswordChar = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(11, 61);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(56, 13);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Password:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(11, 35);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(58, 13);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Username:";
-            // 
-            // smOrgUsername
-            // 
-            this.smOrgUsername.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ModBuilder.Properties.Settings.Default, "smOrgUsername", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.smOrgUsername.Location = new System.Drawing.Point(98, 32);
-            this.smOrgUsername.Name = "smOrgUsername";
-            this.smOrgUsername.Size = new System.Drawing.Size(241, 20);
-            this.smOrgUsername.TabIndex = 1;
-            this.smOrgUsername.Text = global::ModBuilder.Properties.Settings.Default.smOrgUsername;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 16);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(333, 13);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "This will integrate your SimpleMachines.org account into Mod Builder.";
-            // 
-            // idUsername
-            // 
-            this.idUsername.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ModBuilder.Properties.Settings.Default, "idUsername", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.idUsername.Location = new System.Drawing.Point(106, 12);
-            this.idUsername.Name = "idUsername";
-            this.idUsername.Size = new System.Drawing.Size(241, 20);
-            this.idUsername.TabIndex = 2;
-            this.idUsername.Text = global::ModBuilder.Properties.Settings.Default.idUsername;
             // 
             // label8
             // 
@@ -352,15 +268,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Path to SMF files...";
             // 
-            // smfPath
-            // 
-            this.smfPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ModBuilder.Properties.Settings.Default, "smfPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.smfPath.Location = new System.Drawing.Point(123, 17);
-            this.smfPath.Name = "smfPath";
-            this.smfPath.Size = new System.Drawing.Size(152, 20);
-            this.smfPath.TabIndex = 2;
-            this.smfPath.Text = global::ModBuilder.Properties.Settings.Default.smfPath;
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.groupBox2);
@@ -395,18 +302,6 @@
             this.label4.Text = "WARNING!!! This feature can have undesired side effects!\r\nYou should also disable" +
     " this when writing mods for SMF 2.1!";
             // 
-            // bypassArchiveError
-            // 
-            this.bypassArchiveError.AutoSize = true;
-            this.bypassArchiveError.Checked = global::ModBuilder.Properties.Settings.Default.bypassArchiveError;
-            this.bypassArchiveError.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::ModBuilder.Properties.Settings.Default, "bypassArchiveError", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.bypassArchiveError.Location = new System.Drawing.Point(6, 19);
-            this.bypassArchiveError.Name = "bypassArchiveError";
-            this.bypassArchiveError.Size = new System.Drawing.Size(245, 17);
-            this.bypassArchiveError.TabIndex = 0;
-            this.bypassArchiveError.Text = "Attempt to bypass \"The archive is empty\" error";
-            this.bypassArchiveError.UseVisualStyleBackColor = true;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupInstr);
@@ -416,19 +311,6 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Smart Building features";
-            // 
-            // groupInstr
-            // 
-            this.groupInstr.AutoSize = true;
-            this.groupInstr.Checked = global::ModBuilder.Properties.Settings.Default.groupInstructions;
-            this.groupInstr.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.groupInstr.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::ModBuilder.Properties.Settings.Default, "groupInstructions", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.groupInstr.Location = new System.Drawing.Point(6, 19);
-            this.groupInstr.Name = "groupInstr";
-            this.groupInstr.Size = new System.Drawing.Size(300, 17);
-            this.groupInstr.TabIndex = 0;
-            this.groupInstr.Text = "Group instructions on the same file together in the XML file";
-            this.groupInstr.UseVisualStyleBackColor = true;
             // 
             // tabPage4
             // 
@@ -442,6 +324,17 @@
             this.tabPage4.Text = "Updates";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.autoCheckUpdates);
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Location = new System.Drawing.Point(8, 6);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(354, 84);
+            this.groupBox5.TabIndex = 4;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Updating";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -452,17 +345,56 @@
             this.label3.Text = "This feature can cause Mod Builder to start up really slow,\r\nso please keep that " +
     "in mind when using this feature.";
             // 
-            // autoCheckUpdates
+            // groupBox4
             // 
-            this.autoCheckUpdates.AutoSize = true;
-            this.autoCheckUpdates.Checked = global::ModBuilder.Properties.Settings.Default.autoCheckUpdates;
-            this.autoCheckUpdates.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::ModBuilder.Properties.Settings.Default, "autoCheckUpdates", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoCheckUpdates.Location = new System.Drawing.Point(6, 19);
-            this.autoCheckUpdates.Name = "autoCheckUpdates";
-            this.autoCheckUpdates.Size = new System.Drawing.Size(319, 17);
-            this.autoCheckUpdates.TabIndex = 0;
-            this.autoCheckUpdates.Text = "When Mod Builder launches, automatically check for updates.";
-            this.autoCheckUpdates.UseVisualStyleBackColor = true;
+            this.groupBox4.Controls.Add(this.comboBox1);
+            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Controls.Add(this.label13);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Location = new System.Drawing.Point(8, 96);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(354, 108);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Recovery";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(103, 49);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(97, 21);
+            this.comboBox1.TabIndex = 5;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 79);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(194, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Delete all stored update executables";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 52);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(91, 13);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Revert to version:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(16, 16);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(303, 26);
+            this.label12.TabIndex = 2;
+            this.label12.Text = "Mod Manager stores all update executables. This allows you to\r\nrevert to an older" +
+    " version, when features do not work correctly.";
             // 
             // panel1
             // 
@@ -497,75 +429,119 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.phpver);
+            this.tabPage5.Controls.Add(this.label10);
+            this.tabPage5.Controls.Add(this.button6);
+            this.tabPage5.Controls.Add(this.phppath);
+            this.tabPage5.Controls.Add(this.label9);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(370, 220);
             this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Advanced";
+            this.tabPage5.Text = "PHP Code Checking";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // label12
+            // label9
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(16, 16);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(303, 26);
-            this.label12.TabIndex = 2;
-            this.label12.Text = "Mod Manager stores all update executables. This allows you to\r\nrevert to an older" +
-    " version, when features do not work correctly.";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(8, 13);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(85, 13);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Path to php.exe:";
             // 
-            // groupBox4
+            // button6
             // 
-            this.groupBox4.Controls.Add(this.comboBox1);
-            this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Location = new System.Drawing.Point(8, 96);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(354, 108);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Recovery";
+            this.button6.Location = new System.Drawing.Point(287, 8);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "Browse";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // groupBox5
+            // label10
             // 
-            this.groupBox5.Controls.Add(this.autoCheckUpdates);
-            this.groupBox5.Controls.Add(this.label3);
-            this.groupBox5.Location = new System.Drawing.Point(8, 6);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(354, 84);
-            this.groupBox5.TabIndex = 4;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Updating";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(8, 50);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(202, 13);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "The following PHP version was detected:";
             // 
-            // label13
+            // phpver
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 52);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(91, 13);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "Revert to version:";
+            this.phpver.AutoSize = true;
+            this.phpver.Location = new System.Drawing.Point(216, 50);
+            this.phpver.Name = "phpver";
+            this.phpver.Size = new System.Drawing.Size(57, 13);
+            this.phpver.TabIndex = 6;
+            this.phpver.Text = "(unknown)";
             // 
-            // button3
+            // idUsername
             // 
-            this.button3.Location = new System.Drawing.Point(6, 79);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(194, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Delete all stored update executables";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.idUsername.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ModBuilder.Properties.Settings.Default, "idUsername", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.idUsername.Location = new System.Drawing.Point(106, 12);
+            this.idUsername.Name = "idUsername";
+            this.idUsername.Size = new System.Drawing.Size(241, 20);
+            this.idUsername.TabIndex = 2;
+            this.idUsername.Text = global::ModBuilder.Properties.Settings.Default.idUsername;
             // 
-            // comboBox1
+            // smfPath
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(103, 49);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(97, 21);
-            this.comboBox1.TabIndex = 5;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.smfPath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ModBuilder.Properties.Settings.Default, "smfPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.smfPath.Location = new System.Drawing.Point(123, 17);
+            this.smfPath.Name = "smfPath";
+            this.smfPath.Size = new System.Drawing.Size(152, 20);
+            this.smfPath.TabIndex = 2;
+            this.smfPath.Text = global::ModBuilder.Properties.Settings.Default.smfPath;
+            // 
+            // bypassArchiveError
+            // 
+            this.bypassArchiveError.AutoSize = true;
+            this.bypassArchiveError.Checked = global::ModBuilder.Properties.Settings.Default.bypassArchiveError;
+            this.bypassArchiveError.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::ModBuilder.Properties.Settings.Default, "bypassArchiveError", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.bypassArchiveError.Location = new System.Drawing.Point(6, 19);
+            this.bypassArchiveError.Name = "bypassArchiveError";
+            this.bypassArchiveError.Size = new System.Drawing.Size(245, 17);
+            this.bypassArchiveError.TabIndex = 0;
+            this.bypassArchiveError.Text = "Attempt to bypass \"The archive is empty\" error";
+            this.bypassArchiveError.UseVisualStyleBackColor = true;
+            // 
+            // groupInstr
+            // 
+            this.groupInstr.AutoSize = true;
+            this.groupInstr.Checked = global::ModBuilder.Properties.Settings.Default.groupInstructions;
+            this.groupInstr.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.groupInstr.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::ModBuilder.Properties.Settings.Default, "groupInstructions", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.groupInstr.Location = new System.Drawing.Point(6, 19);
+            this.groupInstr.Name = "groupInstr";
+            this.groupInstr.Size = new System.Drawing.Size(300, 17);
+            this.groupInstr.TabIndex = 0;
+            this.groupInstr.Text = "Group instructions on the same file together in the XML file";
+            this.groupInstr.UseVisualStyleBackColor = true;
+            // 
+            // autoCheckUpdates
+            // 
+            this.autoCheckUpdates.AutoSize = true;
+            this.autoCheckUpdates.Checked = global::ModBuilder.Properties.Settings.Default.autoCheckUpdates;
+            this.autoCheckUpdates.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::ModBuilder.Properties.Settings.Default, "autoCheckUpdates", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoCheckUpdates.Location = new System.Drawing.Point(6, 19);
+            this.autoCheckUpdates.Name = "autoCheckUpdates";
+            this.autoCheckUpdates.Size = new System.Drawing.Size(319, 17);
+            this.autoCheckUpdates.TabIndex = 0;
+            this.autoCheckUpdates.Text = "When Mod Builder launches, automatically check for updates.";
+            this.autoCheckUpdates.UseVisualStyleBackColor = true;
+            // 
+            // phppath
+            // 
+            this.phppath.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ModBuilder.Properties.Settings.Default, "phppath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.phppath.Location = new System.Drawing.Point(99, 10);
+            this.phppath.Name = "phppath";
+            this.phppath.Size = new System.Drawing.Size(182, 20);
+            this.phppath.TabIndex = 1;
+            this.phppath.Text = global::ModBuilder.Properties.Settings.Default.phppath;
             // 
             // Options
             // 
@@ -576,14 +552,17 @@
             this.ClientSize = new System.Drawing.Size(378, 280);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Options";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Mod Builder Options";
             this.Load += new System.EventHandler(this.Options_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -592,11 +571,13 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage4.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -631,16 +612,9 @@
         private System.Windows.Forms.CheckBox groupInstr;
         private System.Windows.Forms.Label dsmfver;
         private System.Windows.Forms.Label dsmfverp;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox smOrgPassword;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox smOrgUsername;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox idUsername;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button testSmOrgDetails;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -648,5 +622,10 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Label phpver;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox phppath;
+        private System.Windows.Forms.Label label9;
     }
 }

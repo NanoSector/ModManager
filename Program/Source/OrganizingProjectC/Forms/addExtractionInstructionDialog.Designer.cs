@@ -130,7 +130,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 136);
+            this.ClientSize = new System.Drawing.Size(495, 135);
+            this.ControlBox = false;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -140,12 +141,15 @@
             this.Controls.Add(this.refreshComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.fileComboBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(511, 174);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(511, 174);
             this.Name = "addExtractionInstructionDialog";
-            this.Text = "addExtractionInstructionDialog";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "Add or edit an extract instruction";
             this.ResumeLayout(false);
             this.PerformLayout();
 

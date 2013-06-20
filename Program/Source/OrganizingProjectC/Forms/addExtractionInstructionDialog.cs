@@ -90,11 +90,11 @@ namespace ModBuilder.Forms
             string sql;
             if (editing == 0)
             {
-                sql = "INSERT INTO files(id, file_name, destination) VALUES(null, @fileName, @destination)";
+                sql = "INSERT INTO files(id, file_name, destination, type) VALUES(null, @fileName, @destination)";
             }
             else
             {
-                sql = "UPDATE files SET file_name = @fileName, destination = @destination WHERE id = @editing";
+                sql = "UPDATE files SET file_name = @fileName, destination = @destination, type = @type WHERE id = @editing";
             }
 
             // Create the query.

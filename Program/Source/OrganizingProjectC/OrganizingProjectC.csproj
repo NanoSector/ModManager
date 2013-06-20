@@ -76,9 +76,6 @@
       <HintPath>Resources\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="ScintillaNET">
-      <HintPath>Resources\ScintillaNET.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite.Linq">
@@ -97,6 +94,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="APIs\Build.cs" />
     <Compile Include="APIs\Notify.cs" />
     <Compile Include="Forms\addDeletionInstructionDialog.cs">
       <SubType>Form</SubType>
@@ -203,6 +201,30 @@
     <EmbeddedResource Include="Forms\ModConsole.resx">
       <DependentUpon>ModConsole.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="templates\code_install\Hooks.php">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\code_install\Settings.php">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\code_uninstall\Hooks.php">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\code_uninstall\Settings.php">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\database_install\Hooks.php">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\database_install\Settings.php">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\database_uninstall\Hooks.php">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="templates\database_uninstall\Settings.php">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -236,6 +258,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
