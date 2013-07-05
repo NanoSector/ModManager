@@ -15,7 +15,6 @@ namespace ModBuilder.Forms
 {
     public partial class convertProject : Form
     {
-        APIs.Notify message = new APIs.Notify();
         public convertProject()
         {
             InitializeComponent();
@@ -39,7 +38,7 @@ namespace ModBuilder.Forms
                 // Being the nice program I am, I shall check if a project already exists in this directory.
                 if (File.Exists(fb.SelectedPath + "/data.sqlite") && File.Exists(fb.SelectedPath + "/Package/package-info.xml"))
                 {
-                    DialogResult qresult = message.warning("Mod Manager has detected that a project already exists in the selected directory. Are you sure you want to continue and possibly overwrite the existing project?", MessageBoxButtons.YesNo);
+                    DialogResult qresult = MessageBox.Show("Mod Manager has detected that a project already exists in the selected directory. Are you sure you want to continue and possibly overwrite the existing project?", "Options", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     // No? Quit.
                     if (qresult == DialogResult.No)
@@ -69,7 +68,7 @@ namespace ModBuilder.Forms
                 // Being the nice program I am, I shall check if a project already exists in this directory.
                 if (!File.Exists(fb.SelectedPath + "/package-info.xml"))
                 {
-                    DialogResult qresult = message.warning("Mod Manager has detected that there is no package-info.xml in the package, so you will have to manually select any files in the package. Do you still want to continue?", MessageBoxButtons.YesNo);
+                    DialogResult qresult = MessageBox.Show("Mod Manager has detected that there is no package-info.xml in the package, so you will have to manually select any files in the package. Do you still want to continue?", "Converting", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     // No? Quit.
                     if (qresult == DialogResult.No)
@@ -241,7 +240,7 @@ namespace ModBuilder.Forms
         {
             if (!Directory.Exists(packageInputPath.Text))
             {
-                message.error("Your input directory does not exist. Please select a different one.", MessageBoxButtons.OK);
+                MessageBox.Show("Your input directory does not exist. Please select a different one.", "Convert Project", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -442,7 +441,7 @@ namespace ModBuilder.Forms
 
             me.Close();
 
-            DialogResult result = message.information("Package has been converted, do you want to load it now?", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("The package has been converted, do you want to load it now?", "Converting Project", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 loadProject lp = new loadProject();

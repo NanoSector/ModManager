@@ -19,8 +19,6 @@ namespace ModBuilder
         private modEditor me;
         int editing = 0;
 
-        APIs.Notify message = new APIs.Notify();
-
         // Loads and sets up the environment.
         public addInstruction(string workingDirectory, SQLiteConnection conn, int editing, modEditor mode)
         {
@@ -116,17 +114,7 @@ namespace ModBuilder
                     break;
             }
 
-            int optional;
-            switch (optionalCheck.Checked)
-            {
-                case true:
-                    optional = 1;
-                    break;
-
-                default:
-                    optional = 0;
-                    break;
-            }   
+            int optional = Convert.ToInt32(optionalCheck.Checked);
 
             // Start the sql string.
             string sql;
@@ -176,7 +164,7 @@ namespace ModBuilder
             string file = (filePrefix.SelectedItem + "/" + fileEdited.Text).Replace("$boarddir", path).Replace("$sourcedir", path + "/Sources").Replace("$themedir", path + "/Themes/default").Replace("$languagedir", path + "/Themes/default/languages").Replace("$avatardir", path + "/Avatars").Replace("$imagesdir", path + "/Themes/default/images");
             if (!File.Exists(file))
             {
-                message.warning("The specified file was not found. This instruction will NOT successfully be executed.");
+                MessageBox.Show("The specified file was not found. This instruction will NOT successfully be executed.", "Testing instruction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -188,12 +176,12 @@ namespace ModBuilder
                 // Try to find the before text in the mess.
                 if (contents.IndexOf(before.Text) == -1)
                 {
-                    message.warning("The text to search for was not found. The instruction will NOT be successfully executed.");
+                    MessageBox.Show("The text to search for was not found. The instruction will NOT be successfully executed.", "Testing instruction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
             }
 
-            message.information("The instruction should successfully be executed upon installation.");
+            MessageBox.Show("The instruction should successfully be executed upon installation.", "Testing instruction", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void addInstruction_Load(object sender, EventArgs e)

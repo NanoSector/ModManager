@@ -1,9 +1,0 @@
-[0613/180330:WARNING:dns_config_service_win.cc(623)] Failed to read DnsConfig.
-[0613/180330:ERROR:textfield.h(162)] NOT IMPLEMENTED
-[0613/180331:INFO:browser_window_win.cc(423)] Should hide icon indicating blocked pop-up
-[0613/180334:ERROR:checker.cc(74)] [AU] Error occured on update checking. Retrying 1 time
-[0613/180336:WARNING:dns_config_service_win.cc(623)] Failed to read DnsConfig.
-[0613/180336:ERROR:textfield.h(162)] NOT IMPLEMENTED
-[0613/180336:INFO:browser_window_win.cc(423)] Should hide icon indicating blocked pop-up
-[0613/180338:ERROR:checker.cc(74)] [AU] Error occured on update checking. Retrying 2 time
-[0613/180343:ERROR:checker.cc(74)] [AU] Error occured on update checking. Retrying 3 time

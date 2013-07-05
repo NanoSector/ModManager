@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Data.SQLite;
-using Ionic.Zip;
 using ModBuilder.Forms;
 using System.Diagnostics;
 
@@ -25,8 +24,6 @@ namespace ModBuilder
         public bool hasConn = false;
         public Dictionary<string, string> settings = new Dictionary<string,string>();
         //public bool changesPending = false; - For later :)
-        public modConsole mc;
-        APIs.Notify message = new APIs.Notify();
         #endregion
 
         #region Load
@@ -183,12 +180,6 @@ namespace ModBuilder
             if (string.IsNullOrEmpty(workingDirectory))
                 return false;
 
-            mc.Message("----------------------------------------------------------------------------");
-            mc.Message("Build started...");
-
-            // Start measuring the time elapsed.
-            mc.startMeasureTime();
-
             // Create a Package and Source directory if they do not exist.
             if (!Directory.Exists(workingDirectory + "/Package"))
                 Directory.CreateDirectory(workingDirectory + "/Package");
@@ -199,10 +190,7 @@ namespace ModBuilder
             if (String.IsNullOrEmpty(modName.Text) || String.IsNullOrEmpty(modVersion.Text) || String.IsNullOrEmpty(modType.Text) || String.IsNullOrEmpty(modID.Text) || String.IsNullOrEmpty(modCompatibility.Text))
             {
                 // Yes it is, warn the user and reset to the main tab.
-                mc.Message("Not all the required fields are filled in. Build aborted.");
-                mc.endMeasureTime();
-                message.warning("You forgot to fill in some details.", MessageBoxButtons.OK);
-                tabControl1.SelectedTab = modDetailsTab;
+                modSettings.SelectedTab = modDetailsTab;
 
                 // Also mark the required fields in a nice red colour. It goes away once something's typed. First up is name.
                 if (String.IsNullOrEmpty(modName.Text))
@@ -228,8 +216,7 @@ namespace ModBuilder
 
             if (modID.Text.Length > 32)
             {
-                mc.Message("Build aborted; mod ID is too long (" + modID.Text.Length + " characters as opposed to 32 max)");
-                message.error("The mod ID is too long. Please shorten it to (less than) 32 characters. Build aborted.", MessageBoxButtons.OK);
+                MessageBox.Show("The mod ID is too long. Please shorten it to (less than) 32 characters. Build aborted.", "Build", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -240,8 +227,6 @@ namespace ModBuilder
             creader.Read();
 
             int numinst = Convert.ToInt32(creader[0]);
-
-            mc.Message("All strings filled. Updating settings.");
 
             #region Update settings
             // Update our settings when we have a connection.
@@ -274,14 +259,12 @@ namespace ModBuilder
 
                     // And execute the command.
                     updatecommand.ExecuteNonQuery();
-                    mc.Message("Updated setting " + pair.Key + " to value " + pair.Value);
                 }
             }
             #endregion
 
             // Lets build the package_info.xml.
             #region Build package-info.xml
-            mc.Message("Settings updated. Now attempting to build package-info.xml.");
             using (FileStream fileStream = new FileStream(workingDirectory + "/Package/package-info.xml", FileMode.Create))
             using (StreamWriter sw = new StreamWriter(fileStream))
             using (XmlTextWriter writer = new XmlTextWriter(sw))
@@ -425,14 +408,12 @@ namespace ModBuilder
                 writer.Flush();
                 writer.Close();
             }
-            mc.Message("package-info.xml has been build.");
             #endregion
 
             // Some settings before we start writing install.xml.
             #region Build install.xml
             if (!ignoreInstructions.Checked)
             {
-                mc.Message("Attempting to build install.xml");
 
                 if (numinst != 0)
                 {
@@ -547,25 +528,19 @@ namespace ModBuilder
                         writer.Flush();
                         writer.Close();
                     }
-                    mc.Message("install.xml has been built.");
                 }
                 else
                 {
-                    mc.Message("install.xml has not been built because there are no instructions.");
                     if (File.Exists(workingDirectory + "/Package/install.xml"))
                         File.Delete(workingDirectory + "/Package/install.xml");
                 }
             }
             // If we did select to ignore the instructions part, delete the install.xml file. The data is stored in the database anyway.
             else if (ignoreInstructions.Checked && File.Exists(workingDirectory + "/Package/install.xml"))
-            {
-                mc.Message("Custom instructions are set to be ignored, and install.xml exists. Deleting install.xml.");
                 File.Delete(workingDirectory + "/Package/install.xml");
-            }
             #endregion
 
             #region Writing files
-            mc.Message("Writing and deleting unused files...");
 
             // File -> string to write
             Dictionary<string, string> filesToHandle = new Dictionary<string, string>();
@@ -590,30 +565,17 @@ namespace ModBuilder
             {
                 // If we have a valid check, write the file.
                 if (!string.IsNullOrEmpty(pair.Value))
-                {
-                    // Write the file.
                     File.WriteAllText(workingDirectory + "/Package/" + pair.Key, pair.Value);
-                    mc.Message("Wrote file \"" + pair.Key + "\".");
-                }
 
                 // Else if we left out data for this file, remove it to save possible space and empty files in the package
                 else if (string.IsNullOrEmpty(pair.Value) && File.Exists(workingDirectory + "/Package/" + pair.Key))
-                {
                     File.Delete(workingDirectory + "/Package/" + pair.Key);
-                    mc.Message("Deleted file \"" + pair.Key + "\".");
-                }
             }
-
-            mc.Message("Files have been updated.");
             #endregion
 
             // Do we have a database?
             if (!hasConn)
                 generateSQL(workingDirectory);
-
-            // Finish up the mod console log.
-            mc.Message("Build finished!");
-            mc.endMeasureTime();
 
             // Return true so we know.
             return true;
@@ -625,7 +587,7 @@ namespace ModBuilder
             bool result = buildMod(workingDirectory);
 
             if (result == false)
-                message.error("An error occured while building your mod. Please try again.", MessageBoxButtons.OK);
+                MessageBox.Show("An error occured while building your mod. Please try again.", "Build", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         #endregion
 
@@ -648,7 +610,7 @@ namespace ModBuilder
                 // Rare scenario, yet possible.
                 if (!Directory.Exists(fb.SelectedPath))
                 {
-                    message.error("An error occured while saving your project, the destination directory does not exist.", MessageBoxButtons.OK);
+                    MessageBox.Show("An error occured while saving your project, the destination directory does not exist.", "Saving project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -668,7 +630,7 @@ namespace ModBuilder
             // Did we get an error from the builder?
             if (result == false)
             {
-                message.error("An error occured while saving your project. Please try again.", MessageBoxButtons.OK);
+                MessageBox.Show("An error occured while saving your project. Please try again or try repairing your project.", "Saving project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -684,7 +646,7 @@ namespace ModBuilder
 
         private void showHelp(string text)
         {
-            message.information(text);
+            MessageBox.Show(text, "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -755,7 +717,7 @@ namespace ModBuilder
         {
             if (!hasConn)
             {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
+                MessageBox.Show("Please save your project before continuing.", "Adding instruction", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -767,7 +729,7 @@ namespace ModBuilder
         {
             if (!hasConn)
             {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
+                MessageBox.Show("Please save your project before continuing.", "Editing instruction", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             var tindex = instructions.SelectedNode.Name;
@@ -783,7 +745,7 @@ namespace ModBuilder
         {
             if (!File.Exists(workingDirectory + "/data.sqlite"))
             {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
+                MessageBox.Show("Please save your project before continuing.", "Refreshing instructions", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             // Grab the data.
@@ -812,7 +774,7 @@ namespace ModBuilder
         {
             if (!hasConn)
             {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
+                MessageBox.Show("Please save your project before continuing.", "Deleting instruction", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -835,18 +797,308 @@ namespace ModBuilder
         }
         #endregion
 
+        #region Settings
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (!hasConn)
+            {
+                MessageBox.Show("Please save your project before continuing.", "Adding setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(settingName.Text))
+            {
+                MessageBox.Show("You need to enter a setting name.", "Adding setting", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            System.Text.RegularExpressions.Match m = System.Text.RegularExpressions.Regex.Match(settingName.Text, @"[a-zA-Z0-9_\-]*");
+            MessageBox.Show(m.Groups[1].Value);
+            if (!m.Success || m.Groups[1].Value != settingName.Text)
+            {
+                MessageBox.Show("Only alphabetic characters (a to z, lower and uppercase, and numbers), underscores and minuses are allowed in setting names.", "Mod Builder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(settingValue.Text))
+            {
+                DialogResult res = MessageBox.Show("You have not entered a default value for the setting. Do you still want to add it?", "Adding setting", MessageBoxButtons.OK, MessageBoxIcon.Question);
+
+                if (res == DialogResult.No)
+                    return;
+            }
+            return;
+
+            string sql = "INSERT INTO modsettings(id, key, value) VALUES(null, @key, @value)";
+
+            // Create the query.
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+
+            command.Parameters.AddWithValue("@key", fileComboBoxE.SelectedItem);
+            string ext = "";
+            if (!string.IsNullOrEmpty(fileNameE.Text))
+                ext = "/" + fileNameE.Text;
+            command.Parameters.AddWithValue("@destination", filePrefixE.SelectedItem + ext);
+
+            command.ExecuteNonQuery();
+
+            refreshExtractionTree();
+
+            fileComboBoxE.SelectedItem = " ";
+            filePrefixE.SelectedItem = " ";
+            fileNameE.Text = "";
+        }
+        #endregion
+
+        #region Extracting files
+        public void refreshExtractionTree()
+        {
+            if (!hasConn)
+            {
+                MessageBox.Show("Please save your project before continuing.", "Refreshing instructions", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Allow us to update.
+            extractFiles.BeginUpdate();
+            extractFiles.Nodes.Clear();
+
+            // Add a "header" node.
+            extractFiles.Nodes.Add("Files to be extracted on install");
+            int i = 1;
+            string sql = "SELECT id, file_name, destination FROM files";
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int id = Convert.ToInt32(reader["id"]);
+                extractFiles.Nodes.Add("id" + id, "Extract \"" + reader["file_name"] + "\" to \"" + reader["destination"] + "\"");
+                i++;
+            }
+            extractFiles.Nodes.Add(i - 1 + " instructions total.");
+            extractFiles.EndUpdate();
+
+            deleteFiles.BeginUpdate();
+            deleteFiles.Nodes.Clear();
+            deleteFiles.Nodes.Add("Files to be removed on uninstall");
+            sql = "SELECT id, file_name FROM files_delete";
+            command = new SQLiteCommand(sql, conn);
+            reader = command.ExecuteReader();
+            i = 1;
+            while (reader.Read())
+            {
+                int id = Convert.ToInt32(reader["id"]);
+                deleteFiles.Nodes.Add("id" + id, "Remove \"" + reader["file_name"] + "\"", id);
+                i++;
+            }
+            deleteFiles.Nodes.Add(i - 1 + " instructions total.");
+            deleteFiles.EndUpdate();
+
+            // While we are busy, also refresh the files.
+            fileComboBoxE.Items.Clear();
+            fileComboBoxE.Items.Add(" ");
+            refreshComboboxList(workingDirectory + "\\Source");
+        }
+
+        public void refreshComboboxList(string dir)
+        {
+
+            // get the information of the directory
+            DirectoryInfo directory = new DirectoryInfo(dir);
+
+            // loop through each subdirectory
+            foreach (DirectoryInfo d in directory.GetDirectories())
+            {
+
+                string name = d.FullName.Replace(workingDirectory + "\\Source\\", "");
+                fileComboBoxE.Items.Add(name);
+                refreshComboboxList(d.FullName);
+            }
+            // lastly, loop through each file in the directory, and add these as nodes
+            foreach (FileInfo f in directory.GetFiles())
+            {
+                string name = f.FullName.Replace(workingDirectory + "\\Source\\", "");
+                // create a new node
+                fileComboBoxE.Items.Add(name);
+            }
+        }
+
+        private void extractionRefresh_Click(object sender, EventArgs e)
+        {
+            if (!hasConn)
+            {
+                MessageBox.Show("Please save your project before continuing.", "Refreshing instructions", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            refreshExtractionTree();
+        }
+
+        private void createExtractionInstruction_Click(object sender, EventArgs e)
+        {
+            if (!hasConn)
+            {
+                MessageBox.Show("Please save your project before continuing.", "Create instruction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            /*addExtractionInstructionDialog aeid = new addExtractionInstructionDialog(workingDirectory, this, conn, 0);
+            aeid.Show();*/
+
+            if (string.IsNullOrEmpty(fileComboBoxE.SelectedItem.ToString()) || string.IsNullOrEmpty(filePrefixE.SelectedItem.ToString()))
+            {
+                MessageBox.Show("You did not fill in all fields; all fields are required.", "Saving instruction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string sql = "INSERT INTO files(id, file_name, destination) VALUES(null, @fileName, @destination)";
+
+            // Create the query.
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+
+            command.Parameters.AddWithValue("@fileName", fileComboBoxE.SelectedItem);
+            string ext = "";
+            if (!string.IsNullOrEmpty(fileNameE.Text))
+                ext = "/" + fileNameE.Text;
+            command.Parameters.AddWithValue("@destination", filePrefixE.SelectedItem + ext);
+
+            command.ExecuteNonQuery();
+
+            refreshExtractionTree();
+
+            fileComboBoxE.SelectedItem = " ";
+            filePrefixE.SelectedItem = " ";
+            fileNameE.Text = "";
+        }
+
+        private void extractFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (!hasConn)
+            {
+                MessageBox.Show("Please save your project before continuing.", "Editing instruction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var tindex = extractFiles.SelectedNode.Name;
+            if (String.IsNullOrEmpty(tindex))
+                return;
+            int index = Convert.ToInt32(tindex.Replace("id", ""));
+            addExtractionInstructionDialog aeid = new addExtractionInstructionDialog(workingDirectory, this, conn, index);
+            aeid.Show();
+        }
+
+        private void deleteExtractButton_Click(object sender, EventArgs e)
+        {
+            if (!hasConn)
+            {
+                MessageBox.Show("Please save your project before continuing.", "Delete instruction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (extractFiles.SelectedNode == null)
+                return;
+            var tindex = extractFiles.SelectedNode.Name;
+            if (String.IsNullOrEmpty(tindex))
+                return;
+            int index = Convert.ToInt32(tindex.Replace("id", ""));
+
+            // Get rid of it.
+            string sql = "DELETE FROM files WHERE id = " + index;
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
+            refreshExtractionTree();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!hasConn)
+            {
+                MessageBox.Show("Please save your project before continuing.", "Adding instruction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            /*addDeletionInstructionDialog adid = new addDeletionInstructionDialog(workingDirectory, this, conn, 0);
+            adid.Show();*/
+
+            if (string.IsNullOrEmpty(fileNameD.Text) || string.IsNullOrEmpty(filePrefixD.SelectedItem.ToString()))
+            {
+                MessageBox.Show("You did not fill in all fields; all fields are required.", "Adding instruction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (whatIs_Dir.Checked == false && whatIs_File.Checked == false)
+            {
+                MessageBox.Show("Please select the type of the item you want to delete before continuing.", "Adding instruction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string sql = "INSERT INTO files_delete(id, file_name, type) VALUES(null, @fileName, @type)";
+
+            string type = "";
+            if (whatIs_Dir.Checked == true)
+                type = "dir";
+            else
+                type = "file";
+
+
+            // Create the query.
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            command.Parameters.AddWithValue("@fileName", filePrefixD.SelectedItem + "/" + fileNameD.Text);
+            command.Parameters.AddWithValue("@type", type);
+
+            command.ExecuteNonQuery();
+            refreshExtractionTree();
+            filePrefixD.SelectedItem = " ";
+            fileNameD.Text = "";
+            whatIs_Dir.Checked = false;
+            whatIs_File.Checked = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (!hasConn)
+            {
+                MessageBox.Show("Please save your project before continuing.", "Delete instruction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var tindex = deleteFiles.SelectedNode.Name;
+            if (String.IsNullOrEmpty(tindex))
+                return;
+            int index = Convert.ToInt32(tindex.Replace("id", ""));
+
+            // Get rid of it.
+            string sql = "DELETE FROM files_delete WHERE id = " + index;
+            SQLiteCommand command = new SQLiteCommand(sql, conn);
+            command.ExecuteNonQuery();
+
+            refreshExtractionTree();
+        }
+
+        private void deleteFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (!hasConn)
+            {
+                MessageBox.Show("Please save your project before continuing.", "Editing instruction", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            var tindex = deleteFiles.SelectedNode.Name;
+            if (String.IsNullOrEmpty(tindex))
+                return;
+            int index = Convert.ToInt32(tindex.Replace("id", ""));
+
+            addDeletionInstructionDialog ai = new addDeletionInstructionDialog(workingDirectory, this, conn, index);
+            ai.Show();
+        }
+        #endregion
+
         #region Generate database
         private void regenerateSQLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // If we have no working directory set, we have no saved project here or the project has become corrupt. Either way, cancel.
             if (!Directory.Exists(workingDirectory))
             {
-                message.error("Either your project is not saved or you have a corrupted project. Please try saving your project.", MessageBoxButtons.OK);
+                MessageBox.Show("Either your project is not saved or you have a corrupted project. Please try saving your project.", "Regenerating SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // Confirmation...
-            DialogResult result = message.question("Are you sure you want to regenerate the database file? You will lose almost all your data!", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("Are you sure you want to regenerate the database file? You will lose all your data!", "Regenrating SQL", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             // They're sure. Lets start.
             if (result == DialogResult.Yes)
@@ -862,7 +1114,7 @@ namespace ModBuilder
                 }
                 catch (IOException)
                 {
-                    message.warning("The database file is in use by another process. Please try again in a few seconds.", MessageBoxButtons.OK);
+                    MessageBox.Show("The database file is in use by another process. Please try again in a few seconds.", "Regenerating SQL", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -870,7 +1122,7 @@ namespace ModBuilder
                 generateSQL(workingDirectory);
 
                 // Information.
-                message.information("A new database has been generated. Your project will now be reloaded.", MessageBoxButtons.OK);
+                MessageBox.Show("A new database has been generated. Your project will now be reloaded.", "Regenerating SQL", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // And reload the project to take advantage of the changes.
                 loadProject lp = new loadProject();
@@ -905,13 +1157,14 @@ namespace ModBuilder
             hasConn = true;
 
             // Create our tables.
-            string[] sqlcomm = new string[5]
+            string[] sqlcomm = new string[]
             {
                 "CREATE TABLE IF NOT EXISTS instructions(id INTEGER PRIMARY KEY, before VARCHAR(255), after VARCHAR(255), type VARCHAR(20), file VARCHAR(255), optional INTEGER)",
                 "CREATE TABLE IF NOT EXISTS hooks(id INTEGER PRIMARY KEY, hook_name VARCHAR(255), value VARCHAR(255))",
-                "CREATE TABLE IF NOT EXISTS files(id INTEGER PRIMARY KEY, file_name VARCHAR(255), destination VARCHAR(255))",
+                "CREATE TABLE IF NOT EXISTS files(id INTEGER PRIMARY KEY, file_name VARCHAR(255), destination VARCHAR(255), type VARCHAR(255))",
                 "CREATE TABLE IF NOT EXISTS files_delete(id INTEGER PRIMARY KEY, file_name VARCHAR(255), type VARCHAR(255))",
-                "CREATE TABLE IF NOT EXISTS settings(key VARCHAR(255), value VARCHAR(255))"
+                "CREATE TABLE IF NOT EXISTS settings(key VARCHAR(255), value VARCHAR(255))",
+                "CREATE TABLE IF NOT EXISTS modsettings(id INTEGER PRIMARY KEY, key VARCHAR(255), value VARCHAR(255))"
             };
 
             SQLiteCommand command;
@@ -926,8 +1179,9 @@ namespace ModBuilder
 
             // If a setting doesn't exist, insert it.
             Dictionary<string, string> cset = new Dictionary<string, string>();
-
+            
             // All our settings. Setting name => default value.
+            cset.Add("mbVersion", Properties.Settings.Default.mbVersion);
             cset.Add("ignoreInstructions", "false");
             cset.Add("autoGenerateModID", "true");
             cset.Add("includeModManLine", "true");
@@ -961,9 +1215,6 @@ namespace ModBuilder
         {
             // Just start an all new instance. Simple as that.
             modEditor me = new modEditor();
-
-            // Except that it's not.
-            me.mc = new modConsole();
 
             // Some default values.
             me.genPkgID.Checked = true;
@@ -1000,7 +1251,7 @@ namespace ModBuilder
 
             // Check the status.
             if (stat == false)
-                message.error("An error occured while loading the project, some files could not be found or the project is corrupt.", MessageBoxButtons.OK);
+                MessageBox.Show("An error occured while loading the project, some files could not be found or the project is corrupt.", "Open project", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             // Tyvm!
             lp.Close();
@@ -1063,7 +1314,7 @@ namespace ModBuilder
         {
             if (!Directory.Exists(workingDirectory) || !Directory.Exists(workingDirectory + "/Package") || !Directory.Exists(workingDirectory + "/Source"))
             {
-                message.error("Unable to compile project because not all required files are in place. Please save your project and try again.", MessageBoxButtons.OK);
+                MessageBox.Show("Unable to compile project because not all required files are in place. Please save your project and try again.", "Compiling project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -1122,9 +1373,9 @@ namespace ModBuilder
 
             // And done!
             if (output.IndexOf("Everything is Ok") != -1)
-                message.information("The package has been compiled.", MessageBoxButtons.OK);
+                MessageBox.Show("The package has been compiled.", "Compiling package", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                message.error("Something went wrong while compiling your package. Please try again.");
+                MessageBox.Show("Something went wrong while compiling your package. Please try again.", "Compiling project", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         public static void CopyFilesRecursively(DirectoryInfo source, DirectoryInfo target)
         {
@@ -1144,180 +1395,11 @@ namespace ModBuilder
         }
         #endregion
 
-        #region Extracting files
-        public void refreshExtractionTree()
-        {
-            if (!hasConn)
-            {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
-                return;
-            }
-            mc.Message("Refreshing extraction and deletion instructions...");
-
-            // Allow us to update.
-            extractFiles.BeginUpdate();
-            extractFiles.Nodes.Clear();
-
-            // Add a "header" node.
-            extractFiles.Nodes.Add("Files to be extracted on install");
-            int i = 1;
-            string sql = "SELECT id, file_name, destination FROM files";
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-            SQLiteDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                int id = Convert.ToInt32(reader["id"]);
-                extractFiles.Nodes.Add("id" + id, "Extract \"" + reader["file_name"] + "\" to \"" + reader["destination"] + "\"");
-                i++;
-            }
-            mc.Message("Added " + (i - 1) + " instructions.");
-            extractFiles.Nodes.Add(i - 1 + " instructions total.");
-            extractFiles.EndUpdate();
-
-            deleteFiles.BeginUpdate();
-            deleteFiles.Nodes.Clear();
-            deleteFiles.Nodes.Add("Files to be removed on uninstall");
-            sql = "SELECT id, file_name FROM files_delete";
-            command = new SQLiteCommand(sql, conn);
-            reader = command.ExecuteReader();
-            i = 1;
-            while (reader.Read())
-            {
-                int id = Convert.ToInt32(reader["id"]);
-                deleteFiles.Nodes.Add("id" + id, "Remove \"" + reader["file_name"] + "\"", id);
-                i++;
-            }
-            deleteFiles.Nodes.Add(i - 1 + " instructions total.");
-            deleteFiles.EndUpdate();
-        }
-
-        private void extractionRefresh_Click(object sender, EventArgs e)
-        {
-            if (!hasConn)
-            {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
-                return;
-            }
-            refreshExtractionTree();
-        }
-
-        private void createExtractionInstruction_Click(object sender, EventArgs e)
-        {
-            if (!hasConn)
-            {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK); 
-                return;
-            }
-            addExtractionInstructionDialog aeid = new addExtractionInstructionDialog(workingDirectory, this, conn, 0);
-            aeid.Show();
-        }
-
-        private void extractFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (!hasConn)
-            {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK); 
-                return;
-            }
-            var tindex = extractFiles.SelectedNode.Name;
-            if (String.IsNullOrEmpty(tindex))
-                return;
-            int index = Convert.ToInt32(tindex.Replace("id", ""));
-            addExtractionInstructionDialog aeid = new addExtractionInstructionDialog(workingDirectory, this, conn, index);
-            aeid.Show();
-        }
-
-        private void deleteExtractButton_Click(object sender, EventArgs e)
-        {
-            if (!hasConn)
-            {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
-                return;
-            }
-            var tindex = extractFiles.SelectedNode.Name;
-            if (String.IsNullOrEmpty(tindex))
-                return;
-            int index = Convert.ToInt32(tindex.Replace("id", ""));
-
-            // Get rid of it.
-            string sql = "DELETE FROM files WHERE id = " + index;
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-            command.ExecuteNonQuery();
-
-            refreshExtractionTree();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (!hasConn)
-            {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
-                return;
-            }
-            addDeletionInstructionDialog adid = new addDeletionInstructionDialog(workingDirectory, this, conn, 0);
-            adid.Show();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (!hasConn)
-            {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
-                return;
-            }
-            var tindex = deleteFiles.SelectedNode.Name;
-            if (String.IsNullOrEmpty(tindex))
-                return;
-            int index = Convert.ToInt32(tindex.Replace("id", ""));
-
-            // Get rid of it.
-            string sql = "DELETE FROM files_delete WHERE id = " + index;
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-            command.ExecuteNonQuery();
-
-            refreshExtractionTree();
-        }
-
-        private void deleteFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (!hasConn)
-            {
-                message.information("Please save your project before continuing.", MessageBoxButtons.OK);
-                return;
-            }
-            var tindex = deleteFiles.SelectedNode.Name;
-            if (String.IsNullOrEmpty(tindex))
-                return;
-            int index = Convert.ToInt32(tindex.Replace("id", ""));
-
-            addDeletionInstructionDialog ai = new addDeletionInstructionDialog(workingDirectory, this, conn, index);
-            ai.Show();
-        }
-        #endregion
-
         #region Unload SQL
         private void modEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (hasConn)
                 conn.Close();
-
-            mc.Close();
-        }
-        #endregion
-
-        #region Console code
-        private void showConsoleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (showConsoleToolStripMenuItem.Checked == true)
-            {
-                mc.Hide();
-                showConsoleToolStripMenuItem.Checked = false;
-            }
-            else
-            {
-                mc.Show();
-                showConsoleToolStripMenuItem.Checked = true;
-            }
         }
         #endregion
 
@@ -1357,7 +1439,7 @@ namespace ModBuilder
                 customCodeInstall.Text = tcontents;
             }
             else
-                message.error("The requested template does not exist!");
+                MessageBox.Show("The requested template does not exist!", "Calling template", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void ccodeUninstallTemplates_SelectedIndexChanged(object sender, EventArgs e)
@@ -1368,7 +1450,7 @@ namespace ModBuilder
                 customCodeUninstall.Text = tcontents;
             }
             else
-                message.error("The requested template does not exist!");
+                MessageBox.Show("The requested template does not exist!", "Calling template", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void adatabaseInstallTemplates_SelectedIndexChanged(object sender, EventArgs e)
@@ -1379,7 +1461,7 @@ namespace ModBuilder
                 installDatabaseCode.Text = tcontents;
             }
             else
-                message.error("The requested template does not exist!");
+                MessageBox.Show("The requested template does not exist!", "Calling template", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void adatabaseUninstallTemplates_SelectedIndexChanged(object sender, EventArgs e)
@@ -1390,7 +1472,7 @@ namespace ModBuilder
                 uninstallDatabaseCode.Text = tcontents;
             }
             else
-                message.error("The requested template does not exist!");
+                MessageBox.Show("The requested template does not exist!", "Calling template", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         #endregion
 
@@ -1400,7 +1482,7 @@ namespace ModBuilder
         {
             if (!File.Exists(Properties.Settings.Default.phppath))
             {
-                message.error("PHP was not found; can't check for errors.");
+                MessageBox.Show("PHP was not found; can't check for errors.", "Checking code", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -1426,11 +1508,11 @@ namespace ModBuilder
             this.Activate();
 
             if (!String.IsNullOrWhiteSpace(output) && output.IndexOf("Parse error") != -1)
-                message.error(output.Replace(" in " + AppDomain.CurrentDomain.BaseDirectory + "temp.php", ""));
+                MessageBox.Show(output.Replace(" in " + AppDomain.CurrentDomain.BaseDirectory + "temp.php", ""), "Checking code", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (String.IsNullOrWhiteSpace(output))
-                message.information("No parse errors were detected.");
+                MessageBox.Show("No parse errors were detected", "Checking code", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
-                message.error("Something went wrong when checking for errors. Please check that the path to php.exe is set correctly and try again.");
+                MessageBox.Show("Something went wrong when checking for errors. Please check that the path to php.exe is set correctly and try again.", "Checking code", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             File.Delete(AppDomain.CurrentDomain.BaseDirectory + @"\temp.php");
         }

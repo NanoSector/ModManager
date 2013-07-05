@@ -16,10 +16,11 @@ namespace ModBuilder
     public partial class Form1 : Form
     {
         // This version of Mod Builder.
-        string mbversion = "1.3";
+        string mbversion = Properties.Settings.Default.mbVersion;
+        string currmbversion = "1.4";
 
+        #region Initialising
         string dlfilename;
-        APIs.Notify message = new APIs.Notify();
 
         public Form1()
         {
@@ -28,11 +29,25 @@ namespace ModBuilder
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (mbversion != currmbversion)
+            {
+                #region ALL TASKS REQUIRED TO UPDATE GO IN HERE
+
+                #endregion
+
+                // Update the version
+                string ombversion = mbversion;
+                Properties.Settings.Default.mbVersion = mbversion = currmbversion;
+                Properties.Settings.Default.Save();
+
+                MessageBox.Show("Mod Builder has successfully been updated. Enjoy!", "Mod Builder update from " + ombversion + " to " + currmbversion);
+            }
             // Check for updates, if set to do so.
             versionLabel.Text = "v" + mbversion;
             if (Properties.Settings.Default.autoCheckUpdates)
                 checkUpdate(false);
         }
+        #endregion
 
         #region Opening projects
         private void openProjectButton(object sender, EventArgs e)
@@ -62,7 +77,7 @@ namespace ModBuilder
 
             // Check the status.
             if (stat == false)
-                message.error("An error occured while loading the project, some files could not be found or the project is corrupt.", MessageBoxButtons.OK);
+                MessageBox.Show("An error occured while loading the project, some files could not be found or the project is corrupt. Please try repairing your project.", "Opening Mod Builder project", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             // Tyvm!
             lp.Close();
@@ -74,9 +89,6 @@ namespace ModBuilder
         {
             // Start a new instance of the Mod Editor.
             modEditor me = new modEditor();
-
-            // Assign a new mod console to this instance.
-            me.mc = new modConsole();
 
             // Some default values.
             me.genPkgID.Checked = true;
@@ -112,12 +124,12 @@ namespace ModBuilder
             // Check if it is a valid project.
             if (!Directory.Exists(dir + "/Package") || !Directory.Exists(dir + "/Source") || !File.Exists(dir + "/Package/package-info.xml"))
             {
-                message.error("The selected project is not a valid project.", MessageBoxButtons.OK);
+                MessageBox.Show("The selected project is not a valid project.", "Repairing Mod Builder project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // Ask if the user wants to generate a new database, or to just add the tables.
-            DialogResult result = message.question("Should I generate a new database for this project? Answering no will instead try to add all missing tables.", MessageBoxButtons.YesNoCancel);
+            DialogResult result = MessageBox.Show("Should the existing database be truncated? Answering no will instead try to add all missing data.", "Reparing project", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
             // New instance of the mod editor.
             modEditor me = new modEditor();
@@ -141,7 +153,7 @@ namespace ModBuilder
             }
 
             // Ask if the user wants to load the project.
-            result = message.question("Your project has been repaired, should I load it now?", MessageBoxButtons.YesNo);
+            result = MessageBox.Show("Your project has been repaired. Do you want to load the project now?", "Project repaired", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             // Yes? Load the project.
             if (result == DialogResult.Yes)
@@ -155,7 +167,7 @@ namespace ModBuilder
 
                 // Check the status.
                 if (stat == false)
-                    message.error("An error occured while loading the project.", MessageBoxButtons.OK);
+                    MessageBox.Show("An error occured while loading the project.", "Loading project", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 // Close the loadProject dialog.
                 lp.Close();
@@ -172,20 +184,17 @@ namespace ModBuilder
         #endregion
 
         #region Updating
-        #region Progress Change
         private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
-        #endregion
 
-        #region Download Complete
         private void DLUpdateCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Cancelled)
                 return;
 
-            DialogResult result = message.information("The download has completed. Do you want to start the installer now? This will close Mod Manager and any open Mod Editor windows, so save your work before continuing.", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show("The download has completed. Do you want to start the installer now? This will close Mod Manager and any open Mod Editor windows, so save your work before continuing.", "Updated Downloaded", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 System.Diagnostics.Process.Start(dlfilename);
@@ -195,9 +204,7 @@ namespace ModBuilder
             checkForUpdatesToolStripMenuItem.Text = "Update pending...";
             Size = new Size(Size.Width, 184);
         }
-        #endregion
 
-        #region Check for updates
         private void checkUpdate(bool throwMessage = true)
         {
             // Catch any exceptions.
@@ -222,12 +229,12 @@ namespace ModBuilder
                 {
                     // If we are running in silent mode, skip this message.
                     if (throwMessage)
-                        message.information("You are using the latest version of Mod Manager.");
+                        MessageBox.Show("You are using the latest version of Mod Builder.", "Mod Builder Updater", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
                 else
                 {
-                    DialogResult result = message.question("A new version (" + lver + ") of Mod Manager has been released. Do you want to download and install the update?", MessageBoxButtons.YesNo);
+                    DialogResult result = MessageBox.Show("A new version (" + lver + ") of Mod Manager has been released. Do you want to download and install the update?", "Mod Builder Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (result == DialogResult.Yes)
                     {
@@ -246,18 +253,16 @@ namespace ModBuilder
             {
                 // Silent mode? Shhh.
                 if (throwMessage)
-                    message.error("An error occured while checking for updates. Please check your internet connection or try later.", MessageBoxButtons.OK);
+                    MessageBox.Show("An error occured while checking for updates. Please check your internet connection or try later.", "Mod Builder Updater", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }
-        #endregion
-        #endregion
-        #region Check for updates button
+
         private void checkForUpdatesToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(dlfilename) && File.Exists(dlfilename))
             {
-                DialogResult res = message.question("Do you want to start the updater now? This will close Mod Manager, save any open projects.", MessageBoxButtons.YesNo);
+                DialogResult res = MessageBox.Show("Do you want to start the updater now? This will close Mod Manager, save any open projects.", "Mod Builder Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (res == DialogResult.Yes)
                 {
@@ -274,7 +279,7 @@ namespace ModBuilder
         #region About
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            message.information("Mod Builder, a tool to help you create modifications for SMF (Simple Machines Forum).\nSMF is © Simple Machines, http://simplemachines.org/ \n Mod Builder is © Rick \"Yoshi2889\" Kerkhof");
+            MessageBox.Show("Mod Builder, a tool to help you create modifications for SMF (Simple Machines Forum).\nSMF is © Simple Machines, http://simplemachines.org/ \n Mod Builder is © Rick \"Yoshi2889\" Kerkhof");
         }
         #endregion
 

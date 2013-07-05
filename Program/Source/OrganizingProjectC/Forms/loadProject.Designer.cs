@@ -30,6 +30,7 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.status = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -49,16 +50,25 @@
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 1;
             // 
+            // status
+            // 
+            this.status.AutoSize = true;
+            this.status.Location = new System.Drawing.Point(12, 64);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(91, 13);
+            this.status.TabIndex = 2;
+            this.status.Text = "Opening project...";
+            // 
             // loadProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(316, 69);
+            this.ClientSize = new System.Drawing.Size(316, 86);
             this.ControlBox = false;
+            this.Controls.Add(this.status);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
-            this.MaximumSize = new System.Drawing.Size(332, 107);
-            this.MinimumSize = new System.Drawing.Size(332, 107);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "loadProject";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -72,5 +82,6 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label status;
     }
 }

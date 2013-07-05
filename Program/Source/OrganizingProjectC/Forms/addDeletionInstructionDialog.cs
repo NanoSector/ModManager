@@ -16,7 +16,6 @@ namespace ModBuilder.Forms
         modEditor me;
         SQLiteConnection conn;
         int editing;
-        APIs.Notify message = new APIs.Notify();
         public addDeletionInstructionDialog(string workingDirectory, modEditor me, SQLiteConnection conn, int editing)
         {
             InitializeComponent();
@@ -42,18 +41,8 @@ namespace ModBuilder.Forms
                         fileName.Text = pieces[1];
                     }
 
-                    switch (reader["type"].ToString())
-                    {
-                        case "dir":
-                            whatIs_Dir.Checked = true;
-                            whatIs_File.Checked = false;
-                            break;
-
-                        case "file":
-                            whatIs_Dir.Checked = false;
-                            whatIs_File.Checked = true;
-                            break;
-                    }
+                    whatIs_Dir.Checked = reader["type"].ToString() == "dir";
+                    whatIs_File.Checked = reader["type"].ToString() == "file";
                 }
             }
         }
@@ -67,13 +56,13 @@ namespace ModBuilder.Forms
         {
             if (string.IsNullOrEmpty(fileName.Text) || string.IsNullOrEmpty(filePrefix.SelectedItem.ToString()))
             {
-                message.warning("You did not fill in all fields; all fields are required.");
+                MessageBox.Show("You did not fill in all fields; all fields are required.", "Adding instruction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (whatIs_Dir.Checked == false && whatIs_File.Checked == false)
             {
-                message.error("Please select the type of the item you want to delete before continuing.");
+                MessageBox.Show("Please select the type of the item you want to delete before continuing.", "Adding instruction", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

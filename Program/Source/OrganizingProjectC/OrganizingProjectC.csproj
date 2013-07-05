@@ -51,7 +51,7 @@
   <PropertyGroup />
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>card-address %281%29.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\logo.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -76,6 +76,10 @@
       <HintPath>Resources\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="ScintillaNET, Version=2.5.2.0, Culture=neutral, PublicKeyToken=948d6c9751444115, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ScintillaNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite.Linq">
@@ -94,8 +98,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="APIs\Build.cs" />
-    <Compile Include="APIs\Notify.cs" />
     <Compile Include="Forms\addDeletionInstructionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +127,12 @@
     </Compile>
     <Compile Include="Forms\agent.Designer.cs">
       <DependentUpon>agent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomDialog.Designer.cs">
+      <DependentUpon>CustomDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\loadProject.cs">
       <SubType>Form</SubType>
@@ -161,6 +169,9 @@
     <EmbeddedResource Include="Forms\agent.resx">
       <DependentUpon>agent.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomDialog.resx">
+      <DependentUpon>CustomDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\loadProject.resx">
       <DependentUpon>loadProject.cs</DependentUpon>
     </EmbeddedResource>
@@ -192,15 +203,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Forms\ModConsole.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ModConsole.Designer.cs">
-      <DependentUpon>ModConsole.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Forms\ModConsole.resx">
-      <DependentUpon>ModConsole.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="templates\code_install\Hooks.php">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -247,7 +249,8 @@
     <Content Include="7za.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="card-address %281%29.ico" />
+    <Content Include="Resources\logo.ico" />
+    <None Include="Resources\refresh.png" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

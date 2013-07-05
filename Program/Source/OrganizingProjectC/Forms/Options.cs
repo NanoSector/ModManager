@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using ModBuilder.APIs;
 using System.Net;
 using System.Text.RegularExpressions;
 using Ionic.Zip;
@@ -18,7 +17,6 @@ namespace ModBuilder.Forms
 {
     public partial class Options : Form
     {
-        Notify message = new Notify();
         string dl11f;
         string dl20f;
         public Options()
@@ -53,7 +51,7 @@ namespace ModBuilder.Forms
         {
             if (!String.IsNullOrEmpty(smfPath.Text) && !Directory.Exists(smfPath.Text))
             {
-                message.warning("The path to the SMF files you entered is invalid. Please check that it exists and try again.");
+                MessageBox.Show("The path to the SMF files you entered is invalid. Please check that it exists and try again.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 tabControl1.SelectedTab = tabPage2;
             }
             else
@@ -137,7 +135,7 @@ namespace ModBuilder.Forms
         private void dl20Completed(object sender, AsyncCompletedEventArgs e)
         {
             dl20.Text = "Download complete!";
-            DialogResult a = message.question("Download complete! Do you want to set up the debugging environment now?", MessageBoxButtons.YesNo);
+            DialogResult a = MessageBox.Show("Download complete! Do you want to set up the debugging environment now?", "Options", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (a == DialogResult.Yes)
             {
@@ -209,7 +207,7 @@ namespace ModBuilder.Forms
         private void dl11Completed(object sender, AsyncCompletedEventArgs e)
         {
             dl11.Text = "Download complete!";
-            DialogResult a = message.question("Download complete! Do you want to set up the debugging environment now?", MessageBoxButtons.YesNo);
+            DialogResult a = MessageBox.Show("Download complete! Do you want to set up the debugging environment now?", "Options", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (a == DialogResult.Yes)
             {
@@ -258,15 +256,15 @@ namespace ModBuilder.Forms
                 File.Delete(file);
             }
 
-            message.information(toDelete.Length + " update executables have been deleted.");
+            MessageBox.Show(toDelete.Length + " update executables have been deleted.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "update_" + comboBox1.SelectedItem.ToString().Replace(".", "-") + ".exe"))
-                message.error("The requested version has either been moved or deleted, or was not found.");
-            
-            DialogResult result = message.question("This will start an installer to revert this version of Mod Builder to the selected version, and this version will be closed. Are you okay with this?", MessageBoxButtons.YesNo);
+                MessageBox.Show("The requested version has either been moved or deleted, or was not found.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            DialogResult result = MessageBox.Show("This will start an installer to revert this version of Mod Builder to the selected version, and this version will be closed. Are you okay with this?", "Options", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
@@ -295,10 +293,11 @@ namespace ModBuilder.Forms
 
                 string output = p.StandardOutput.ReadLine();
 
-                message.information(output);
-
                 if (output.Substring(0, 3) != "PHP")
-                    message.error("The PHP instance is either not correctly compiled or is no PHP instance. Please try again.");
+                {
+                    MessageBox.Show("The PHP instance is either not correctly compiled or is no PHP instance. Please try again.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 Match version = Regex.Match(output, @"PHP ([^']*) \(");
                 if (version.Success)
@@ -307,7 +306,7 @@ namespace ModBuilder.Forms
                     phppath.Text = fd.FileName;
                 }
                 else
-                    message.error("The PHP instance is either not correctly compiled or is no PHP instance. Please try again.");
+                    MessageBox.Show("The PHP instance is either not correctly compiled or is no PHP instance. Please try again.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
