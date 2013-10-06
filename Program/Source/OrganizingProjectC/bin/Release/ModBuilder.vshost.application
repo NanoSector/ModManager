@@ -4,17 +4,17 @@
   <description asmv2:publisher="ModBuilder" asmv2:product="ModBuilder" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true" />
   <compatibleFrameworks xmlns="urn:schemas-microsoft-com:clickonce.v2">
-    <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
+    <framework targetVersion="4.5" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="ModBuilder.exe.manifest" size="9140">
+    <dependentAssembly dependencyType="install" codebase="ModBuilder.exe.manifest" size="9015">
       <assemblyIdentity name="ModBuilder.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>5noTR5VScLj80p5k98GLNOD1aXs=</dsig:DigestValue>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>c/yd9Ns14hhmsOzH+jQiwTHbWFEKnwxCFReLTjufB5I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

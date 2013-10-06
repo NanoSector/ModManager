@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using System.IO;
 using ModBuilder.Forms;
 using System.Net;
+using System.Xml;
+using Microsoft.WindowsAPICodePack;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace ModBuilder
 {
@@ -57,16 +60,17 @@ namespace ModBuilder
             lp.Show();
 
             // Get us a new FolderBrowserDialog
-            FolderBrowserDialog fb = new FolderBrowserDialog();
-            fb.Description = "Please select the directory that your project resides in.";
-            fb.ShowNewFolderButton = false;
+            CommonOpenFileDialog fb = new CommonOpenFileDialog();
+            fb.IsFolderPicker = true;
+            fb.Title = "Please select the directory that your project resides in.";
+            fb.EnsurePathExists = true;
             fb.ShowDialog();
 
             // Get the path.
-            string dir = fb.SelectedPath;
+            string dir = fb.FileName;
 
             // Avoid the annoying An error occured dialog.
-            if (string.IsNullOrEmpty(dir))
+            if (string.IsNullOrEmpty(dir) || !Directory.Exists(dir))
             {
                 lp.Close();
                 return;
@@ -104,21 +108,17 @@ namespace ModBuilder
         #region Repair projects
         private void repairAProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Start a new Folder Browser Dialog.
-            FolderBrowserDialog fb = new FolderBrowserDialog();
-
-            // Some settings for it.
-            fb.Description = "Please select the directory that your project resides in.";
-            fb.ShowNewFolderButton = false;
-
-            // And show it.
-            DialogResult bresult = fb.ShowDialog();
+            CommonOpenFileDialog fb = new CommonOpenFileDialog();
+            fb.IsFolderPicker = true;
+            fb.Title = "Please select the directory that your project resides in.";
+            fb.EnsurePathExists = true;
+            fb.ShowDialog();
 
             // Get the path.
-            string dir = fb.SelectedPath;
+            string dir = fb.FileName;
 
             // Check if it is empty or if the user clicked Cancel.
-            if (bresult == DialogResult.Cancel || string.IsNullOrEmpty(dir))
+            if (string.IsNullOrEmpty(dir) || !Directory.Exists(dir))
                 return;
 
             // Check if it is a valid project.
@@ -134,17 +134,62 @@ namespace ModBuilder
             // New instance of the mod editor.
             modEditor me = new modEditor();
 
+            #region Boring XML parsing
+            // Try to parse the package_info.xml.
+            XmlTextReader xmldoc = new XmlTextReader(dir + "/Package/package-info.xml");
+            xmldoc.DtdProcessing = DtdProcessing.Ignore;
+            while (xmldoc.Read())
+            {
+                if (xmldoc.NodeType.Equals(XmlNodeType.Element))
+                {
+                    switch (xmldoc.LocalName)
+                    {
+                        case "id":
+                            string mid = xmldoc.ReadElementContentAsString();
+                            me.modID.Text = mid;
+
+                            // Determine the mod author.
+                            string[] pieces = mid.Split(':');
+                            me.authorName.Text = pieces[0];
+                            break;
+
+                        case "name":
+                            me.modName.Text = xmldoc.ReadElementContentAsString();
+                            break;
+
+                        case "version":
+                            me.modVersion.Text = xmldoc.ReadElementContentAsString();
+                            break;
+
+                        case "type":
+                            if (xmldoc.ReadElementContentAsString() == "modification")
+                                me.modType.SelectedItem = "Modification";
+                            else
+                                me.modType.SelectedItem = "Avatar pack";
+                            break;
+
+                        case "install":
+                            me.modCompatibility.Text = xmldoc.GetAttribute("for");
+
+                            break;
+                    }
+                }
+            }
+            xmldoc.Close();
+            #endregion
+
             // Switch the result, to see what the user has answered.
+            ModBuilder.Classes.ModParser mp = new ModBuilder.Classes.ModParser();
             switch (result)
             {
                 // Generate an all new shiny database.
                 case (DialogResult.Yes):
-                    me.generateSQL(dir);
+                    me.generateSQL(dir, true, mp.parsePackageInfo(dir + "/Package/package-info.xml"));
                     break;
 
                 // Only add the missing tables.
                 case (DialogResult.No):
-                    me.generateSQL(dir, false);
+                    me.generateSQL(dir, false, mp.parsePackageInfo(dir + "/Package/package-info.xml"));
                     break;
 
                 // Or don't do anything at all! :D

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Files");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(modEditor));
             this.modSettings = new System.Windows.Forms.TabControl();
             this.modDetailsTab = new System.Windows.Forms.TabPage();
@@ -55,13 +54,6 @@
             this.authorName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.usernameHelp = new System.Windows.Forms.PictureBox();
-            this.filesTab = new System.Windows.Forms.TabPage();
-            this.filesHelp = new System.Windows.Forms.PictureBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.refreshFileListButton = new System.Windows.Forms.Button();
-            this.addFileButton = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.files = new System.Windows.Forms.TreeView();
             this.readmeTab = new System.Windows.Forms.TabPage();
             this.modReadme = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -141,9 +133,18 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.hooksTab = new System.Windows.Forms.TabPage();
+            this.button8 = new System.Windows.Forms.Button();
             this.modHooks = new System.Windows.Forms.TreeView();
             this.settingsTab = new System.Windows.Forms.TabPage();
-            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.addSettingBox = new System.Windows.Forms.GroupBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.settingValue = new System.Windows.Forms.TextBox();
+            this.settingName = new System.Windows.Forms.TextBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.modSettingsTree = new System.Windows.Forms.TreeView();
             this.buildSettingsTab = new System.Windows.Forms.TabPage();
             this.label23 = new System.Windows.Forms.Label();
             this.includeModManLine = new System.Windows.Forms.CheckBox();
@@ -157,15 +158,9 @@
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.regenerateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.settingName = new System.Windows.Forms.TextBox();
-            this.settingValue = new System.Windows.Forms.TextBox();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.button10 = new System.Windows.Forms.Button();
+            this.openProjectDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modSettingsCancel = new System.Windows.Forms.Button();
+            this.msDelete = new System.Windows.Forms.Button();
             this.modSettings.SuspendLayout();
             this.modDetailsTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -176,8 +171,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.modNameHelp)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usernameHelp)).BeginInit();
-            this.filesTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filesHelp)).BeginInit();
             this.readmeTab.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).BeginInit();
@@ -209,15 +202,14 @@
             this.panel7.SuspendLayout();
             this.hooksTab.SuspendLayout();
             this.settingsTab.SuspendLayout();
+            this.addSettingBox.SuspendLayout();
             this.buildSettingsTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // modSettings
             // 
             this.modSettings.Controls.Add(this.modDetailsTab);
-            this.modSettings.Controls.Add(this.filesTab);
             this.modSettings.Controls.Add(this.readmeTab);
             this.modSettings.Controls.Add(this.instructionsTab);
             this.modSettings.Controls.Add(this.extractFilesTab);
@@ -505,85 +497,6 @@
             this.usernameHelp.TabIndex = 19;
             this.usernameHelp.TabStop = false;
             this.usernameHelp.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // filesTab
-            // 
-            this.filesTab.Controls.Add(this.filesHelp);
-            this.filesTab.Controls.Add(this.label10);
-            this.filesTab.Controls.Add(this.refreshFileListButton);
-            this.filesTab.Controls.Add(this.addFileButton);
-            this.filesTab.Controls.Add(this.label6);
-            this.filesTab.Controls.Add(this.files);
-            this.filesTab.Location = new System.Drawing.Point(4, 22);
-            this.filesTab.Name = "filesTab";
-            this.filesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.filesTab.Size = new System.Drawing.Size(760, 369);
-            this.filesTab.TabIndex = 1;
-            this.filesTab.Text = "Files";
-            this.filesTab.UseVisualStyleBackColor = true;
-            // 
-            // filesHelp
-            // 
-            this.filesHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.filesHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.filesHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.filesHelp.Location = new System.Drawing.Point(736, 6);
-            this.filesHelp.Name = "filesHelp";
-            this.filesHelp.Size = new System.Drawing.Size(16, 16);
-            this.filesHelp.TabIndex = 22;
-            this.filesHelp.TabStop = false;
-            this.filesHelp.Click += new System.EventHandler(this.filesHelp_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(262, 82);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(298, 13);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "From this panel, you can view any files present in your project.";
-            // 
-            // refreshFileListButton
-            // 
-            this.refreshFileListButton.Location = new System.Drawing.Point(255, 48);
-            this.refreshFileListButton.Name = "refreshFileListButton";
-            this.refreshFileListButton.Size = new System.Drawing.Size(100, 22);
-            this.refreshFileListButton.TabIndex = 3;
-            this.refreshFileListButton.Text = "Refresh";
-            this.refreshFileListButton.UseVisualStyleBackColor = true;
-            this.refreshFileListButton.Click += new System.EventHandler(this.refreshFileListButton_Click);
-            // 
-            // addFileButton
-            // 
-            this.addFileButton.Location = new System.Drawing.Point(255, 19);
-            this.addFileButton.Name = "addFileButton";
-            this.addFileButton.Size = new System.Drawing.Size(100, 23);
-            this.addFileButton.TabIndex = 2;
-            this.addFileButton.Text = "Open directory";
-            this.addFileButton.UseVisualStyleBackColor = true;
-            this.addFileButton.Click += new System.EventHandler(this.addFileButton_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(252, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "File Management";
-            // 
-            // files
-            // 
-            this.files.Dock = System.Windows.Forms.DockStyle.Left;
-            this.files.Location = new System.Drawing.Point(3, 3);
-            this.files.Name = "files";
-            treeNode1.Name = "filesRoot";
-            treeNode1.Text = "Files";
-            this.files.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            this.files.Size = new System.Drawing.Size(243, 363);
-            this.files.TabIndex = 0;
             // 
             // readmeTab
             // 
@@ -1074,10 +987,10 @@
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(3, 235);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(304, 26);
+            this.label22.Size = new System.Drawing.Size(353, 26);
             this.label22.TabIndex = 9;
             this.label22.Text = "Instructions for deleting files are not the same as instructions for\r\nextracting " +
-    "files. Therefore ";
+    "files. Therefore you need to manually specify these instructions.";
             // 
             // label21
             // 
@@ -1469,6 +1382,18 @@
             this.hooksTab.Text = "Hooks";
             this.hooksTab.UseVisualStyleBackColor = true;
             // 
+            // button8
+            // 
+            this.button8.BackgroundImage = global::ModBuilder.Properties.Resources.refresh;
+            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Location = new System.Drawing.Point(736, 6);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(16, 16);
+            this.button8.TabIndex = 15;
+            this.button8.UseVisualStyleBackColor = true;
+            // 
             // modHooks
             // 
             this.modHooks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1483,8 +1408,8 @@
             // 
             this.settingsTab.Controls.Add(this.button10);
             this.settingsTab.Controls.Add(this.button7);
-            this.settingsTab.Controls.Add(this.groupBox5);
-            this.settingsTab.Controls.Add(this.treeView2);
+            this.settingsTab.Controls.Add(this.addSettingBox);
+            this.settingsTab.Controls.Add(this.modSettingsTree);
             this.settingsTab.Location = new System.Drawing.Point(4, 22);
             this.settingsTab.Name = "settingsTab";
             this.settingsTab.Size = new System.Drawing.Size(760, 369);
@@ -1492,15 +1417,105 @@
             this.settingsTab.Text = "Mod Settings";
             this.settingsTab.UseVisualStyleBackColor = true;
             // 
-            // treeView2
+            // button10
             // 
-            this.treeView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.button10.Location = new System.Drawing.Point(296, 253);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(153, 23);
+            this.button10.TabIndex = 16;
+            this.button10.Text = "Delete the selected setting";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.BackgroundImage = global::ModBuilder.Properties.Resources.refresh;
+            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Location = new System.Drawing.Point(736, 6);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(16, 16);
+            this.button7.TabIndex = 15;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // addSettingBox
+            // 
+            this.addSettingBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView2.Location = new System.Drawing.Point(3, 6);
-            this.treeView2.Name = "treeView2";
-            this.treeView2.Size = new System.Drawing.Size(282, 355);
-            this.treeView2.TabIndex = 2;
+            this.addSettingBox.Controls.Add(this.msDelete);
+            this.addSettingBox.Controls.Add(this.modSettingsCancel);
+            this.addSettingBox.Controls.Add(this.label32);
+            this.addSettingBox.Controls.Add(this.label31);
+            this.addSettingBox.Controls.Add(this.settingValue);
+            this.addSettingBox.Controls.Add(this.settingName);
+            this.addSettingBox.Controls.Add(this.button9);
+            this.addSettingBox.Location = new System.Drawing.Point(296, 28);
+            this.addSettingBox.Name = "addSettingBox";
+            this.addSettingBox.Size = new System.Drawing.Size(461, 219);
+            this.addSettingBox.TabIndex = 4;
+            this.addSettingBox.TabStop = false;
+            this.addSettingBox.Text = "Add a new setting";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(6, 59);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(70, 13);
+            this.label32.TabIndex = 4;
+            this.label32.Text = "Default value";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(6, 33);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(40, 13);
+            this.label31.TabIndex = 3;
+            this.label31.Text = "Setting";
+            // 
+            // settingValue
+            // 
+            this.settingValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.settingValue.Location = new System.Drawing.Point(100, 56);
+            this.settingValue.MaxLength = 9999999;
+            this.settingValue.Multiline = true;
+            this.settingValue.Name = "settingValue";
+            this.settingValue.Size = new System.Drawing.Size(355, 128);
+            this.settingValue.TabIndex = 2;
+            // 
+            // settingName
+            // 
+            this.settingName.Location = new System.Drawing.Point(100, 30);
+            this.settingName.Name = "settingName";
+            this.settingName.Size = new System.Drawing.Size(182, 20);
+            this.settingName.TabIndex = 1;
+            // 
+            // button9
+            // 
+            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button9.Location = new System.Drawing.Point(332, 190);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(123, 23);
+            this.button9.TabIndex = 0;
+            this.button9.Text = "Add setting";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // modSettingsTree
+            // 
+            this.modSettingsTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.modSettingsTree.Location = new System.Drawing.Point(3, 6);
+            this.modSettingsTree.Name = "modSettingsTree";
+            this.modSettingsTree.Size = new System.Drawing.Size(282, 355);
+            this.modSettingsTree.TabIndex = 2;
+            this.modSettingsTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.modSettingsTree_NodeMouseDoubleClick);
             // 
             // buildSettingsTab
             // 
@@ -1586,7 +1601,8 @@
             this.compileToolStripMenuItem,
             this.buildToolStripMenuItem,
             this.toolStripSeparator1,
-            this.regenerateSQLToolStripMenuItem});
+            this.regenerateSQLToolStripMenuItem,
+            this.openProjectDirectoryToolStripMenuItem});
             this.projectToolStripMenuItem.Name = "projectToolStripMenuItem";
             this.projectToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.projectToolStripMenuItem.Text = "Project";
@@ -1596,7 +1612,7 @@
             this.compileToolStripMenuItem.Name = "compileToolStripMenuItem";
             this.compileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
-            this.compileToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.compileToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.compileToolStripMenuItem.Text = "Compile";
             this.compileToolStripMenuItem.Click += new System.EventHandler(this.compileToolStripMenuItem_Click);
             // 
@@ -1605,119 +1621,52 @@
             this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
             this.buildToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.B)));
-            this.buildToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.buildToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.buildToolStripMenuItem.Text = "Build";
             this.buildToolStripMenuItem.Click += new System.EventHandler(this.buildToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(190, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(191, 6);
             // 
             // regenerateSQLToolStripMenuItem
             // 
             this.regenerateSQLToolStripMenuItem.Name = "regenerateSQLToolStripMenuItem";
-            this.regenerateSQLToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.regenerateSQLToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.regenerateSQLToolStripMenuItem.Text = "Regenerate SQL";
             this.regenerateSQLToolStripMenuItem.Click += new System.EventHandler(this.regenerateSQLToolStripMenuItem_Click);
             // 
-            // groupBox5
+            // openProjectDirectoryToolStripMenuItem
             // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.Controls.Add(this.label32);
-            this.groupBox5.Controls.Add(this.label31);
-            this.groupBox5.Controls.Add(this.settingValue);
-            this.groupBox5.Controls.Add(this.settingName);
-            this.groupBox5.Controls.Add(this.button9);
-            this.groupBox5.Location = new System.Drawing.Point(291, 43);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(461, 219);
-            this.groupBox5.TabIndex = 4;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Add a new setting";
+            this.openProjectDirectoryToolStripMenuItem.Name = "openProjectDirectoryToolStripMenuItem";
+            this.openProjectDirectoryToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.openProjectDirectoryToolStripMenuItem.Text = "Open Project Directory";
+            this.openProjectDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openProjectDirectoryToolStripMenuItem_Click);
             // 
-            // button7
+            // modSettingsCancel
             // 
-            this.button7.BackgroundImage = global::ModBuilder.Properties.Resources.refresh;
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(736, 6);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(16, 16);
-            this.button7.TabIndex = 15;
-            this.button7.UseVisualStyleBackColor = true;
+            this.modSettingsCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.modSettingsCancel.Location = new System.Drawing.Point(203, 190);
+            this.modSettingsCancel.Name = "modSettingsCancel";
+            this.modSettingsCancel.Size = new System.Drawing.Size(123, 23);
+            this.modSettingsCancel.TabIndex = 5;
+            this.modSettingsCancel.Text = "Cancel";
+            this.modSettingsCancel.UseVisualStyleBackColor = true;
+            this.modSettingsCancel.Visible = false;
+            this.modSettingsCancel.Click += new System.EventHandler(this.modSettingsCancel_Click);
             // 
-            // button8
+            // msDelete
             // 
-            this.button8.BackgroundImage = global::ModBuilder.Properties.Resources.refresh;
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(736, 6);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(16, 16);
-            this.button8.TabIndex = 15;
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // button9
-            // 
-            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button9.Location = new System.Drawing.Point(332, 190);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(123, 23);
-            this.button9.TabIndex = 0;
-            this.button9.Text = "Add setting";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // settingName
-            // 
-            this.settingName.Location = new System.Drawing.Point(100, 30);
-            this.settingName.Name = "settingName";
-            this.settingName.Size = new System.Drawing.Size(182, 20);
-            this.settingName.TabIndex = 1;
-            // 
-            // settingValue
-            // 
-            this.settingValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.settingValue.Location = new System.Drawing.Point(100, 56);
-            this.settingValue.MaxLength = 9999999;
-            this.settingValue.Multiline = true;
-            this.settingValue.Name = "settingValue";
-            this.settingValue.Size = new System.Drawing.Size(355, 128);
-            this.settingValue.TabIndex = 2;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(6, 33);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(40, 13);
-            this.label31.TabIndex = 3;
-            this.label31.Text = "Setting";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(6, 59);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(70, 13);
-            this.label32.TabIndex = 4;
-            this.label32.Text = "Default value";
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(291, 268);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(153, 23);
-            this.button10.TabIndex = 16;
-            this.button10.Text = "Delete the selected setting";
-            this.button10.UseVisualStyleBackColor = true;
+            this.msDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.msDelete.Location = new System.Drawing.Point(74, 190);
+            this.msDelete.Name = "msDelete";
+            this.msDelete.Size = new System.Drawing.Size(123, 23);
+            this.msDelete.TabIndex = 6;
+            this.msDelete.Text = "Delete this setting";
+            this.msDelete.UseVisualStyleBackColor = true;
+            this.msDelete.Visible = false;
+            this.msDelete.Click += new System.EventHandler(this.msDelete_Click);
             // 
             // modEditor
             // 
@@ -1744,9 +1693,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usernameHelp)).EndInit();
-            this.filesTab.ResumeLayout(false);
-            this.filesTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.filesHelp)).EndInit();
             this.readmeTab.ResumeLayout(false);
             this.readmeTab.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -1794,12 +1740,12 @@
             this.panel7.PerformLayout();
             this.hooksTab.ResumeLayout(false);
             this.settingsTab.ResumeLayout(false);
+            this.addSettingBox.ResumeLayout(false);
+            this.addSettingBox.PerformLayout();
             this.buildSettingsTab.ResumeLayout(false);
             this.buildSettingsTab.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1821,9 +1767,6 @@
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openProjectToolStripMenuItem;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TabPage filesTab;
-        private System.Windows.Forms.Button addFileButton;
-        private System.Windows.Forms.Label label6;
         public System.Windows.Forms.ComboBox modType;
         public System.Windows.Forms.TextBox modID;
         public System.Windows.Forms.TextBox modVersion;
@@ -1850,9 +1793,7 @@
         public System.Windows.Forms.TextBox modCompatibility;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button refreshFileListButton;
         private System.Windows.Forms.Button delInstruction;
-        public System.Windows.Forms.TreeView files;
         private System.Windows.Forms.TabPage extractFilesTab;
         private System.Windows.Forms.Button createExtractionInstruction;
         private System.Windows.Forms.Label label13;
@@ -1883,11 +1824,9 @@
         public System.Windows.Forms.CheckBox ignoreInstructions;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         public System.Windows.Forms.CheckBox genPkgID;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TabPage buildSettingsTab;
         private System.Windows.Forms.Label label23;
         public System.Windows.Forms.CheckBox includeModManLine;
-        private System.Windows.Forms.PictureBox filesHelp;
         private System.Windows.Forms.PictureBox readmeHelp;
         private System.Windows.Forms.PictureBox instructionHelp;
         private System.Windows.Forms.Panel panel3;
@@ -1933,15 +1872,18 @@
         private System.Windows.Forms.TabPage hooksTab;
         public System.Windows.Forms.TreeView modHooks;
         private System.Windows.Forms.TabPage settingsTab;
-        public System.Windows.Forms.TreeView treeView2;
+        public System.Windows.Forms.TreeView modSettingsTree;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox addSettingBox;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.TextBox settingValue;
         private System.Windows.Forms.TextBox settingName;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.ToolStripMenuItem openProjectDirectoryToolStripMenuItem;
+        private System.Windows.Forms.Button modSettingsCancel;
+        private System.Windows.Forms.Button msDelete;
     }
 }

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Text.RegularExpressions;
-using Ionic.Zip;
 using System.Security.Cryptography;
 using System.Diagnostics;
 
@@ -135,7 +135,7 @@ namespace ModBuilder.Forms
         private void dl20Completed(object sender, AsyncCompletedEventArgs e)
         {
             dl20.Text = "Download complete!";
-            DialogResult a = MessageBox.Show("Download complete! Do you want to set up the debugging environment now?", "Options", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult a = MessageBox.Show("Download complete! Do you want to set up the debugging environment now?", "Mod Builder", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (a == DialogResult.Yes)
             {
@@ -146,27 +146,27 @@ namespace ModBuilder.Forms
                 string s = fb.SelectedPath;
                 if (Directory.Exists(s))
                 {
-                    smfPath.Text = s;
-
                     // Start extracting the downloaded archive.
-                    using (ZipFile zip1 = ZipFile.Read(dl20f))
+                    ZipFile.ExtractToDirectory(dl20f, s);
+                    
+                    // Check if index.php is there...
+                    if (!File.Exists(s + "/index.php") || !File.Exists(s + "/Settings.php"))
                     {
-                        // here, we extract every entry, but we could extract conditionally
-                        // based on entry name, size, date, checkbox status, etc.  
-                        foreach (ZipEntry en in zip1)
-                        {
-                            en.Extract(s, ExtractExistingFileAction.OverwriteSilently);
-                        }
+                        MessageBox.Show("Your environment package is corrupt, since it does not contain an index.php or Settings.php in the root. Please try again later or check http://simplemachines.org/ for up-to-date information.", "Mod Builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
-
                     string contents = File.ReadAllText(s + "/index.php");
 
                     Match match = Regex.Match(contents, @"'SMF ([^']*)'");
                     if (match.Success)
+                    {
                         dsmfver.Text = match.Groups[1].Value;
-
-                    dl20.Text = "Environment is set!";
-                    dl11.Enabled = false;
+                        smfPath.Text = s;
+                        dl20.Text = "Environment is set!";
+                        dl11.Enabled = false;
+                    }
+                    else
+                        MessageBox.Show("index.php contains no SMF version or an illegal version number!", "Mod Builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -218,27 +218,30 @@ namespace ModBuilder.Forms
                 string s = fb.SelectedPath;
                 if (Directory.Exists(s))
                 {
-                    smfPath.Text = s;
-
                     // Start extracting the downloaded archive.
-                    using (ZipFile zip1 = ZipFile.Read(dl11f))
+                    ZipFile.ExtractToDirectory(dl11f, s);
+
+                    // Check if index.php is there...
+                    if (!File.Exists(s + "/index.php") || !File.Exists(s + "/Settings.php"))
                     {
-                        // here, we extract every entry, but we could extract conditionally
-                        // based on entry name, size, date, checkbox status, etc.  
-                        foreach (ZipEntry en in zip1)
-                        {
-                            en.Extract(s, ExtractExistingFileAction.OverwriteSilently);
-                        }
+                        MessageBox.Show("Your environment package is corrupt, since it does not contain an index.php or Settings.php in the root. Please try again later or check http://simplemachines.org/ for up-to-date information.", "Mod Builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
 
+                    // Grab the contents of index.php.
                     string contents = File.ReadAllText(s + "/index.php");
 
+                    // Mix and match.
                     Match match = Regex.Match(contents, @"'SMF ([^']*)'");
                     if (match.Success)
+                    {
                         dsmfver.Text = match.Groups[1].Value;
-
-                    dl11.Text = "Environment is set!";
-                    dl20.Enabled = false;
+                        smfPath.Text = s;
+                        dl11.Text = "Environment is set!";
+                        dl20.Enabled = false;
+                    }
+                    else
+                        MessageBox.Show("index.php contains no SMF version or an illegal version number!", "Mod Builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

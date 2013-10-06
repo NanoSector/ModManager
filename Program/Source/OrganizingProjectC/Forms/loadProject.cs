@@ -26,55 +26,67 @@ namespace ModBuilder
             try
             {
                 // Check if the directory exists. Also should contain a package_info.xml.
-                if (!Directory.Exists(dir) || !File.Exists(dir + "/Package/package-info.xml"))
+                if (!Directory.Exists(dir))
                     return false;
 
                 // Start an instance of the mod editor.
                 modEditor me = new modEditor();
 
-                #region Boring XML parsing
-                // Try to parse the package_info.xml.
-                XmlTextReader xmldoc = new XmlTextReader(dir + "/Package/package-info.xml");
-                xmldoc.DtdProcessing = DtdProcessing.Ignore;
-                while (xmldoc.Read())
+                if (!File.Exists(dir + "/data.sqlite"))
                 {
-                    if (xmldoc.NodeType.Equals(XmlNodeType.Element))
-                    {
-                        switch (xmldoc.LocalName)
-                        {
-                            case "id":
-                                string mid = xmldoc.ReadElementContentAsString();
-                                me.modID.Text = mid;
-
-                                // Determine the mod author.
-                                string[] pieces = mid.Split(':');
-                                me.authorName.Text = pieces[0];
-                                break;
-
-                            case "name":
-                                me.modName.Text = xmldoc.ReadElementContentAsString();
-                                break;
-
-                            case "version":
-                                me.modVersion.Text = xmldoc.ReadElementContentAsString();
-                                break;
-
-                            case "type":
-                                if (xmldoc.ReadElementContentAsString() == "modification")
-                                    me.modType.SelectedItem = "Modification";
-                                else
-                                    me.modType.SelectedItem = "Avatar pack";
-                                break;
-
-                            case "install":
-                                me.modCompatibility.Text = xmldoc.GetAttribute("for");
-
-                                break;
-                        }
-                    }
+                    MessageBox.Show("A required database file was not found in your project. It will now be generated.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    me.generateSQL(dir);
                 }
-                xmldoc.Close();
-                #endregion
+
+                me.workingDirectory = dir;
+                me.conn = new SQLiteConnection("Data Source=\"" + dir + "/data.sqlite\";Version=3;");
+                me.conn.Open();
+                me.hasConn = true;
+
+                me.refreshInstructionTree();
+                me.refreshExtractionTree();
+                me.refreshSettingTree();
+                me.reloadSettings();
+
+                // Checks.
+                if (!me.settings.ContainsKey("modName") || !me.settings.ContainsKey("mbVersion") || !me.settings.ContainsKey("ignoreInstructions") || !me.settings.ContainsKey("autoGenerateModID") || !me.settings.ContainsKey("includeModManLine"))
+                {
+                    MessageBox.Show("Your project does not include all the required settings. Please try to repair your project and try again.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    me.conn.Close();
+                    me.Close();
+                    return false;
+                }
+
+                // Compare the versions
+                Version lmver = new Version(Properties.Settings.Default.minMbVersion);
+                Version mver = new Version(me.settings["mbVersion"]);
+                int status = mver.CompareTo(lmver);
+
+                // If the status is equal to or bigger than 0 we are running the latest version.
+                if (status < 0)
+                {
+                    MessageBox.Show("Your project is generated with an older version of Mod Builder, which used a different format. Please repair your project and try again.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    me.conn.Close();
+                    me.Close();
+                    return false;
+                }
+
+                me.modID.Text = me.settings["modID"];
+                me.modName.Text = me.settings["modName"];
+                me.modType.SelectedItem = me.settings["modType"];
+                me.modVersion.Text = me.settings["modVersion"];
+                me.authorName.Text = me.settings["modUser"];
+                me.modCompatibility.Text = me.settings["modCompat"];
+                me.Text = me.settings["modName"] + " - Mod Builder";
+
+                if (me.settings["ignoreInstructions"] == "true")
+                    me.ignoreInstructions.Checked = true;
+
+                if (me.settings["autoGenerateModID"] == "true")
+                    me.genPkgID.Checked = true;
+
+                if (me.settings["includeModManLine"] == "true")
+                    me.includeModManLine.Checked = true;
 
                 // Also load the readme.txt.
                 if (File.Exists(dir + "/Package/readme.txt"))
@@ -91,54 +103,6 @@ namespace ModBuilder
 
                 if (File.Exists(dir + "/Package/uninstallDatabase.php"))
                     me.uninstallDatabaseCode.Text = File.ReadAllText(dir + "/Package/uninstallDatabase.php");
-
-                if (!File.Exists(dir + "/data.sqlite"))
-                {
-                    MessageBox.Show("A required database file was not found in your project. It will now be generated.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    me.generateSQL(dir);
-                }
-
-                me.workingDirectory = dir;
-                me.conn = new SQLiteConnection("Data Source=\"" + dir + "/data.sqlite\";Version=3;");
-                me.conn.Open();
-                me.hasConn = true;
-
-                me.refreshInstructionTree();
-                me.refreshExtractionTree();
-                me.reloadSettings();
-                me.PopulateFileTree(dir, me.files.Nodes[0]);
-
-                // Checks.
-                if (!me.settings.ContainsKey("mbVersion") || !me.settings.ContainsKey("ignoreInstructions") || !me.settings.ContainsKey("autoGenerateModID") || !me.settings.ContainsKey("includeModManLine"))
-                {
-                    MessageBox.Show("Your project does not include all the required settings. Please try to repair your project and try again.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    me.conn.Close();
-                    me.Close();
-                    return false;
-                }
-
-                // Compare the versions
-                Version lmver = new Version(Properties.Settings.Default.minMbVersion);
-                Version mver = new Version(me.settings["mbVersion"]);
-                int status = mver.CompareTo(lmver);
-
-                // If the status is equal to or bigger than 0 we are running the latest version.
-                if (status < 0)
-                {
-                    MessageBox.Show("Your project is generated with an older version of Mod Builder, which used a different package format. Please try to repair your project and try again.", "Loading Project", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    me.conn.Close();
-                    me.Close();
-                    return false;
-                }
-
-                if (me.settings["ignoreInstructions"] == "true")
-                    me.ignoreInstructions.Checked = true;
-
-                if (me.settings["autoGenerateModID"] == "true")
-                    me.genPkgID.Checked = true;
-
-                if (me.settings["includeModManLine"] == "true")
-                    me.includeModManLine.Checked = true;
 
                 me.Show();
 
