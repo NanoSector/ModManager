@@ -34,6 +34,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dl21 = new System.Windows.Forms.Button();
+            this.twoonever = new System.Windows.Forms.Label();
+            this.latestin21 = new System.Windows.Forms.Label();
             this.dsmfver = new System.Windows.Forms.Label();
             this.dsmfverp = new System.Windows.Forms.Label();
             this.onever = new System.Windows.Forms.Label();
@@ -60,6 +63,12 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.wampPhpVersions = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.wampPath = new System.Windows.Forms.TextBox();
+            this.browseWampButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.phpver = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
@@ -68,6 +77,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -77,6 +88,7 @@
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,6 +149,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.dl21);
+            this.tabPage2.Controls.Add(this.twoonever);
+            this.tabPage2.Controls.Add(this.latestin21);
             this.tabPage2.Controls.Add(this.dsmfver);
             this.tabPage2.Controls.Add(this.dsmfverp);
             this.tabPage2.Controls.Add(this.onever);
@@ -157,6 +172,34 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Debugging";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dl21
+            // 
+            this.dl21.Location = new System.Drawing.Point(206, 133);
+            this.dl21.Name = "dl21";
+            this.dl21.Size = new System.Drawing.Size(150, 23);
+            this.dl21.TabIndex = 15;
+            this.dl21.Text = "View on GitHub";
+            this.dl21.UseVisualStyleBackColor = true;
+            this.dl21.Click += new System.EventHandler(this.dl21_Click);
+            // 
+            // twoonever
+            // 
+            this.twoonever.AutoSize = true;
+            this.twoonever.Location = new System.Drawing.Point(103, 139);
+            this.twoonever.Name = "twoonever";
+            this.twoonever.Size = new System.Drawing.Size(57, 13);
+            this.twoonever.TabIndex = 14;
+            this.twoonever.Text = "(unknown)";
+            // 
+            // latestin21
+            // 
+            this.latestin21.AutoSize = true;
+            this.latestin21.Location = new System.Drawing.Point(21, 139);
+            this.latestin21.Name = "latestin21";
+            this.latestin21.Size = new System.Drawing.Size(76, 13);
+            this.latestin21.TabIndex = 13;
+            this.latestin21.Text = "Latest in 2.1.x:";
             // 
             // dsmfver
             // 
@@ -225,7 +268,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(24, 130);
+            this.button4.Location = new System.Drawing.Point(24, 113);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(150, 23);
             this.button4.TabIndex = 5;
@@ -414,6 +457,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.groupBox2);
             this.tabPage5.Controls.Add(this.phpver);
             this.tabPage5.Controls.Add(this.label10);
             this.tabPage5.Controls.Add(this.button6);
@@ -426,6 +470,67 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "PHP Code Checking";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.wampPhpVersions);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.wampPath);
+            this.groupBox2.Controls.Add(this.browseWampButton);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Location = new System.Drawing.Point(8, 77);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(354, 137);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Got WAMPServer 2 installed?";
+            // 
+            // wampPhpVersions
+            // 
+            this.wampPhpVersions.FormattingEnabled = true;
+            this.wampPhpVersions.Location = new System.Drawing.Point(116, 83);
+            this.wampPhpVersions.Name = "wampPhpVersions";
+            this.wampPhpVersions.Size = new System.Drawing.Size(62, 21);
+            this.wampPhpVersions.TabIndex = 4;
+            this.wampPhpVersions.SelectedIndexChanged += new System.EventHandler(this.wampPhpVersions_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 86);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(104, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "PHP versions found:";
+            // 
+            // wampPath
+            // 
+            this.wampPath.Location = new System.Drawing.Point(96, 13);
+            this.wampPath.Name = "wampPath";
+            this.wampPath.Size = new System.Drawing.Size(171, 20);
+            this.wampPath.TabIndex = 2;
+            this.wampPath.TextChanged += new System.EventHandler(this.wampPath_TextChanged);
+            // 
+            // browseWampButton
+            // 
+            this.browseWampButton.Location = new System.Drawing.Point(273, 11);
+            this.browseWampButton.Name = "browseWampButton";
+            this.browseWampButton.Size = new System.Drawing.Size(75, 23);
+            this.browseWampButton.TabIndex = 1;
+            this.browseWampButton.Text = "Browse";
+            this.browseWampButton.UseVisualStyleBackColor = true;
+            this.browseWampButton.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 16);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(84, 13);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "WAMP location:";
             // 
             // phpver
             // 
@@ -504,6 +609,26 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 39);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(270, 26);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Mod Builder will detect WAMP if installed in C:\\wamp.\r\nIf not, you need to manual" +
+    "ly specify the installation here.";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 108);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(318, 26);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Once a version is selected Mod Builder will check this version and\r\nuse it for mo" +
+    "d building.";
+            // 
             // Options
             // 
             this.AcceptButton = this.button1;
@@ -536,6 +661,8 @@
             this.groupBox4.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -583,5 +710,16 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox phppath;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button dl21;
+        private System.Windows.Forms.Label twoonever;
+        private System.Windows.Forms.Label latestin21;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox wampPath;
+        private System.Windows.Forms.Button browseWampButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox wampPhpVersions;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
     }
 }

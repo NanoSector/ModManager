@@ -10,6 +10,8 @@ using System.IO;
 using System.Xml;
 using System.Data.SQLite;
 using System.Xml.Linq;
+using Microsoft.WindowsAPICodePack;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace ModBuilder.Forms
 {
@@ -22,21 +24,24 @@ namespace ModBuilder.Forms
 
         private void browseOutputDirectory_Click(object sender, EventArgs e)
         {
-            // Show a new folder browser dialog.
-            FolderBrowserDialog fb = new FolderBrowserDialog();
+            // Get us a new FolderBrowserDialog
+            CommonOpenFileDialog fb = new CommonOpenFileDialog();
+            fb.IsFolderPicker = true;
+            fb.Title = "Please select the directory where your project should be created.";
+            fb.EnsurePathExists = true;
+            CommonFileDialogResult rs = fb.ShowDialog();
 
-            // Set some settings.
-            fb.Description = "Select the directory the project should be created in.";
-            fb.ShowNewFolderButton = true;
-            
-            // Show it.
-            DialogResult result = fb.ShowDialog();
+            if (rs == CommonFileDialogResult.Cancel)
+                return;
+
+            // Get the path.
+            string dir = fb.FileName;
 
             // Did we get a valid response?
-            if (result != DialogResult.Cancel && !String.IsNullOrEmpty(fb.SelectedPath) && Directory.Exists(fb.SelectedPath))
+            if (!String.IsNullOrEmpty(dir) && Directory.Exists(dir))
             {
                 // Being the nice program I am, I shall check if a project already exists in this directory.
-                if (File.Exists(fb.SelectedPath + "/data.sqlite") && File.Exists(fb.SelectedPath + "/Package/package-info.xml"))
+                if (File.Exists(dir + "/data.sqlite") && File.Exists(dir + "/Package/package-info.xml"))
                 {
                     DialogResult qresult = MessageBox.Show("Mod Manager has detected that a project already exists in the selected directory. Are you sure you want to continue and possibly overwrite the existing project?", "Options", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -46,27 +51,30 @@ namespace ModBuilder.Forms
                 }
 
                 // Update the textbox.
-                outputDirectory.Text = fb.SelectedPath;
+                outputDirectory.Text = dir;
             }
         }
 
         private void browseInputPackageDirectory_Click(object sender, EventArgs e)
         {
-            // Show a new folder browser dialog.
-            FolderBrowserDialog fb = new FolderBrowserDialog();
+            // Get us a new FolderBrowserDialog
+            CommonOpenFileDialog fb = new CommonOpenFileDialog();
+            fb.IsFolderPicker = true;
+            fb.Title = "Please select the directory where your package is located.";
+            fb.EnsurePathExists = true;
+            CommonFileDialogResult rs = fb.ShowDialog();
 
-            // Set some settings.
-            fb.Description = "Select the directory the project should be created in.";
-            fb.ShowNewFolderButton = true;
-            
-            // Show it.
-            DialogResult result = fb.ShowDialog();
+            if (rs == CommonFileDialogResult.Cancel)
+                return;
+
+            // Get the path.
+            string dir = fb.FileName;
 
             // Did we get a valid response?
-            if (result != DialogResult.Cancel && !String.IsNullOrEmpty(fb.SelectedPath) && Directory.Exists(fb.SelectedPath))
+            if (!String.IsNullOrEmpty(dir) && Directory.Exists(dir))
             {
                 // Being the nice program I am, I shall check if a project already exists in this directory.
-                if (!File.Exists(fb.SelectedPath + "/package-info.xml"))
+                if (!File.Exists(dir + "/package-info.xml"))
                 {
                     DialogResult qresult = MessageBox.Show("Mod Manager has detected that there is no package-info.xml in the package, so you will have to manually select any files in the package. Do you still want to continue?", "Converting", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -85,15 +93,15 @@ namespace ModBuilder.Forms
                 uninstallDatabasePHPPath.Text = "";
 
                 // Update the textbox.
-                packageInputPath.Text = fb.SelectedPath;
+                packageInputPath.Text = dir;
 
                 #region Read the package-info.xml, if it exists.
-                if (File.Exists(fb.SelectedPath + "/package-info.xml"))
+                if (File.Exists(dir + "/package-info.xml"))
                 {
-                    packageInfoXMLPath.Text = fb.SelectedPath + "\\package-info.xml";
+                    packageInfoXMLPath.Text = dir + "\\package-info.xml";
 
                     XmlDocument doc = new XmlDocument();
-                    doc.Load(fb.SelectedPath + "/package-info.xml");
+                    doc.Load(dir + "/package-info.xml");
 
                     foreach (XmlNode l_packageNode in doc.LastChild.ChildNodes)
                     {
@@ -104,17 +112,17 @@ namespace ModBuilder.Forms
                                 switch (l_operationNode.Name)
                                 {
                                     case "modification":
-                                        installXmlPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        installXmlPath.Text = dir + "/" + l_operationNode.InnerText;
                                         break;
                                     case "code":
-                                        installPHPPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        installPHPPath.Text = dir + "/" + l_operationNode.InnerText;
                                         break;
                                     case "database":
-                                        installDatabasePHPPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        installDatabasePHPPath.Text = dir + "/" + l_operationNode.InnerText;
                                         break;
                                     case "readme":
-                                        if (File.Exists(fb.SelectedPath + "/" + l_operationNode.InnerText))
-                                            readmeTXTPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        if (File.Exists(dir + "/" + l_operationNode.InnerText))
+                                            readmeTXTPath.Text = dir + "/" + l_operationNode.InnerText;
                                         else
                                             readmeTXTPath.Text = "Inline";
                                         break;
@@ -128,10 +136,10 @@ namespace ModBuilder.Forms
                                 switch (l_operationNode.Name)
                                 {
                                     case "code":
-                                        uninstallPHPPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        uninstallPHPPath.Text = dir + "/" + l_operationNode.InnerText;
                                         break;
                                     case "database":
-                                        uninstallDatabasePHPPath.Text = fb.SelectedPath + "/" + l_operationNode.InnerText;
+                                        uninstallDatabasePHPPath.Text = dir + "/" + l_operationNode.InnerText;
                                         break;
                                 }
                             }

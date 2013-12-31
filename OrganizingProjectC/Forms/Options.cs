@@ -12,6 +12,8 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Security.Cryptography;
 using System.Diagnostics;
+using Microsoft.WindowsAPICodePack;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace ModBuilder.Forms
 {
@@ -40,6 +42,13 @@ namespace ModBuilder.Forms
             {
                 comboBox1.Items.Add(file.Replace(AppDomain.CurrentDomain.BaseDirectory + "update_", "").Replace(".exe", "").Replace("-", "."));
             }
+
+            // WAMP time!
+            if (Directory.Exists("C:\\wamp"))
+                wampPath.Text = "C:\\wamp";
+
+            if (!String.IsNullOrEmpty(phppath.Text) && File.Exists(phppath.Text))
+                checkPHP(phppath.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -63,12 +72,18 @@ namespace ModBuilder.Forms
 
         private void browseSmfPath_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fb = new FolderBrowserDialog();
-            fb.ShowNewFolderButton = false;
-            fb.Description = "Select the directory where the environment exists...";
-            fb.ShowDialog();
+            // Get us a new FolderBrowserDialog
+            CommonOpenFileDialog fb = new CommonOpenFileDialog();
+            fb.IsFolderPicker = true;
+            fb.Title = "Please select the directory that your environment resides in.";
+            fb.EnsurePathExists = true;
+            CommonFileDialogResult rs = fb.ShowDialog();
 
-            string s = fb.SelectedPath;
+            if (rs == CommonFileDialogResult.Cancel)
+                return;
+
+            // Get the path.
+            string s = fb.FileName;
             if (Directory.Exists(s))
             {
                 smfPath.Text = s;
@@ -91,16 +106,26 @@ namespace ModBuilder.Forms
         private void button4_Click(object sender, EventArgs e)
         {
             WebClient client = new WebClient();
-            string l20ver = client.DownloadString("http://www.simplemachines.org/smf/current-version.js?version=2.0");
-            string l11ver = client.DownloadString("http://www.simplemachines.org/smf/current-version.js");
-
-            twover.Text = l20ver.Replace("window.smfVersion = \"SMF ", "").Replace("\";", "");
-            onever.Text = l11ver.Replace("window.smfVersion = \"SMF ", "").Replace("\";", "");
+            twoonever.Text = client.DownloadString("http://www.simplemachines.org/smf/current-version.js?version=2.1").Replace("window.smfVersion = \"SMF ", "").Replace("\";", "");
+            twover.Text = client.DownloadString("http://www.simplemachines.org/smf/current-version.js?version=2.0").Replace("window.smfVersion = \"SMF ", "").Replace("\";", "");
+            onever.Text = client.DownloadString("http://www.simplemachines.org/smf/current-version.js").Replace("window.smfVersion = \"SMF ", "").Replace("\";", "");
 
             dl20.Enabled = true;
             dl11.Enabled = true;
 
             button4.Enabled = false;
+        }
+
+        private void dl21_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://www.github.com/SimpleMachines/SMF2.1");
+            }
+            catch
+            {
+                System.Diagnostics.Process.Start("iexplore", "https://www.github.com/SimpleMachines/SMF2.1");
+            }
         }
 
         private void dl20_Click(object sender, EventArgs e)
@@ -284,33 +309,85 @@ namespace ModBuilder.Forms
             DialogResult result = fd.ShowDialog();
 
             if (result == DialogResult.OK)
+                checkPHP(fd.FileName);
+        }
+
+        private void checkPHP(string file)
+        {
+            // Try a test call on this instance.
+            Process p = new Process();
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            p.StartInfo.CreateNoWindow = true;
+            p.StartInfo.FileName = file;
+            p.StartInfo.Arguments = " -v";
+            p.Start();
+
+            string output = p.StandardOutput.ReadLine();
+
+            if (output.Substring(0, 3) != "PHP")
             {
-                // Try a test call on this instance.
-                Process p = new Process();
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                p.StartInfo.FileName = fd.FileName;
-                p.StartInfo.Arguments = " -v";
-                p.Start();
+                MessageBox.Show("The PHP instance is either not correctly compiled or is no PHP instance. Please try again.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                string output = p.StandardOutput.ReadLine();
+            Match version = Regex.Match(output, @"PHP ([^']*) \(");
+            if (version.Success)
+            {
+                phpver.Text = version.Groups[1].Value;
+                phppath.Text = file;
+            }
+            else
+                MessageBox.Show("The PHP instance is either not correctly compiled or is no PHP instance. Please try again.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
-                if (output.Substring(0, 3) != "PHP")
-                {
-                    MessageBox.Show("The PHP instance is either not correctly compiled or is no PHP instance. Please try again.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+        #region WAMP functionality
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // Show them the loading box.
+            loadProject lp = new loadProject();
+            lp.Show();
 
-                Match version = Regex.Match(output, @"PHP ([^']*) \(");
-                if (version.Success)
-                {
-                    phpver.Text = version.Groups[1].Value;
-                    phppath.Text = fd.FileName;
-                }
+            // Get us a new FolderBrowserDialog
+            CommonOpenFileDialog fb = new CommonOpenFileDialog();
+            fb.IsFolderPicker = true;
+            fb.Title = "Please select the directory that WAMP resides in.";
+            fb.EnsurePathExists = true;
+            CommonFileDialogResult rs = fb.ShowDialog();
+
+            if (rs == CommonFileDialogResult.Cancel)
+                return;
+
+            // Get the path.
+            string dir = fb.FileName;
+
+            wampPath.Text = dir;
+        }
+
+        private void wampPhpVersions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (File.Exists(wampPath.Text + "\\bin\\php\\php" + wampPhpVersions.SelectedItem.ToString() + "\\php.exe"))
+                    checkPHP(wampPath.Text + "\\bin\\php\\php" + wampPhpVersions.SelectedItem.ToString() + "\\php.exe");
                 else
-                    MessageBox.Show("The PHP instance is either not correctly compiled or is no PHP instance. Please try again.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("The specified PHP version was not found in the WAMP install, or your WAMP path is invalid.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch
+            {
+                MessageBox.Show("The specified PHP version was not found in the WAMP install, or your WAMP path is invalid.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void wampPath_TextChanged(object sender, EventArgs e)
+        {
+            string[] pvers = Directory.GetDirectories(wampPath.Text + "\\bin\\php");
+            foreach (string ver in pvers)
+            {
+                wampPhpVersions.Items.Add(ver.Replace(wampPath.Text + "\\bin\\php\\php", ""));
+            }
+        }
+        #endregion
     }
 }
