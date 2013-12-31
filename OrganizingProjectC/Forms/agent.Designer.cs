@@ -46,7 +46,6 @@
             this.convertAPackageToAProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.repairAProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,9 +91,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 124);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(180, 13);
+            this.label2.Size = new System.Drawing.Size(177, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "(c) 2013 - Rick \"Yoshi2889\" Kerkhof";
+            this.label2.Text = "© 2013 - Rick \"Yoshi2889\" Kerkhof";
             // 
             // label3
             // 
@@ -148,7 +147,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(270, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(274, 24);
             this.menuStrip1.TabIndex = 16;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -164,14 +163,14 @@
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newProjectToolStripMenuItem.Text = "New Project";
             this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.openNewProject);
             // 
             // openProjectToolStripMenuItem
             // 
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
-            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openProjectToolStripMenuItem.Text = "Open Project";
             this.openProjectToolStripMenuItem.Click += new System.EventHandler(this.openProjectButton);
             // 
@@ -179,9 +178,8 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.convertAPackageToAProjectToolStripMenuItem,
-            this.toolStripSeparator1,
             this.repairAProjectToolStripMenuItem,
-            this.toolStripSeparator3,
+            this.toolStripSeparator1,
             this.optionsToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
@@ -205,11 +203,6 @@
             this.repairAProjectToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
             this.repairAProjectToolStripMenuItem.Text = "Repair a Project...";
             this.repairAProjectToolStripMenuItem.Click += new System.EventHandler(this.repairAProjectToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(241, 6);
             // 
             // optionsToolStripMenuItem
             // 
@@ -259,7 +252,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 146);
+            this.ClientSize = new System.Drawing.Size(274, 145);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.versionLabel);
             this.Controls.Add(this.progressBar1);
@@ -309,7 +302,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem supportToolstripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
     }
 }

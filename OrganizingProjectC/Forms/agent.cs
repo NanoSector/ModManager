@@ -286,7 +286,7 @@ namespace ModBuilder
         #region About
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Mod Builder, a tool to help you create modifications for SMF (Simple Machines Forum).\nSMF is © Simple Machines, http://simplemachines.org/ \n Mod Builder is © Rick \"Yoshi2889\" Kerkhof");
+            MessageBox.Show("Mod Builder, a tool to help you create modifications for SMF (Simple Machines Forum).\nSMF is © Simple Machines, http://simplemachines.org/ \n Mod Builder is © Rick \"Yoshi2889\" Kerkhof\nSome icons by Yusuke Kamiyamane. Licensed under a Creative Commons Attribution 3.0 License.");
         }
         #endregion
 

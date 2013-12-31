@@ -105,48 +105,41 @@
             this.customCodeTab = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.customCodeInstall = new System.Windows.Forms.TextBox();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.importCustomCodeInstall = new System.Windows.Forms.LinkLabel();
+            this.label15 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.cfeInstallCode = new System.Windows.Forms.Button();
             this.ccodeInstallTemplates = new System.Windows.Forms.ComboBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.importCustomCodeUninstall = new System.Windows.Forms.LinkLabel();
+            this.label16 = new System.Windows.Forms.Label();
             this.customCodeUninstall = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.cfeUninstallCode = new System.Windows.Forms.Button();
             this.ccodeUninstallTemplates = new System.Windows.Forms.ComboBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.alterDatabaseTab = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.installDatabaseCode = new System.Windows.Forms.TextBox();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.importInstallDatabaseCode = new System.Windows.Forms.LinkLabel();
+            this.label20 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.cfeDBInstall = new System.Windows.Forms.Button();
             this.adatabaseInstallTemplates = new System.Windows.Forms.ComboBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.uninstallDatabaseCode = new System.Windows.Forms.TextBox();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.importUninstallDatabaseCode = new System.Windows.Forms.LinkLabel();
+            this.label18 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.cfeDBUninstall = new System.Windows.Forms.Button();
             this.adatabaseUninstallTemplates = new System.Windows.Forms.ComboBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.hooksTab = new System.Windows.Forms.TabPage();
-            this.button8 = new System.Windows.Forms.Button();
-            this.modHooks = new System.Windows.Forms.TreeView();
-            this.settingsTab = new System.Windows.Forms.TabPage();
-            this.deleteModSetting = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.addSettingBox = new System.Windows.Forms.GroupBox();
-            this.msDelete = new System.Windows.Forms.Button();
-            this.modSettingsCancel = new System.Windows.Forms.Button();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.settingValue = new System.Windows.Forms.TextBox();
-            this.settingName = new System.Windows.Forms.TextBox();
-            this.button9 = new System.Windows.Forms.Button();
-            this.modSettingsTree = new System.Windows.Forms.TreeView();
             this.buildSettingsTab = new System.Windows.Forms.TabPage();
             this.label23 = new System.Windows.Forms.Label();
             this.includeModManLine = new System.Windows.Forms.CheckBox();
@@ -166,18 +159,6 @@
             this.refreshFilesToExtractdeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshInstallationCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshDatabaseAlteringCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshHooksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refreshModSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.refreshEverythingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importCustomCodeInstall = new System.Windows.Forms.LinkLabel();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.importCustomCodeUninstall = new System.Windows.Forms.LinkLabel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.importUninstallDatabaseCode = new System.Windows.Forms.LinkLabel();
-            this.importInstallDatabaseCode = new System.Windows.Forms.LinkLabel();
             this.modSettings.SuspendLayout();
             this.modDetailsTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -208,24 +189,21 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.panel4.SuspendLayout();
             this.alterDatabaseTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.panel8.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.panel7.SuspendLayout();
-            this.hooksTab.SuspendLayout();
-            this.settingsTab.SuspendLayout();
-            this.addSettingBox.SuspendLayout();
             this.buildSettingsTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panel9.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel12.SuspendLayout();
             this.SuspendLayout();
             // 
             // modSettings
@@ -236,8 +214,6 @@
             this.modSettings.Controls.Add(this.extractFilesTab);
             this.modSettings.Controls.Add(this.customCodeTab);
             this.modSettings.Controls.Add(this.alterDatabaseTab);
-            this.modSettings.Controls.Add(this.hooksTab);
-            this.modSettings.Controls.Add(this.settingsTab);
             this.modSettings.Controls.Add(this.buildSettingsTab);
             this.modSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modSettings.Location = new System.Drawing.Point(0, 24);
@@ -1105,6 +1081,38 @@
             this.customCodeInstall.TabIndex = 2;
             this.customCodeInstall.WordWrap = false;
             // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.importCustomCodeInstall);
+            this.panel9.Controls.Add(this.label15);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(376, 13);
+            this.panel9.TabIndex = 11;
+            // 
+            // importCustomCodeInstall
+            // 
+            this.importCustomCodeInstall.AutoSize = true;
+            this.importCustomCodeInstall.Dock = System.Windows.Forms.DockStyle.Left;
+            this.importCustomCodeInstall.Location = new System.Drawing.Point(60, 0);
+            this.importCustomCodeInstall.Name = "importCustomCodeInstall";
+            this.importCustomCodeInstall.Size = new System.Drawing.Size(45, 13);
+            this.importCustomCodeInstall.TabIndex = 10;
+            this.importCustomCodeInstall.TabStop = true;
+            this.importCustomCodeInstall.Text = "Import...";
+            this.importCustomCodeInstall.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.importCustomCodeInstall_LinkClicked);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label15.Location = new System.Drawing.Point(0, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(60, 13);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Installation:";
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.cfeInstallCode);
@@ -1144,15 +1152,37 @@
             this.label25.TabIndex = 7;
             this.label25.Text = "Templates:";
             // 
-            // label15
+            // panel10
             // 
-            this.label15.AutoSize = true;
-            this.label15.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label15.Location = new System.Drawing.Point(0, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(60, 13);
-            this.label15.TabIndex = 3;
-            this.label15.Text = "Installation:";
+            this.panel10.Controls.Add(this.importCustomCodeUninstall);
+            this.panel10.Controls.Add(this.label16);
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(0, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(374, 13);
+            this.panel10.TabIndex = 9;
+            // 
+            // importCustomCodeUninstall
+            // 
+            this.importCustomCodeUninstall.AutoSize = true;
+            this.importCustomCodeUninstall.Dock = System.Windows.Forms.DockStyle.Left;
+            this.importCustomCodeUninstall.Location = new System.Drawing.Point(73, 0);
+            this.importCustomCodeUninstall.Name = "importCustomCodeUninstall";
+            this.importCustomCodeUninstall.Size = new System.Drawing.Size(45, 13);
+            this.importCustomCodeUninstall.TabIndex = 6;
+            this.importCustomCodeUninstall.TabStop = true;
+            this.importCustomCodeUninstall.Text = "Import...";
+            this.importCustomCodeUninstall.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.importCustomCodeUninstall_LinkClicked);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label16.Location = new System.Drawing.Point(0, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(73, 13);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "Uninstallation:";
             // 
             // customCodeUninstall
             // 
@@ -1203,16 +1233,6 @@
             this.label24.Size = new System.Drawing.Size(59, 13);
             this.label24.TabIndex = 7;
             this.label24.Text = "Templates:";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label16.Location = new System.Drawing.Point(0, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(73, 13);
-            this.label16.TabIndex = 5;
-            this.label16.Text = "Uninstallation:";
             // 
             // label14
             // 
@@ -1270,6 +1290,38 @@
             this.installDatabaseCode.TabIndex = 3;
             this.installDatabaseCode.WordWrap = false;
             // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.importInstallDatabaseCode);
+            this.panel11.Controls.Add(this.label20);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Location = new System.Drawing.Point(0, 0);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(376, 13);
+            this.panel11.TabIndex = 10;
+            // 
+            // importInstallDatabaseCode
+            // 
+            this.importInstallDatabaseCode.AutoSize = true;
+            this.importInstallDatabaseCode.Dock = System.Windows.Forms.DockStyle.Left;
+            this.importInstallDatabaseCode.Location = new System.Drawing.Point(60, 0);
+            this.importInstallDatabaseCode.Name = "importInstallDatabaseCode";
+            this.importInstallDatabaseCode.Size = new System.Drawing.Size(45, 13);
+            this.importInstallDatabaseCode.TabIndex = 4;
+            this.importInstallDatabaseCode.TabStop = true;
+            this.importInstallDatabaseCode.Text = "Import...";
+            this.importInstallDatabaseCode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.importInstallDatabaseCode_LinkClicked);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label20.Location = new System.Drawing.Point(0, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(60, 13);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Installation:";
+            // 
             // panel8
             // 
             this.panel8.Controls.Add(this.cfeDBInstall);
@@ -1309,16 +1361,6 @@
             this.label27.TabIndex = 7;
             this.label27.Text = "Templates:";
             // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label20.Location = new System.Drawing.Point(0, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(60, 13);
-            this.label20.TabIndex = 3;
-            this.label20.Text = "Installation:";
-            // 
             // uninstallDatabaseCode
             // 
             this.uninstallDatabaseCode.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1329,6 +1371,38 @@
             this.uninstallDatabaseCode.Size = new System.Drawing.Size(374, 306);
             this.uninstallDatabaseCode.TabIndex = 5;
             this.uninstallDatabaseCode.WordWrap = false;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.importUninstallDatabaseCode);
+            this.panel12.Controls.Add(this.label18);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel12.Location = new System.Drawing.Point(0, 0);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(374, 13);
+            this.panel12.TabIndex = 10;
+            // 
+            // importUninstallDatabaseCode
+            // 
+            this.importUninstallDatabaseCode.AutoSize = true;
+            this.importUninstallDatabaseCode.Dock = System.Windows.Forms.DockStyle.Left;
+            this.importUninstallDatabaseCode.Location = new System.Drawing.Point(73, 0);
+            this.importUninstallDatabaseCode.Name = "importUninstallDatabaseCode";
+            this.importUninstallDatabaseCode.Size = new System.Drawing.Size(45, 13);
+            this.importUninstallDatabaseCode.TabIndex = 6;
+            this.importUninstallDatabaseCode.TabStop = true;
+            this.importUninstallDatabaseCode.Text = "Import...";
+            this.importUninstallDatabaseCode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.importUninstallDatabaseCode_LinkClicked);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label18.Location = new System.Drawing.Point(0, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(73, 13);
+            this.label18.TabIndex = 5;
+            this.label18.Text = "Uninstallation:";
             // 
             // panel7
             // 
@@ -1369,16 +1443,6 @@
             this.label26.TabIndex = 7;
             this.label26.Text = "Templates:";
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label18.Location = new System.Drawing.Point(0, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(73, 13);
-            this.label18.TabIndex = 5;
-            this.label18.Text = "Uninstallation:";
-            // 
             // label19
             // 
             this.label19.AutoSize = true;
@@ -1390,177 +1454,6 @@
             this.label19.TabIndex = 0;
             this.label19.Text = "You can specify your own database to be executed here. It is easier to copy it fr" +
     "om a code editor than to write it here.";
-            // 
-            // hooksTab
-            // 
-            this.hooksTab.Controls.Add(this.button8);
-            this.hooksTab.Controls.Add(this.modHooks);
-            this.hooksTab.Location = new System.Drawing.Point(4, 22);
-            this.hooksTab.Name = "hooksTab";
-            this.hooksTab.Padding = new System.Windows.Forms.Padding(3);
-            this.hooksTab.Size = new System.Drawing.Size(760, 369);
-            this.hooksTab.TabIndex = 9;
-            this.hooksTab.Text = "Hooks";
-            this.hooksTab.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.BackgroundImage = global::ModBuilder.Properties.Resources.refresh;
-            this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(736, 6);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(16, 16);
-            this.button8.TabIndex = 15;
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // modHooks
-            // 
-            this.modHooks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.modHooks.Location = new System.Drawing.Point(3, 8);
-            this.modHooks.Name = "modHooks";
-            this.modHooks.Size = new System.Drawing.Size(282, 355);
-            this.modHooks.TabIndex = 2;
-            // 
-            // settingsTab
-            // 
-            this.settingsTab.Controls.Add(this.deleteModSetting);
-            this.settingsTab.Controls.Add(this.button7);
-            this.settingsTab.Controls.Add(this.addSettingBox);
-            this.settingsTab.Controls.Add(this.modSettingsTree);
-            this.settingsTab.Location = new System.Drawing.Point(4, 22);
-            this.settingsTab.Name = "settingsTab";
-            this.settingsTab.Size = new System.Drawing.Size(760, 369);
-            this.settingsTab.TabIndex = 10;
-            this.settingsTab.Text = "Mod Settings";
-            this.settingsTab.UseVisualStyleBackColor = true;
-            // 
-            // deleteModSetting
-            // 
-            this.deleteModSetting.Location = new System.Drawing.Point(296, 253);
-            this.deleteModSetting.Name = "deleteModSetting";
-            this.deleteModSetting.Size = new System.Drawing.Size(153, 23);
-            this.deleteModSetting.TabIndex = 16;
-            this.deleteModSetting.Text = "Delete the selected setting";
-            this.deleteModSetting.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.BackgroundImage = global::ModBuilder.Properties.Resources.refresh;
-            this.button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(736, 6);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(16, 16);
-            this.button7.TabIndex = 15;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // addSettingBox
-            // 
-            this.addSettingBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.addSettingBox.Controls.Add(this.msDelete);
-            this.addSettingBox.Controls.Add(this.modSettingsCancel);
-            this.addSettingBox.Controls.Add(this.label32);
-            this.addSettingBox.Controls.Add(this.label31);
-            this.addSettingBox.Controls.Add(this.settingValue);
-            this.addSettingBox.Controls.Add(this.settingName);
-            this.addSettingBox.Controls.Add(this.button9);
-            this.addSettingBox.Location = new System.Drawing.Point(296, 28);
-            this.addSettingBox.Name = "addSettingBox";
-            this.addSettingBox.Size = new System.Drawing.Size(461, 219);
-            this.addSettingBox.TabIndex = 4;
-            this.addSettingBox.TabStop = false;
-            this.addSettingBox.Text = "Add a new setting";
-            // 
-            // msDelete
-            // 
-            this.msDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.msDelete.Location = new System.Drawing.Point(74, 190);
-            this.msDelete.Name = "msDelete";
-            this.msDelete.Size = new System.Drawing.Size(123, 23);
-            this.msDelete.TabIndex = 6;
-            this.msDelete.Text = "Delete this setting";
-            this.msDelete.UseVisualStyleBackColor = true;
-            this.msDelete.Visible = false;
-            this.msDelete.Click += new System.EventHandler(this.msDelete_Click);
-            // 
-            // modSettingsCancel
-            // 
-            this.modSettingsCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.modSettingsCancel.Location = new System.Drawing.Point(203, 190);
-            this.modSettingsCancel.Name = "modSettingsCancel";
-            this.modSettingsCancel.Size = new System.Drawing.Size(123, 23);
-            this.modSettingsCancel.TabIndex = 5;
-            this.modSettingsCancel.Text = "Cancel";
-            this.modSettingsCancel.UseVisualStyleBackColor = true;
-            this.modSettingsCancel.Visible = false;
-            this.modSettingsCancel.Click += new System.EventHandler(this.modSettingsCancel_Click);
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(6, 59);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(70, 13);
-            this.label32.TabIndex = 4;
-            this.label32.Text = "Default value";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(6, 33);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(40, 13);
-            this.label31.TabIndex = 3;
-            this.label31.Text = "Setting";
-            // 
-            // settingValue
-            // 
-            this.settingValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.settingValue.Location = new System.Drawing.Point(100, 56);
-            this.settingValue.MaxLength = 9999999;
-            this.settingValue.Multiline = true;
-            this.settingValue.Name = "settingValue";
-            this.settingValue.Size = new System.Drawing.Size(355, 128);
-            this.settingValue.TabIndex = 2;
-            // 
-            // settingName
-            // 
-            this.settingName.Location = new System.Drawing.Point(100, 30);
-            this.settingName.Name = "settingName";
-            this.settingName.Size = new System.Drawing.Size(182, 20);
-            this.settingName.TabIndex = 1;
-            // 
-            // button9
-            // 
-            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button9.Location = new System.Drawing.Point(332, 190);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(123, 23);
-            this.button9.TabIndex = 0;
-            this.button9.Text = "Add setting";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
-            // modSettingsTree
-            // 
-            this.modSettingsTree.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.modSettingsTree.Location = new System.Drawing.Point(3, 6);
-            this.modSettingsTree.Name = "modSettingsTree";
-            this.modSettingsTree.Size = new System.Drawing.Size(282, 355);
-            this.modSettingsTree.TabIndex = 2;
-            this.modSettingsTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.modSettingsTree_NodeMouseDoubleClick);
             // 
             // buildSettingsTab
             // 
@@ -1695,14 +1588,10 @@
             this.helpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.helpToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.refreshEverythingToolStripMenuItem,
-            this.toolStripSeparator2,
             this.refreshSourceEditsToolStripMenuItem,
             this.refreshFilesToExtractdeleteToolStripMenuItem,
             this.refreshInstallationCodeToolStripMenuItem,
-            this.refreshDatabaseAlteringCodeToolStripMenuItem,
-            this.refreshHooksToolStripMenuItem,
-            this.refreshModSettingsToolStripMenuItem});
+            this.refreshDatabaseAlteringCodeToolStripMenuItem});
             this.helpToolStripMenuItem.Image = global::ModBuilder.Properties.Resources.refresh;
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
@@ -1735,118 +1624,6 @@
             this.refreshDatabaseAlteringCodeToolStripMenuItem.Name = "refreshDatabaseAlteringCodeToolStripMenuItem";
             this.refreshDatabaseAlteringCodeToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
             this.refreshDatabaseAlteringCodeToolStripMenuItem.Text = "Refresh Database altering code";
-            // 
-            // refreshHooksToolStripMenuItem
-            // 
-            this.refreshHooksToolStripMenuItem.Name = "refreshHooksToolStripMenuItem";
-            this.refreshHooksToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
-            this.refreshHooksToolStripMenuItem.Text = "Refresh Hooks";
-            // 
-            // refreshModSettingsToolStripMenuItem
-            // 
-            this.refreshModSettingsToolStripMenuItem.Name = "refreshModSettingsToolStripMenuItem";
-            this.refreshModSettingsToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
-            this.refreshModSettingsToolStripMenuItem.Text = "Refresh Mod Settings";
-            this.refreshModSettingsToolStripMenuItem.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(233, 6);
-            // 
-            // refreshEverythingToolStripMenuItem
-            // 
-            this.refreshEverythingToolStripMenuItem.Name = "refreshEverythingToolStripMenuItem";
-            this.refreshEverythingToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
-            this.refreshEverythingToolStripMenuItem.Text = "Refresh everything";
-            // 
-            // importCustomCodeInstall
-            // 
-            this.importCustomCodeInstall.AutoSize = true;
-            this.importCustomCodeInstall.Dock = System.Windows.Forms.DockStyle.Left;
-            this.importCustomCodeInstall.Location = new System.Drawing.Point(60, 0);
-            this.importCustomCodeInstall.Name = "importCustomCodeInstall";
-            this.importCustomCodeInstall.Size = new System.Drawing.Size(45, 13);
-            this.importCustomCodeInstall.TabIndex = 10;
-            this.importCustomCodeInstall.TabStop = true;
-            this.importCustomCodeInstall.Text = "Import...";
-            this.importCustomCodeInstall.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.importCustomCodeInstall_LinkClicked);
-            // 
-            // panel9
-            // 
-            this.panel9.Controls.Add(this.importCustomCodeInstall);
-            this.panel9.Controls.Add(this.label15);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(376, 13);
-            this.panel9.TabIndex = 11;
-            // 
-            // panel10
-            // 
-            this.panel10.Controls.Add(this.importCustomCodeUninstall);
-            this.panel10.Controls.Add(this.label16);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(0, 0);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(374, 13);
-            this.panel10.TabIndex = 9;
-            // 
-            // importCustomCodeUninstall
-            // 
-            this.importCustomCodeUninstall.AutoSize = true;
-            this.importCustomCodeUninstall.Dock = System.Windows.Forms.DockStyle.Left;
-            this.importCustomCodeUninstall.Location = new System.Drawing.Point(73, 0);
-            this.importCustomCodeUninstall.Name = "importCustomCodeUninstall";
-            this.importCustomCodeUninstall.Size = new System.Drawing.Size(45, 13);
-            this.importCustomCodeUninstall.TabIndex = 6;
-            this.importCustomCodeUninstall.TabStop = true;
-            this.importCustomCodeUninstall.Text = "Import...";
-            this.importCustomCodeUninstall.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.importCustomCodeUninstall_LinkClicked);
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.importInstallDatabaseCode);
-            this.panel11.Controls.Add(this.label20);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel11.Location = new System.Drawing.Point(0, 0);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(376, 13);
-            this.panel11.TabIndex = 10;
-            // 
-            // panel12
-            // 
-            this.panel12.Controls.Add(this.importUninstallDatabaseCode);
-            this.panel12.Controls.Add(this.label18);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel12.Location = new System.Drawing.Point(0, 0);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(374, 13);
-            this.panel12.TabIndex = 10;
-            // 
-            // importUninstallDatabaseCode
-            // 
-            this.importUninstallDatabaseCode.AutoSize = true;
-            this.importUninstallDatabaseCode.Dock = System.Windows.Forms.DockStyle.Left;
-            this.importUninstallDatabaseCode.Location = new System.Drawing.Point(73, 0);
-            this.importUninstallDatabaseCode.Name = "importUninstallDatabaseCode";
-            this.importUninstallDatabaseCode.Size = new System.Drawing.Size(45, 13);
-            this.importUninstallDatabaseCode.TabIndex = 6;
-            this.importUninstallDatabaseCode.TabStop = true;
-            this.importUninstallDatabaseCode.Text = "Import...";
-            this.importUninstallDatabaseCode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.importUninstallDatabaseCode_LinkClicked);
-            // 
-            // importInstallDatabaseCode
-            // 
-            this.importInstallDatabaseCode.AutoSize = true;
-            this.importInstallDatabaseCode.Dock = System.Windows.Forms.DockStyle.Left;
-            this.importInstallDatabaseCode.Location = new System.Drawing.Point(60, 0);
-            this.importInstallDatabaseCode.Name = "importInstallDatabaseCode";
-            this.importInstallDatabaseCode.Size = new System.Drawing.Size(45, 13);
-            this.importInstallDatabaseCode.TabIndex = 4;
-            this.importInstallDatabaseCode.TabStop = true;
-            this.importInstallDatabaseCode.Text = "Import...";
-            this.importInstallDatabaseCode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.importInstallDatabaseCode_LinkClicked);
             // 
             // modEditor
             // 
@@ -1902,8 +1679,12 @@
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.alterDatabaseTab.ResumeLayout(false);
@@ -1914,26 +1695,18 @@
             this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
-            this.hooksTab.ResumeLayout(false);
-            this.settingsTab.ResumeLayout(false);
-            this.addSettingBox.ResumeLayout(false);
-            this.addSettingBox.PerformLayout();
             this.buildSettingsTab.ResumeLayout(false);
             this.buildSettingsTab.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2057,31 +1830,12 @@
         private System.Windows.Forms.TextBox fileNameD;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.ComboBox filePrefixD;
-        private System.Windows.Forms.TabPage hooksTab;
-        public System.Windows.Forms.TreeView modHooks;
-        private System.Windows.Forms.TabPage settingsTab;
-        public System.Windows.Forms.TreeView modSettingsTree;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button deleteModSetting;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.GroupBox addSettingBox;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox settingValue;
-        private System.Windows.Forms.TextBox settingName;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.ToolStripMenuItem openProjectDirectoryToolStripMenuItem;
-        private System.Windows.Forms.Button modSettingsCancel;
-        private System.Windows.Forms.Button msDelete;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem refreshEverythingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem refreshSourceEditsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshFilesToExtractdeleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshInstallationCodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem refreshDatabaseAlteringCodeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem refreshHooksToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem refreshModSettingsToolStripMenuItem;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.LinkLabel importCustomCodeInstall;
         private System.Windows.Forms.Panel panel10;

@@ -1,1 +1,0 @@
-This is a sample project to show off what Mod Builder can do.
