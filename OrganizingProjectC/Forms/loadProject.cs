@@ -45,7 +45,6 @@ namespace ModBuilder
 
                 me.refreshInstructionTree();
                 me.refreshExtractionTree();
-                me.refreshSettingTree();
                 me.reloadSettings();
 
                 // Checks.
@@ -108,8 +107,9 @@ namespace ModBuilder
 
                 return true;
             }
-            catch
+            catch (Exception e)
             {
+                MessageBox.Show(e.ToString());
                 return false;
             }
         }

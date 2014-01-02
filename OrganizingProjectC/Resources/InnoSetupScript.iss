@@ -2,9 +2,9 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Mod Builder"
-#define MyAppVersion "1.3"
+#define MyAppVersion "1.4"
 #define MyAppPublisher "Yoshi2889"
-#define MyAppURL "http://map3forum.tk"
+#define MyAppURL "http://www.simplemachines.org/community/index.php?topic=493451.0"
 #define MyAppExeName "ModBuilder.exe"
 
 [Setup]
@@ -22,8 +22,8 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\SMF Mod Builder
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-;LicenseFile="C:\Users\Rick\My Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\Resources\LICENSE.TXT"
-;InfoBeforeFile="C:\Users\Rick\My Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\Resources\INFO.TXT"
+;LicenseFile="C:\Users\Rick_2\My Documents\GitHub\ModManager\OrganizingProjectC\Resources\LICENSE.TXT"
+;InfoBeforeFile="C:\Users\Rick_2\My Documents\GitHub\ModManager\OrganizingProjectC\Resources\INFO.TXT"
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
@@ -34,19 +34,23 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
+Name: "templates"; Description: "Extract the sample template files"; GroupDescription: "Template files"
 
 [Files]
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\ModBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\7za.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\Ionic.Zip.dll"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Debug\ModBuilder.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Debug\ModBuilder.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Rick\Documents\GitHub\ModManager\Program\Source\OrganizingProjectC\bin\Release\templates\*"; DestDir: "{app}\templates"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\ModBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\templates\*"; DestDir: "{app}\templates"; Flags: ignoreversion recursesubdirs createallsubdirs; Tasks: templates
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+
+[Dirs]
+Name: "{app}\templates"
+Name: "{app}\templates\code_install"
+Name: "{app}\templates\code_uninstall"
+Name: "{app}\templates\database_install"
+Name: "{app}\templates\database_uninstall"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

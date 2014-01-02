@@ -104,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Mod.cs" />
+    <Compile Include="Classes\Package.cs" />
     <Compile Include="Forms\addDeletionInstructionDialog.cs">
       <SubType>Form</SubType>
     </Compile>

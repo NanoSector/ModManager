@@ -803,209 +803,6 @@ namespace ModBuilder
         }
         #endregion
 
-        #region Mod Settings
-        private bool isEditing = false;
-        private int editing = -1;
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            if (!hasConn)
-            {
-                MessageBox.Show("Please save your project before continuing.", "Adding setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(settingName.Text))
-            {
-                MessageBox.Show("You need to enter a setting name.", "Adding setting", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            Regex r = new Regex(@"^[a-zA-Z0-9_\-]*$");
-            if (!r.IsMatch(settingName.Text))
-            {
-                MessageBox.Show("Only alphabetic characters (a to z, lower and uppercase, and numbers), underscores and minuses are allowed in setting names.", "Mod Builder", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(settingValue.Text))
-            {
-                DialogResult res = MessageBox.Show("You have not entered a default value for the setting. Do you still want to add it?", "Adding setting", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (res == DialogResult.No)
-                    return;
-            }
-
-            // Inserting a new one?
-            if (isEditing == false || editing == -1)
-            {
-                // First lets check if the key doesn't already exist.
-                SQLiteCommand command = new SQLiteCommand("SELECT id, key, value FROM modsettings WHERE key = @key", conn);
-
-                // To check we need just the key.
-                command.Parameters.AddWithValue("@key", settingName.Text);
-
-                // If it already exists, we got a result.
-                SQLiteDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    MessageBox.Show("A setting with the same name already exists. Please think of a different name.", "Adding setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Then lets insert the setting.
-                command = new SQLiteCommand("INSERT INTO modsettings(key, value) VALUES(@key, @value)", conn);
-
-                // Add in the parameters.
-                command.Parameters.AddWithValue("@key", settingName.Text);
-                command.Parameters.AddWithValue("@value", settingValue.Text);
-
-                // Execute.
-                command.ExecuteNonQuery();
-
-                // Refresh.
-                refreshSettingTree();
-
-                settingName.Text = "";
-                settingValue.Text = "";
-            }
-
-            // No? Editing, then.
-            else
-            {
-                // First lets check if the key doesn't already exist.
-                SQLiteCommand command = new SQLiteCommand("SELECT id, key, value FROM modsettings WHERE key = @key AND id != @id", conn);
-
-                // To check, we need the setting key and ID.
-                command.Parameters.AddWithValue("@key", settingName.Text);
-                command.Parameters.AddWithValue("@id", editing);
-
-                // If it already exists, we got a result.
-                SQLiteDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    MessageBox.Show("A setting with the same name already exists. Please think of a different name.", "Adding setting", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Create the query to update the setting.
-                command = new SQLiteCommand("UPDATE modsettings SET key = @key, value = @value WHERE id = @id", conn);
-
-                // Add in the parameters for this query.
-                command.Parameters.AddWithValue("@id", editing);
-                command.Parameters.AddWithValue("@key", settingName.Text);
-                command.Parameters.AddWithValue("@value", settingValue.Text);
-
-                // Execute the query.
-                command.ExecuteNonQuery();
-
-                // Done, so refresh the list of settings.
-                refreshSettingTree();
-
-                // And reset everything back to how it was.
-                settingName.Text = "";
-                settingValue.Text = "";
-                modSettingsCancel.Visible = false;
-                msDelete.Visible = false;
-                button9.Text = "Add setting";
-                addSettingBox.Text = "Add a new setting";
-                isEditing = false;
-                editing = -1;
-            }
-        }
-        public void refreshSettingTree()
-        {
-            if (!hasConn)
-            {
-                MessageBox.Show("Please save your project before continuing.", "Refreshing instructions", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Start updating.
-            modSettingsTree.BeginUpdate();
-            modSettingsTree.Nodes.Clear();
-
-            // Add what this is.
-            modSettingsTree.Nodes.Add("Custom mod settings");
-
-            // Grab the data.
-            int i = 1;
-            string sql = "SELECT id, key, value FROM modsettings";
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-            SQLiteDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                int id = Convert.ToInt32(reader["id"]);
-                modSettingsTree.Nodes.Add("id" + id, "Setting \"" + reader["key"] + "\"");
-                i++;
-            }
-            modSettingsTree.Nodes.Add(i - 1 + " instructions total.");
-            
-            modSettingsTree.EndUpdate();
-        }
-        private void modSettingsTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (!hasConn)
-            {
-                MessageBox.Show("Please save your project before continuing.", "Editing instruction", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            var tindex = modSettingsTree.SelectedNode.Name;
-            if (String.IsNullOrEmpty(tindex))
-                return;
-            int index = Convert.ToInt32(tindex.Replace("id", ""));
-
-            string sql = "SELECT id, key, value FROM modsettings WHERE id = @id";
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-            command.Parameters.AddWithValue("@id", index);
-            SQLiteDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                settingName.Text = reader["key"].ToString();
-                settingValue.Text = reader["value"].ToString();
-                isEditing = true;
-                editing = Convert.ToInt32(reader["id"]);
-                modSettingsCancel.Visible = true;
-                msDelete.Visible = true;
-                button9.Text = "Update this setting";
-                addSettingBox.Text = "Edit setting \"" + reader["key"] + "\"";
-            }
-        }
-        private void modSettingsCancel_Click(object sender, EventArgs e)
-        {
-            settingName.Text = "";
-            settingValue.Text = "";
-            modSettingsCancel.Visible = false;
-            msDelete.Visible = false;
-            button9.Text = "Add setting";
-            addSettingBox.Text = "Add a new setting";
-            isEditing = false;
-            editing = -1;
-        }
-        private void msDelete_Click(object sender, EventArgs e)
-        {
-            string sql = "DELETE FROM modsettings WHERE id = @id";
-
-            // Create the query.
-            SQLiteCommand command = new SQLiteCommand(sql, conn);
-            command.Parameters.AddWithValue("@id", editing);
-            command.ExecuteNonQuery();
-            settingName.Text = "";
-            settingValue.Text = "";
-            modSettingsCancel.Visible = false;
-            msDelete.Visible = false;
-            button9.Text = "Add setting";
-            addSettingBox.Text = "Add a new setting";
-            isEditing = false;
-            editing = -1;
-            refreshSettingTree();
-        }
-        private void button7_Click(object sender, EventArgs e)
-        {
-            refreshSettingTree();
-        }
-        #endregion
-
         #region Extracting files
         public void refreshExtractionTree()
         {
@@ -1037,14 +834,14 @@ namespace ModBuilder
             deleteFiles.BeginUpdate();
             deleteFiles.Nodes.Clear();
             deleteFiles.Nodes.Add("Files to be removed on uninstall");
-            sql = "SELECT id, file_name FROM files_delete";
+            sql = "SELECT id, file_name, type FROM files_delete";
             command = new SQLiteCommand(sql, conn);
             reader = command.ExecuteReader();
             i = 1;
             while (reader.Read())
             {
                 int id = Convert.ToInt32(reader["id"]);
-                deleteFiles.Nodes.Add("id" + id, "Remove \"" + reader["file_name"] + "\"", id);
+                deleteFiles.Nodes.Add("id" + id, "Remove \"" + reader["file_name"] + "\" (" + reader["type"] + ")", id);
                 i++;
             }
             deleteFiles.Nodes.Add(i - 1 + " instructions total.");
@@ -1296,10 +1093,12 @@ namespace ModBuilder
             {
                 // If we have a connection, close it.
                 if (hasConn)
+                {
                     conn.Close();
 
-                // Sleep to avoid exceptions.
-                System.Threading.Thread.Sleep(100);
+                    // Sleep to avoid exceptions.
+                    System.Threading.Thread.Sleep(100);
+                }
 
                 // Create a new file.
                 SQLiteConnection.CreateFile(dir + "/data.sqlite");
@@ -1309,7 +1108,7 @@ namespace ModBuilder
             conn = new SQLiteConnection("Data Source=\"" + dir + "/data.sqlite\";Version=3;");
             conn.Open();
 
-            // Trick the ME into believing that we have a valid connection, which we in fact have.
+            // Trick the ME into believing that we have a valid connection.
             hasConn = true;
 
             // Create our tables.
@@ -1337,7 +1136,6 @@ namespace ModBuilder
             Dictionary<string, string> cset = new Dictionary<string, string>();
             
             // All our settings. Setting name => default value.
-            cset.Add("modName", "");
             cset.Add("mbVersion", Properties.Settings.Default.mbVersion);
             cset.Add("ignoreInstructions", "false");
             cset.Add("autoGenerateModID", "true");
@@ -1355,6 +1153,9 @@ namespace ModBuilder
                     cset.Add(pair.Key, pair.Value);
                 }
             }
+
+            if (!cset.ContainsKey("modName"))
+                cset.Add("modName", "");
 
             // Loop through each to add them.
             foreach (var pair in cset)
@@ -1432,7 +1233,7 @@ namespace ModBuilder
         {
             if (!Directory.Exists(workingDirectory) || !Directory.Exists(workingDirectory + "/Package") || !Directory.Exists(workingDirectory + "/Source"))
             {
-                MessageBox.Show("Unable to compile project because not all required files are in place. Please save your project and try again.", "Compiling project", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Unable to compile the project because not all required files are in place. Please save your project and try again.", "Compiling project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -1442,7 +1243,7 @@ namespace ModBuilder
             SaveFileDialog sf = new SaveFileDialog();
             sf.AddExtension = true;
             sf.DefaultExt = "zip";
-            sf.Filter = "Compressed files|*.zip";
+            sf.Filter = "Compressed ZIP files|*.zip";
             sf.InitialDirectory = workingDirectory;
             sf.CheckFileExists = false;
             sf.CheckPathExists = true;
@@ -1655,7 +1456,7 @@ namespace ModBuilder
 
             System.Diagnostics.Process.Start("explorer.exe", workingDirectory);
         }
-    #endregion
+        #endregion
 
         private void refreshInstallationCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1692,7 +1493,6 @@ namespace ModBuilder
 
                     if (shouldbePHP && !import.StartsWith("<?") && MessageBox.Show("The file you tried to import does not (immediately) contain PHP start tags. Are you still sure you wish to import it?", "Mod Builder", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                             return null;
-
 
                     // Then throw it back.
                     return import;

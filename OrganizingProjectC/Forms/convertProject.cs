@@ -255,9 +255,13 @@ namespace ModBuilder.Forms
             if (!Directory.Exists(outputDirectory.Text))
                 Directory.CreateDirectory(outputDirectory.Text);
 
-            modEditor me = new modEditor();
+            // Make sure the user knows we're busy...
+            System.Threading.Thread.Sleep(100);
+            cvWorking.Visible = true;
 
-            me.generateSQL(outputDirectory.Text);
+            modEditor me = new modEditor();
+            Dictionary<string, string> details = Classes.ModParser.parsePackageInfo(packageInfoXMLPath.Text);
+            me.generateSQL(outputDirectory.Text, true, details);
 
             // Update a setting.
             string updatesql = "UPDATE settings SET value = \"false\" WHERE key = \"autoGenerateModID\"";
@@ -451,10 +455,7 @@ namespace ModBuilder.Forms
 
             DialogResult result = MessageBox.Show("The package has been converted, do you want to load it now?", "Converting Project", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
-            {
-                loadProject lp = new loadProject();
-                lp.openProjDir(outputDirectory.Text);
-            }
+                ModBuilder.Classes.PackageWorker.bootstrapLoad(outputDirectory.Text);
             Close();
         }
 
@@ -496,6 +497,36 @@ namespace ModBuilder.Forms
         {
             // Just close.
             Close();
+        }
+
+        private void cleanReadme_Click(object sender, EventArgs e)
+        {
+            readmeTXTPath.Text = "";
+        }
+
+        private void cleanInstall_Click(object sender, EventArgs e)
+        {
+            installXmlPath.Text = "";
+        }
+
+        private void cleanInstallCode_Click(object sender, EventArgs e)
+        {
+            installPHPPath.Text = "";
+        }
+
+        private void cleanDeinstallCode_Click(object sender, EventArgs e)
+        {
+            uninstallPHPPath.Text = "";
+        }
+
+        private void cleanDBInstall_Click(object sender, EventArgs e)
+        {
+            installDatabasePHPPath.Text = "";
+        }
+
+        private void cleanDBDeinstall_Click(object sender, EventArgs e)
+        {
+            uninstallDatabasePHPPath.Text = "";
         }
     }
 }

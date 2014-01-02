@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml;
 
+using System.Windows.Forms;
+
+
 namespace ModBuilder.Classes
 {
     class ModParser
     {
-        public Dictionary<string, string> parsePackageInfo(string input)
+        public static Dictionary<string, string> parsePackageInfo(string input)
         {
             if (!File.Exists(input))
                 return new Dictionary<string, string>();
 
-            Dictionary<string, string> details = new Dictionary<string,string>();
+            Dictionary<string, string> details = new Dictionary<string, string>();
 
             try
             {
@@ -54,7 +57,8 @@ namespace ModBuilder.Classes
                                 break;
 
                             case "install":
-                                details.Add("modCompat", xmldoc.GetAttribute("for"));
+                                if (!details.ContainsKey("modCompat"))
+                                    details.Add("modCompat", xmldoc.GetAttribute("for"));
 
                                 break;
                         }
@@ -62,13 +66,12 @@ namespace ModBuilder.Classes
                 }
                 xmldoc.Close();
                 #endregion
+                return details;
             }
             catch
             {
                 return new Dictionary<string, string>();
             }
-
-            return details;
         }
     }
 }

@@ -61,6 +61,13 @@
             this.browseInputPackageDirectory = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.cleanDBDeinstall = new System.Windows.Forms.Button();
+            this.cleanDBInstall = new System.Windows.Forms.Button();
+            this.cleanDeinstallCode = new System.Windows.Forms.Button();
+            this.cleanInstallCode = new System.Windows.Forms.Button();
+            this.cleanInstall = new System.Windows.Forms.Button();
+            this.cleanReadme = new System.Windows.Forms.Button();
+            this.cvWorking = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +86,7 @@
             this.outputDirectory.Location = new System.Drawing.Point(173, 25);
             this.outputDirectory.Name = "outputDirectory";
             this.outputDirectory.ReadOnly = true;
-            this.outputDirectory.Size = new System.Drawing.Size(505, 20);
+            this.outputDirectory.Size = new System.Drawing.Size(601, 20);
             this.outputDirectory.TabIndex = 1;
             // 
             // label2
@@ -99,14 +106,14 @@
             this.groupBox1.Controls.Add(this.outputDirectory);
             this.groupBox1.Location = new System.Drawing.Point(15, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(782, 65);
+            this.groupBox1.Size = new System.Drawing.Size(861, 65);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Project";
             // 
             // browseOutputDirectory
             // 
-            this.browseOutputDirectory.Location = new System.Drawing.Point(684, 23);
+            this.browseOutputDirectory.Location = new System.Drawing.Point(780, 23);
             this.browseOutputDirectory.Name = "browseOutputDirectory";
             this.browseOutputDirectory.Size = new System.Drawing.Size(75, 23);
             this.browseOutputDirectory.TabIndex = 3;
@@ -116,6 +123,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cleanReadme);
+            this.groupBox2.Controls.Add(this.cleanInstall);
+            this.groupBox2.Controls.Add(this.cleanInstallCode);
+            this.groupBox2.Controls.Add(this.cleanDeinstallCode);
+            this.groupBox2.Controls.Add(this.cleanDBInstall);
+            this.groupBox2.Controls.Add(this.cleanDBDeinstall);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.readmeTXTPath);
             this.groupBox2.Controls.Add(this.browseReadmeTXT);
@@ -143,7 +156,7 @@
             this.groupBox2.Controls.Add(this.browseInputPackageDirectory);
             this.groupBox2.Location = new System.Drawing.Point(15, 127);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(782, 379);
+            this.groupBox2.Size = new System.Drawing.Size(861, 379);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Package";
@@ -162,12 +175,12 @@
             this.readmeTXTPath.Location = new System.Drawing.Point(173, 131);
             this.readmeTXTPath.Name = "readmeTXTPath";
             this.readmeTXTPath.ReadOnly = true;
-            this.readmeTXTPath.Size = new System.Drawing.Size(505, 20);
+            this.readmeTXTPath.Size = new System.Drawing.Size(568, 20);
             this.readmeTXTPath.TabIndex = 26;
             // 
             // browseReadmeTXT
             // 
-            this.browseReadmeTXT.Location = new System.Drawing.Point(684, 131);
+            this.browseReadmeTXT.Location = new System.Drawing.Point(780, 129);
             this.browseReadmeTXT.Name = "browseReadmeTXT";
             this.browseReadmeTXT.Size = new System.Drawing.Size(75, 23);
             this.browseReadmeTXT.TabIndex = 25;
@@ -190,12 +203,12 @@
             this.uninstallDatabasePHPPath.Location = new System.Drawing.Point(173, 341);
             this.uninstallDatabasePHPPath.Name = "uninstallDatabasePHPPath";
             this.uninstallDatabasePHPPath.ReadOnly = true;
-            this.uninstallDatabasePHPPath.Size = new System.Drawing.Size(505, 20);
+            this.uninstallDatabasePHPPath.Size = new System.Drawing.Size(568, 20);
             this.uninstallDatabasePHPPath.TabIndex = 23;
             // 
             // browseUninstallDatabasePHP
             // 
-            this.browseUninstallDatabasePHP.Location = new System.Drawing.Point(684, 341);
+            this.browseUninstallDatabasePHP.Location = new System.Drawing.Point(780, 339);
             this.browseUninstallDatabasePHP.Name = "browseUninstallDatabasePHP";
             this.browseUninstallDatabasePHP.Size = new System.Drawing.Size(75, 23);
             this.browseUninstallDatabasePHP.TabIndex = 22;
@@ -217,12 +230,12 @@
             this.installDatabasePHPPath.Location = new System.Drawing.Point(173, 298);
             this.installDatabasePHPPath.Name = "installDatabasePHPPath";
             this.installDatabasePHPPath.ReadOnly = true;
-            this.installDatabasePHPPath.Size = new System.Drawing.Size(505, 20);
+            this.installDatabasePHPPath.Size = new System.Drawing.Size(568, 20);
             this.installDatabasePHPPath.TabIndex = 20;
             // 
             // browseInstallDatabasePHP
             // 
-            this.browseInstallDatabasePHP.Location = new System.Drawing.Point(684, 298);
+            this.browseInstallDatabasePHP.Location = new System.Drawing.Point(780, 296);
             this.browseInstallDatabasePHP.Name = "browseInstallDatabasePHP";
             this.browseInstallDatabasePHP.Size = new System.Drawing.Size(75, 23);
             this.browseInstallDatabasePHP.TabIndex = 19;
@@ -244,12 +257,12 @@
             this.uninstallPHPPath.Location = new System.Drawing.Point(173, 256);
             this.uninstallPHPPath.Name = "uninstallPHPPath";
             this.uninstallPHPPath.ReadOnly = true;
-            this.uninstallPHPPath.Size = new System.Drawing.Size(505, 20);
+            this.uninstallPHPPath.Size = new System.Drawing.Size(568, 20);
             this.uninstallPHPPath.TabIndex = 17;
             // 
             // browseUninstallPHP
             // 
-            this.browseUninstallPHP.Location = new System.Drawing.Point(684, 256);
+            this.browseUninstallPHP.Location = new System.Drawing.Point(780, 254);
             this.browseUninstallPHP.Name = "browseUninstallPHP";
             this.browseUninstallPHP.Size = new System.Drawing.Size(75, 23);
             this.browseUninstallPHP.TabIndex = 16;
@@ -271,12 +284,12 @@
             this.installPHPPath.Location = new System.Drawing.Point(173, 214);
             this.installPHPPath.Name = "installPHPPath";
             this.installPHPPath.ReadOnly = true;
-            this.installPHPPath.Size = new System.Drawing.Size(505, 20);
+            this.installPHPPath.Size = new System.Drawing.Size(568, 20);
             this.installPHPPath.TabIndex = 14;
             // 
             // browseInstallPHP
             // 
-            this.browseInstallPHP.Location = new System.Drawing.Point(684, 214);
+            this.browseInstallPHP.Location = new System.Drawing.Point(780, 212);
             this.browseInstallPHP.Name = "browseInstallPHP";
             this.browseInstallPHP.Size = new System.Drawing.Size(75, 23);
             this.browseInstallPHP.TabIndex = 13;
@@ -298,12 +311,12 @@
             this.installXmlPath.Location = new System.Drawing.Point(173, 172);
             this.installXmlPath.Name = "installXmlPath";
             this.installXmlPath.ReadOnly = true;
-            this.installXmlPath.Size = new System.Drawing.Size(505, 20);
+            this.installXmlPath.Size = new System.Drawing.Size(568, 20);
             this.installXmlPath.TabIndex = 11;
             // 
             // browseInstallXML
             // 
-            this.browseInstallXML.Location = new System.Drawing.Point(684, 172);
+            this.browseInstallXML.Location = new System.Drawing.Point(780, 170);
             this.browseInstallXML.Name = "browseInstallXML";
             this.browseInstallXML.Size = new System.Drawing.Size(75, 23);
             this.browseInstallXML.TabIndex = 10;
@@ -325,12 +338,12 @@
             this.packageInfoXMLPath.Location = new System.Drawing.Point(173, 92);
             this.packageInfoXMLPath.Name = "packageInfoXMLPath";
             this.packageInfoXMLPath.ReadOnly = true;
-            this.packageInfoXMLPath.Size = new System.Drawing.Size(505, 20);
+            this.packageInfoXMLPath.Size = new System.Drawing.Size(601, 20);
             this.packageInfoXMLPath.TabIndex = 8;
             // 
             // browsePackageInfoXML
             // 
-            this.browsePackageInfoXML.Location = new System.Drawing.Point(684, 92);
+            this.browsePackageInfoXML.Location = new System.Drawing.Point(780, 90);
             this.browsePackageInfoXML.Name = "browsePackageInfoXML";
             this.browsePackageInfoXML.Size = new System.Drawing.Size(75, 23);
             this.browsePackageInfoXML.TabIndex = 7;
@@ -363,12 +376,12 @@
             this.packageInputPath.Location = new System.Drawing.Point(173, 20);
             this.packageInputPath.Name = "packageInputPath";
             this.packageInputPath.ReadOnly = true;
-            this.packageInputPath.Size = new System.Drawing.Size(505, 20);
+            this.packageInputPath.Size = new System.Drawing.Size(601, 20);
             this.packageInputPath.TabIndex = 4;
             // 
             // browseInputPackageDirectory
             // 
-            this.browseInputPackageDirectory.Location = new System.Drawing.Point(684, 20);
+            this.browseInputPackageDirectory.Location = new System.Drawing.Point(780, 18);
             this.browseInputPackageDirectory.Name = "browseInputPackageDirectory";
             this.browseInputPackageDirectory.Size = new System.Drawing.Size(75, 23);
             this.browseInputPackageDirectory.TabIndex = 0;
@@ -378,7 +391,7 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(722, 512);
+            this.okButton.Location = new System.Drawing.Point(795, 512);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 5;
@@ -389,7 +402,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(641, 512);
+            this.cancelButton.Location = new System.Drawing.Point(714, 512);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 6;
@@ -397,19 +410,94 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // cleanDBDeinstall
+            // 
+            this.cleanDBDeinstall.Location = new System.Drawing.Point(747, 339);
+            this.cleanDBDeinstall.Name = "cleanDBDeinstall";
+            this.cleanDBDeinstall.Size = new System.Drawing.Size(27, 23);
+            this.cleanDBDeinstall.TabIndex = 29;
+            this.cleanDBDeinstall.Text = "-";
+            this.cleanDBDeinstall.UseVisualStyleBackColor = true;
+            this.cleanDBDeinstall.Click += new System.EventHandler(this.cleanDBDeinstall_Click);
+            // 
+            // cleanDBInstall
+            // 
+            this.cleanDBInstall.Location = new System.Drawing.Point(747, 296);
+            this.cleanDBInstall.Name = "cleanDBInstall";
+            this.cleanDBInstall.Size = new System.Drawing.Size(27, 23);
+            this.cleanDBInstall.TabIndex = 30;
+            this.cleanDBInstall.Text = "-";
+            this.cleanDBInstall.UseVisualStyleBackColor = true;
+            this.cleanDBInstall.Click += new System.EventHandler(this.cleanDBInstall_Click);
+            // 
+            // cleanDeinstallCode
+            // 
+            this.cleanDeinstallCode.Location = new System.Drawing.Point(747, 254);
+            this.cleanDeinstallCode.Name = "cleanDeinstallCode";
+            this.cleanDeinstallCode.Size = new System.Drawing.Size(27, 23);
+            this.cleanDeinstallCode.TabIndex = 32;
+            this.cleanDeinstallCode.Text = "-";
+            this.cleanDeinstallCode.UseVisualStyleBackColor = true;
+            this.cleanDeinstallCode.Click += new System.EventHandler(this.cleanDeinstallCode_Click);
+            // 
+            // cleanInstallCode
+            // 
+            this.cleanInstallCode.Location = new System.Drawing.Point(747, 212);
+            this.cleanInstallCode.Name = "cleanInstallCode";
+            this.cleanInstallCode.Size = new System.Drawing.Size(27, 23);
+            this.cleanInstallCode.TabIndex = 33;
+            this.cleanInstallCode.Text = "-";
+            this.cleanInstallCode.UseVisualStyleBackColor = true;
+            this.cleanInstallCode.Click += new System.EventHandler(this.cleanInstallCode_Click);
+            // 
+            // cleanInstall
+            // 
+            this.cleanInstall.Location = new System.Drawing.Point(747, 170);
+            this.cleanInstall.Name = "cleanInstall";
+            this.cleanInstall.Size = new System.Drawing.Size(27, 23);
+            this.cleanInstall.TabIndex = 34;
+            this.cleanInstall.Text = "-";
+            this.cleanInstall.UseVisualStyleBackColor = true;
+            this.cleanInstall.Click += new System.EventHandler(this.cleanInstall_Click);
+            // 
+            // cleanReadme
+            // 
+            this.cleanReadme.Location = new System.Drawing.Point(747, 129);
+            this.cleanReadme.Name = "cleanReadme";
+            this.cleanReadme.Size = new System.Drawing.Size(27, 23);
+            this.cleanReadme.TabIndex = 35;
+            this.cleanReadme.Text = "-";
+            this.cleanReadme.UseVisualStyleBackColor = true;
+            this.cleanReadme.Click += new System.EventHandler(this.cleanReadme_Click);
+            // 
+            // cvWorking
+            // 
+            this.cvWorking.AutoSize = true;
+            this.cvWorking.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cvWorking.Location = new System.Drawing.Point(12, 517);
+            this.cvWorking.Name = "cvWorking";
+            this.cvWorking.Size = new System.Drawing.Size(332, 13);
+            this.cvWorking.TabIndex = 7;
+            this.cvWorking.Text = "Converting your project, hold on... This may take a while.";
+            this.cvWorking.Visible = false;
+            // 
             // convertProject
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(809, 547);
+            this.ClientSize = new System.Drawing.Size(884, 544);
+            this.Controls.Add(this.cvWorking);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "convertProject";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Convert a Package";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -455,5 +543,12 @@
         private System.Windows.Forms.Button browseReadmeTXT;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button cleanReadme;
+        private System.Windows.Forms.Button cleanInstall;
+        private System.Windows.Forms.Button cleanInstallCode;
+        private System.Windows.Forms.Button cleanDeinstallCode;
+        private System.Windows.Forms.Button cleanDBInstall;
+        private System.Windows.Forms.Button cleanDBDeinstall;
+        private System.Windows.Forms.Label cvWorking;
     }
 }

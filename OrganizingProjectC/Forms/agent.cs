@@ -13,6 +13,7 @@ using System.Net;
 using System.Xml;
 using Microsoft.WindowsAPICodePack;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using ModBuilder.Classes;
 
 namespace ModBuilder
 {
@@ -36,6 +37,8 @@ namespace ModBuilder
             {
                 #region ALL TASKS REQUIRED TO UPDATE GO IN HERE
 
+                // Added in 1.4.
+                MessageBox.Show("Thank you for updating to Mod Builder version 1.4. In this version a lot of bugs have been fixed, including bugs in the project system, so you might need to Repair your projects in order for them to work. You won't lose any data.", "Mod Builder update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 #endregion
 
                 // Update the version
@@ -43,7 +46,7 @@ namespace ModBuilder
                 Properties.Settings.Default.mbVersion = mbversion = currmbversion;
                 Properties.Settings.Default.Save();
 
-                MessageBox.Show("Mod Builder has successfully been updated. Enjoy!", "Mod Builder update from " + ombversion + " to " + currmbversion);
+                MessageBox.Show("Thank you for updating Mod Builder!", "Mod Builder update from " + ombversion + " to " + currmbversion, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             // Check for updates, if set to do so.
             versionLabel.Text = "v" + mbversion;
@@ -128,7 +131,7 @@ namespace ModBuilder
                 return;
 
             // Check if it is a valid project.
-            if (!Directory.Exists(dir + "/Package") || !Directory.Exists(dir + "/Source"))
+            if (!Directory.Exists(dir + "/Package") || !File.Exists(dir + "/data.sqlite"))
             {
                 MessageBox.Show("The selected project is not a valid project.", "Repairing Mod Builder project", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -137,33 +140,28 @@ namespace ModBuilder
             // Ask if the user wants to generate a new database, or to just add the tables.
             DialogResult result = MessageBox.Show("Should the existing database be truncated? Answering no will instead try to add all missing data.", "Reparing project", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
 
+            if (result == DialogResult.Cancel)
+                return;
+
             // New instance of the mod editor.
             modEditor me = new modEditor();
 
-            // Switch the result, to see what the user has answered.
-            ModBuilder.Classes.ModParser mp = new ModBuilder.Classes.ModParser();
-            switch (result)
-            {
-                // Generate an all new shiny database.
-                case (DialogResult.Yes):
-                    me.generateSQL(dir, true, mp.parsePackageInfo(dir + "/Package/package-info.xml"));
-                    break;
+            // Fiddle with the database.
+            me.generateSQL(dir, (result == DialogResult.Yes), ModParser.parsePackageInfo(dir + "/Package/package-info.xml"));
 
-                // Only add the missing tables.
-                case (DialogResult.No):
-                    me.generateSQL(dir, false, mp.parsePackageInfo(dir + "/Package/package-info.xml"));
-                    break;
-
-                // Or don't do anything at all! :D
-                case (DialogResult.Cancel):
-                    return;
-            }
+            // Do /Source and /Package exist?
+            if (!Directory.Exists(dir + "/Source"))
+                Directory.CreateDirectory(dir + "/Source");
+            if (!Directory.Exists(dir + "/Package"))
+                Directory.CreateDirectory(dir + "/Package");
 
             // Ask if the user wants to load the project.
             result = MessageBox.Show("Your project has been repaired. Do you want to load the project now?", "Project repaired", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             // Yes? Load the project.
             if (result == DialogResult.Yes)
+                PackageWorker.bootstrapLoad(dir);
+                /*
             {
                 // Show a loadProject dialog.
                 loadProject lp = new loadProject();
@@ -178,7 +176,7 @@ namespace ModBuilder
 
                 // Close the loadProject dialog.
                 lp.Close();
-            }
+            }*/
         }
         #endregion
 
