@@ -85,7 +85,7 @@ namespace ModBuilder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1.4.1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.4.2")]
         public string mbVersion {
             get {
                 return ((string)(this["mbVersion"]));

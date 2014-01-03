@@ -79,7 +79,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>TfTwwhedbI2/tAJVhklppLAprCOEeMRLeg/BB7wvKTw=</dsig:DigestValue>
+        <dsig:DigestValue>UVtTEFBKhBT2jolSiGhCz227fI70hBKOrm1G9v9wjso=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -113,7 +113,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>LRgc1KcxP5dXOkVFI6p7y2u2fFi20J9/a3iI/b66g0I=</dsig:DigestValue>
+      <dsig:DigestValue>mRf1ncHVwaJyJMURBDVDuYv4vivhZ1fuhuEz/sIlsVk=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\logo.ico" size="5430">

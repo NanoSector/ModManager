@@ -21,7 +21,7 @@ namespace ModBuilder
     {
         // This version of Mod Builder.
         string mbversion = Properties.Settings.Default.mbVersion;
-        string currmbversion = "1.4.1";
+        string currmbversion = "1.4.2";
 
         #region Initialising
         string dlfilename;
@@ -38,6 +38,7 @@ namespace ModBuilder
                 #region ALL TASKS REQUIRED TO UPDATE GO IN HERE
 
                 // Added in 1.4.
+                if (mbversion == "1.3")
                 MessageBox.Show("Thank you for updating to Mod Builder version 1.4. In this version a lot of bugs have been fixed, including bugs in the project system, so you might need to Repair your projects in order for them to work. You won't lose any data.", "Mod Builder update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 #endregion
 
@@ -75,7 +76,10 @@ namespace ModBuilder
             CommonFileDialogResult rs = fb.ShowDialog();
 
             if (rs == CommonFileDialogResult.Cancel)
+            {
+                lp.Close();
                 return;
+            }
 
             // Get the path.
             string dir = fb.FileName;

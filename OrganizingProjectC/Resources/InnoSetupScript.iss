@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Mod Builder"
-#define MyAppVersion "1.4.1"
+#define MyAppVersion "1.4.2"
 #define MyAppPublisher "Yoshi2889"
 #define MyAppURL "http://www.simplemachines.org/community/index.php?topic=493451.0"
 #define MyAppExeName "ModBuilder.exe"
@@ -41,6 +41,8 @@ Name: "templates"; Description: "Extract the sample template files"; GroupDescri
 Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\ModBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\packages\Windows7APICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\packages\Windows7APICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\templates\*"; DestDir: "{app}\templates"; Flags: ignoreversion recursesubdirs createallsubdirs; Tasks: templates
