@@ -72,14 +72,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModBuilder.exe" size="162304">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModBuilder.exe" size="162816">
       <assemblyIdentity name="ModBuilder" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>tfWIC0tmCmuHBzqkzkyFqQUOtX4GD2JfTIY3NH+9zbo=</dsig:DigestValue>
+        <dsig:DigestValue>TfTwwhedbI2/tAJVhklppLAprCOEeMRLeg/BB7wvKTw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -107,13 +107,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="ModBuilder.exe.config" size="2000">
+  <file name="ModBuilder.exe.config" size="2002">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>khIJwv5Gw6mM337ILduiP4hcHqDwdXfsJ2ot2lj2wEQ=</dsig:DigestValue>
+      <dsig:DigestValue>LRgc1KcxP5dXOkVFI6p7y2u2fFi20J9/a3iI/b66g0I=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\logo.ico" size="5430">

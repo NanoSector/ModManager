@@ -37,10 +37,13 @@ namespace ModBuilder.Forms
                     dsmfver.Text = match.Groups[1].Value;
             }
 
-            string[] updates = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "update_*.exe");
-            foreach (string file in updates)
+            if (Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),  "Mod Builder\\Updates")))
             {
-                comboBox1.Items.Add(file.Replace(AppDomain.CurrentDomain.BaseDirectory + "update_", "").Replace(".exe", "").Replace("-", "."));
+                string[] updates = Directory.GetFiles(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),  "Mod Builder\\Updates"), "update_*.exe");
+                foreach (string file in updates)
+                {
+                    comboBox1.Items.Add(file.Replace(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),  "Mod Builder\\Updates\\update_"), "").Replace(".exe", "").Replace("-", "."));
+                }
             }
 
             // WAMP time!
@@ -49,6 +52,9 @@ namespace ModBuilder.Forms
 
             if (!String.IsNullOrEmpty(phppath.Text) && File.Exists(phppath.Text))
                 checkPHP(phppath.Text);
+
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder\\SMF")))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder\\SMF"));
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -130,22 +136,6 @@ namespace ModBuilder.Forms
 
         private void dl20_Click(object sender, EventArgs e)
         {
-            // Create a new save dialog.
-            SaveFileDialog sf = new SaveFileDialog();
-            sf.DefaultExt = "zip";
-            sf.AddExtension = true;
-            sf.FileName = "smf_" + twover.Text.Replace(".", "-") + "_install.zip";
-            sf.Filter = "Zip files|*.zip";
-            sf.CheckFileExists = false;
-            sf.CheckPathExists = true;
-
-            // Show the dialog.
-            DialogResult sfres = sf.ShowDialog();
-
-            // Quit if we did something wrong-err, weird.
-            if (sfres == DialogResult.Cancel || string.IsNullOrEmpty(sf.FileName))
-                return;
-
             // Mess with some controls.
             dl20.Enabled = false;
             dl20.Text = "Downloading...";
@@ -154,8 +144,8 @@ namespace ModBuilder.Forms
             WebClient client = new WebClient();
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(dl20Completed);
             client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(dl20ProgressChanged);
-            client.DownloadFileAsync(new Uri("http://mirror.ord.simplemachines.org/index.php/smf_" + twover.Text.Replace(".", "-") + "_install.zip"), @sf.FileName);
-            dl20f = sf.FileName;
+            dl20f = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder\\SMF\\smf_" + twover.Text.Replace(".", "-") + "_install.zip");
+            client.DownloadFileAsync(new Uri("http://mirror.ord.simplemachines.org/index.php/smf_" + twover.Text.Replace(".", "-") + "_install.zip"), dl20f);
         }
         private void dl20Completed(object sender, AsyncCompletedEventArgs e)
         {
@@ -202,22 +192,6 @@ namespace ModBuilder.Forms
 
         private void dl11_Click(object sender, EventArgs e)
         {
-            // Create a new save dialog.
-            SaveFileDialog sf = new SaveFileDialog();
-            sf.DefaultExt = "zip";
-            sf.AddExtension = true;
-            sf.FileName = "smf_" + onever.Text.Replace(".", "-") + "_install.zip";
-            sf.Filter = "Zip files|*.zip";
-            sf.CheckFileExists = false;
-            sf.CheckPathExists = true;
-
-            // Show the dialog.
-            DialogResult sfres = sf.ShowDialog();
-
-            // Quit if we did something wrong-err, weird.
-            if (sfres == DialogResult.Cancel || string.IsNullOrEmpty(sf.FileName))
-                return;
-
             // Mess with some controls.
             dl11.Enabled = false;
             dl11.Text = "Downloading...";
@@ -226,8 +200,9 @@ namespace ModBuilder.Forms
             WebClient client = new WebClient();
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(dl11Completed);
             client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(dl11ProgressChanged);
-            client.DownloadFileAsync(new Uri("http://mirror.ord.simplemachines.org/index.php/smf_" + onever.Text.Replace(".", "-") + "_install.zip"), @sf.FileName);
-            dl11f = sf.FileName;
+            dl11f = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder\\SMF\\smf_" + onever.Text.Replace(".", "-") + "_install.zip");
+            client.DownloadFileAsync(new Uri("http://mirror.ord.simplemachines.org/index.php/smf_" + onever.Text.Replace(".", "-") + "_install.zip"), dl11f);
+            
         }
         private void dl11Completed(object sender, AsyncCompletedEventArgs e)
         {
@@ -277,26 +252,31 @@ namespace ModBuilder.Forms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string[] toDelete = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "update_*.exe");
+            string[] toDelete = Directory.GetFiles(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),  "Mod Builder\\Updates"), "update_*.exe");
 
             foreach (string file in toDelete)
             {
                 File.Delete(file);
             }
 
+            Directory.Delete(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),  "Mod Builder\\Updates"));
+
             MessageBox.Show(toDelete.Length + " update executables have been deleted.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "update_" + comboBox1.SelectedItem.ToString().Replace(".", "-") + ".exe"))
+            if (!File.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder\\Updates\\update_" + comboBox1.SelectedItem.ToString().Replace(".", "-") + ".exe")))
+            {
                 MessageBox.Show("The requested version has either been moved or deleted, or was not found.", "Options", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             DialogResult result = MessageBox.Show("This will start an installer to revert this version of Mod Builder to the selected version, and this version will be closed. Are you okay with this?", "Options", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (result == DialogResult.Yes)
             {
-                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "update_" + comboBox1.SelectedItem.ToString().Replace(".", "-") + ".exe");
+                System.Diagnostics.Process.Start(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),  "Mod Builder\\Updates\\update_" + comboBox1.SelectedItem.ToString().Replace(".", "-") + ".exe"));
                 Application.Exit();
             }
         }

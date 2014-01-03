@@ -18,7 +18,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="mbVersion" Type="System.String" Scope="User">
-      <Value Profile="(Default)">1.4</Value>
+      <Value Profile="(Default)">1.4.1</Value>
     </Setting>
     <Setting Name="minMbVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)">1.4</Value>

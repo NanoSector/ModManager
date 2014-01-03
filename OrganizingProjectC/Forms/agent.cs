@@ -21,7 +21,7 @@ namespace ModBuilder
     {
         // This version of Mod Builder.
         string mbversion = Properties.Settings.Default.mbVersion;
-        string currmbversion = "1.4";
+        string currmbversion = "1.4.1";
 
         #region Initialising
         string dlfilename;
@@ -46,12 +46,17 @@ namespace ModBuilder
                 Properties.Settings.Default.mbVersion = mbversion = currmbversion;
                 Properties.Settings.Default.Save();
 
-                MessageBox.Show("Thank you for updating Mod Builder!", "Mod Builder update from " + ombversion + " to " + currmbversion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thank you for updating Mod Builder!", "Mod Builder updated from " + ombversion + " to " + currmbversion, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             // Check for updates, if set to do so.
             versionLabel.Text = "v" + mbversion;
             if (Properties.Settings.Default.autoCheckUpdates)
                 checkUpdate(false);
+
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder")))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder"));
+            if (!Directory.Exists(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder\\Updates")))
+                Directory.CreateDirectory(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder\\Updates"));
         }
         #endregion
 
@@ -244,13 +249,14 @@ namespace ModBuilder
                     if (result == DialogResult.Yes)
                     {
                         // Rezise the form a bit :)
-                        Size = new Size(Size.Width, 247);
+                        Size = new Size(Size.Width, 249);
 
                         // Start downloading! DLUpdateCompleted will take over once it's done.
                         client.DownloadFileCompleted += new AsyncCompletedEventHandler(DLUpdateCompleted);
                         client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                        client.DownloadFileAsync(new Uri("https://github.com/Yoshi2889/ModManager/blob/master/setup.exe?raw=true"), @AppDomain.CurrentDomain.BaseDirectory + "/update_" + lver.Replace(".", "-") + ".exe");
-                        dlfilename = AppDomain.CurrentDomain.BaseDirectory + "/update_" + lver.Replace(".", "-") + ".exe";
+                        dlfilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder\\Updates\\update_" + lver.Replace(".", "-") + ".exe");
+                        MessageBox.Show(dlfilename);
+                        client.DownloadFileAsync(new Uri("https://github.com/Yoshi2889/ModManager/blob/master/setup.exe?raw=true"), dlfilename);
                     }
                 }
             }
@@ -309,5 +315,10 @@ namespace ModBuilder
             op.ShowDialog();
         }
         #endregion
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

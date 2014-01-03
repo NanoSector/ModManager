@@ -105,6 +105,8 @@ namespace ModBuilder
 
                 me.Show();
 
+                // Log this to the recent projects file.
+
                 return true;
             }
             catch (Exception e)
