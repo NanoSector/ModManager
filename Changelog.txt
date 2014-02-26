@@ -10,7 +10,6 @@
 ! Bugfix: Wrong icon displayed on PHP code check success.
 ! Bugfix: PHP code checking now does not display a CMD dialog.
 ! Bugfix: When adding/editing a source code edit, now displays the correct titles.
-! Bugfix: 
 
 === 1.4.2 ===
 ! Bugfix: Close the Loading Project dialog upon cancel.
