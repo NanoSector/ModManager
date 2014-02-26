@@ -47,7 +47,14 @@ namespace ModBuilder
 
                 MessageBox.Show("Thank you for updating Mod Builder!", "Mod Builder updated from " + ombversion + " to " + currmbversion, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            else if (mbversion != currmbversion)
+
+            // Pour them over as versions.
+            Version mver = new Version(mbversion);
+            Version lmver = new Version(currmbversion);
+
+            // Compare the versions.
+            int status = mver.CompareTo(lmver);
+            if (status < 0)
             {
                 Properties.Settings.Default.mbVersion = currmbversion;
                 Properties.Settings.Default.Save();

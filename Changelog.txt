@@ -1,6 +1,7 @@
 === 1.4.4 ===
 ! Bugfix: Fix bug where downgrading MB does not store the actual version in the settings.
 ! Bugfix: Converting a package now takes all instructions into account.
+! Bugfix: Really fix bug with versions.
 
 === 1.4.3 ===
 + Feature: New Update dialog.
