@@ -1403,6 +1403,7 @@ namespace ModBuilder
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            p.StartInfo.CreateNoWindow = true;
             p.StartInfo.FileName = Properties.Settings.Default.phppath;
             p.StartInfo.Arguments = " \"" + AppDomain.CurrentDomain.BaseDirectory + "\\temp.php\"";
             p.Start();
@@ -1419,7 +1420,7 @@ namespace ModBuilder
             if (!String.IsNullOrWhiteSpace(output) && output.IndexOf("Parse error") != -1)
                 MessageBox.Show(output.Replace(" in " + AppDomain.CurrentDomain.BaseDirectory + "temp.php", ""), "Checking code", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else if (String.IsNullOrWhiteSpace(output))
-                MessageBox.Show("No parse errors were detected", "Checking code", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No parse errors were detected", "Checking code", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 MessageBox.Show("Something went wrong when checking for errors. Please check that the path to php.exe is set correctly and try again.", "Checking code", MessageBoxButtons.OK, MessageBoxIcon.Error);
 

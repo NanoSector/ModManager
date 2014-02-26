@@ -226,10 +226,10 @@
             // 
             this.modDetailsTab.Controls.Add(this.groupBox2);
             this.modDetailsTab.Controls.Add(this.groupBox1);
-            this.modDetailsTab.Location = new System.Drawing.Point(4, 22);
+            this.modDetailsTab.Location = new System.Drawing.Point(4, 24);
             this.modDetailsTab.Name = "modDetailsTab";
             this.modDetailsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.modDetailsTab.Size = new System.Drawing.Size(760, 369);
+            this.modDetailsTab.Size = new System.Drawing.Size(760, 367);
             this.modDetailsTab.TabIndex = 0;
             this.modDetailsTab.Text = "Mod Details";
             this.modDetailsTab.UseVisualStyleBackColor = true;
@@ -286,14 +286,14 @@
             "Avatar pack"});
             this.modType.Location = new System.Drawing.Point(223, 77);
             this.modType.Name = "modType";
-            this.modType.Size = new System.Drawing.Size(511, 21);
+            this.modType.Size = new System.Drawing.Size(166, 21);
             this.modType.TabIndex = 5;
             this.modType.SelectedIndexChanged += new System.EventHandler(this.modType_SelectedIndexChanged);
             // 
             // genPkgID
             // 
             this.genPkgID.AutoSize = true;
-            this.genPkgID.Location = new System.Drawing.Point(31, 127);
+            this.genPkgID.Location = new System.Drawing.Point(395, 106);
             this.genPkgID.Name = "genPkgID";
             this.genPkgID.Size = new System.Drawing.Size(170, 17);
             this.genPkgID.TabIndex = 7;
@@ -408,10 +408,11 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(27, 172);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(529, 13);
+            this.label8.Size = new System.Drawing.Size(529, 26);
             this.label8.TabIndex = 17;
             this.label8.Text = "(you can use a range, like 2.0 - 2.0.99, but just a single version will also work" +
-    ". Separate versions with a comma)";
+    ". Separate versions with a comma)\r\nMultiple versions are not supported at this t" +
+    "ime.";
             // 
             // label4
             // 
@@ -438,7 +439,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.modID.Location = new System.Drawing.Point(223, 104);
             this.modID.Name = "modID";
-            this.modID.Size = new System.Drawing.Size(511, 20);
+            this.modID.Size = new System.Drawing.Size(166, 20);
             this.modID.TabIndex = 6;
             this.modID.TextChanged += new System.EventHandler(this.modID_TextChanged);
             // 
@@ -500,10 +501,10 @@
             this.readmeTab.Controls.Add(this.modReadme);
             this.readmeTab.Controls.Add(this.panel1);
             this.readmeTab.Controls.Add(this.panel3);
-            this.readmeTab.Location = new System.Drawing.Point(4, 22);
+            this.readmeTab.Location = new System.Drawing.Point(4, 24);
             this.readmeTab.Name = "readmeTab";
             this.readmeTab.Padding = new System.Windows.Forms.Padding(3);
-            this.readmeTab.Size = new System.Drawing.Size(760, 369);
+            this.readmeTab.Size = new System.Drawing.Size(760, 367);
             this.readmeTab.TabIndex = 2;
             this.readmeTab.Text = "Readme";
             this.readmeTab.UseVisualStyleBackColor = true;
@@ -515,7 +516,7 @@
             this.modReadme.Multiline = true;
             this.modReadme.Name = "modReadme";
             this.modReadme.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.modReadme.Size = new System.Drawing.Size(754, 299);
+            this.modReadme.Size = new System.Drawing.Size(754, 297);
             this.modReadme.TabIndex = 0;
             // 
             // panel1
@@ -523,7 +524,7 @@
             this.panel1.Controls.Add(this.readmeHelp);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(3, 328);
+            this.panel1.Location = new System.Drawing.Point(3, 326);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(754, 38);
             this.panel1.TabIndex = 1;
@@ -621,10 +622,10 @@
             // 
             this.instructionsTab.Controls.Add(this.panel2);
             this.instructionsTab.Controls.Add(this.instructions);
-            this.instructionsTab.Location = new System.Drawing.Point(4, 22);
+            this.instructionsTab.Location = new System.Drawing.Point(4, 24);
             this.instructionsTab.Name = "instructionsTab";
             this.instructionsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.instructionsTab.Size = new System.Drawing.Size(760, 369);
+            this.instructionsTab.Size = new System.Drawing.Size(760, 367);
             this.instructionsTab.TabIndex = 3;
             this.instructionsTab.Text = "Source Edits";
             this.instructionsTab.UseVisualStyleBackColor = true;
@@ -640,7 +641,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(291, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(466, 363);
+            this.panel2.Size = new System.Drawing.Size(466, 361);
             this.panel2.TabIndex = 8;
             // 
             // button6
@@ -672,7 +673,7 @@
             // 
             this.ignoreInstructions.AutoSize = true;
             this.ignoreInstructions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ignoreInstructions.Location = new System.Drawing.Point(0, 346);
+            this.ignoreInstructions.Location = new System.Drawing.Point(0, 344);
             this.ignoreInstructions.Name = "ignoreInstructions";
             this.ignoreInstructions.Size = new System.Drawing.Size(466, 17);
             this.ignoreInstructions.TabIndex = 7;
@@ -724,10 +725,10 @@
             // 
             this.extractFilesTab.Controls.Add(this.panel6);
             this.extractFilesTab.Controls.Add(this.splitContainer1);
-            this.extractFilesTab.Location = new System.Drawing.Point(4, 22);
+            this.extractFilesTab.Location = new System.Drawing.Point(4, 24);
             this.extractFilesTab.Name = "extractFilesTab";
             this.extractFilesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.extractFilesTab.Size = new System.Drawing.Size(760, 369);
+            this.extractFilesTab.Size = new System.Drawing.Size(760, 367);
             this.extractFilesTab.TabIndex = 5;
             this.extractFilesTab.Text = "Files to extract/delete";
             this.extractFilesTab.UseVisualStyleBackColor = true;
@@ -746,7 +747,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel6.Location = new System.Drawing.Point(341, 3);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(416, 363);
+            this.panel6.Size = new System.Drawing.Size(416, 361);
             this.panel6.TabIndex = 14;
             // 
             // groupBox4
@@ -1041,10 +1042,10 @@
             // 
             this.customCodeTab.Controls.Add(this.splitContainer2);
             this.customCodeTab.Controls.Add(this.label14);
-            this.customCodeTab.Location = new System.Drawing.Point(4, 22);
+            this.customCodeTab.Location = new System.Drawing.Point(4, 24);
             this.customCodeTab.Name = "customCodeTab";
             this.customCodeTab.Padding = new System.Windows.Forms.Padding(3);
-            this.customCodeTab.Size = new System.Drawing.Size(760, 369);
+            this.customCodeTab.Size = new System.Drawing.Size(760, 367);
             this.customCodeTab.TabIndex = 6;
             this.customCodeTab.Text = "Installation code";
             this.customCodeTab.UseVisualStyleBackColor = true;
@@ -1066,7 +1067,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.panel10);
             this.splitContainer2.Panel2.Controls.Add(this.customCodeUninstall);
             this.splitContainer2.Panel2.Controls.Add(this.panel4);
-            this.splitContainer2.Size = new System.Drawing.Size(754, 345);
+            this.splitContainer2.Size = new System.Drawing.Size(754, 343);
             this.splitContainer2.SplitterDistance = 376;
             this.splitContainer2.TabIndex = 6;
             // 
@@ -1077,7 +1078,7 @@
             this.customCodeInstall.Multiline = true;
             this.customCodeInstall.Name = "customCodeInstall";
             this.customCodeInstall.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.customCodeInstall.Size = new System.Drawing.Size(376, 306);
+            this.customCodeInstall.Size = new System.Drawing.Size(376, 304);
             this.customCodeInstall.TabIndex = 2;
             this.customCodeInstall.WordWrap = false;
             // 
@@ -1119,7 +1120,7 @@
             this.panel5.Controls.Add(this.ccodeInstallTemplates);
             this.panel5.Controls.Add(this.label25);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 319);
+            this.panel5.Location = new System.Drawing.Point(0, 317);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(376, 26);
             this.panel5.TabIndex = 9;
@@ -1191,7 +1192,7 @@
             this.customCodeUninstall.Multiline = true;
             this.customCodeUninstall.Name = "customCodeUninstall";
             this.customCodeUninstall.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.customCodeUninstall.Size = new System.Drawing.Size(374, 319);
+            this.customCodeUninstall.Size = new System.Drawing.Size(374, 317);
             this.customCodeUninstall.TabIndex = 4;
             this.customCodeUninstall.WordWrap = false;
             // 
@@ -1201,7 +1202,7 @@
             this.panel4.Controls.Add(this.ccodeUninstallTemplates);
             this.panel4.Controls.Add(this.label24);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 319);
+            this.panel4.Location = new System.Drawing.Point(0, 317);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(374, 26);
             this.panel4.TabIndex = 8;
@@ -1250,10 +1251,10 @@
             // 
             this.alterDatabaseTab.Controls.Add(this.splitContainer3);
             this.alterDatabaseTab.Controls.Add(this.label19);
-            this.alterDatabaseTab.Location = new System.Drawing.Point(4, 22);
+            this.alterDatabaseTab.Location = new System.Drawing.Point(4, 24);
             this.alterDatabaseTab.Name = "alterDatabaseTab";
             this.alterDatabaseTab.Padding = new System.Windows.Forms.Padding(3);
-            this.alterDatabaseTab.Size = new System.Drawing.Size(760, 369);
+            this.alterDatabaseTab.Size = new System.Drawing.Size(760, 367);
             this.alterDatabaseTab.TabIndex = 7;
             this.alterDatabaseTab.Text = "Database altering code";
             this.alterDatabaseTab.UseVisualStyleBackColor = true;
@@ -1275,7 +1276,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.uninstallDatabaseCode);
             this.splitContainer3.Panel2.Controls.Add(this.panel12);
             this.splitContainer3.Panel2.Controls.Add(this.panel7);
-            this.splitContainer3.Size = new System.Drawing.Size(754, 345);
+            this.splitContainer3.Size = new System.Drawing.Size(754, 343);
             this.splitContainer3.SplitterDistance = 376;
             this.splitContainer3.TabIndex = 6;
             // 
@@ -1286,7 +1287,7 @@
             this.installDatabaseCode.Multiline = true;
             this.installDatabaseCode.Name = "installDatabaseCode";
             this.installDatabaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.installDatabaseCode.Size = new System.Drawing.Size(376, 306);
+            this.installDatabaseCode.Size = new System.Drawing.Size(376, 304);
             this.installDatabaseCode.TabIndex = 3;
             this.installDatabaseCode.WordWrap = false;
             // 
@@ -1328,7 +1329,7 @@
             this.panel8.Controls.Add(this.adatabaseInstallTemplates);
             this.panel8.Controls.Add(this.label27);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel8.Location = new System.Drawing.Point(0, 319);
+            this.panel8.Location = new System.Drawing.Point(0, 317);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(376, 26);
             this.panel8.TabIndex = 9;
@@ -1368,7 +1369,7 @@
             this.uninstallDatabaseCode.Multiline = true;
             this.uninstallDatabaseCode.Name = "uninstallDatabaseCode";
             this.uninstallDatabaseCode.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.uninstallDatabaseCode.Size = new System.Drawing.Size(374, 306);
+            this.uninstallDatabaseCode.Size = new System.Drawing.Size(374, 304);
             this.uninstallDatabaseCode.TabIndex = 5;
             this.uninstallDatabaseCode.WordWrap = false;
             // 
@@ -1410,7 +1411,7 @@
             this.panel7.Controls.Add(this.adatabaseUninstallTemplates);
             this.panel7.Controls.Add(this.label26);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 319);
+            this.panel7.Location = new System.Drawing.Point(0, 317);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(374, 26);
             this.panel7.TabIndex = 9;
@@ -1459,10 +1460,10 @@
             // 
             this.buildSettingsTab.Controls.Add(this.label23);
             this.buildSettingsTab.Controls.Add(this.includeModManLine);
-            this.buildSettingsTab.Location = new System.Drawing.Point(4, 22);
+            this.buildSettingsTab.Location = new System.Drawing.Point(4, 24);
             this.buildSettingsTab.Name = "buildSettingsTab";
             this.buildSettingsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.buildSettingsTab.Size = new System.Drawing.Size(760, 369);
+            this.buildSettingsTab.Size = new System.Drawing.Size(760, 367);
             this.buildSettingsTab.TabIndex = 8;
             this.buildSettingsTab.Text = "Build Settings";
             this.buildSettingsTab.UseVisualStyleBackColor = true;
