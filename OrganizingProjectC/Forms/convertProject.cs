@@ -269,64 +269,41 @@ namespace ModBuilder.Forms
             ucomm.ExecuteNonQuery();
 
             // Create a readme.txt if the text is inline.
-            bool readmeTextInline = false;
-
-            if (readmeTXTPath.Text == "Inline")
-                readmeTextInline = true;
+            bool readmeTextInline = (readmeTXTPath.Text == "Inline");
 
             // Parse the XML.
             #region Read the install.xml, if it exists.
             if (File.Exists(installXmlPath.Text))
             {
-                XmlDocument l_document = new XmlDocument();
-                l_document.Load(installXmlPath.Text);
+                XmlTextReader xmldoc = new XmlTextReader(installXmlPath.Text);
+                xmldoc.DtdProcessing = DtdProcessing.Ignore;
+                string currfile = "";
+                string sql = "INSERT INTO instructions(id, before, after, type, file, optional) VALUES(null, @beforeText, @afterText, @type, @fileEdited, @optional)";
 
-                string filename = "";
-                bool optional = false;
-                string search = "";
-                foreach (XmlNode l_fileNode in l_document.ChildNodes[l_document.ChildNodes.Count - 1].ChildNodes)
+                while (xmldoc.Read())
                 {
-                    if (l_fileNode.Name == "file")
+                    if (xmldoc.NodeType.Equals(XmlNodeType.Element))
                     {
-                        filename = l_fileNode.Attributes["name"].Value;
-
-                        if (l_fileNode.ChildNodes.Count > 0 && l_fileNode.ChildNodes[0].Name == "operation")
+                        switch (xmldoc.LocalName)
                         {
-                            optional = l_fileNode.Attributes["error"].Value == "skip";
-                            string sql = "INSERT INTO instructions(id, before, after, type, file, optional) VALUES(null, @beforeText, @afterText, @type, @fileEdited, @optional)";
+                            case "file":
+                                currfile = xmldoc.GetAttribute("name");
+                                break;
 
-                            // Create the query.
-                            SQLiteCommand command = new SQLiteCommand(sql, me.conn);
-                            command.Parameters.AddWithValue("@fileEdited", filename);
-                            command.Parameters.AddWithValue("@optional", optional);
+                            case "operation":
+                                SQLiteCommand command = new SQLiteCommand(sql, me.conn);
+                                command.Parameters.AddWithValue("@fileEdited", currfile);
+                                command.Parameters.AddWithValue("@optional", (xmldoc.GetAttribute("error") == "skip"));
 
-                            // Empty out the search var.
-                            search = "";
+                                xmldoc.ReadToDescendant("search");
+                                command.Parameters.AddWithValue("@type", xmldoc.GetAttribute("position"));
+                                command.Parameters.AddWithValue("@beforeText", xmldoc.ReadElementContentAsString().Replace("\r", "\n").Replace("\n", "\r\n"));
 
-                            foreach (XmlNode l_operationNode in l_fileNode.ChildNodes[0].ChildNodes)
-                            {
-                                switch (l_operationNode.Name)
-                                {
-                                    case "search":
-                                        command.Parameters.AddWithValue("@type", l_operationNode.Attributes["position"].Value);
+                                xmldoc.ReadToNextSibling("add");
+                                command.Parameters.AddWithValue("@afterText", xmldoc.ReadElementContentAsString().Replace("\r", "\n").Replace("\n", "\r\n"));
 
-                                        if (l_operationNode.ChildNodes.Count > 0)
-                                        {
-                                            search = l_operationNode.ChildNodes[0].Value.Replace("\r", "\n").Replace("\n", "\r\n");
-                                        }
-                                        break;
-
-                                    case "add":
-                                        if (l_operationNode.ChildNodes.Count > 0)
-                                        {
-                                            command.Parameters.AddWithValue("@afterText", l_operationNode.ChildNodes[0].Value.Replace("\r", "\n").Replace("\n", "\r\n"));
-                                        }
-                                        break;
-                                }
-                            }
-
-                            command.Parameters.AddWithValue("@beforeText", search);
-                            command.ExecuteNonQuery();
+                                command.ExecuteNonQuery();
+                                break;
                         }
                     }
                 }
@@ -377,8 +354,7 @@ namespace ModBuilder.Forms
                     {
                         foreach (XmlNode l_operationNode in l_packageNode.ChildNodes)
                         {
-                            Console.WriteLine(
-                                 "Test child node name: " + l_operationNode.Name);
+                            Console.WriteLine("Test child node name: " + l_operationNode.Name);
                             switch (l_operationNode.Name)
                             {
                                 case "readme":

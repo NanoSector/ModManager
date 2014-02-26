@@ -21,7 +21,7 @@ namespace ModBuilder
     {
         // This version of Mod Builder.
         string mbversion = Properties.Settings.Default.mbVersion;
-        string currmbversion = "1.4.3";
+        string currmbversion = "1.4.4";
 
         #region Initialising
         public Form1()
@@ -46,6 +46,11 @@ namespace ModBuilder
                 Properties.Settings.Default.Save();
 
                 MessageBox.Show("Thank you for updating Mod Builder!", "Mod Builder updated from " + ombversion + " to " + currmbversion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (mbversion != currmbversion)
+            {
+                Properties.Settings.Default.mbVersion = currmbversion;
+                Properties.Settings.Default.Save();
             }
             // Check for updates, if set to do so.
             versionLabel.Text = "v" + mbversion;
