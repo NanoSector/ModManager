@@ -34,6 +34,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.browseOutputDirectory = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cleanReadme = new System.Windows.Forms.Button();
+            this.cleanInstall = new System.Windows.Forms.Button();
+            this.cleanInstallCode = new System.Windows.Forms.Button();
+            this.cleanDeinstallCode = new System.Windows.Forms.Button();
+            this.cleanDBInstall = new System.Windows.Forms.Button();
+            this.cleanDBDeinstall = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.readmeTXTPath = new System.Windows.Forms.TextBox();
             this.browseReadmeTXT = new System.Windows.Forms.Button();
@@ -61,15 +67,11 @@
             this.browseInputPackageDirectory = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.cleanDBDeinstall = new System.Windows.Forms.Button();
-            this.cleanDBInstall = new System.Windows.Forms.Button();
-            this.cleanDeinstallCode = new System.Windows.Forms.Button();
-            this.cleanInstallCode = new System.Windows.Forms.Button();
-            this.cleanInstall = new System.Windows.Forms.Button();
-            this.cleanReadme = new System.Windows.Forms.Button();
             this.cvWorking = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -160,6 +162,66 @@
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Package";
+            // 
+            // cleanReadme
+            // 
+            this.cleanReadme.Location = new System.Drawing.Point(747, 129);
+            this.cleanReadme.Name = "cleanReadme";
+            this.cleanReadme.Size = new System.Drawing.Size(27, 23);
+            this.cleanReadme.TabIndex = 35;
+            this.cleanReadme.Text = "-";
+            this.cleanReadme.UseVisualStyleBackColor = true;
+            this.cleanReadme.Click += new System.EventHandler(this.cleanReadme_Click);
+            // 
+            // cleanInstall
+            // 
+            this.cleanInstall.Location = new System.Drawing.Point(747, 170);
+            this.cleanInstall.Name = "cleanInstall";
+            this.cleanInstall.Size = new System.Drawing.Size(27, 23);
+            this.cleanInstall.TabIndex = 34;
+            this.cleanInstall.Text = "-";
+            this.cleanInstall.UseVisualStyleBackColor = true;
+            this.cleanInstall.Click += new System.EventHandler(this.cleanInstall_Click);
+            // 
+            // cleanInstallCode
+            // 
+            this.cleanInstallCode.Location = new System.Drawing.Point(747, 212);
+            this.cleanInstallCode.Name = "cleanInstallCode";
+            this.cleanInstallCode.Size = new System.Drawing.Size(27, 23);
+            this.cleanInstallCode.TabIndex = 33;
+            this.cleanInstallCode.Text = "-";
+            this.cleanInstallCode.UseVisualStyleBackColor = true;
+            this.cleanInstallCode.Click += new System.EventHandler(this.cleanInstallCode_Click);
+            // 
+            // cleanDeinstallCode
+            // 
+            this.cleanDeinstallCode.Location = new System.Drawing.Point(747, 254);
+            this.cleanDeinstallCode.Name = "cleanDeinstallCode";
+            this.cleanDeinstallCode.Size = new System.Drawing.Size(27, 23);
+            this.cleanDeinstallCode.TabIndex = 32;
+            this.cleanDeinstallCode.Text = "-";
+            this.cleanDeinstallCode.UseVisualStyleBackColor = true;
+            this.cleanDeinstallCode.Click += new System.EventHandler(this.cleanDeinstallCode_Click);
+            // 
+            // cleanDBInstall
+            // 
+            this.cleanDBInstall.Location = new System.Drawing.Point(747, 296);
+            this.cleanDBInstall.Name = "cleanDBInstall";
+            this.cleanDBInstall.Size = new System.Drawing.Size(27, 23);
+            this.cleanDBInstall.TabIndex = 30;
+            this.cleanDBInstall.Text = "-";
+            this.cleanDBInstall.UseVisualStyleBackColor = true;
+            this.cleanDBInstall.Click += new System.EventHandler(this.cleanDBInstall_Click);
+            // 
+            // cleanDBDeinstall
+            // 
+            this.cleanDBDeinstall.Location = new System.Drawing.Point(747, 339);
+            this.cleanDBDeinstall.Name = "cleanDBDeinstall";
+            this.cleanDBDeinstall.Size = new System.Drawing.Size(27, 23);
+            this.cleanDBDeinstall.TabIndex = 29;
+            this.cleanDBDeinstall.Text = "-";
+            this.cleanDBDeinstall.UseVisualStyleBackColor = true;
+            this.cleanDBDeinstall.Click += new System.EventHandler(this.cleanDBDeinstall_Click);
             // 
             // label6
             // 
@@ -391,7 +453,7 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(795, 512);
+            this.okButton.Location = new System.Drawing.Point(801, 6);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 5;
@@ -402,7 +464,7 @@
             // cancelButton
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(714, 512);
+            this.cancelButton.Location = new System.Drawing.Point(720, 6);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 6;
@@ -410,87 +472,38 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // cleanDBDeinstall
-            // 
-            this.cleanDBDeinstall.Location = new System.Drawing.Point(747, 339);
-            this.cleanDBDeinstall.Name = "cleanDBDeinstall";
-            this.cleanDBDeinstall.Size = new System.Drawing.Size(27, 23);
-            this.cleanDBDeinstall.TabIndex = 29;
-            this.cleanDBDeinstall.Text = "-";
-            this.cleanDBDeinstall.UseVisualStyleBackColor = true;
-            this.cleanDBDeinstall.Click += new System.EventHandler(this.cleanDBDeinstall_Click);
-            // 
-            // cleanDBInstall
-            // 
-            this.cleanDBInstall.Location = new System.Drawing.Point(747, 296);
-            this.cleanDBInstall.Name = "cleanDBInstall";
-            this.cleanDBInstall.Size = new System.Drawing.Size(27, 23);
-            this.cleanDBInstall.TabIndex = 30;
-            this.cleanDBInstall.Text = "-";
-            this.cleanDBInstall.UseVisualStyleBackColor = true;
-            this.cleanDBInstall.Click += new System.EventHandler(this.cleanDBInstall_Click);
-            // 
-            // cleanDeinstallCode
-            // 
-            this.cleanDeinstallCode.Location = new System.Drawing.Point(747, 254);
-            this.cleanDeinstallCode.Name = "cleanDeinstallCode";
-            this.cleanDeinstallCode.Size = new System.Drawing.Size(27, 23);
-            this.cleanDeinstallCode.TabIndex = 32;
-            this.cleanDeinstallCode.Text = "-";
-            this.cleanDeinstallCode.UseVisualStyleBackColor = true;
-            this.cleanDeinstallCode.Click += new System.EventHandler(this.cleanDeinstallCode_Click);
-            // 
-            // cleanInstallCode
-            // 
-            this.cleanInstallCode.Location = new System.Drawing.Point(747, 212);
-            this.cleanInstallCode.Name = "cleanInstallCode";
-            this.cleanInstallCode.Size = new System.Drawing.Size(27, 23);
-            this.cleanInstallCode.TabIndex = 33;
-            this.cleanInstallCode.Text = "-";
-            this.cleanInstallCode.UseVisualStyleBackColor = true;
-            this.cleanInstallCode.Click += new System.EventHandler(this.cleanInstallCode_Click);
-            // 
-            // cleanInstall
-            // 
-            this.cleanInstall.Location = new System.Drawing.Point(747, 170);
-            this.cleanInstall.Name = "cleanInstall";
-            this.cleanInstall.Size = new System.Drawing.Size(27, 23);
-            this.cleanInstall.TabIndex = 34;
-            this.cleanInstall.Text = "-";
-            this.cleanInstall.UseVisualStyleBackColor = true;
-            this.cleanInstall.Click += new System.EventHandler(this.cleanInstall_Click);
-            // 
-            // cleanReadme
-            // 
-            this.cleanReadme.Location = new System.Drawing.Point(747, 129);
-            this.cleanReadme.Name = "cleanReadme";
-            this.cleanReadme.Size = new System.Drawing.Size(27, 23);
-            this.cleanReadme.TabIndex = 35;
-            this.cleanReadme.Text = "-";
-            this.cleanReadme.UseVisualStyleBackColor = true;
-            this.cleanReadme.Click += new System.EventHandler(this.cleanReadme_Click);
-            // 
             // cvWorking
             // 
             this.cvWorking.AutoSize = true;
             this.cvWorking.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cvWorking.Location = new System.Drawing.Point(12, 517);
+            this.cvWorking.Location = new System.Drawing.Point(12, 11);
             this.cvWorking.Name = "cvWorking";
             this.cvWorking.Size = new System.Drawing.Size(332, 13);
             this.cvWorking.TabIndex = 7;
             this.cvWorking.Text = "Converting your project, hold on... This may take a while.";
             this.cvWorking.Visible = false;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.panel1.Controls.Add(this.okButton);
+            this.panel1.Controls.Add(this.cvWorking);
+            this.panel1.Controls.Add(this.cancelButton);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 512);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(884, 32);
+            this.panel1.TabIndex = 8;
+            // 
             // convertProject
             // 
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(884, 544);
-            this.Controls.Add(this.cvWorking);
-            this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.okButton);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -503,6 +516,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -550,5 +565,6 @@
         private System.Windows.Forms.Button cleanDBInstall;
         private System.Windows.Forms.Button cleanDBDeinstall;
         private System.Windows.Forms.Label cvWorking;
+        private System.Windows.Forms.Panel panel1;
     }
 }

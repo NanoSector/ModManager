@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Mod Builder"
-#define MyAppVersion "1.4.2"
+#define MyAppVersion "1.4.3"
 #define MyAppPublisher "Yoshi2889"
 #define MyAppURL "http://www.simplemachines.org/community/index.php?topic=493451.0"
 #define MyAppExeName "ModBuilder.exe"
@@ -23,7 +23,7 @@ DefaultDirName={pf}\SMF Mod Builder
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 ;LicenseFile="C:\Users\Rick_2\My Documents\GitHub\ModManager\OrganizingProjectC\Resources\LICENSE.TXT"
-;InfoBeforeFile="C:\Users\Rick_2\My Documents\GitHub\ModManager\OrganizingProjectC\Resources\INFO.TXT"
+InfoBeforeFile="C:\Users\Rick\My Documents\GitHub\ModManager\Changelog.txt"
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
@@ -38,14 +38,14 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 Name: "templates"; Description: "Extract the sample template files"; GroupDescription: "Template files"
 
 [Files]
-Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\ModBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\packages\Windows7APICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\packages\Windows7APICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\templates\*"; DestDir: "{app}\templates"; Flags: ignoreversion recursesubdirs createallsubdirs; Tasks: templates
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\ModBuilder.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\System.Data.SQLite.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\System.Data.SQLite.Linq.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\packages\Windows7APICodePack-Core.1.1.0.0\lib\Microsoft.WindowsAPICodePack.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\packages\Windows7APICodePack-Shell.1.1.0.0\lib\Microsoft.WindowsAPICodePack.Shell.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\x64\*"; DestDir: "{app}\x64"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\x86\*"; DestDir: "{app}\x86"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Rick\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\templates\*"; DestDir: "{app}\templates"; Flags: ignoreversion recursesubdirs createallsubdirs; Tasks: templates
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Dirs]

@@ -35,15 +35,10 @@
             this.genModIDWarn = new System.Windows.Forms.Label();
             this.modType = new System.Windows.Forms.ComboBox();
             this.genPkgID = new System.Windows.Forms.CheckBox();
-            this.modVersionHelp = new System.Windows.Forms.PictureBox();
             this.modName = new System.Windows.Forms.TextBox();
-            this.modTypeHelp = new System.Windows.Forms.PictureBox();
             this.modVersion = new System.Windows.Forms.TextBox();
-            this.modIDHelp = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.ModCompatHelp = new System.Windows.Forms.PictureBox();
             this.versionLabel = new System.Windows.Forms.Label();
-            this.modNameHelp = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -53,11 +48,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.authorName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.usernameHelp = new System.Windows.Forms.PictureBox();
             this.readmeTab = new System.Windows.Forms.TabPage();
             this.modReadme = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.readmeHelp = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
@@ -67,8 +60,6 @@
             this.bbcB = new System.Windows.Forms.Button();
             this.instructionsTab = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.instructionHelp = new System.Windows.Forms.PictureBox();
             this.ignoreInstructions = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -93,7 +84,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.fileComboBoxE = new System.Windows.Forms.ComboBox();
             this.createExtractionInstruction = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
@@ -154,6 +144,16 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.regenerateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openProjectDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modVersionHelp = new System.Windows.Forms.PictureBox();
+            this.modTypeHelp = new System.Windows.Forms.PictureBox();
+            this.modIDHelp = new System.Windows.Forms.PictureBox();
+            this.ModCompatHelp = new System.Windows.Forms.PictureBox();
+            this.modNameHelp = new System.Windows.Forms.PictureBox();
+            this.usernameHelp = new System.Windows.Forms.PictureBox();
+            this.readmeHelp = new System.Windows.Forms.PictureBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.instructionHelp = new System.Windows.Forms.PictureBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshSourceEditsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.refreshFilesToExtractdeleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -162,20 +162,12 @@
             this.modSettings.SuspendLayout();
             this.modDetailsTab.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.modVersionHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.modTypeHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.modIDHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ModCompatHelp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.modNameHelp)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.usernameHelp)).BeginInit();
             this.readmeTab.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).BeginInit();
             this.panel3.SuspendLayout();
             this.instructionsTab.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).BeginInit();
             this.extractFilesTab.SuspendLayout();
             this.panel6.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -204,6 +196,14 @@
             this.panel7.SuspendLayout();
             this.buildSettingsTab.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modVersionHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modTypeHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modIDHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ModCompatHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modNameHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usernameHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).BeginInit();
             this.SuspendLayout();
             // 
             // modSettings
@@ -301,17 +301,6 @@
             this.genPkgID.UseVisualStyleBackColor = true;
             this.genPkgID.CheckedChanged += new System.EventHandler(this.genPkgID_CheckedChanged);
             // 
-            // modVersionHelp
-            // 
-            this.modVersionHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.modVersionHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.modVersionHelp.Location = new System.Drawing.Point(6, 55);
-            this.modVersionHelp.Name = "modVersionHelp";
-            this.modVersionHelp.Size = new System.Drawing.Size(16, 16);
-            this.modVersionHelp.TabIndex = 23;
-            this.modVersionHelp.TabStop = false;
-            this.modVersionHelp.Click += new System.EventHandler(this.pictureBox6_Click);
-            // 
             // modName
             // 
             this.modName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -321,17 +310,6 @@
             this.modName.Size = new System.Drawing.Size(511, 20);
             this.modName.TabIndex = 3;
             this.modName.TextChanged += new System.EventHandler(this.modName_TextChanged);
-            // 
-            // modTypeHelp
-            // 
-            this.modTypeHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.modTypeHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.modTypeHelp.Location = new System.Drawing.Point(6, 82);
-            this.modTypeHelp.Name = "modTypeHelp";
-            this.modTypeHelp.Size = new System.Drawing.Size(16, 16);
-            this.modTypeHelp.TabIndex = 22;
-            this.modTypeHelp.TabStop = false;
-            this.modTypeHelp.Click += new System.EventHandler(this.pictureBox5_Click);
             // 
             // modVersion
             // 
@@ -343,17 +321,6 @@
             this.modVersion.TabIndex = 4;
             this.modVersion.TextChanged += new System.EventHandler(this.modVersion_TextChanged);
             // 
-            // modIDHelp
-            // 
-            this.modIDHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.modIDHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.modIDHelp.Location = new System.Drawing.Point(6, 108);
-            this.modIDHelp.Name = "modIDHelp";
-            this.modIDHelp.Size = new System.Drawing.Size(16, 16);
-            this.modIDHelp.TabIndex = 21;
-            this.modIDHelp.TabStop = false;
-            this.modIDHelp.Click += new System.EventHandler(this.pictureBox4_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -363,17 +330,6 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Mod name";
             // 
-            // ModCompatHelp
-            // 
-            this.ModCompatHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.ModCompatHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.ModCompatHelp.Location = new System.Drawing.Point(6, 153);
-            this.ModCompatHelp.Name = "ModCompatHelp";
-            this.ModCompatHelp.Size = new System.Drawing.Size(16, 16);
-            this.ModCompatHelp.TabIndex = 20;
-            this.ModCompatHelp.TabStop = false;
-            this.ModCompatHelp.Click += new System.EventHandler(this.pictureBox3_Click);
-            // 
             // versionLabel
             // 
             this.versionLabel.AutoSize = true;
@@ -382,17 +338,6 @@
             this.versionLabel.Size = new System.Drawing.Size(65, 13);
             this.versionLabel.TabIndex = 6;
             this.versionLabel.Text = "Mod version";
-            // 
-            // modNameHelp
-            // 
-            this.modNameHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.modNameHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.modNameHelp.Location = new System.Drawing.Point(6, 29);
-            this.modNameHelp.Name = "modNameHelp";
-            this.modNameHelp.Size = new System.Drawing.Size(16, 16);
-            this.modNameHelp.TabIndex = 18;
-            this.modNameHelp.TabStop = false;
-            this.modNameHelp.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label3
             // 
@@ -485,17 +430,6 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "Username";
             // 
-            // usernameHelp
-            // 
-            this.usernameHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.usernameHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.usernameHelp.Location = new System.Drawing.Point(7, 27);
-            this.usernameHelp.Name = "usernameHelp";
-            this.usernameHelp.Size = new System.Drawing.Size(16, 16);
-            this.usernameHelp.TabIndex = 19;
-            this.usernameHelp.TabStop = false;
-            this.usernameHelp.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
             // readmeTab
             // 
             this.readmeTab.Controls.Add(this.modReadme);
@@ -528,18 +462,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(754, 38);
             this.panel1.TabIndex = 1;
-            // 
-            // readmeHelp
-            // 
-            this.readmeHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.readmeHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.readmeHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.readmeHelp.Location = new System.Drawing.Point(733, 11);
-            this.readmeHelp.Name = "readmeHelp";
-            this.readmeHelp.Size = new System.Drawing.Size(16, 16);
-            this.readmeHelp.TabIndex = 23;
-            this.readmeHelp.TabStop = false;
-            this.readmeHelp.Click += new System.EventHandler(this.readmeHelp_Click);
             // 
             // label9
             // 
@@ -643,31 +565,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(466, 361);
             this.panel2.TabIndex = 8;
-            // 
-            // button6
-            // 
-            this.button6.BackgroundImage = global::ModBuilder.Properties.Resources.refresh;
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(423, 3);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(16, 16);
-            this.button6.TabIndex = 25;
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.instructionsRefresh_Click);
-            // 
-            // instructionHelp
-            // 
-            this.instructionHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.instructionHelp.Cursor = System.Windows.Forms.Cursors.Help;
-            this.instructionHelp.Image = global::ModBuilder.Properties.Resources.question;
-            this.instructionHelp.Location = new System.Drawing.Point(445, 3);
-            this.instructionHelp.Name = "instructionHelp";
-            this.instructionHelp.Size = new System.Drawing.Size(16, 16);
-            this.instructionHelp.TabIndex = 24;
-            this.instructionHelp.TabStop = false;
-            this.instructionHelp.Click += new System.EventHandler(this.instructionHelp_Click);
             // 
             // ignoreInstructions
             // 
@@ -935,19 +832,6 @@
             this.createExtractionInstruction.Text = "Create a new instruction\r\n";
             this.createExtractionInstruction.UseVisualStyleBackColor = true;
             this.createExtractionInstruction.Click += new System.EventHandler(this.createExtractionInstruction_Click);
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImage = global::ModBuilder.Properties.Resources.refresh;
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(388, 23);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(16, 16);
-            this.button5.TabIndex = 14;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.extractionRefresh_Click);
             // 
             // label28
             // 
@@ -1584,6 +1468,122 @@
             this.openProjectDirectoryToolStripMenuItem.Text = "Open Project Directory";
             this.openProjectDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openProjectDirectoryToolStripMenuItem_Click);
             // 
+            // modVersionHelp
+            // 
+            this.modVersionHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.modVersionHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.modVersionHelp.Location = new System.Drawing.Point(6, 55);
+            this.modVersionHelp.Name = "modVersionHelp";
+            this.modVersionHelp.Size = new System.Drawing.Size(16, 16);
+            this.modVersionHelp.TabIndex = 23;
+            this.modVersionHelp.TabStop = false;
+            this.modVersionHelp.Click += new System.EventHandler(this.pictureBox6_Click);
+            // 
+            // modTypeHelp
+            // 
+            this.modTypeHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.modTypeHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.modTypeHelp.Location = new System.Drawing.Point(6, 82);
+            this.modTypeHelp.Name = "modTypeHelp";
+            this.modTypeHelp.Size = new System.Drawing.Size(16, 16);
+            this.modTypeHelp.TabIndex = 22;
+            this.modTypeHelp.TabStop = false;
+            this.modTypeHelp.Click += new System.EventHandler(this.pictureBox5_Click);
+            // 
+            // modIDHelp
+            // 
+            this.modIDHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.modIDHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.modIDHelp.Location = new System.Drawing.Point(6, 108);
+            this.modIDHelp.Name = "modIDHelp";
+            this.modIDHelp.Size = new System.Drawing.Size(16, 16);
+            this.modIDHelp.TabIndex = 21;
+            this.modIDHelp.TabStop = false;
+            this.modIDHelp.Click += new System.EventHandler(this.pictureBox4_Click);
+            // 
+            // ModCompatHelp
+            // 
+            this.ModCompatHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.ModCompatHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.ModCompatHelp.Location = new System.Drawing.Point(6, 153);
+            this.ModCompatHelp.Name = "ModCompatHelp";
+            this.ModCompatHelp.Size = new System.Drawing.Size(16, 16);
+            this.ModCompatHelp.TabIndex = 20;
+            this.ModCompatHelp.TabStop = false;
+            this.ModCompatHelp.Click += new System.EventHandler(this.pictureBox3_Click);
+            // 
+            // modNameHelp
+            // 
+            this.modNameHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.modNameHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.modNameHelp.Location = new System.Drawing.Point(6, 29);
+            this.modNameHelp.Name = "modNameHelp";
+            this.modNameHelp.Size = new System.Drawing.Size(16, 16);
+            this.modNameHelp.TabIndex = 18;
+            this.modNameHelp.TabStop = false;
+            this.modNameHelp.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // usernameHelp
+            // 
+            this.usernameHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.usernameHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.usernameHelp.Location = new System.Drawing.Point(7, 27);
+            this.usernameHelp.Name = "usernameHelp";
+            this.usernameHelp.Size = new System.Drawing.Size(16, 16);
+            this.usernameHelp.TabIndex = 19;
+            this.usernameHelp.TabStop = false;
+            this.usernameHelp.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // readmeHelp
+            // 
+            this.readmeHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.readmeHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.readmeHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.readmeHelp.Location = new System.Drawing.Point(733, 11);
+            this.readmeHelp.Name = "readmeHelp";
+            this.readmeHelp.Size = new System.Drawing.Size(16, 16);
+            this.readmeHelp.TabIndex = 23;
+            this.readmeHelp.TabStop = false;
+            this.readmeHelp.Click += new System.EventHandler(this.readmeHelp_Click);
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImage = global::ModBuilder.Properties.Resources.refresh;
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button6.FlatAppearance.BorderSize = 0;
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(423, 3);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(16, 16);
+            this.button6.TabIndex = 25;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.instructionsRefresh_Click);
+            // 
+            // instructionHelp
+            // 
+            this.instructionHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.instructionHelp.Cursor = System.Windows.Forms.Cursors.Help;
+            this.instructionHelp.Image = global::ModBuilder.Properties.Resources.question;
+            this.instructionHelp.Location = new System.Drawing.Point(445, 3);
+            this.instructionHelp.Name = "instructionHelp";
+            this.instructionHelp.Size = new System.Drawing.Size(16, 16);
+            this.instructionHelp.TabIndex = 24;
+            this.instructionHelp.TabStop = false;
+            this.instructionHelp.Click += new System.EventHandler(this.instructionHelp_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackgroundImage = global::ModBuilder.Properties.Resources.refresh;
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.button5.FlatAppearance.BorderSize = 0;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(388, 23);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(16, 16);
+            this.button5.TabIndex = 14;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.extractionRefresh_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -1643,24 +1643,16 @@
             this.modDetailsTab.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.modVersionHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.modTypeHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.modIDHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ModCompatHelp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.modNameHelp)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.usernameHelp)).EndInit();
             this.readmeTab.ResumeLayout(false);
             this.readmeTab.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).EndInit();
             this.panel3.ResumeLayout(false);
             this.instructionsTab.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).EndInit();
             this.extractFilesTab.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -1708,6 +1700,14 @@
             this.buildSettingsTab.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modVersionHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modTypeHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modIDHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ModCompatHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.modNameHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usernameHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.readmeHelp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.instructionHelp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

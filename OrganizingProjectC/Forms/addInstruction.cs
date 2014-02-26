@@ -151,8 +151,30 @@ namespace ModBuilder
 
         private void method_SelectedIndexChanged(object sender, EventArgs e)
         {
+            splitContainer1.Panel1Collapsed = false;
+            splitContainer1.Panel1.Show();
+            before.Enabled = true;
+            if (method.SelectedItem.ToString() == "Replace")
+            {
+                labelBefore.Text = "Code to search for:";
+                labelAfter.Text = "Code replace with:";
+            }
+            if (method.SelectedItem.ToString() == "Add before")
+            {
+                labelBefore.Text = "Code after:";
+                labelAfter.Text = "Code before:";
+            }
+            if (method.SelectedItem.ToString() == "Add after")
+            {
+                labelBefore.Text = "Code before:";
+                labelAfter.Text = "Code after:";
+            }
             if (method.SelectedItem.ToString() == "At the end of file")
             {
+                labelBefore.Text = "(unused)";
+                labelAfter.Text = "Code to add:";
+                splitContainer1.Panel1Collapsed = true;
+                splitContainer1.Panel1.Hide();
                 before.Text = "";
                 before.Enabled = false;
             }

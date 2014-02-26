@@ -72,14 +72,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModBuilder.exe" size="162816">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ModBuilder.exe" size="165376">
       <assemblyIdentity name="ModBuilder" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>XXG5hdfCaEqdZfZ48RBFjAgnLGPwAVNRbIwRHOHcy8A=</dsig:DigestValue>
+        <dsig:DigestValue>YG4DzxHxBv5zkqmjOIGrGfIy8eOYvB1U+Zcmx2e/ITw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

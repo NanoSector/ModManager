@@ -194,3 +194,4 @@ C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\bin\Release\Micro
 C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\obj\Release\ModBuilder.TrustInfo.xml
 C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\obj\Release\ModBuilder.exe.manifest
 C:\Users\Rick_2\Documents\GitHub\ModManager\OrganizingProjectC\obj\Release\ModBuilder.application
+C:\Users\Rick\Documents\GitHub\ModManager\OrganizingProjectC\obj\Release\ModBuilder.Forms.Updater.resources

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.before = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelBefore = new System.Windows.Forms.Label();
+            this.labelAfter = new System.Windows.Forms.Label();
             this.after = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.testInstruction = new System.Windows.Forms.Button();
@@ -64,25 +64,25 @@
             this.before.TabIndex = 0;
             this.before.WordWrap = false;
             // 
-            // label1
+            // labelBefore
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Code before:";
+            this.labelBefore.AutoSize = true;
+            this.labelBefore.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelBefore.Location = new System.Drawing.Point(0, 0);
+            this.labelBefore.Name = "labelBefore";
+            this.labelBefore.Size = new System.Drawing.Size(68, 13);
+            this.labelBefore.TabIndex = 1;
+            this.labelBefore.Text = "Code before:";
             // 
-            // label2
+            // labelAfter
             // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Code after:";
+            this.labelAfter.AutoSize = true;
+            this.labelAfter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelAfter.Location = new System.Drawing.Point(0, 0);
+            this.labelAfter.Name = "labelAfter";
+            this.labelAfter.Size = new System.Drawing.Size(59, 13);
+            this.labelAfter.TabIndex = 2;
+            this.labelAfter.Text = "Code after:";
             // 
             // after
             // 
@@ -229,12 +229,12 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.before);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.labelBefore);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.after);
-            this.splitContainer1.Panel2.Controls.Add(this.label2);
+            this.splitContainer1.Panel2.Controls.Add(this.labelAfter);
             this.splitContainer1.Size = new System.Drawing.Size(849, 341);
             this.splitContainer1.SplitterDistance = 418;
             this.splitContainer1.TabIndex = 9;
@@ -279,8 +279,8 @@
         #endregion
 
         private System.Windows.Forms.TextBox before;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelBefore;
+        private System.Windows.Forms.Label labelAfter;
         private System.Windows.Forms.TextBox after;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button2;

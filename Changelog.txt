@@ -1,8 +1,11 @@
 === 1.4.3 ===
++ Feature: New Update dialog.
 + Feature: Changelog diplay upon update.
 ! UI fix: Resized Mod type and Mod ID controls for better UX.
 ! Bugfix: Wrong icon displayed on PHP code check success.
 ! Bugfix: PHP code checking now does not display a CMD dialog.
+! Bugfix: When adding/editing a source code edit, now displays the correct titles.
+! Bugfix: 
 
 === 1.4.2 ===
 ! Bugfix: Close the Loading Project dialog upon cancel.

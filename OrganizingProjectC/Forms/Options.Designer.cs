@@ -64,6 +64,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.wampPhpVersions = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.wampPath = new System.Windows.Forms.TextBox();
@@ -77,8 +79,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -111,10 +111,10 @@
             this.tabPage1.Controls.Add(this.idUsername);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(370, 220);
+            this.tabPage1.Size = new System.Drawing.Size(370, 218);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -165,10 +165,10 @@
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.smfPath);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(370, 220);
+            this.tabPage2.Size = new System.Drawing.Size(370, 218);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Debugging";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -328,10 +328,10 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.groupBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(370, 220);
+            this.tabPage3.Size = new System.Drawing.Size(370, 218);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Building";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -363,10 +363,10 @@
             // 
             this.tabPage4.Controls.Add(this.groupBox5);
             this.tabPage4.Controls.Add(this.groupBox4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Location = new System.Drawing.Point(4, 24);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(370, 220);
+            this.tabPage4.Size = new System.Drawing.Size(370, 218);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Updates";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -457,19 +457,19 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.tabPage5.Controls.Add(this.groupBox2);
             this.tabPage5.Controls.Add(this.phpver);
             this.tabPage5.Controls.Add(this.label10);
             this.tabPage5.Controls.Add(this.button6);
             this.tabPage5.Controls.Add(this.phppath);
             this.tabPage5.Controls.Add(this.label9);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Location = new System.Drawing.Point(4, 24);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(370, 220);
+            this.tabPage5.Size = new System.Drawing.Size(370, 218);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "PHP Code Checking";
-            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -486,6 +486,26 @@
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Got WAMPServer 2 installed?";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 108);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(318, 26);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Once a version is selected Mod Builder will check this version and\r\nuse it for mo" +
+    "d building.";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 39);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(270, 26);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "Mod Builder will detect WAMP if installed in C:\\wamp.\r\nIf not, you need to manual" +
+    "ly specify the installation here.";
             // 
             // wampPhpVersions
             // 
@@ -608,26 +628,6 @@
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 39);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(270, 26);
-            this.label14.TabIndex = 5;
-            this.label14.Text = "Mod Builder will detect WAMP if installed in C:\\wamp.\r\nIf not, you need to manual" +
-    "ly specify the installation here.";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 108);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(318, 26);
-            this.label15.TabIndex = 6;
-            this.label15.Text = "Once a version is selected Mod Builder will check this version and\r\nuse it for mo" +
-    "d building.";
             // 
             // Options
             // 

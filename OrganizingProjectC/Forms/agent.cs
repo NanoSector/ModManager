@@ -21,11 +21,9 @@ namespace ModBuilder
     {
         // This version of Mod Builder.
         string mbversion = Properties.Settings.Default.mbVersion;
-        string currmbversion = "1.4.2";
+        string currmbversion = "1.4.3";
 
         #region Initialising
-        string dlfilename;
-
         public Form1()
         {
             InitializeComponent();
@@ -39,7 +37,7 @@ namespace ModBuilder
 
                 // Added in 1.4.
                 if (mbversion == "1.3")
-                MessageBox.Show("Thank you for updating to Mod Builder version 1.4. In this version a lot of bugs have been fixed, including bugs in the project system, so you might need to Repair your projects in order for them to work. You won't lose any data.", "Mod Builder update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Thank you for updating to Mod Builder version 1.4. In this version a lot of bugs have been fixed, including bugs in the project system, so you might need to Repair your projects in order for them to work. You won't lose any data.", "Mod Builder update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 #endregion
 
                 // Update the version
@@ -198,27 +196,6 @@ namespace ModBuilder
         #endregion
 
         #region Updating
-        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            progressBar1.Value = e.ProgressPercentage;
-        }
-
-        private void DLUpdateCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-                return;
-
-            DialogResult result = MessageBox.Show("The download has completed. Do you want to start the installer now? This will close Mod Manager and any open Mod Editor windows, so save your work before continuing.", "Updated Downloaded", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                System.Diagnostics.Process.Start(dlfilename);
-                Close();
-            }
-
-            checkForUpdatesToolStripMenuItem.Text = "Update pending...";
-            Size = new Size(Size.Width, 184);
-        }
-
         private void checkUpdate(bool throwMessage = true)
         {
             // Catch any exceptions.
@@ -248,20 +225,9 @@ namespace ModBuilder
                 }
                 else
                 {
-                    DialogResult result = MessageBox.Show("A new version (" + lver + ") of Mod Manager has been released. Do you want to download and install the update?", "Mod Builder Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    if (result == DialogResult.Yes)
-                    {
-                        // Rezise the form a bit :)
-                        Size = new Size(Size.Width, 249);
-
-                        // Start downloading! DLUpdateCompleted will take over once it's done.
-                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(DLUpdateCompleted);
-                        client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                        dlfilename = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Mod Builder\\Updates\\update_" + lver.Replace(".", "-") + ".exe");
-                        MessageBox.Show(dlfilename);
-                        client.DownloadFileAsync(new Uri("https://github.com/Yoshi2889/ModManager/blob/master/setup.exe?raw=true"), dlfilename);
-                    }
+                    Forms.Updater updf = new Updater(lver);
+                    updf.ShowDialog();
+                    return;
                 }
             }
             catch
@@ -275,18 +241,6 @@ namespace ModBuilder
 
         private void checkForUpdatesToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(dlfilename) && File.Exists(dlfilename))
-            {
-                DialogResult res = MessageBox.Show("Do you want to start the updater now? This will close Mod Manager, save any open projects.", "Mod Builder Updater", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (res == DialogResult.Yes)
-                {
-                    System.Diagnostics.Process.Start(dlfilename);
-                    Close();
-                }
-                return;
-            }
-
             checkUpdate();
         }
         #endregion
