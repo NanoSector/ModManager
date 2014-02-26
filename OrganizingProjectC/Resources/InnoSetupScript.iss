@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Mod Builder"
-#define MyAppVersion "1.4.3"
+#define MyAppVersion "1.4.4"
 #define MyAppPublisher "Yoshi2889"
 #define MyAppURL "http://www.simplemachines.org/community/index.php?topic=493451.0"
 #define MyAppExeName "ModBuilder.exe"
