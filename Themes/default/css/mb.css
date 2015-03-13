@@ -1,0 +1,19 @@
+/* Mod Builder by Yoshi2889 - Stylesheet */
+.projbox
+{
+	width: 250px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+}
+
+.mbformcontent
+{
+	padding: 0 12%;
+}
+
+#mbformadvsettings_content
+{
+	border: 1px solid #CCC;
+	padding: 10px;
+	margin-top: 10px;
+}

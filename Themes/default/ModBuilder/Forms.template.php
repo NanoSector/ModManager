@@ -1,0 +1,303 @@
+<?php
+
+// Mod Builder by Yoshi2889 - Forms and Inputs
+function template_mb_project_settings()
+{
+	global $context, $txt, $settings;
+	
+	// Show a message if we have saved.
+	echo '
+	<div class="windowbg" id="profile_success" style="display: none;">
+		', $txt['mb']['mod_saved'], '
+	</div>';
+	
+	// Any errors, doc?
+	echo '
+	<div class="errorbox" id="errors_container"', empty($context['mb']['errors']) ? ' style="display: none;"' : '', '>
+		<strong>', $txt['mb']['ferrors']['errors_occured'], '</strong>
+		<ul class="reset" id="form_errors">';
+		
+	// Fallback for lazy browsers.
+	if (!empty($context['mb']['errors']))
+		foreach ($context['mb']['errors'] as $error)
+			echo '
+			<li class="error">', $txt['mb']['ferrors'][$error], '</li>';
+
+		echo '
+		</ul>
+	</div>';
+	
+	// Then start up our regular stuff.
+	echo '
+	<div class="cat_bar">
+		<h3 class="catbg">
+			', $context['mb']['settings_title'], '
+		</h3>
+	</div>
+	<div class="windowbg">
+		<span class="topslice"><span></span></span>
+		<div class="mbformcontent">
+			<form action="', $context['mb']['post_url'], '" method="post" id="mod_form">
+				<table>';
+			
+	// Mod name.
+	echo '
+					<tr>
+						<td><label for="mod_name"><span id="l_mod_name"><strong>', $txt['mb']['mod_name'], '</strong></span></label></td>
+						<td><input type="text" id="mod_name" name="mod_name" value="', $context['mb']['project']['name'], '" size="80" /></td>
+					</tr>';
+				
+	// Mod version.
+	echo '
+					<tr>
+						<td><label for="mod_version"><span id="l_mod_version"><strong>', $txt['mb']['mod_version'], '</strong></span></label></td>
+						<td><input type="text" id="mod_version" name="mod_version" value="', $context['mb']['project']['version'], '" />
+					</tr>';
+					
+	// Mod type.
+	echo '
+					<tr>
+						<td><label for="mod_type"><strong>', $txt['mb']['mod_type'], '</strong></label></td>
+						<td><select name="mod_type" id="mod_type">
+							<option value="1"', $context['mb']['project']['type'] == 1 ? ' selected="selected"' : '', '>', $txt['mb']['type_1'], '</option>
+							<option value="2"', $context['mb']['project']['type'] == 2 ? ' selected="selected"' : '', '>', $txt['mb']['type_2'], '</option>
+						</select></td>
+					</tr>';
+					
+	echo '
+				</table>			
+				<a id="mbformadvsettings">
+					<img id="mbformadvsettings_icon" class="icon" src="', $settings['images_url'], '/expand.gif" alt="" /> 
+					<span id="mbformadvsettings_text">', $txt['mb']['advanced_options'], '</span>
+				</a>
+				<div id="mbformadvsettings_content" style="display: none;">
+					', $txt['mb']['advanced_settings_desc'], '<br />
+					<div id="mod_modid_container">
+						<span id="l_mod_id"><strong>', $txt['mb']['mod_id'], '&nbsp;</strong></span>
+						<input type="text" id="mod_id" name="mod_id" value="', $context['mb']['project']['modid'], '" maxlength="32" size="32" />
+						<button type="button" id="genmodid">', $txt['mb']['genmodid'], '</button>
+					</div>
+					<input type="checkbox" id="mod_autogenid" name="mod_id_autogen" /> 
+					<label for="mod_autogenid">', $txt['mb']['mod_id_autogen'], '</label>';
+					
+	if ($context['mb']['can_transfer'])
+		echo '
+					<hr />
+					<a href="', $scripturl, '?action=mb;sa=edit;area=transfer;project=', $context['mb']['project']['id'], '">', $txt['mb']['mod_transfer_ownership'], '</a>';
+					
+	echo '
+			</div>';
+				
+	if (!empty($context['mb']['hidden_config_vars']))
+	{
+		foreach ($context['mb']['hidden_config_vars'] as $hsetting)
+		{
+			echo '
+				<input type="hidden" name="', $hsetting[0], '" value="', $hsetting[1], '" />';
+		}
+	}
+	
+	echo '
+				<div class="floatright">
+					<span id="form_sload" class="icon" style="display: none;"><img src="', $settings['images_url'], '/mb_sloading.gif" alt="" /></span>
+					<input type="submit" class="button_submit" value="', $txt['mb']['mod_submit'], '" />
+				</div>
+				<br class="clear" />
+			</form>
+		</div>
+		<span class="botslice"><span></span></span>
+	</div>
+	<br class="clear" />';
+}
+
+function template_mb_mod_readme()
+{
+	global $context, $txt;
+	
+	// Show a message if we have saved.
+	if (isset($_GET['saved']))
+		echo '
+	<div class="windowbg" id="profile_success">
+		', $txt['mb']['mod_saved'], '
+	</div>';
+	
+	// If the user wants to see how their readme looks - the preview section is where it's at!
+	if (!empty($context['mb']['previewing']))
+		echo '
+	<div id="preview_section">
+		<div class="cat_bar">
+			<h3 class="catbg">
+				<span id="preview_subject">', $txt['mb']['preview_readme'], '</span>
+			</h3>
+		</div>
+		<div class="windowbg">
+			<span class="topslice"><span></span></span>
+			<div class="content">
+					', empty($context['mb']['preview_readme']) ? $txt['mb']['readme_left_empty'] : $context['mb']['preview_readme'], '
+			</div>
+			<span class="botslice"><span></span></span>
+		</div>
+	</div><br />';
+	
+	echo '
+	<div class="cat_bar">
+		<h3 class="catbg">
+			', $context['mb']['page_title'], '
+		</h3>
+	</div>
+	<div class="windowbg">
+		<span class="topslice"><span></span></span>
+		<div class="mbformcontent">
+			<form action="', $context['mb']['post_url'], '" method="post">
+				<div id="bbcBox_message"></div>
+				<div id="smileyBox_message"></div>
+				', template_control_richedit($context['post_box_name'], 'smileyBox_message', 'bbcBox_message') . '
+				<input type="hidden" name="mod_pid" value="', $context['mb']['project']['id'], '" />
+				<div class="floatright">
+					', template_control_richedit_buttons($context['post_box_name']), '
+				</div>
+				<br class="clear" />
+			</form>
+		</div>
+		<span class="botslice"><span></span></span>
+	</div>';
+}
+
+function template_mb_flexible_settings()
+{
+	global $context, $txt;
+	
+	// Show a message if we have saved.
+	if (isset($_GET['saved']))
+		echo '
+	<div class="windowbg" id="profile_success">
+		', $txt['mb']['mod_saved'], '
+	</div>';
+	
+	// Any errors, doc?
+	if (!empty($context['mb']['errors']))
+	{
+		// Unfortunately, yes...
+		echo '
+	<div class="errorbox">
+		<strong>', $txt['mb']['errors_occured'], '</strong>
+		<ul class="reset">';
+
+		foreach ($context['mb']['errors'] as $error)
+			echo '
+			<li class="error">', $txt['mb']['' . $error], '</li>';
+
+		echo '
+		</ul>
+	</div>';
+	}
+	
+	// First show a title if we have one.
+	if (!empty($context['mb']['settings_title']))
+		echo '
+	<div class="cat_bar">
+		<h3 class="catbg">', $context['mb']['settings_title'], '</h3>
+	</div>';
+	
+	// Open up a windowbg.
+	echo '
+	<div class="windowbg">
+		<span class="topslice"><span></span></span>
+		<div class="mbformcontent">';
+		
+	// Now enter the configuration stuff.
+	if (!empty($context['mb']['config_vars']))
+	{
+		echo '
+			<form action="', $context['mb']['post_url'], '" method="post">
+				<table>';
+		
+		foreach ($context['mb']['config_vars'] as $setting)
+		{
+			// Show the label.
+			echo '
+					<tr>';
+					
+			// Show a label?
+			if (!in_array($setting[0], array('check', 'link')))
+				echo '
+						<td style="padding-right:10px">
+							<strong>', !empty($context['mb']['mark_errors']) && empty($context['mb']['project'][$setting[1]]) ? '<span class="error">' . $setting[3] . '</span>' : $setting[3], '</strong>
+						</td>
+						<td>';
+			else
+				echo '
+						<td></td>
+						<td>';
+				
+			// Figure out the setting type.
+			switch ($setting[0])
+			{
+				// A checkbox?
+				case 'check':
+					echo '
+							<input type="checkbox" id="', $setting[2], '" name="', $setting[2], '"', $context['mb']['project'][$setting[1]] ? ' checked="checked"' : '', ' /> ', $setting[3];
+					break;
+				case 'text':
+					echo '
+							<input type="text" id="', $setting[2], '" name="', $setting[2], '" value="', $context['mb']['project'][$setting[1]], '"', !empty($setting[4]) ? ' size="' . $setting[4] . '"' : '', !empty($setting[5]) ? ' maxlength="' . $setting[5] . '"' : '', ' />';
+					break;
+				case 'textarea':
+					echo '
+							<textarea id="', $setting[2], '" name="', $setting[2], '"', !empty($setting[4]) ? ' rows="' . $setting[4] . '"' : '', !empty($setting[5]) ? ' cols="' . $setting[5] . '"' : '', '>', $context['mb']['project'][$setting[1]], '</textarea>';
+					break;
+				case 'select':
+					echo '
+							<select name="', $setting[2], '">';
+							
+					foreach ($setting[4] as $option => $text)
+					{
+						echo '
+								<option value="', $option, '"', $context['mb']['project']['type'] == $option ? ' selected="selected"' : '', '>', $text, '</option>';
+					}
+					
+					echo '
+							</select>';
+					break;
+				case 'link':
+					echo '
+							<a href="', $setting[1], '">', $setting[2], '</a>';
+					break;
+			}
+			
+			echo '
+						</td>
+					</tr>';
+		}
+		
+		echo '
+				</table>';
+				
+		// Any hidden settings.
+		if (!empty($context['mb']['hidden_config_vars']))
+		{
+			foreach ($context['mb']['hidden_config_vars'] as $hcv)
+			{
+				echo '
+				<input type="hidden" name="', $hcv[0], '" value="', $hcv[1], '" />';
+			}
+		}
+		
+		echo '
+				<div class="floatright">
+					<input type="submit" value="', $txt['mb']['mod_submit'], '" onclick="return submitThisOnce(this);" class="button_submit" />
+				</div>
+				<br class="clear" />
+			</form>';
+	}
+	
+	echo '
+				</table>
+			</form>';
+	
+	echo '
+		</div>
+		<span class="botslice"><span></span></span>
+	</div>
+	<br class="clear" />';
+}
