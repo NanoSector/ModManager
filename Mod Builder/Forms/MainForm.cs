@@ -10,8 +10,9 @@ using System.Windows.Forms;
 using Mod_Builder.Classes;
 
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace Mod_Builder
 {
@@ -21,6 +22,9 @@ namespace Mod_Builder
         Log log;
         // The project instance.
         Project project;
+
+        // Are we working from disk or memory?
+        bool isOnDisk = false;
 
         // Start the form.
         public MainForm()
@@ -72,8 +76,8 @@ namespace Mod_Builder
             if (this.saveProjectDialog.FileName.Length == 0)
                 return;
 
-            this.project.isOnDisk = true;
-            this.log.log("Set flags; the project is informed of its state.");
+            this.isOnDisk = true;
+            this.log.log("Set flags; the environment is informed of the project state.");
 
             ProjectHelpers.SerializeObject(this.saveProjectDialog.FileName, this.project);
             this.log.log("Serialized and saved Project to disk. Path: " + this.saveProjectDialog.FileName, "SAVE");
@@ -104,7 +108,7 @@ namespace Mod_Builder
         public static void SerializeObject(string filename, Project objectToSerialize)
         {
             Stream stream = File.Open(filename, FileMode.Create);
-            BinaryFormatter bFormatter = new BinaryFormatter();
+            XmlSerializer bFormatter = new  XmlSerializer(typeof(Project));
             bFormatter.Serialize(stream, objectToSerialize);
             stream.Close();
         }
@@ -112,7 +116,7 @@ namespace Mod_Builder
         {
             Project objectToSerialize;
             Stream stream = File.Open(filename, FileMode.Open);
-            BinaryFormatter bFormatter = new BinaryFormatter();
+            XmlSerializer bFormatter = new XmlSerializer(typeof(Project));
             objectToSerialize = (Project)bFormatter.Deserialize(stream);
             stream.Close();
             return objectToSerialize;
