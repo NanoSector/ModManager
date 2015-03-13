@@ -1,0 +1,10 @@
+C:\Users\Rick\Documents\GitHub\NewModBuilder\Mod Builder\Mod Builder\bin\Debug\Mod Builder.exe.config
+C:\Users\Rick\Documents\GitHub\NewModBuilder\Mod Builder\Mod Builder\obj\Debug\Mod_Builder.Properties.Resources.resources
+C:\Users\Rick\Documents\GitHub\NewModBuilder\Mod Builder\Mod Builder\obj\Debug\Mod Builder.csproj.GenerateResource.Cache
+C:\Users\Rick\Documents\GitHub\NewModBuilder\Mod Builder\Mod Builder\obj\Debug\Mod_Builder.MainForm.resources
+C:\Users\Rick\Documents\GitHub\NewModBuilder\Mod Builder\Mod Builder\bin\Debug\Mod Builder.exe
+C:\Users\Rick\Documents\GitHub\NewModBuilder\Mod Builder\Mod Builder\bin\Debug\Mod Builder.pdb
+C:\Users\Rick\Documents\GitHub\NewModBuilder\Mod Builder\Mod Builder\obj\Debug\Mod Builder.exe
+C:\Users\Rick\Documents\GitHub\NewModBuilder\Mod Builder\Mod Builder\obj\Debug\Mod Builder.pdb
+C:\Users\Rick\Documents\GitHub\NewModBuilder\Mod Builder\Mod Builder\obj\Debug\Mod_Builder.Forms.LogForm.resources
+C:\Users\Rick\Documents\GitHub\NewModBuilder\Mod Builder\Mod Builder\obj\Debug\Mod Builder.csprojResolveAssemblyReference.cache
