@@ -12,11 +12,5 @@ namespace Mod_Builder.Classes
     [Serializable()]
     public class Project : IProject
     {
-        public bool isOnDisk {get; set;}
-
-        public Project()
-        {
-            this.isOnDisk = false;
-        }
     }
 }

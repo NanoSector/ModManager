@@ -45,9 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Instruction\AddAfterInstruction.cs" />
+    <Compile Include="Classes\Instruction\AddBeforeInstruction.cs" />
+    <Compile Include="Classes\Instruction\EndOfFileInstruction.cs" />
+    <Compile Include="Classes\Instruction\ReplaceInstruction.cs" />
     <Compile Include="Classes\IProject.cs" />
     <Compile Include="Classes\Log.cs" />
     <Compile Include="Classes\Project.cs" />
+    <Compile Include="Classes\Project\ProjectInformation.cs" />
     <Compile Include="Forms\LogForm.cs">
       <SubType>Form</SubType>
     </Compile>

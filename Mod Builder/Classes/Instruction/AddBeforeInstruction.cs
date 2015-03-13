@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mod_Builder.Classes
+namespace Mod_Builder.Classes.Instruction
 {
-    interface IProject
+    class AddBeforeInstruction
     {
-        List<>
     }
 }
