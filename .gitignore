@@ -43,12 +43,12 @@ local.properties
 
 # Build results
 
-Mod Builder/[Dd]ebug/
-Mod Builder/[Rr]elease/
-Mod Builder/x64/
-Mod Builder/build/
-Mod Builder/[Bb]in/
-Mod Builder/[Oo]bj/
+Mod\ Builder/[Dd]ebug/
+Mod\ Builder/[Rr]elease/
+Mod\ Builder/x64/
+Mod\ Builder/build/
+Mod\ Builder/[Bb]in/
+Mod\ Builder/[Oo]bj/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
