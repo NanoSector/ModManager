@@ -12,6 +12,9 @@ namespace Mod_Builder.Classes.Instruction
         public string codeSearch;
         public string codeAdd;
 
+        // Allow the user to set a custom name for it. Default name == filename + type
+        public string name;
+
         public bool testInstruction(string filename)
         {
             // No file? No dice.
