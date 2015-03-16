@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Mod_Builder.Classes.Instruction
 {
-    abstract class InstructionBase
+    public abstract class InstructionBase
     {
         public string codeSearch;
         public string codeAdd;
