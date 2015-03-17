@@ -1,0 +1,88 @@
+# General UI elements
+mod_name: Name:
+mod_version: Version:
+mod_compat: Designed for SMF version:
+mod_compat_custom_enable: Other...
+mod_id: Mod ID:
+mod_id_gen_check: Automatically generate mod ID
+new_project: New Project
+
+# Generic terms
+project: Project
+instruction: Instruction
+instructions: Instructions
+ok: OK
+cancel: Cancel
+
+# File menu
+file_menu: File
+file_new: New...
+file_open: Open...
+file_save: Save...
+file_save_as: Save as...
+file_quit: Quit
+
+# Edit menu
+edit_menu: Edit
+
+# View menu
+view_menu: View
+
+# Project menu
+project_menu: Project
+project_open_dir: Open project directory
+project_apply: Apply...
+project_apply_install: Install to installation
+project_apply_uninstall: Uninstall from installation
+project_settings: Project settings...
+
+# Tools menu
+tools_menu: Tools
+tools_settings: Settings...
+
+# Help menu
+help_menu: Help
+help_log: Show the log
+help_topic: Open forum topic
+help_about: About Mod Builder
+
+# Status text
+status_project_new: New project created in memory.
+status_project_opened: Project opened.
+status_project_saved: Project saved.
+status_project_to_mem: Project moved to memory.
+
+# File watcher strings.
+fw_reload: The loaded project was changed on disk. Do you want to reload it?
+fw_delete: The loaded project was deleted from disk. Do you want to close this project and open a new project? If you choose No, the current project will be moved into memory, and it will be lost upon closing Mod Builder.
+fw_rename: The loaded project was renamed to "{0}", old path: "{1}"
+
+# Errors
+error_project_load: An error occured while loading the project. See the log for details.
+error_project_save: An error occured while saving the project. See the log for details.
+error_value_required: You must enter a value here.
+error_gt_lt: Not a valid value, this item can not contain less-than or greater-than signs.
+error_auto_gen_username: If you want to automatically generate a mod ID, you need to enter your username here.
+error_username_length: Your username may not exceed 30 characters.
+error_username_chars: Your username may only contain the characters a-z, A-Z and 0-9.
+
+
+# Instructions ContextMenuStrip
+icms_create: Create a new instruction...
+icms_delete: Delete this instruction
+icms_edit: Edit this instruction
+
+# Instruction Editor
+inst_find: Code to find
+inst_replacewith: Replace code with
+inst_add_after: Code to add after
+inst_add_before: Code to add before
+inst_add_end: Code to add at the end of the file
+inst_filetoedit: File to edit
+inst_method: Method to use
+inst_replace: Replace
+inst_after: Add after
+inst_before: Add before
+inst_end: At the end of file
+inst_optional: This edit is optional
+inst_custom_name: (Optional) Instruction name:

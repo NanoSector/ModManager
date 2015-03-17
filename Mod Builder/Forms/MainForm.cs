@@ -22,6 +22,8 @@ namespace Mod_Builder
         Log log;
         // The project instance.
         Project project;
+        // Language instance.
+        Translate tr;
 
         // Are we working from disk or memory?
         bool isOnDisk = false;
@@ -34,6 +36,7 @@ namespace Mod_Builder
 
             // We'd like a logging instance.
             this.log = new Log();
+            this.tr = new Translate(this.log);
             this.log.log("Mod Builder started");
             this.log.log("OS: " + Environment.OSVersion.ToString() + " (is 64-bit: " + Environment.Is64BitOperatingSystem.ToString() + ", is 64-bit process: " + Environment.Is64BitProcess.ToString() + ")");
             this.log.log("Common Language Runtime version: " + Environment.Version.ToString());
@@ -41,9 +44,69 @@ namespace Mod_Builder
 
             // Set up a new empty project.
             this.project = new Project();
-            log.log("New project created in memory.");
+            this.Text = _("new_project") + " - Mod Builder";
+            this.log.log("New project created in memory.");
+
+            // Refresh the strings.
+            this.updateStrings();
 
             this.projectOverview.ExpandAll();
+        }
+
+        public void updateStrings()
+        {
+            try
+            {
+                this.setStatus(_("status_project_new"));
+                this.modNameLabel.Text = _("mod_name");
+                this.modVersionLabel.Text = _("mod_version");
+                this.compatibilityLabel.Text = _("mod_compat");
+                this.compatibilityCustomEnabler.Text = _("mod_compat_custom_enable");
+                this.modIDLabel.Text = _("mod_id");
+                this.genModID.Text = _("mod_id_gen_check");
+
+                // File menu.
+                this.fileMenu.Text = _("file_menu");
+                this.newFileToolStripMenuItem.Text = _("file_new");
+                this.newProjectToolStripMenuItem.Text = _("project");
+                this.newInstructionToolStripMenuItem.Text = _("instruction");
+                this.openProjectDirectoryToolStripMenuItem.Text = _("file_open");
+                this.saveProjectToolStripMenuItem.Text = _("file_save");
+                this.saveAsToolStripMenuItem.Text = _("file_save_as");
+                this.quitToolStripMenuItem.Text = _("file_quit");
+
+                this.editMenu.Text = _("edit_menu");
+
+                this.viewMenu.Text = _("view_menu");
+
+                this.projectMenu.Text = _("project_menu");
+                this.openProjectDirectoryToolStripMenuItem.Text = _("project_open_dir");
+                this.applyToolStripMenuItem.Text = _("project_apply");
+                this.installToInstallationToolStripMenuItem.Text = _("project_apply_install");
+                this.removeFromInstallationToolStripMenuItem.Text = _("project_apply_uninstall");
+                this.projectSettingsToolStripMenuItem.Text = _("project_settings");
+
+                this.toolsMenu.Text = _("tools_menu");
+                this.settingsToolStripMenuItem.Text = _("tools_settings");
+
+                this.helpMenu.Text = _("help_menu");
+                this.showLog.Text = _("help_log");
+                this.forumTopicToolStripMenuItem.Text = _("help_topic");
+                this.aboutToolStripMenuItem.Text = _("help_about");
+
+                // The project tree.
+                projectOverview.Nodes.Find("projectNode", false)[0].Text = _("project");
+                projectOverview.Nodes.Find("instructionsNode", true)[0].Text = _("instructions");
+
+                // Instructions contextmenustrip.
+                instructionContext.Items.Find("createInstructionButton", true)[0].Text = _("icms_create");
+            }
+            catch (LanguageKeyNotFoundException e)
+            {
+                MessageBox.Show("The language file you are trying to use is either corrupt, incomplete, or not compatible with this version of Mod Builder. Please check its syntax and try again. Now loading the English language file. Error message: " + e.Message);
+                tr.changeLanguage("en");
+                this.updateStrings();
+            }
         }
 
         private void showLog_Click(object sender, EventArgs e)
@@ -64,7 +127,7 @@ namespace Mod_Builder
                 this.log.log("Saving existing project to disk.", "SAVE");
                 ProjectHelpers.SerializeObject(this.filename, this.project);
                 this.log.log("Serialized and saved Project to disk. Path: " + this.filename, "SAVE");
-                this.setStatus("Project saved.");
+                this.setStatus(_("status_project_saved"));
             }
 
             // Simulate a click to the Save as... button ;) Saves a lot of code.
@@ -97,12 +160,12 @@ namespace Mod_Builder
                     fsWatcher.Filter = Path.GetFileName(this.filename);
                     fsWatcher.EnableRaisingEvents = true;
                     this.log.log("The loaded file is now watched for changes.", "WATCH");
-                    this.setStatus("Project saved.");
+                    this.setStatus(_("status_project_saved"));
                 }
                 catch (Exception ex)
                 {
                     this.log.log("Exception caught! " + ex.ToString(), "SAVE");
-                    MessageBox.Show("Could not save the project.", "Mod Builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(_("error_project_save"), "Mod Builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -151,12 +214,12 @@ namespace Mod_Builder
                 fsWatcher.EnableRaisingEvents = true;
                 this.log.log("The loaded file is now watched for changes.", "WATCH");
 
-                this.setStatus("Project opened.");
+                this.setStatus(_("status_project_opened"));
 
             }
             catch
             {
-                MessageBox.Show("An error occured while loading the project.", "Mod Builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(_("error_project_load"), "Mod Builder", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
         }
@@ -226,7 +289,7 @@ namespace Mod_Builder
             // We don't accept empty mod names.
             if (tb.Text.Length == 0)
             {
-                globalErrorProvider.SetError(tb, "You must enter a value here.");
+                globalErrorProvider.SetError(tb, _("error_value_required"));
                 e.Cancel = true;
             }
 
@@ -234,7 +297,7 @@ namespace Mod_Builder
             Match match = Regex.Match(tb.Text, @"[^<>]+");
             if (!match.Success || match.Value != tb.Text)
             {
-                globalErrorProvider.SetError(tb, "Not a valid value, this item can not contain less-than or greater-than signs.");
+                globalErrorProvider.SetError(tb, _("error_gt_lt"));
                 e.Cancel = true;
             }
 
@@ -247,12 +310,12 @@ namespace Mod_Builder
         {
             if (genModID.Checked && userName.Text.Length == 0)
             {
-                globalErrorProvider.SetError(userName, "If you want to automatically generate a mod ID, you need to enter your username here.");
+                globalErrorProvider.SetError(userName, _("error_auto_gen_username"));
                 e.Cancel = true;
             }
             else if (genModID.Checked && userName.Text.Length > 30)
             {
-                globalErrorProvider.SetError(userName, "Your username may not exceed 30 characters.");
+                globalErrorProvider.SetError(userName, _("error_username_length"));
                 e.Cancel = true;
             }
             else if (genModID.Checked)
@@ -260,7 +323,7 @@ namespace Mod_Builder
                 Match m = Regex.Match(userName.Text, @"[a-zA-Z0-9]+");
                 if (!m.Success || m.Value != userName.Text)
                 {
-                    globalErrorProvider.SetError(userName, "Your username may only contain the characters a-z, A-Z and 0-9.");
+                    globalErrorProvider.SetError(userName, _("error_username_chars"));
                     e.Cancel = true;
                 }
             }
@@ -325,7 +388,7 @@ namespace Mod_Builder
 
         private void fsWatcher_Changed(object sender, FileSystemEventArgs e)
         {
-            DialogResult dr = MessageBox.Show("The loaded project was changed on disk. Do you want to reload it?", "Mod Builder", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            DialogResult dr = MessageBox.Show(_("fw_reload"), "Mod Builder", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             if (dr == DialogResult.Yes)
                 this.loadProject(this.filename);
@@ -333,7 +396,7 @@ namespace Mod_Builder
 
         private void fsWatcher_Deleted(object sender, FileSystemEventArgs e)
         {
-            DialogResult dr = MessageBox.Show("The loaded project was deleted from disk. Do you want to close this project and open a new project? If you choose No, the current project will be moved into memory, and it will be lost upon closing Mod Builder.", "Mod Builder", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            DialogResult dr = MessageBox.Show(_("fw_delete"), "Mod Builder", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             if (dr == DialogResult.Yes)
                 Application.Restart();
@@ -349,11 +412,36 @@ namespace Mod_Builder
 
         private void fsWatcher_Renamed(object sender, RenamedEventArgs e)
         {
-            this.setStatus("The project was renamed to \"" + e.FullPath + "\", old path: \"" + e.OldFullPath + "\"");
+            this.setStatus(string.Format(_("fw_rename"), e.FullPath, e.OldFullPath));
             this.log.log("The project was renamed to \"" + e.FullPath + "\", old path: \"" + e.OldFullPath + "\". Internal paths updated.", "WATCH");
             this.filename = e.FullPath;
             fsWatcher.Path = Path.GetDirectoryName(e.FullPath);
             fsWatcher.Filter = Path.GetFileName(e.FullPath);
+        }
+
+        // Translating stuff the easy way.
+        private string _(string key)
+        {
+            return tr.translate(key);
+        }
+
+        private void loadLanguageFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog of = new OpenFileDialog())
+            {
+                DialogResult dr = of.ShowDialog();
+
+                if (dr == DialogResult.Cancel)
+                    return;
+
+                tr.loadTranslationFile(of.FileName);
+            }
+        }
+
+        private void createInstructionButton_Click(object sender, EventArgs e)
+        {
+            Forms.InstructionEditor ie = new Forms.InstructionEditor(this.log, this.tr);
+            ie.Show();
         }
     }
     public static class ProjectHelpers

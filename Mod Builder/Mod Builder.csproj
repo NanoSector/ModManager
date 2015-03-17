@@ -58,11 +58,18 @@
     <Compile Include="Classes\Log.cs" />
     <Compile Include="Classes\Project.cs" />
     <Compile Include="Classes\ProjectComponents\Settings.cs" />
+    <Compile Include="Classes\Translate.cs" />
     <Compile Include="Forms\About.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\InstructionEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\InstructionEditor.Designer.cs">
+      <DependentUpon>InstructionEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\License.cs">
       <SubType>Form</SubType>
@@ -98,6 +105,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\InstructionEditor.resx">
+      <DependentUpon>InstructionEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\License.resx">
       <DependentUpon>License.cs</DependentUpon>

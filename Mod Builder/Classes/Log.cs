@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace Mod_Builder.Classes
 {
-    class Log
+    public class Log
     {
         // The actual log buffer.
         List<string> logBuffer = new List<string>();
