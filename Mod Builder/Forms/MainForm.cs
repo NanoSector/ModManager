@@ -70,7 +70,7 @@ namespace Mod_Builder
                 this.newFileToolStripMenuItem.Text = _("file_new");
                 this.newProjectToolStripMenuItem.Text = _("project");
                 this.newInstructionToolStripMenuItem.Text = _("instruction");
-                this.openProjectDirectoryToolStripMenuItem.Text = _("file_open");
+                this.openProjectToolStripMenuItem.Text = _("file_open");
                 this.saveProjectToolStripMenuItem.Text = _("file_save");
                 this.saveAsToolStripMenuItem.Text = _("file_save_as");
                 this.quitToolStripMenuItem.Text = _("file_quit");

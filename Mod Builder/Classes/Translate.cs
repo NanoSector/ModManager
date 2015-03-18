@@ -86,6 +86,7 @@ namespace Mod_Builder.Classes
             // If this failed for whatever reason, default to the English language file.
             catch
             {
+                this.log.log("Could not load language file for language code " + code + ", falling back to English.", "LANG");
                 this.loadTranslationFile(Environment.CurrentDirectory + "/lang/en.mblang");
                 return false;
             }
