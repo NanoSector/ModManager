@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Mod_Builder.Classes;
 
-using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Xml.Serialization;
 using System.Text.RegularExpressions;
@@ -108,6 +108,30 @@ namespace Mod_Builder
                 this.updateStrings();
             }
         }
+        public void updateUI(object sender = null, EventArgs e = null)
+        {
+            // Update generic form controls.
+            this.projectName.Text = this.project.name;
+            this.Text = this.project.name + " - Mod Builder";
+            this.projectVersion.Text = this.project.version;
+            this.compatible11.Checked = this.project.compatible11;
+            this.compatible20.Checked = this.project.compatible20;
+            this.compatible21.Checked = this.project.compatible21;
+
+            this.compatibilityCustomEnabler.Checked = this.project.compatibleCustomEnabled;
+            compatible11.Enabled = compatible20.Enabled = compatible21.Enabled = !this.project.compatibleCustomEnabled;
+            compatibleCustom.Visible = this.project.compatibleCustomEnabled;
+            compatibleCustom.Text = this.project.compatibleCustom;
+
+            this.userName.Text = this.project.username;
+
+            int i = 0;
+            foreach (Mod_Builder.Classes.Instruction.InstructionBase inst in this.project.instructions)
+            {
+                this.projectOverview.Nodes.Find("instructionsNode", true)[0].Nodes.Add("instruction_" + inst.id, inst.name);
+                i++;
+            }
+        }
 
         private void showLog_Click(object sender, EventArgs e)
         {
@@ -146,6 +170,9 @@ namespace Mod_Builder
 
                 if (saveProjectDialog.FileName.Length == 0 || dr == DialogResult.Cancel)
                     return;
+
+                // Disable the file system watcher for a minute. :)
+                fsWatcher.EnableRaisingEvents = false;
 
                 try
                 {
@@ -191,23 +218,12 @@ namespace Mod_Builder
                 this.project = ProjectHelpers.DeSerializeObject(filename);
                 this.log.log("Loaded project into memory: " + filename, "LOAD");
 
-                this.Text = this.project.name + " - Mod Builder";
-                this.projectName.Text = this.project.name;
-                this.log.log("The project name is: \"" + this.project.name + "\", updated form controls.", "LOAD");
-
-                this.projectVersion.Text = this.project.version;
-                this.log.log("The project version is: \"" + this.project.version + "\", updated form controls.", "LOAD");
-
-                this.genModID.Checked = this.project.generateModID;
-                this.modID.Text = this.project.modID;
-                this.log.log("The mod ID is: \"" + this.project.modID + "\", generated: " + this.project.generateModID.ToString() + ". Updated form controls.", "LOAD");
-
-                this.userName.Text = this.project.username;
-                this.log.log("The username used to generate the mod ID is: \"" + this.project.username + "\", updated form controls.", "LOAD");
-
                 this.isOnDisk = true;
                 this.filename = filename;
                 this.log.log("Loaded project; working with file: " + this.filename, "LOAD");
+
+                this.updateUI();
+                this.log.log("Updated form controls.");
 
                 fsWatcher.Path = Path.GetDirectoryName(this.filename);
                 fsWatcher.Filter = Path.GetFileName(this.filename);
@@ -440,7 +456,7 @@ namespace Mod_Builder
 
         private void createInstructionButton_Click(object sender, EventArgs e)
         {
-            Forms.InstructionEditor ie = new Forms.InstructionEditor(this.log, this.tr);
+            Forms.InstructionEditor ie = new Forms.InstructionEditor(this.log, this.tr, this.project, this);
             ie.Show();
         }
     }
@@ -449,7 +465,7 @@ namespace Mod_Builder
         public static void SerializeObject(string filename, Project objectToSerialize)
         {
             Stream stream = File.Open(filename, FileMode.Create);
-            XmlSerializer bFormatter = new  XmlSerializer(typeof(Project));
+            BinaryFormatter bFormatter = new BinaryFormatter();
             bFormatter.Serialize(stream, objectToSerialize);
             stream.Close();
         }
@@ -457,7 +473,7 @@ namespace Mod_Builder
         {
             Project objectToSerialize;
             Stream stream = File.Open(filename, FileMode.Open);
-            XmlSerializer bFormatter = new XmlSerializer(typeof(Project));
+            BinaryFormatter bFormatter = new BinaryFormatter();
             objectToSerialize = (Project)bFormatter.Deserialize(stream);
             stream.Close();
             return objectToSerialize;

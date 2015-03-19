@@ -107,12 +107,12 @@
             this.instructionContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createInstructionButton});
             this.instructionContext.Name = "instructionContext";
-            this.instructionContext.Size = new System.Drawing.Size(153, 48);
+            this.instructionContext.Size = new System.Drawing.Size(137, 26);
             // 
             // createInstructionButton
             // 
             this.createInstructionButton.Name = "createInstructionButton";
-            this.createInstructionButton.Size = new System.Drawing.Size(152, 22);
+            this.createInstructionButton.Size = new System.Drawing.Size(136, 22);
             this.createInstructionButton.Text = "icms_create";
             this.createInstructionButton.Click += new System.EventHandler(this.createInstructionButton_Click);
             // 
@@ -407,7 +407,6 @@
             this.projectOverview.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode2});
             this.projectOverview.SelectedImageIndex = 0;
-            this.projectOverview.ShowRootLines = false;
             this.projectOverview.Size = new System.Drawing.Size(294, 497);
             this.projectOverview.TabIndex = 0;
             // 

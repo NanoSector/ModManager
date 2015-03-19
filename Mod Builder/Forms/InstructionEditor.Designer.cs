@@ -111,6 +111,7 @@
             this.okButton.TabIndex = 7;
             this.okButton.Text = "ok";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 

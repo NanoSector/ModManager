@@ -15,14 +15,26 @@ namespace Mod_Builder.Forms
         Classes.Translate tr;
         Classes.Log log;
         Classes.Instruction.InstructionBase inst;
+        Classes.Instruction.InstructionBase oldinst;
+        Classes.Project proj;
+        Mod_Builder.MainForm mf;
+        int key;
 
-        public InstructionEditor(Classes.Log log, Classes.Translate tr, Classes.Instruction.InstructionBase inst = null)
+
+        public InstructionEditor(Classes.Log log, Classes.Translate tr, Classes.Project proj, Mod_Builder.MainForm mf, int key = -1)
         {
-            if (inst == null)
-                inst = new Classes.Instruction.ReplaceInstruction();
+            if (key == -1)
+                this.inst = new Classes.Instruction.ReplaceInstruction();
+            else
+                this.inst = proj.findInstructionByKey(key);
+
+            this.oldinst = this.inst;
+
             this.tr = tr;
             this.log = log;
-            this.inst = inst;
+            this.key = key;
+            this.proj = proj;
+            this.mf = mf;
 
             InitializeComponent();
 
@@ -40,7 +52,6 @@ namespace Mod_Builder.Forms
 
             this.okButton.Text = _("ok");
             this.cancelButton.Text = _("cancel");
-            
         }
 
         private void changeLayout()
@@ -70,6 +81,27 @@ namespace Mod_Builder.Forms
         private string _(string key)
         {
             return tr.translate(key);
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            this.inst.filename = this.inst_fileprefix.Text + "/" + this.inst_filename.Text;
+            if (this.inst_name.Text.Length == 0)
+                this.inst.name = string.Format(_("inst_default_name"), this.inst.filename);
+            else
+                this.inst.name = this.inst_name.Text;
+
+            if (this.key == -1)
+                this.proj.addInstruction(this.inst);
+            else
+            {
+                this.proj.instructions.Remove(oldinst);
+                this.proj.instructions.Insert(key, inst);
+            }
+
+            this.mf.updateUI();
+
+            this.Close();
         }
     }
 }

@@ -7,6 +7,7 @@ using System.IO;
 
 namespace Mod_Builder.Classes.Instruction
 {
+    [Serializable]
     class EndOfFileInstruction : InstructionBase
     {
         new public string codeSearch = "";

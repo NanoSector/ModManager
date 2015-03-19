@@ -7,6 +7,7 @@ using System.IO;
 
 namespace Mod_Builder.Classes.Instruction
 {
+    [Serializable]
     class ReplaceInstruction : InstructionBase
     {
         override public string applyTestEdit(string filename)

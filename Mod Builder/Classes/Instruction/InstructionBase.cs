@@ -7,10 +7,13 @@ using System.IO;
 
 namespace Mod_Builder.Classes.Instruction
 {
+    [Serializable]
     public abstract class InstructionBase
     {
-        public string codeSearch;
-        public string codeAdd;
+        public string codeSearch = "";
+        public string codeAdd = "";
+        public string filename = "";
+        public int id = 0;
 
         // Allow the user to set a custom name for it. Default name == filename + type
         public string name;

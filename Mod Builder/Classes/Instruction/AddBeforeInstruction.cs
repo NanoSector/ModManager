@@ -7,6 +7,7 @@ using System.IO;
 
 namespace Mod_Builder.Classes.Instruction
 {
+    [Serializable]
     class AddBeforeInstruction : InstructionBase
     {
         public override string applyTestEdit(string filename)
